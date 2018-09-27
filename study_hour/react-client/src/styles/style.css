@@ -1,0 +1,306 @@
+.img {
+    max-height: 90%;
+    max-width: 90%;
+    /*border-radius: 40%;*/
+}
+.img-right {
+    max-height: 100%;
+    max-width: 100%;
+    z-index: 1000;
+}
+
+.menu-item {
+    position: relative !important;
+    top: 20px !important;
+    bottom: 20px !important;
+    max-width: 100% !important;
+    max-height: 80% !important;
+    padding: 20px 20px !important;
+}
+.button-s {
+    width: 100%;
+    height: 100%;
+    position: relative !important;
+    background: #FFFFFF !important;
+    z-index: 100 !important;
+}
+.resume-div {
+    margin: auto;
+    padding-top: 30px;
+    height: 95%;
+    width: 50%;
+    bottom: 0;
+    top: 0;
+    position: relative;
+    max-width: 60%;
+    max-height: 100%;
+}
+.background {
+    top: 0;
+    max-height: 100%;
+    max-width: 100%;
+    z-index: 0;
+}
+
+.paper {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), url("../images/background.jpg") !important;
+    background-size: cover !important;
+    overflow-y: auto;
+}
+.left-drawer {
+    top: 0px !important;
+    text-align: left !important;
+    width: 10% !important;
+    transform: translate(0%, 0px) !important;
+    background: transparent !important;
+}
+
+.center-div {
+    max-width: 100%;
+    max-height: 100%;
+    height: 90%;
+    width: 100%;
+    background-color: #8cd0d3;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.img-terminator {
+    background: transparent !important;
+    bottom: 0;
+    left: 50%;
+    position: fixed;
+
+}
+.img-selfie {
+    background: transparent;
+    max-height: 20%;
+    max-width: 20%;
+    border-radius: 50%;
+}
+.img-postgres {
+    background: transparent;
+    max-height: 50%;
+    max-width: 50%;
+}
+.img-icon {
+    max-height: 100%;
+    max-width: 100%;
+}
+.banner-div {
+    max-width: 100%;
+    max-height: 40%;
+    top: 20%;
+    background: transparent;
+    position: fixed;
+    /*z-index: 1;*/
+
+}
+.about-div {
+    max-width: 100%;
+    max-height: 20%;
+    position: fixed;
+    top: 25%;
+    right: 0;
+    text-align: center;
+    margin: auto;
+
+}
+.name-div {
+    max-width: 100%;
+    max-height: 20%;
+    /*position: fixed;*/
+    padding-top: 20%;
+    top: 30%;
+    right: 28%;
+    text-align: center;
+    margin: auto;
+
+}
+.banner-div:hover {
+    background-color: #6b6bb8 !important;
+}
+.chess-top-div {
+    max-width: 100%;
+    margin: auto;
+    text-align: center;
+    /*z-index: 999;*/
+}
+.chess-div {
+    max-width: 45%;
+    max-height: 45%;
+    height: 40%;
+    width: 40%;
+    margin: auto;
+    padding-bottom: 10px;
+    /*z-index: 999;*/
+}
+
+.chat-div {
+    max-width: 50%;
+    max-height: 50%;
+    height: 90%;
+    width: 90%;
+    margin: auto;
+    padding-bottom: 10px;
+    background-color: #6b6bb8;
+    /*z-index: 999;*/
+}
+.chat-info-div {
+    position: relative;
+    margin: auto;
+    text-align: center;
+    max-width: 50%;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.8);
+}
+.chess-info-div {
+    position: relative;
+    margin: auto;
+    text-align: center;
+    max-width: 100%;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.8);
+}
+.chess-space-div {
+    margin: auto;
+    height: 100px;
+    z-index: 1000;
+}
+.photo-div {
+    display: inline-block;
+    position: fixed;
+    height: 100px;
+    width: 300px;
+    left: 50%;
+    right: 50%;
+    top: 50%;
+    background: transparent;
+    /*background: #6b6bb8;*/
+}
+
+@font-face {
+    font-family: GraublauWeb;
+    src: url("../fonts/TradeMark Demo.otf") format("opentype");
+}
+
+.caligraphy {
+    text-align: center;
+    font-family: 'GraublauWeb';
+    vertical-align: middle;
+
+}
+
+.vertical-menu {
+    position: fixed;
+    top: 15%;
+    width: 14%;
+    bottom: 0;
+}
+
+.vertical-menu a {
+    background-color: #eee; /* Grey background color */
+    color: black; /* Black text color */
+    display: block; /* Make the links appear below each other */
+    padding: 12px; /* Add some padding */
+    text-decoration: none; /* Remove underline from links */
+}
+
+.vertical-menu a:hover {
+    background-color: #ccc; /* Dark grey background on mouse-over */
+}
+
+.vertical-menu a.active {
+    background-color: #4CAF50; /* Add a green color to the "active/current" link */
+    color: white;
+}
+
+.large-div {
+    /*width: 800px;*/
+    /*height: 187px;*/
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+}
+
+.left-div {
+    margin-left: -10%;
+    position: fixed;
+    top: 0;
+    left: 10%;
+    bottom: 0;
+    width: 14%;
+    z-index: 1000;
+    background: #144d53;
+    overflow-y: auto;
+    padding-top: 1.5em;
+}
+
+table.center {
+    margin-left:auto;
+    margin-right:auto;
+}
+
+
+h1 {
+    color: #111;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 70px;
+    font-weight: lighter;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-align: center;
+}
+
+h2 { color: #111;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 40px; font-weight: 300;
+    font-weight: lighter;
+    line-height: 32px;
+    margin: 0 0 10px;
+    text-align: center;
+    display: inline-block;
+}
+
+h3 { color: #111;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 25px; font-weight: 300;
+    font-weight: lighter;
+    line-height: 32px;
+    margin: 0 0 10px;
+    text-align: center;
+    display: inline-block;
+}
+
+p { color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 14px; line-height: 24px; margin: 0 0 24px; text-align: justify; text-justify: inter-word; }
+
+
+table {
+    table-layout: fixed;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
