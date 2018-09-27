@@ -1,16 +1,57 @@
 {
   "name": "study_hour",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "react-scripts": "1.1.5"
-  },
+  "version": "1.0.0",
+  "description": "Study Hour",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack -d --watch",
+    "start": "node ./server/index.js",
+    "build": "webpack -p",
+    "react-dev": "webpack -d --watch",
+    "server-dev": "nodemon server/index.js",
+    "postinstall": "webpack",
+    "heroku-postbuild": "webpack -p"
+  },
+  "author": "Elliot V Pourmand",
+  "license": "ISC",
+  "dependencies": {
+    "@kyso/react-jupyter": "^0.6.0",
+    "axios": "^0.18.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "body-parser": "^1.18.3",
+    "bundle": "^2.1.0",
+    "cgi": "^0.3.1",
+    "express": "^4.16.3",
+    "material-ui": "^0.20.1",
+    "material-ui-background": "^0.1.2",
+    "pg": "^7.4.3",
+    "python-shell": "^0.5.0",
+    "react": "^16.4.1",
+    "react-center": "^1.1.1",
+    "react-chess": "^1.1.0",
+    "react-dom": "^16.4.1",
+    "react-p5-wrapper": "0.0.4",
+    "react-pdf": "^3.0.5",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-url": "^1.0.1",
+    "sass-loader": "^7.0.3",
+    "svg-loader": "0.0.2",
+    "webpack": "^4.15.1"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.11",
+    "file-loader": "^1.1.11",
+    "material-ui-image": "^2.1.1",
+    "mocha": "^5.2.0",
+    "react-image": "^1.3.1",
+    "should": "^13.2.1",
+    "style-loader": "^0.21.0",
+    "url-loader": "^1.0.1",
+    "webpack-cli": "^2.1.5"
   }
 }
