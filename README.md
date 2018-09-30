@@ -10,6 +10,12 @@
 ## How to start project
 Clone project from github using command `git clone https://github.com/ElliotVilhelm/CSE110_Project.git`
 
+To Run 
+-- 
+`npm run server` 
+
+Alternative Run Method (If you want two have separate client & server on different terminal)
+-- 
 `npm run react-dev`
 `npm run server-dev`
 
