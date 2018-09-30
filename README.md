@@ -27,3 +27,21 @@ Clone project from github using command `git clone https://github.com/ElliotVilh
 4. Accept pull request on project's github repo.
 
 5. After peers review your code, merge pull request.
+
+# Team Members
+  
+
+
+| Names                  |
+|------------------------|
+| Mher Arabian           |
+| Yoo Jin Chung (Rachel) |
+| Cheng Cheng (Roger)    |
+| William Vuong          |
+| Elliot Pourmand        |
+| Xiaofan Lin (Sam)      |
+| Zixuan Zhang           |
+| Adam Kabbara           |
+| Yusuf Khandoker        |
+| Kenil Vora             |
+
