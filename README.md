@@ -13,7 +13,7 @@ Clone project from github using command `git clone https://github.com/ElliotVilh
 `npm run react-dev`
 `npm run server-dev`
 
-`npm start` to launch the project. Go to **localhost:8080** to view.
+Go to **localhost:8080** to view.
 
 
 ## How to collaborate
@@ -42,6 +42,6 @@ Clone project from github using command `git clone https://github.com/ElliotVilh
 | Xiaofan Lin (Sam)      |
 | Zixuan Zhang           |
 | Adam Kabbara           |
-| Yusuf Khandoker        |
+| Jishan Khandoker       |
 | Kenil Vora             |
 
