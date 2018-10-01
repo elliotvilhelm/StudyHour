@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 import { URLProvider } from 'react-url';
 import '../styles/style.css'
 import SideBar from './SideBar'
@@ -14,18 +15,22 @@ class HomePage extends Component {
 
     render() {
 
+
         return (
 
             <div>
                 <SideBar/>
                 <Paper className='paper'>
                     <div className='name-div'>
-                    <h1>Elliot Vilhelm Pourmand</h1>
+                        <h1>Elliot Vilhelm Pourmand</h1>
+                    </div>
+                    <div>
+                        <button><Link to="/Login">Login</Link></button>
                     </div>
                     <div className='photo-div'>
                         <a href="https://github.com/elliotvilhelm">
-                        <h2>Creator</h2>
-                        <img src={github} className='img-icon'/>
+                            <h2>Creator</h2>
+                            <img src={github} className='img-icon'/>
                         </a>
                     </div>
                 </Paper>
