@@ -4,7 +4,7 @@
   "description": "Study Hour",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "dev": "webpack -d --watch",
     "start": "node ./server/index.js",
     "build": "webpack -p",
