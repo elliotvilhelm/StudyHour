@@ -1,4 +1,8 @@
 # StudyHour
+=======
+## Build Status
+[![Build
+Status](https://travis-ci.org/ElliotVilhelm/StudyHour.svg?branch=master)](https://travis-ci.org/ElliotVilhelm/StudyHour)
 
 | Service | URL |
 |-----|-----|
