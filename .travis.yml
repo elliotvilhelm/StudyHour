@@ -1,5 +1,5 @@
 sudo: true
-before_install: cd study_hour; apt install libgif-dev
+before_install: cd study_hour; sudo apt install libgif-dev
 language: node_js
 node_js:
   - "6.1"
