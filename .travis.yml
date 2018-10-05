@@ -1,8 +1,9 @@
 sudo: true
-before_install: cd study_hour; sudo apt install libgif-dev; sudo apt-get install node-gyp; sudo apt-get install librsvg2-2 librsvg2-dev; sudo apt-get install build-essential
+#before_install: cd study_hour; sudo apt install libgif-dev; sudo apt-get install node-gyp; sudo apt-get install librsvg2-2 librsvg2-dev; sudo apt-get install build-essential
+before_install: cd study_hour;
 language: node_js
 node_js:
-  - "6.4.1"
+  - "6.1.0"
 install:
   - npm install
 script:
