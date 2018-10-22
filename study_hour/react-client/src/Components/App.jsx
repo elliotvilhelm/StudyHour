@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch} from 'react-router-dom';
+import { Router, Route, Switch} from 'react-router-dom';
 import HomePage from './HomePage';
 import About from './About';
 import Login from './Login';
@@ -14,14 +14,16 @@ class App extends Component {
         return (
 
             <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-                <BrowserRouter history={history}>
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
+                <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+                <Router history={history}>
                     <Switch>
-                        <Route exact path="/" component={HomePage} />
+                        <Route exact path="/" component={HomePage}/>
                         <Route exact path="/Home" component={HomePage} />
-                        <Route path="/About" component={About}/>
-                        <Route path="/Login" componenet={Login} />
+                        <Route exact path="/About" component={About}/>
+                        <Route exact path="/Login" component={Login} />
                     </Switch>
-                </BrowserRouter>
+                </Router>
             </MuiThemeProvider>
         );
     }
