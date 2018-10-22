@@ -4,6 +4,7 @@ import '../styles/style.css'
 import SideBar from './SideBar'
 import Paper from 'material-ui/Paper'
 import github from '../images/github.png'
+import Login from './Login'
 
 
 
