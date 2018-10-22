@@ -4,10 +4,9 @@ const PORT = process.env.PORT || 8080;
 const path = require('path');
 const app = express();
 const pg = require('pg');
-const config = require('../config.js');
 
 
-db = config.database;
+db = 'studyhour';
 var pgClient = new pg.Client(db);
 pgClient.connect().then()
 {

@@ -2,14 +2,9 @@ import React, {Component} from 'react';
 import Paper from 'material-ui/Paper';
 import SideBar from "./SideBar";
 import '../styles/style.css'
-import selfie from '../images/selfie.png'
+import Comment from './Comment'
+import CommentTable from './CommentTable'
 
-
-
-const style = {
-    display: 'inline-block',
-    margin: '40px 32px 16px 0',
-};
 
 class About extends Component {
     render() {
@@ -17,17 +12,8 @@ class About extends Component {
             <div>
                 <SideBar/>
                 <Paper className='paper'>
-                    <div className='about-div'>
-                        <img src={selfie} className='img-selfie'/>
-                        <div>
-                            <h1>💻 Software Engineer</h1>
-                            <h2>University of California San Diego</h2>
-                            <br/>
-                            <h2>Zendesk</h2>
-                            <br/>
-                            <h3>Los Angeles ✈️  San Francisco ✈️ San Diego</h3>
-                        </div>
-                    </div>
+                    <h1>sample comment table</h1>
+                    <CommentTable/>
                 </Paper>
             </div>
         )
