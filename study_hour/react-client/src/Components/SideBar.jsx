@@ -2,11 +2,13 @@ import React, {Component} from 'react';
 import { URLProvider } from 'react-url';
 import home from '../images/home.svg'
 import profile from '../images/profile.svg'
+import login from '../images/login.svg'
 import '../styles/style.css'
 import Img from 'react-image';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import { Link } from 'react-router-dom'
+import { connect } from  "react-redux";
 
 const style = {
     display: 'inline-block',
@@ -16,7 +18,7 @@ const style = {
 class SideBar extends Component {
     constructor(props) {
         super(props);
-        this.state = {open: true};
+        this.state = {open: true, authenticated: false};
         this.toggleDrawer = this.toggleDrawer.bind(this);
     }
 
@@ -24,11 +26,11 @@ class SideBar extends Component {
         // this.setState({ open: op });
     }
     render() {
-        return (
-            <div>
-            <Drawer open={this.state.open}
-                    containerClassName='left-drawer'
-                    zDepth={2}>
+        let sideBar;
+        if (this.props.authenticated) {
+            sideBar = (<Drawer open={this.state.open}
+                               containerClassName='left-drawer'
+                               zDepth={2}>
                 <MenuItem className='menu-item'>
                     <Link to={"Home"}>
                         <img src={home} className='img-right'/>
@@ -39,15 +41,32 @@ class SideBar extends Component {
                         <img src={profile} className="img-right"/>
                     </Link>
                 </MenuItem>
+            </Drawer>);
+        } else {
+            sideBar = (<Drawer open={this.state.open}
+                               containerClassName='left-drawer'
+                               zDepth={2}>
                 <MenuItem className='menu-item'>
                     <Link to={"Login"}>
-                        <img src={home} className='img-right'/>
+                        <img src={login} className='img-right'/>
                     </Link>
                 </MenuItem>
-            </Drawer>
+            </Drawer>);
+
+        }
+
+        return (
+            <div>
+                {sideBar}
             </div>
         );
     }
 }
 
-export default SideBar;
+function mapStateToProps(state) {
+    return {
+        authenticated: state.auth.authenticated
+    }
+}
+
+export default connect(mapStateToProps)(SideBar);

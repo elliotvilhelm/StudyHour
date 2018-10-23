@@ -125,7 +125,4 @@ function mapStateToProps(state) {
     }
 }
 
-// export default withStyles(styles)(Login);
 export default connect(mapStateToProps)(withStyles(styles)(withRouter(Login)));
-// export default withStyles(styles)(connect(mapStateToProps)(Login));
-// export default connect(mapStateToProps)(Login);

@@ -23,9 +23,6 @@ class HomePage extends Component {
                     <div className='name-div'>
                         <h1>Elliot Vilhelm Pourmand</h1>
                     </div>
-                    <div>
-                        <button><Link to="/Login">Login</Link></button>
-                    </div>
                     <div className='photo-div'>
                         <a href="https://github.com/elliotvilhelm">
                             <h2>Creator</h2>
