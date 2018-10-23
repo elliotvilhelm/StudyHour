@@ -1,27 +1,31 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch} from 'react-router-dom';
+import { Router, Route, Switch} from 'react-router-dom';
 import HomePage from './HomePage';
 import About from './About';
-import LoginPage from './LoginPage';
+import Login from './Login';
 import '../styles/style.css'
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import history from '../history'
+import history from '../history';
+import RequireAuth from './RequireAuth';
+import NoAuth from './NoAuth';
 
 class App extends Component {
     render() {
         return (
 
             <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-                <BrowserRouter history={history}>
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
+                <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+                <Router history={history}>
                     <Switch>
-                        <Route exact path="/" component={HomePage} />
-                        <Route exact path="/Home" component={HomePage} />
+                        <Route exact path="/" component={HomePage}/>
+                        <Route exact path="/Home" component={RequireAuth(HomePage)} />
                         <Route path="/About" component={About}/>
-                        <Route path="/Login" component={LoginPage}/>
+                        <Route path="/Login" component={NoAuth(Login)}/>
                     </Switch>
-                </BrowserRouter>
+                </Router>
             </MuiThemeProvider>
         );
     }

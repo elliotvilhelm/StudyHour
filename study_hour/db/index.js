@@ -1,25 +1,12 @@
-var pg = require('pg');
-config = require('../config.js');
-db = config.database;
-var pgClient = new pg.Client(db);
-pgClient.connect();
-var query = pgClient.query("SELECT comment from Comments").then(result => {
-        console.log(result);
+const pg = require('pg');
+const pool = new pg.Pool({
+user: 'postgres',
+host: '127.0.0.1',
+database: 'studyhour',
+password: '123',
+port: '5432'});
 
-        if(result == 0)
-        {
-            console.log(send('Unknown database!'));
-        }
-        else if(result == 1)
-        {
-            console.log('Error trying to connect!');
-        }
-        else if(result == 2)
-        {
-            console.log('Connection done!');
-        }
-        pgClient.end()
-    }
-);
-
-
+pool.query("SELECT NOW()", (err, res) => {
+console.log(err, res);
+pool.end();
+});

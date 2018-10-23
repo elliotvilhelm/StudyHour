@@ -36,7 +36,12 @@ class SideBar extends Component {
                 </MenuItem>
                 <MenuItem className='menu-item'>
                     <Link to={"About"}>
-                        <Img src={profile} className="img-right"/>
+                        <img src={profile} className="img-right"/>
+                    </Link>
+                </MenuItem>
+                <MenuItem className='menu-item'>
+                    <Link to={"Login"}>
+                        <img src={home} className='img-right'/>
                     </Link>
                 </MenuItem>
             </Drawer>

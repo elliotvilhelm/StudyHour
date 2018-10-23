@@ -5,8 +5,7 @@ import '../styles/style.css'
 import SideBar from './SideBar'
 import Paper from 'material-ui/Paper'
 import github from '../images/github.png'
-
-
+import { connect } from "react-redux";
 
 class HomePage extends Component {
     constructor(props) {
@@ -40,4 +39,11 @@ class HomePage extends Component {
     }
 }
 
-export default HomePage;
+// export default HomePage;
+function mapStateToProps(state) {
+    return {
+        authenticated: state.auth.authenticated
+    };
+}
+
+export default connect(mapStateToProps)(HomePage);
