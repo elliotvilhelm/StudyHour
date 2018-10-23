@@ -317,3 +317,6 @@ tr:nth-child(even) {
     background: #fff0ff;
 }
 
+.login-div {
+    margin: 0 auto;
+}
