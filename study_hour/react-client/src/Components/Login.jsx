@@ -86,13 +86,18 @@ class Login extends Component {
             <div>
                 <SideBar/>
                 <Paper className='paper'>
+                    <div className='banner-div'>
+                        <h1>Welcome to StudyHour</h1>
+                    </div>
                     <div className='login-div'>
-                        <h1>Login</h1>
+                        <h2>Login</h2>
                         <form>
                         <TextField
                             id="standard-email"
                             label="Email"
+                            type="text"
                             className={classes.textField}
+                            placeholder="User Name"
                             onChange={this.handleChangeUserName}
                             autoComplete="username"
                         />
@@ -101,6 +106,7 @@ class Login extends Component {
                             label="Password"
                             className={classes.textField}
                             type="password"
+                            placeholder="Password"
                             autoComplete="current-password"
                             onChange={this.handleChangePassword}
                         />
