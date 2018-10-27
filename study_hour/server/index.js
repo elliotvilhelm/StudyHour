@@ -30,6 +30,27 @@ app.get('/Login', (req, res) => {
     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
 });
 
+// Get all the comments for a location
+// Returned comment should have all comment data including user_id
+app.post('/api/Location/Comments', function (req, res, next) {
+
+
+});
+
+// Get all comments from a given user
+// not that high priority
+app.post('/api/User/Comments', function (req, res, next) {
+
+
+});
+
+// Get all data about a user
+app.post('/api/User', function (req, res, next) {
+
+});
+
+
+// Verify login credentials, return True or False for authentication success
 app.post('/api/Login', function (req, res, next) {
     // const comment_post = req.body.params;
     console.log(req.body);
