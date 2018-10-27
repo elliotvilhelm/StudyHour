@@ -79,7 +79,7 @@ app.post('/api/Login', function (req, res, next) {
         // }
         const config = {
             secret: "supersecret"
-        }
+        };
         const token = jwt.sign({ id: result.rows[0].user_id }, config.secret, {
             expiresIn: 86400 // expires in 24 hours
         });
