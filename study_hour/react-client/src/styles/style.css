@@ -320,6 +320,10 @@ tr:nth-child(even) {
     padding-top: 20px;
     padding-bottom: 20px;
     margin: 0 auto;
+<<<<<<< HEAD
     background: #dddddd;
+=======
+    background: #6b6bb8;
+>>>>>>> login page cleanup
     width: 60%;
 }
