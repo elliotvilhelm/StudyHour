@@ -20,7 +20,7 @@ class App extends Component {
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
                 <Router history={history}>
                     <Switch>
-                        <Route exact path="/" component={HomePage}/>
+                        <Route exact path="/" component={NoAuth(Login)}/>
                         <Route exact path="/Home" component={RequireAuth(HomePage)} />
                         <Route path="/About" component={RequireAuth(About)}/>
                         <Route path="/Login" component={NoAuth(Login)}/>

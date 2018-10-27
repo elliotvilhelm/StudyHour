@@ -22,6 +22,7 @@ const styles = theme => ({
         marginLeft: '40%',
         // marginRight: theme.spacing.unit,
         width: 200,
+        background: 'blue'
     },
     dense: {
         marginTop: 19,
@@ -81,21 +82,20 @@ class Login extends Component {
 
     render () {
         const { classes } = this.props;
-        console.log(this.props);
-        // console.log(this.state);
         return (
             <div>
                 <SideBar/>
                 <Paper className='paper'>
                     <div className='login-div'>
-                        <h1>YOU WANNA LOGIN??</h1>
+                        <h1>Login</h1>
+                        <form>
                         <TextField
                             id="standard-email"
                             label="Email"
                             className={classes.textField}
                             onChange={this.handleChangeUserName}
+                            autoComplete="username"
                         />
-                        <br/>
                         <TextField
                             id="standard-password-input"
                             label="Password"
@@ -109,6 +109,7 @@ class Login extends Component {
                                 onClick={this.handleSubmit}>
                             Submit
                         </Button>
+                        </form>
                     </div>
                 </Paper>
             </div>
