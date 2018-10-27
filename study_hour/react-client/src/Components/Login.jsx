@@ -68,18 +68,14 @@ class Login extends Component {
             config: { headers: {'Content-Type': 'multipart/form-data' }}
         })
             .then(function (response) {
-                //handle success'=
-                console.log("suceessss")
+                console.log("success on login");
                 console.log(response);
-                localStorage.setItem(username, response.data.token);
-
+                localStorage.setItem('user', response.data.token);
                 history.push('/Home');
                 self.props.dispatch(auth_actions.authenticate());
-                // self.setState({authenticated: true})
             })
             .catch(function (response) {
-                //handle error
-                console.log("db respone",response);
+                console.log("Error on login db response",response);
             });
     }
 
