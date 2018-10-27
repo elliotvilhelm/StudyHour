@@ -84,6 +84,7 @@ class Login extends Component {
         const { classes } = this.props;
         return (
             <div>
+
                 <SideBar/>
                 <Paper className='paper'>
                     <div className='banner-div'>

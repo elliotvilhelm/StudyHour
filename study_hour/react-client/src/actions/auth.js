@@ -8,3 +8,9 @@ export function authenticate() {
         type: AUTHENTICATED
     };
 }
+
+export function unauthenticate() {
+    return {
+        type: UNAUTHENTICATED
+    };
+}

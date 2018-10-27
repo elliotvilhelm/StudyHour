@@ -3,12 +3,14 @@ import { URLProvider } from 'react-url';
 import home from '../images/home.svg'
 import profile from '../images/profile.svg'
 import login from '../images/login.svg'
+import logout from '../images/logout.svg'
 import '../styles/style.css'
 import Img from 'react-image';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import { Link } from 'react-router-dom'
 import { connect } from  "react-redux";
+import * as auth_actions from "../actions/auth";
 
 const style = {
     display: 'inline-block',
@@ -39,6 +41,11 @@ class SideBar extends Component {
                 <MenuItem className='menu-item'>
                     <Link to={"About"}>
                         <img src={profile} className="img-right"/>
+                    </Link>
+                </MenuItem>
+                <MenuItem className='menu-item' onClick={() => this.props.dispatch(auth_actions.unauthenticate())}>
+                    <Link to={"Login"} >
+                        <img src={logout} className="img-right" />
                     </Link>
                 </MenuItem>
             </Drawer>);
