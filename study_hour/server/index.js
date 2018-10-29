@@ -5,9 +5,18 @@ const path = require('path');
 const app = express();
 const pg = require('pg');
 
+
 const jwt = require('jsonwebtoken');
 db = 'studyhour';
-const pgClient = new pg.Client(db);
+// const pgClient = new pg.Client(db);
+
+const pgClient = new pg.Client({
+    user: 'postgres',
+    host: '127.0.0.1',
+    database: 'studyhour',
+    password: '123',
+    port: '5432'});
+
 pgClient.connect().then();
 {
     console.log('DB Connected');
