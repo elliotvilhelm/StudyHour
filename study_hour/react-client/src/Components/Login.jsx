@@ -5,13 +5,9 @@ import '../styles/style.css'
 import { withStyles } from '@material-ui/core/styles';
 import TextField from 'material-ui/TextField';
 import Button from "@material-ui/core/Button/Button";
-import axios from "axios/index";
 import * as auth_actions from "../actions/auth";
 import { connect } from  "react-redux";
 import { withRouter} from 'react-router-dom';
-import history from '../history';
-import { bindActionCreators } from 'redux'
-
 
 const styles = theme => ({
     container: {
@@ -38,7 +34,6 @@ class Login extends Component {
         this.state = {
             username:'',
             password:'',
-            authenticated: false
         };
         this.handleChangeUserName = this.handleChangeUserName.bind(this);
         this.handleChangePassword = this.handleChangePassword.bind(this);
@@ -53,31 +48,7 @@ class Login extends Component {
     };
     handleSubmit(event) {
         console.log("buttonClick");
-        // axios.post(`/api/Login`, {
-        //     username: this.state.username,
-        //     password: this.state.password
-        // });
-        let self = this;
-        console.log("props", this.props)
-        let username = this.state.username;
-        axios({
-            method: 'post',
-            url: '/api/Login',
-            data: {username: this.state.username,
-                password: this.state.password,
-            },
-            config: { headers: {'Content-Type': 'multipart/form-data' }}
-        })
-            .then(function (response) {
-                console.log("success on login");
-                console.log(response);
-                localStorage.setItem('user', response.data.token);
-                history.push('/Home');
-                self.props.dispatch(auth_actions.authenticate());
-            })
-            .catch(function (response) {
-                console.log("Error on login db response",response);
-            });
+        this.props.dispatch(auth_actions.authenticate(this.state.username, this.state.password));
     }
 
     render () {
@@ -125,7 +96,7 @@ class Login extends Component {
 }
 function mapStateToProps(state) {
     return {
-        authenticated: state.auth.authenticated
+        authenticated: state
     }
 }
 

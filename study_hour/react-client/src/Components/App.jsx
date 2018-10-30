@@ -3,6 +3,7 @@ import { Router, Route, Switch} from 'react-router-dom';
 import HomePage from './HomePage';
 import About from './About';
 import Login from './Login';
+import Signup from './Signup';
 import '../styles/style.css'
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -25,6 +26,7 @@ class App extends Component {
                         <Route exact path="/Home" component={RequireAuth(HomePage)} />
                         <Route path="/About" component={RequireAuth(About)}/>
                         <Route path="/Login" component={NoAuth(Login)}/>
+                        <Route path="/Signup" component={NoAuth(Signup)}/>
                     </Switch>
                 </Router>
             </MuiThemeProvider>
