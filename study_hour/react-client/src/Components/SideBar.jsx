@@ -4,6 +4,7 @@ import home from '../images/home.svg'
 import profile from '../images/profile.svg'
 import login from '../images/login.svg'
 import logout from '../images/logout.svg'
+import signup from '../images/signup.svg'
 import '../styles/style.css'
 import Img from 'react-image';
 import Drawer from 'material-ui/Drawer';
@@ -56,6 +57,11 @@ class SideBar extends Component {
                 <MenuItem className='menu-item'>
                     <Link to={"Login"}>
                         <img src={login} className='img-right'/>
+                    </Link>
+                </MenuItem>
+                <MenuItem className='menu-item'>
+                    <Link to={"Signup"}>
+                        <img src={signup} className='img-right'/>
                     </Link>
                 </MenuItem>
             </Drawer>);
