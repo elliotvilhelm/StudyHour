@@ -33,9 +33,15 @@ app.get('/About', (req, res) => {
 app.get('/Login', (req, res) => {
     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
 });
+<<<<<<< HEAD
 
 app.get('/Review', (req, res) => {
     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
+});
+
+=======
+app.get('/Signup', (req, res) => {
+      res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
 });
 
 app.get('/Location', (req, res) => {
@@ -46,7 +52,7 @@ app.get('/Location', (req, res) => {
 // Get all the comments for a location
 // Returned comment should have all comment data including user_id
 app.post('/api/Location/Comments', function (req, res, next) {
-    pgClient.query('SELECT * FROM Comments t WHERE t.location_id= $1 ', [req.body.location], function (err, result) {
+    pgClient.query('SELECT * FROM comments t WHERE t.location_id= $1 ', [req.body.location], function (err, result) {
         if (err) {
             return next(err)
         }
@@ -57,7 +63,7 @@ app.post('/api/Location/Comments', function (req, res, next) {
 // Get all comments from a given user
 // not that high priority
 app.post('/api/User/Comments', function (req, res, next) {
-    pgClient.query('SELECT * FROM Comments t WHERE t.user_id= $1 ', [req.body.location], function (err, result) {
+    pgClient.query('SELECT * FROM comments t WHERE t.id= $1 ', [req.body.location], function (err, result) {
         if (err) {
             return next(err)
         }
@@ -67,7 +73,7 @@ app.post('/api/User/Comments', function (req, res, next) {
 
 // Get all data about a user
 app.post('/api/User', function (req, res, next) {
-    pgClient.query('SELECT * FROM Users t WHERE t.user_id= $1 ', [req.body.user_id], function (err, result) {
+    pgClient.query('SELECT * FROM users t WHERE t.id= $1 ', [req.body.user_id], function (err, result) {
         if (err) {
             return next(err)
         }
@@ -78,7 +84,7 @@ app.post('/api/User', function (req, res, next) {
 
 // Verify login credentials, return True or False for authentication success
 app.post('/api/Login', function (req, res, next) {
-    pgClient.query('SELECT * FROM Users u where u.user_name = $1 and u.password = $2',[req.body.user_name, req.body.password], function (err, result) {
+    pgClient.query('SELECT * FROM users u where u.user_name = $1 and u.password = $2',[req.body.user_name, req.body.password], function (err, result) {
         if (err) {
             return next(err)
         }
@@ -93,5 +99,23 @@ app.post('/api/Login', function (req, res, next) {
             expiresIn: 86400 // expires in 24 hours
         });
         res.send({auth: true, token: token})
+    });
+});
+
+app.post('/api/Signup', function (req, res, next) {
+    pgClient.query('SELECT * FROM users u where u.user_name = $1',[req.body.user_name], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        if(result.rows.length !== 0) {
+            res.send({success: false});
+            return;
+        }
+        pgClient.query('INSERT INTO users(user_name, password) VALUES ($1, $2)',[req.body.user_name, req.body.password],function(err, result) {
+           if (err) {
+               return next(err)
+           }
+        });
+        res.send({success: true});
     });
 });

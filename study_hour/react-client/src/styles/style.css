@@ -24,17 +24,6 @@
     background: #FFFFFF !important;
     z-index: 100 !important;
 }
-.resume-div {
-    margin: auto;
-    padding-top: 30px;
-    height: 95%;
-    width: 50%;
-    bottom: 0;
-    top: 0;
-    position: relative;
-    max-width: 60%;
-    max-height: 100%;
-}
 .background {
     top: 0;
     max-height: 100%;
@@ -79,12 +68,6 @@
     position: fixed;
 
 }
-.img-selfie {
-    background: transparent;
-    max-height: 20%;
-    max-width: 20%;
-    border-radius: 50%;
-}
 .img-postgres {
     background: transparent;
     max-height: 50%;
@@ -127,21 +110,7 @@
 .banner-div:hover {
     background-color: #6b6bb8 !important;
 }
-.chess-top-div {
-    max-width: 100%;
-    margin: auto;
-    text-align: center;
-    /*z-index: 999;*/
-}
-.chess-div {
-    max-width: 45%;
-    max-height: 45%;
-    height: 40%;
-    width: 40%;
-    margin: auto;
-    padding-bottom: 10px;
-    /*z-index: 999;*/
-}
+
 
 .chat-div {
     max-width: 50%;
@@ -163,22 +132,6 @@
     bottom: 0;
     z-index: 1000;
     background: rgba(255, 255, 255, 0.8);
-}
-.chess-info-div {
-    position: relative;
-    margin: auto;
-    text-align: center;
-    max-width: 100%;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 1000;
-    background: rgba(255, 255, 255, 0.8);
-}
-.chess-space-div {
-    margin: auto;
-    height: 100px;
-    z-index: 1000;
 }
 .photo-div {
     display: inline-block;
@@ -284,6 +237,16 @@ h3 { color: #111;
     display: inline-block;
 }
 
+h4 {
+    color: #111;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 20px; font-weight: 300;
+    font-weight: lighter;
+    line-height: 32px;
+    margin: 0 0 10px;
+    text-align: center;
+}
+
 p { color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 14px; line-height: 24px; margin: 0 0 24px; text-align: justify; text-justify: inter-word; }
 
 
@@ -321,7 +284,22 @@ tr:nth-child(even) {
     padding-top: 20px;
     padding-bottom: 20px;
     margin: 0 auto;
-    background: #fff0ff;
-    opacity: .8;
+    background: #D3D3D3;
     width: 60%;
+
+}
+
+
+.signup-div {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin: 0 auto;
+    background: #D3D3D3;
+    width: 60%;
+}
+
+.submit-button {
+    margin: 0 auto;
+    text-align: center;
+
 }
