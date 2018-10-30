@@ -34,6 +34,9 @@ app.get('/Login', (req, res) => {
     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
 });
 app.get('/Signup', (req, res) => {
+      res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
+});
+app.get('/Location', (req, res) => {
     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
 });
 

@@ -11,6 +11,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import history from '../history';
 import RequireAuth from './RequireAuth';
 import NoAuth from './NoAuth';
+import Location from './Location';
 
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
                         <Route path="/About" component={RequireAuth(About)}/>
                         <Route path="/Login" component={NoAuth(Login)}/>
                         <Route path="/Signup" component={NoAuth(Signup)}/>
+                        <Route path="/Location" component={Location}/>
                     </Switch>
                 </Router>
             </MuiThemeProvider>
