@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 
 import MiniComment from './MiniComment'
-import uno from "../../images/Octocat.jpg";
+import uno from "../images/postgres.png";
 
 
 const content = {
@@ -18,21 +18,21 @@ const content = {
 }
 
 let location = {
-  name: "GOOD",
-  address: "123 Sunny Road",
+  name: "Giesel",
+  address: "123 Xiaofan Road",
   outlet: true,
   wifi: true,
   quitness: 3,
   //level: 1-4
-  openHour: {    
+  openHour: {
   }
 }
 export default class Location extends Component {
- 
+
   render() {
-    
+
     return (
-      
+
       <Paper style={{ width: parseInt(this.props.width), padding: 5, backgroundColor: "#EFEFEF", paddingRight:0, paddingLeft: 0, paddingTop:0 }}>
       <AppBar style={{ width: "inherit", padding: 2, marginBottom: 5, float: "none", position:"static", borderRadius: 2}} >
         <Typography variant="display2" color="inherit">{location.name}</Typography>
@@ -69,7 +69,7 @@ export default class Location extends Component {
               />
             </Typography>
 
-           
+
             <Typography  style={{ verticalAlign: "baseline", color: "grey" }}>
                   Quitness
                   <input
@@ -81,7 +81,7 @@ export default class Location extends Component {
                     value={location.quitness}
                   />
                 </Typography>
-             
+
           </Grid>
         </Grid>
 
@@ -99,7 +99,7 @@ export default class Location extends Component {
             </ul>
           </CardContent>
         </Grid>
-        <MiniComment {...content} />        
+        <MiniComment {...content} />
       </Paper>
     );
   }

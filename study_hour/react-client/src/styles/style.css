@@ -320,6 +320,7 @@ tr:nth-child(even) {
     padding-top: 20px;
     padding-bottom: 20px;
     margin: 0 auto;
-    background: #6b6bb8;
+    background: #fff0ff;
+    opacity: .8;
     width: 60%;
 }
