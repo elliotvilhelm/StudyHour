@@ -1,21 +1,32 @@
 import React, {Component} from 'react';
 import { URLProvider } from 'react-url';
 import '../styles/style.css'
+import StarRatingComponent from "react-star-rating-component";
 
 
 
-class Comment extends Component {
-    constructor(props) {
-        super(props);
-    }
+export class Comment extends Component {
 
-    render() {
+
+
+
+    render(){
 
         return (
             <div className="comment-div">
-                <h3>User: Elliot</h3>
+               User: {this.props.user}
                 <div>
-                    <p>I love this location</p>
+
+                    <StarRatingComponent
+                        name="rate star"
+                        editing={false}
+                        starCount={5}
+                        value={this.props.rating}
+                    />
+                </div>
+
+                <div>
+                    {this.props.text}
                 </div>
             </div>
         )

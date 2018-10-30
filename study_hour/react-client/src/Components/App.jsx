@@ -10,6 +10,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import history from '../history';
 import RequireAuth from './RequireAuth';
 import NoAuth from './NoAuth';
+import Review from './Review'
 
 
 class App extends Component {
@@ -25,6 +26,7 @@ class App extends Component {
                         <Route exact path="/Home" component={RequireAuth(HomePage)} />
                         <Route path="/About" component={RequireAuth(About)}/>
                         <Route path="/Login" component={NoAuth(Login)}/>
+                        <Route path="/Review" component={Review}/>
                     </Switch>
                 </Router>
             </MuiThemeProvider>
