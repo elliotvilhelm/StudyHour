@@ -15,10 +15,13 @@ import Location from './Location';
 
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+    }
+    componenetDidMount() {
+    }
     render() {
-        console.log("USER: ", localStorage.getItem('user'));
         return (
-
             <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />

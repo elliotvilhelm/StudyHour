@@ -7,7 +7,7 @@ import { Avatar, Paper, Typography, Grid } from '@material-ui/core'
 const commentStyle = {
     padding: 5,
     margin: 5,
-    width: 200,
+    width: '100%',
     backgroundColor: "#032B43",
     color: "white"
 };
@@ -17,7 +17,6 @@ class Comment extends Component {
     }
 
     render() {
-
         return (
             <Paper style={commentStyle}>
                 <Grid container spacing={16}>
