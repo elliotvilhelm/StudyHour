@@ -17,7 +17,7 @@ class CommentTable extends Component {
             <div className="comments-table-div">
                 <table>
                     <tr>
-                        <h2>Comments</h2>
+                        Comments
                     </tr>
                     <tr>
                         <Comment/>

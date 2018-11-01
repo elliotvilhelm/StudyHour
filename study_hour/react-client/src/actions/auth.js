@@ -9,6 +9,7 @@ export const AUTHENTICATION_ERROR = 'authentication_error';
 export function authenticate(username, password) {
     return (dispatch) =>
     {
+
         axios({
             method: 'post',
             url: '/api/Login',

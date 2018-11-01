@@ -16,6 +16,7 @@ import Location from './Location';
 
 class App extends Component {
     render() {
+        console.log("USER: ", localStorage.getItem('user'));
         return (
 
             <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>

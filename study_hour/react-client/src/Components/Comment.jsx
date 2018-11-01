@@ -1,9 +1,16 @@
 import React, {Component} from 'react';
 import { URLProvider } from 'react-url';
 import '../styles/style.css'
+import { Avatar, Paper, Typography, Grid } from '@material-ui/core'
 
 
-
+const commentStyle = {
+    padding: 5,
+    margin: 5,
+    width: 200,
+    backgroundColor: "#032B43",
+    color: "white"
+};
 class Comment extends Component {
     constructor(props) {
         super(props);
@@ -12,12 +19,17 @@ class Comment extends Component {
     render() {
 
         return (
-            <div className="comment-div">
-                <h3>User: Elliot</h3>
-                <div>
-                    <p>I love this location</p>
-                </div>
-            </div>
+            <Paper style={commentStyle}>
+                <Grid container spacing={16}>
+                    <Grid item>
+                        <Avatar style={{ backgroundColor: "grey" }}>UserName</Avatar>
+                    </Grid>
+                    <Grid item lg={true}>
+                        <Typography color="inherit">text: Hey</Typography>
+                        <Typography color="inherit">Rating</Typography>
+                    </Grid>
+                </Grid>
+            </Paper>
         )
     }
 }

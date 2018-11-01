@@ -7,12 +7,14 @@ import {applyMiddleware, createStore} from 'redux'
 import thunk from 'redux-thunk';
 import root_reducer from './reducers/root_reducer';
 import { authenticate } from './actions/auth'
+import { AUTHENTICATED } from "./actions/auth";
+
 
 const store = createStore(root_reducer, applyMiddleware(thunk));
 const user = localStorage.getItem('user');
 
 if(user) {
-    store.dispatch(authenticate());
+    store.dispatch({type: AUTHENTICATED});
 }
 // const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 ReactDOM.render(<Provider store={store}>
