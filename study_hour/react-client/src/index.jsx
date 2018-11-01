@@ -6,7 +6,6 @@ import { Provider } from 'react-redux'
 import {applyMiddleware, createStore} from 'redux'
 import thunk from 'redux-thunk';
 import root_reducer from './reducers/root_reducer';
-import { authenticate } from './actions/auth'
 import { AUTHENTICATED } from "./actions/auth";
 
 
@@ -15,11 +14,8 @@ document.title = '🔥 StudyHour 🔥';  // YEEEEEEEEEET
 const store = createStore(root_reducer, applyMiddleware(thunk));
 const user = localStorage.getItem('user');
 
-if(user) {
-    store.dispatch({type: AUTHENTICATED});
-}
+if(user) store.dispatch({type: AUTHENTICATED});
 
-// const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 ReactDOM.render(<Provider store={store}>
                     <App/>
                 </Provider>, document.getElementById('app'));
