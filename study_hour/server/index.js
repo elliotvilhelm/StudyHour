@@ -33,13 +33,10 @@ app.get('/About', (req, res) => {
 app.get('/Login', (req, res) => {
     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
 });
-<<<<<<< HEAD
-
 app.get('/Review', (req, res) => {
     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
 });
 
-=======
 app.get('/Signup', (req, res) => {
       res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
 });
