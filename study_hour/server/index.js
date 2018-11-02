@@ -49,7 +49,7 @@ app.get('/Location', (req, res) => {
 // Get all the comments for a location
 // Returned comment should have all comment data including user_id
 app.post('/api/Location/Comments', function (req, res, next) {
-    pgClient.query('SELECT * FROM comments t WHERE t.location_id= $1 ', [req.body.location], function (err, result) {
+    pgClient.query('SELECT c.id, u.user_name, c.location_id, c.rating, c.text FROM comments c, users u WHERE c.location_id= $1 and c.user_id=u.id', [req.body.location], function (err, result) {
         if (err) {
             return next(err)
         }
