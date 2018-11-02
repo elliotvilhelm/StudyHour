@@ -15,7 +15,7 @@ import uno from "../images/postgres.png";
 
 const content = {
   comments: [{ name: "Ana", rating: 2, text: "Noisy place" }, { name: "Bob", rating: 3, text: "It's ok" }]
-}
+};
 
 let location = {
   name: "Giesel",
@@ -26,7 +26,7 @@ let location = {
   //level: 1-4
   openHour: {
   }
-}
+};
 export default class Location extends Component {
 
   render() {

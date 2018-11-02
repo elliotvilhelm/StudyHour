@@ -278,6 +278,7 @@ tr:nth-child(even) {
     margin: 0 auto;
     width: 80%;
     background: #fff0ff;
+    opacity: .9;
 }
 
 .login-div {
