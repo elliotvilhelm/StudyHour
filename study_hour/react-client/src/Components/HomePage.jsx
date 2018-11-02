@@ -29,8 +29,10 @@ class HomePage extends Component {
                             <img src={github} className='img-icon'/>
                         </a>
                     </div>
+
                 </Paper>
             </div>
+
 
         )
     }

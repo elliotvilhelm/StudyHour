@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { URLProvider } from 'react-url';
 import '../styles/style.css'
+import StarRatingComponent from "react-star-rating-component";
 import { Avatar, Paper, Typography, Grid } from '@material-ui/core'
 
 
@@ -20,6 +21,12 @@ class Comment extends Component {
         return (
             <Paper style={commentStyle}>
                 <Grid container spacing={16}>
+                   <StarRatingComponent
+                        name="rate star"
+                        editing={false}
+                        starCount={5}
+                        value={3}
+                    />
                     <Grid item>
                         <Avatar style={{ backgroundColor: "grey" }}>UserName</Avatar>
                     </Grid>
