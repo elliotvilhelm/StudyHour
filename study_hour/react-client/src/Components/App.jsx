@@ -11,8 +11,8 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme'
 import history from '../history';
 import RequireAuth from './RequireAuth';
 import NoAuth from './NoAuth';
-
-import Review from './Review'
+import LocationTable from './LocationTable';
+import Review from './Review';
 
 import Location from './Location';
 
@@ -39,6 +39,7 @@ class App extends Component {
 
                         <Route path="/Review" component={Review}/>
 
+                        <Route path="/Locations" component={LocationTable}/>
 
                         <Route path="/Signup" component={NoAuth(Signup)}/>
 
