@@ -304,3 +304,13 @@ tr:nth-child(even) {
     text-align: center;
 
 }
+.location-table-div{
+    margin: 0 auto;
+    width: 80%;
+    background: blueviolet;
+    opacity: .9;
+}
+.location-header-tr{
+    margin: 0 auto;
+
+}
