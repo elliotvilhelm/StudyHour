@@ -36,7 +36,7 @@ class CommentTable extends Component {
 
             let table = []
             table = this.state.comments.map(comment =>
-                <tr><Comment user={comment.user_id}
+                <tr><Comment user_name={comment.user_name}
                              rating = {comment.rating}
                              text={comment.text}/></tr>
             )

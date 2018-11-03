@@ -18,6 +18,7 @@ class Comment extends Component {
     }
 
     render() {
+        console.log("username", this.props)
         return (
             <Paper style={commentStyle}>
                 <Grid container spacing={16}>
@@ -25,14 +26,13 @@ class Comment extends Component {
                         name="rate star"
                         editing={false}
                         starCount={5}
-                        value={3}
+                        value={this.props.rating}
                     />
                     <Grid item>
-                        <Avatar style={{ backgroundColor: "grey" }}>UserName</Avatar>
+                        <Avatar style={{ backgroundColor: "grey" }}>{this.props.user_name}</Avatar>
                     </Grid>
                     <Grid item lg={true}>
-                        <Typography color="inherit">text: Hey</Typography>
-                        <Typography color="inherit">Rating</Typography>
+                        <Typography color="inherit">{this.props.text}</Typography>
                     </Grid>
                 </Grid>
             </Paper>
