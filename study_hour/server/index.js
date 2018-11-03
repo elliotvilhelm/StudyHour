@@ -41,14 +41,18 @@ app.get('/Signup', (req, res) => {
       res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
 });
 
-app.get('/Location', (req, res) => {
-    res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
-});
-
 app.get('/Locations', (req, res) => {
     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
 });
 
+app.get('/api/Location/:id', function (req, res, next) {
+    pgClient.query('SELECT * from locations l WHERE l.id=$1', [req.params.id], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        res.send({dbresponse: result.rows})
+    });
+});
 
 // Get all the comments for a location
 // Returned comment should have all comment data including user_id
