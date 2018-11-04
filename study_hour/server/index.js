@@ -24,35 +24,42 @@ pgClient.connect().then();
 app.use(bodyParser.json());
 app.use(express.static(`${__dirname}/../react-client/dist`));
 app.use(express.urlencoded({ extended: true }));
-app.get('/Home', (req, res) => {
-    res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
-});
-app.get('/About', (req, res) => {
-    res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
-});
-app.get('/Login', (req, res) => {
-    res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
-});
-app.get('/Review', (req, res) => {
-    res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
-});
+// app.get('/Home', (req, res) => {
+//     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
+// });
+// app.get('/About', (req, res) => {
+//     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
+// });
+// app.get('/Login', (req, res) => {
+//     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
+// });
+// app.get('/Review', (req, res) => {
+//     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
+// });
+//
+// app.get('/Signup', (req, res) => {
+//       res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
+// });
 
-app.get('/Signup', (req, res) => {
-      res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
-});
+// app.get('/Locations', (req, res) => {
+//     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
+// });
+//
+// app.get('/Location/:id', (req, res) => {
+//     res.send({fuck: 'you'});
+//     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
+// });
 
-app.get('/Locations', (req, res) => {
-    res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
-});
-
-app.get('/api/Location/:id', function (req, res, next) {
-    pgClient.query('SELECT * from locations l WHERE l.id=$1', [req.params.id], function (err, result) {
-        if (err) {
-            return next(err)
-        }
-        res.send({dbresponse: result.rows})
-    });
-});
+// app.get('/Location/:id', function (req, res, next) {
+//     console.log("routing???");
+//     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
+    // pgClient.query('SELECT * from locations l WHERE l.id=$1', [req.params.id], function (err, result) {
+    //     if (err) {
+    //         return next(err)
+    //     }
+    //     res.send({dbresponse: result.rows})
+    // });
+// });
 
 // Get all the comments for a location
 // Returned comment should have all comment data including user_id
@@ -132,4 +139,9 @@ app.post('/api/Signup', function (req, res, next) {
         });
         res.send({success: true});
     });
+});
+
+
+app.get('/*', (req, res) => {
+    res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
 });

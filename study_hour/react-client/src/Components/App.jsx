@@ -35,15 +35,11 @@ class App extends Component {
                         <Route exact path="/Home" component={RequireAuth(HomePage)} />
                         <Route path="/About" component={RequireAuth(About)}/>
                         <Route path="/Login" component={NoAuth(Login)}/>
-
-
                         <Route path="/Review" component={Review}/>
-
+                        {/*<Route path="/Location" component={Review}/>*/}
                         <Route path="/Locations" component={LocationTable}/>
-
                         <Route path="/Signup" component={NoAuth(Signup)}/>
-
-                        <Route path="/Location" component={Location}/>
+                        <Route path="/Location/:id" component={Location}/>
                     </Switch>
                 </Router>
             </MuiThemeProvider>

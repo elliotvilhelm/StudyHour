@@ -28,9 +28,15 @@ let location = {
   }
 };
 export default class Location extends Component {
+  constructor(props) {
+    super(props);
+    // console.log(props.match.params.id)
+  }
+
 
   render() {
 
+      // return( <h1>{this.props.match.params.id}</h1>)
     return (
 
       <Paper style={{ width: parseInt(this.props.width), padding: 5, backgroundColor: "#EFEFEF", paddingRight:0, paddingLeft: 0, paddingTop:0 }}>
