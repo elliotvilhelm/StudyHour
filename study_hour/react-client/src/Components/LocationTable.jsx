@@ -5,41 +5,35 @@ import Comment from './Comment'
 import axios from "axios";
 import history from "../history";
 import * as auth_actions from "../actions/auth";
+import LocationThumbnail from './LocationThumbnail'
 
 
-
-class CommentTable extends Component {
+class LocationTable extends Component {
     constructor(props) {
         super(props);
-        //this.state = {comments: [{user: "elliot", text: "hey baby", rating: 2},
-                //{user:"john", text: "heyyyyy", rating:2}], table: []}
-        this.state={comments:[]};
-
-        this.createTable = this.createTable.bind(this);
+        this.state = {locations: [], table: []}
 
     }
     componentDidMount (){
         this.createTable();
     }
     createTable() {
-        axios({
+     axios({
             method: 'post',
-            url: '/api/Location/Comments',
-            data: {location: this.props.location_id},
+            url: '/api/Locations',
             config: { headers: {'Content-Type': 'multipart/form-data' }}
         }).then(response => {
 
 
                console.log("response", response.data.dbresponse);
-             this.setState({comments: response.data.dbresponse});
+             this.setState({locations: response.data.dbresponse});
 
-            let table = this.state.comments.map(comment =>
+            let table = []
+            table = this.state.locations.map(location =>
                 <tr>
-                    <Comment user_name={comment.user_name}
-                             rating = {comment.rating}
-                             text={comment.text}/>
+                    <LocationThumbnail name={location.name} address={location.address}/>
                 </tr>
-            );
+            )
             this.setState({table: table});
 
         })
@@ -48,16 +42,14 @@ class CommentTable extends Component {
             });
 
 
-
-
     }
 
     render() {
         return (
-            <div className="comments-table-div">
+            <div className="locations-table-div">
                 <table>
-                    <tr>
-                        <h2>Comments</h2>
+                    <tr className="location-header-tr">
+                        Locations
                     </tr>
                     {this.state.table}
                 </table>
@@ -65,4 +57,4 @@ class CommentTable extends Component {
         )
     }
 }
-export default CommentTable;
+export default LocationTable;

@@ -9,10 +9,10 @@ const commentStyle = {
     padding: 5,
     margin: 5,
     width: '100%',
-    backgroundColor: "#032B43",
+    backgroundColor: "#D3D3D3",
     color: "white"
 };
-class Comment extends Component {
+class LocationThumbnail extends Component {
     constructor(props) {
         super(props);
     }
@@ -21,21 +21,13 @@ class Comment extends Component {
         return (
             <Paper style={commentStyle}>
                 <Grid container spacing={16}>
-                    <Grid item>
-                        <Avatar style={{ backgroundColor: "grey" }}>{this.props.user_name}</Avatar>
-                    </Grid>
                     <Grid item lg={true}>
-                        <Typography color="inherit">{this.props.text}</Typography>
+                        <Typography color="inherit">{this.props.name}</Typography>
+                        <Typography color="inherit">{this.props.address}</Typography>
                     </Grid>
-                    <StarRatingComponent
-                        name="rate star"
-                        editing={false}
-                        starCount={5}
-                        value={this.props.rating}
-                    />
                 </Grid>
             </Paper>
         )
     }
 }
-export default Comment;
+export default LocationThumbnail;

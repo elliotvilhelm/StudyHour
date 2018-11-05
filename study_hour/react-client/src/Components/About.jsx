@@ -12,7 +12,6 @@ class About extends Component {
             <div>
                 <SideBar/>
                 <Paper className='paper'>
-                    <h1>sample comment table</h1>
                     <CommentTable/>
                 </Paper>
             </div>
