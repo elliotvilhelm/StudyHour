@@ -18,22 +18,21 @@ class Comment extends Component {
     }
 
     render() {
-        console.log("username", this.props)
         return (
             <Paper style={commentStyle}>
                 <Grid container spacing={16}>
-                   <StarRatingComponent
-                        name="rate star"
-                        editing={false}
-                        starCount={5}
-                        value={this.props.rating}
-                    />
                     <Grid item>
                         <Avatar style={{ backgroundColor: "grey" }}>{this.props.user_name}</Avatar>
                     </Grid>
                     <Grid item lg={true}>
                         <Typography color="inherit">{this.props.text}</Typography>
                     </Grid>
+                    <StarRatingComponent
+                        name="rate star"
+                        editing={false}
+                        starCount={5}
+                        value={this.props.rating}
+                    />
                 </Grid>
             </Paper>
         )

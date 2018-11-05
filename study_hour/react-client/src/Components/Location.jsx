@@ -12,6 +12,8 @@ import {
 import MiniComment from './MiniComment'
 import uno from "../images/postgres.png";
 import axios from "axios/index";
+import Comment from "./Comment";
+import CommentTable from "./CommentTable";
 
 
 const content = {
@@ -137,7 +139,7 @@ export default class Location extends Component {
                         </ul>
                     </CardContent>
                 </Grid>
-                <MiniComment {...content} />
+                <CommentTable location_id={this.props.match.params.id}/>
             </Paper>
         );
     }

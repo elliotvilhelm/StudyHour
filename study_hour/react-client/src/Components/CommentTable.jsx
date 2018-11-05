@@ -13,7 +13,7 @@ class CommentTable extends Component {
         super(props);
         //this.state = {comments: [{user: "elliot", text: "hey baby", rating: 2},
                 //{user:"john", text: "heyyyyy", rating:2}], table: []}
-        this.state={comments:[]}
+        this.state={comments:[]};
 
         this.createTable = this.createTable.bind(this);
 
@@ -25,8 +25,7 @@ class CommentTable extends Component {
         axios({
             method: 'post',
             url: '/api/Location/Comments',
-            data: {location: 2
-            },
+            data: {location: this.props.location_id},
             config: { headers: {'Content-Type': 'multipart/form-data' }}
         }).then(response => {
 
@@ -34,12 +33,13 @@ class CommentTable extends Component {
                console.log("response", response.data.dbresponse);
              this.setState({comments: response.data.dbresponse});
 
-            let table = []
-            table = this.state.comments.map(comment =>
-                <tr><Comment user_name={comment.user_name}
+            let table = this.state.comments.map(comment =>
+                <tr>
+                    <Comment user_name={comment.user_name}
                              rating = {comment.rating}
-                             text={comment.text}/></tr>
-            )
+                             text={comment.text}/>
+                </tr>
+            );
             this.setState({table: table});
 
         })
@@ -57,10 +57,9 @@ class CommentTable extends Component {
             <div className="comments-table-div">
                 <table>
                     <tr>
-                        Comments
+                        <h2>Comments</h2>
                     </tr>
                     {this.state.table}
-                    {/*{this.createTable()}*/}
                 </table>
             </div>
         )
