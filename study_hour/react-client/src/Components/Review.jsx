@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import connect from "react-redux/es/connect/connect";
-import {withStyles} from "@material-ui/core";
+import {withStyles} from "@material-ui/core/styles";
 import StarRatingComponent from 'react-star-rating-component';
 import CommentTable from './CommentTable'
 import SideBar from "./SideBar";
-import Paper from "material-ui/Paper";
+import {Paper} from "@material-ui/core";
 
 class Review extends Component{
 
