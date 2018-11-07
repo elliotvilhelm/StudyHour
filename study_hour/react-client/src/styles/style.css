@@ -23,3 +23,11 @@ a:visited, a:hover {
     border-radius: 0;
     
 }
+.location-header-tr{
+    margin: 0 auto;
+
+}
+.addLocation-checkbox{
+    margin: 0 auto;
+    text-align: center;
+}

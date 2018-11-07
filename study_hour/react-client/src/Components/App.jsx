@@ -4,6 +4,7 @@ import HomePage from './HomePage';
 import About from './About';
 import Login from './Login';
 import Signup from './Signup';
+import AddLocation from './AddLocation'
 import '../styles/style.css'
 
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
@@ -58,6 +59,8 @@ class App extends Component {
                         <Route path="/Locations" component={LocationTable}/>
                         <Route path="/Signup" component={NoAuth(Signup)}/>
                         <Route path="/Location/:id" component={Location}/>
+                        <Route path="/Location" component={Location}/>
+                        <Route path="/AddLocation" component={AddLocation}/>
                     </Switch>
                 </Router>
             </MuiThemeProvider>
