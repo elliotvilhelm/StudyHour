@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import { URLProvider } from 'react-url';
 import '../styles/style.css'
-import SideBar from './SideBar'
-import Paper from 'material-ui/Paper'
+import NavBar from './HeaderComponent/NavBar'
+import {Paper} from '@material-ui/core'
+import Map from './Map'
 import github from '../images/github.png'
 import { connect } from "react-redux";
 
@@ -18,18 +19,11 @@ class HomePage extends Component {
         return (
 
             <div>
-                <SideBar/>
-                <Paper className='paper'>
-                    <div className='name-div'>
-                        <h1>Elliot Vilhelm Pourmand</h1>
-                    </div>
-                    <div className='photo-div'>
-                        <a href="https://github.com/elliotvilhelm">
-                            <h2>Creator</h2>
-                            <img src={github} className='img-icon'/>
-                        </a>
-                    </div>
-
+                <NavBar     />
+                <Paper className='wallpaper'>
+                
+                <Map width='500' height='500' />
+                
                 </Paper>
             </div>
 

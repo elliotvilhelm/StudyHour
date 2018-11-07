@@ -1,31 +1,33 @@
-import React, {Component} from 'react';
-import Paper from 'material-ui/Paper';
-import SideBar from "./SideBar";
+import React, {Component, Fragment} from 'react';
+import {Paper} from '@material-ui/core';
+import NavBar from "./HeaderComponent/NavBar";
 import '../styles/style.css'
 import { withStyles } from '@material-ui/core/styles';
-import TextField from 'material-ui/TextField';
-import Button from "@material-ui/core/Button/Button";
+import {TextField, Grid, Typography} from '@material-ui/core';
+import {Button} from "@material-ui/core";
 import * as auth_actions from "../actions/auth";
 import { connect } from  "react-redux";
 import { withRouter} from 'react-router-dom';
+import ColorCombo from "../styles/color_comb"
 
 const styles = theme => ({
-    container: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
     textField: {
         marginLeft: '40%',
-        // marginRight: theme.spacing.unit,
         width: 200,
         background: 'blue'
     },
-    dense: {
-        marginTop: 19,
+    textField: {
+        width: "100%",
+        margin: 'auto',
+        textAlign: 'center'
     },
-    menu: {
+    button: {
         width: 200,
     },
+    item: {
+        paddingLeft: '25%',
+        paddingRight: '25%'
+    }
 });
 
 class Login extends Component {
@@ -39,7 +41,7 @@ class Login extends Component {
         this.handleChangePassword = this.handleChangePassword.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
+    
     handleChangeUserName(event) {
         this.setState({username: event.target.value});
     };
@@ -54,42 +56,60 @@ class Login extends Component {
     render () {
         const { classes } = this.props;
         return (
-            <div>
-                <SideBar/>
-                <Paper className='paper'>
-                    <div className='banner-div'>
-                        <h1>Welcome to StudyHour</h1>
-                    </div>
-                    <div className='login-div'>
-                        <h2>Login</h2>
-                        <form>
+            
+            <Fragment>
+                <NavBar/>
+                <Paper className='wallpaper'>
+                    
+
+                    <Paper style={{padding: "2%", width:"50%", margin:"auto", paddingLeft: "5%", paddingRight: "5%", marginTop: "5%"}}>
+                        <Typography variant="headline" style={{marginBottom: "5%"}}>Login To StudyHour</Typography>
+                        
+
+                        <Grid container>
+                        <Grid item xs="12" className={classes.item}>
                         <TextField
                             id="standard-email"
                             label="Email"
                             type="text"
-                            className={classes.textField}
                             placeholder="User Name"
                             onChange={this.handleChangeUserName}
-                            autoComplete="username"
+                            autoComplete='off'
+                            className={classes.textField}
+                            value={this.state.username}
+                            required
                         />
+                        </Grid>
+                        <Grid item xs="12" className={classes.item}>
                         <TextField
                             id="standard-password-input"
                             label="Password"
-                            className={classes.textField}
                             type="password"
                             placeholder="Password"
-                            autoComplete="current-password"
+                            autoComplete='off'
                             onChange={this.handleChangePassword}
+                            className={classes.textField}
+                            value={this.state.password}
+                            required
                         />
+                        </Grid>
+                        <Grid item xs="12" style={{textAlign: "center", marginTop: 10}} className={classes.item}>
                         <Button variant="contained"
                                 className={classes.button}
-                                onClick={this.handleSubmit}>
+                                onClick={this.handleSubmit}
+                                color="primary"    
+                                        >
                             Submit
                         </Button>
-                        </form>
-                    </div>
+                        </Grid>
+                        </Grid>
+
+                    </Paper>
+
+                    
+                    
                 </Paper>
-            </div>
+            </Fragment>
         )
     }
 }

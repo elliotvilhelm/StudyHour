@@ -1,0 +1,49 @@
+import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import { URLProvider } from 'react-url';
+
+import Location from './WidgetComponent/Location'
+import SideBar from './SideBar'
+import github from '../images/github.png'
+import Login from './Login'
+import { connect } from "react-redux";
+import { AppBar, Paper, Button, Toolbar, Typography, Grid } from "@material-ui/core"
+import bgImg from "../images/background-study.jpg"
+class HomePage extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+
+
+        return (
+            <Fragment>
+                <AppBar style={{backgroundColor: "rgba(122,122,122,0.8)"}}>
+                <Toolbar>
+                <Button color="inherit">
+                    <Typography variant="headline" color="inherit" >Login</Typography>
+                </Button>
+                </Toolbar>
+                </AppBar>
+                <Grid style={{color: "white", paddingTop: 100, paddingBottom: 100, width: "100%", backgroundImage: `url(${bgImg})`, backgroundSize: "cover"}}>
+                    <div style={{width: "50%", margin: "auto"}}>
+                    <Typography variant="h1" color="inherit">Study Hour</Typography>
+                    <Typography variant="diplay1" color="inherit">Find the best place to focus</Typography>
+                    </div>
+                </Grid>
+                <Login />
+
+            </Fragment>
+        )
+    }
+}
+
+// export default HomePage;
+function mapStateToProps(state) {
+    return {
+        authenticated: state.auth.authenticated
+    };
+}
+
+export default connect(mapStateToProps)(HomePage);
