@@ -4,6 +4,7 @@ import { URLProvider } from 'react-url';
 import '../styles/style.css'
 import NavBar from './HeaderComponent/NavBar'
 import {Paper} from '@material-ui/core'
+import Map from './Map'
 import github from '../images/github.png'
 import { connect } from "react-redux";
 
@@ -20,8 +21,9 @@ class HomePage extends Component {
             <div>
                 <NavBar     />
                 <Paper className='wallpaper'>
-                    
-
+                
+                <Map width='500' height='500' />
+                
                 </Paper>
             </div>
 

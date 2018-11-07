@@ -47,9 +47,10 @@ class NavBar extends Component {
     let navBar;
     if (this.props.authenticated) {
       navBar = (
+        <Fragment>
         <AppBar position="static">
           <Toolbar>
-            <IconButton style={{ marginRight: "1%" }} color="inherit" aria-label="Menu">
+            <IconButton  onClick={this.toggleDrawer(true)} style={{ marginRight: "1%" }} color="inherit" aria-label="Menu">
               <MenuIcon />
             </IconButton>
             <img src={studyhour} style={{ marginRight: "70%" }} width={100} />
@@ -72,11 +73,17 @@ class NavBar extends Component {
 
           </Toolbar>
         </AppBar>
+        <Drawer width={DrawerWidth} open={this.state.comeout} onClose={this.toggleDrawer(false)}>
+
+
+        {list}
+      </Drawer>
+      </Fragment>
 
       );
     } else {
       navBar = (
-        <div >
+        <Fragment>
           <AppBar position="static" >
             <Toolbar>
               <IconButton onClick={this.toggleDrawer(true)} style={{ marginRight: "1%" }} color="inherit" aria-label="Menu">
@@ -106,7 +113,7 @@ class NavBar extends Component {
             {list}
           </Drawer>
 
-        </div>
+        </Fragment>
 
       );
 
