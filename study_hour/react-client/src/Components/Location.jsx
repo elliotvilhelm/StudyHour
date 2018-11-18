@@ -9,10 +9,8 @@ import {
     Typography,
 } from "@material-ui/core";
 
-import MiniComment from './MiniComment'
 import uno from "../images/postgres.png";
 import axios from "axios/index";
-import Comment from "./Comment";
 import CommentTable from "./CommentTable";
 
 
@@ -34,12 +32,10 @@ export default class Location extends Component {
     constructor(props) {
         super(props);
         this.state = {location: {}}
-        // console.log(props.match.params.id)
     }
-    componentDidMount() {
+    componentDidUpdate() {
         let id = this.props.match.params.id;
         let self = this;
-        // let url = '/api/Location/1'
         axios({
             method: 'get',
             url: `/api/Location/${id}`,

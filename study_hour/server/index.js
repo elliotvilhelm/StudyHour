@@ -24,32 +24,46 @@ pgClient.connect().then();
 app.use(bodyParser.json());
 app.use(express.static(`${__dirname}/../react-client/dist`));
 app.use(express.urlencoded({ extended: true }));
-// app.get('/Home', (req, res) => {
-//     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
-// });
-// app.get('/About', (req, res) => {
-//     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
-// });
-// app.get('/Login', (req, res) => {
-//     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
-// });
-// app.get('/Review', (req, res) => {
-//     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
-// });
-//
-// app.get('/Signup', (req, res) => {
-//       res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
-// });
 
-// app.get('/Locations', (req, res) => {
-//     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
-// });
-//
-// app.get('/Location/:id', (req, res) => {
-//     res.send({fuck: 'you'});
-//     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
-// });
+app.get('/api/locate/:lat/:lng', function(req, res){
+    // retrieve longtitude, latitude
+    
+    const lng = parseFloat(req.params.lng);
+    const lat = parseFloat(req.params.lat);
 
+    if(lng == NaN || lat == NaN) {
+        return;
+    }
+    const range_lng = 0.1;
+    const range_lat = 0.1;
+    
+    let max_lng = lng + range_lng;
+    let min_lng = lng - range_lng;
+
+    let max_lat = lat + range_lat;
+    let min_lat = lat - range_lat;
+
+    const queryStr = `select * from locations where lng < ${max_lng} and lng > ${min_lng} and lat < ${max_lat} and lat > ${min_lat}`;
+    console.log('Retriving nearby locations:');
+    
+    console.log(`latitude: ${lat}`)
+    console.log(`longtitude: ${lng}`)
+
+    pgClient.query(queryStr,
+        function(err, result) {
+            if (err) {
+                console.log("Query failed at retriving longtitude and latitude");
+                console.log("Error detail:")
+                console.log(err);
+                return;
+            }
+            res.send(result.rows);
+        }
+    
+    );
+
+
+});
 app.get('/api/Location/:id', function (req, res, next) {
     console.log("routing???");
     // res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));

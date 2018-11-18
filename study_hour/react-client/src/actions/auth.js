@@ -28,11 +28,13 @@ export function authenticate(username, password) {
             .catch(function (response) {
                 console.log("Error on login db response", response);
             });
+
     }
 }
 
 export function unauthenticate() {
     localStorage.clear();
+    
     return {
         type: UNAUTHENTICATED
     };

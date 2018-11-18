@@ -7,8 +7,7 @@ import {TextField, Grid, Typography} from '@material-ui/core';
 import {Button} from "@material-ui/core";
 import * as auth_actions from "../actions/auth";
 import { connect } from  "react-redux";
-import { withRouter} from 'react-router-dom';
-import ColorCombo from "../styles/color_comb"
+import { withRouter } from 'react-router-dom';
 
 const styles = theme => ({
     textField: {
@@ -44,12 +43,13 @@ class Login extends Component {
     
     handleChangeUserName(event) {
         this.setState({username: event.target.value});
-    };
+    }
+
     handleChangePassword(event) {
         this.setState({password: event.target.value});
-    };
+    }
+    
     handleSubmit(event) {
-        console.log("buttonClick");
         this.props.dispatch(auth_actions.authenticate(this.state.username, this.state.password));
     }
 
