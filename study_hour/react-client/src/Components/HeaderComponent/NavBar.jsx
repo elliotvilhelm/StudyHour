@@ -1,18 +1,14 @@
 import React, { Component, Fragment } from 'react';
-import home from '../../images/home.svg'
-import profile from '../../images/profile.svg'
-import login from '../../images/login.svg'
-import logout from '../../images/logout.svg'
-import studyhour from '../../images/studyhour.png'
-import signup from '../../images/signup.svg'
+import login from '../../images/login.svg';
+import studyhour from '../../images/studyhour.png';
+import signup from '../../images/signup.svg';
 import { IconButton, AppBar, Toolbar, Button, Drawer, List, ListItemText, ListItem } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'; import ColorCombo from "../../styles/color_comb"
 import { Link } from 'react-router-dom'
 import { connect } from "react-redux";
 import * as auth_actions from "../../actions/auth";
 
-import '../../styles/style.css'
-import { ConsoleLogger } from '@aws-amplify/core';
+import '../../styles/style.css';
 
 const DrawerWidth = 250;
 const list = (

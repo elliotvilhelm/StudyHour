@@ -30,8 +30,8 @@ module.exports = {
                 test: [/\.jsx?/, /\.es6/],
                 include: SRC_DIR,
                 loader: 'babel-loader',
-                query: {
-                    presets: ['react', 'es2015']
+                query: {                    
+                    presets: ["@babel/preset-env", "@babel/preset-react"]
                 }
             },
 

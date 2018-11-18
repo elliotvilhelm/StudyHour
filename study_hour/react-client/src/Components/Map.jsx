@@ -1,62 +1,99 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
+import axios from "axios/index";
 
-
-let loaded = false;
-
-const myKey = "AIzaSyCJ-N7LHuHd3A2EX8hi7l3rpoM-sqWg0uo";
-const script = document.createElement("script");
-document.head.appendChild(script);
+let currentMap;
+let markConfig;
 
 class Map extends Component {
-    
-  componentDidMount() {
-    window.initMap = this.initMap();
-    loadMap(myKey);
+
+  constructor(props) {
+    super(props);
+    this.state = { locations: props.locations, locationsMark: {}};
+    this.retriveNearby = this.retriveNearby.bind(this);
+    this.markNearbyLocations = this.markNearbyLocations.bind(this);
   }
 
-  initMap() {
-    return () => {
-      let pos = { lat: -34.397, lng: 150.644 };
-      // Construct map object and render to the given element
-      const currentMap = new google.maps.Map(document.getElementById("map"), {
-        center: pos,
-        zoom: 1
+  markNearbyLocations() {
+    let locations = this.state.locations;
+    let locationsMark = locations.map((loc) => {
+      return new google.maps.Marker({ ...markConfig, position: { lat: loc.lat, lng: loc.lng } });
+    });
+    this.setState({...this.state, locationsMark: locationsMark});
+  }
+  
+  retriveNearby(currentLoc) {
+    let targetURL = `/api/locate/${currentLoc.lat}/${currentLoc.lng}`;
+
+    axios({
+      method: 'get',
+      url: targetURL,
+      config: { headers: { 'Content-Type': 'multipart/form-data' } }
+    }).then(response => {
+      response = response.data;
+      console.log(response);
+      this.setState({ ...this.state, locations: response});
+      this.markNearbyLocations();
+    })
+      .catch(function (err) {
+        console.log("Error", err);
       });
 
-      // const infoWindow = new google.maps.InfoWindow();
-      var Marker;
-      // Try HTML5 geolocation.
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-          };
-          Marker = new google.maps.Marker({
-            map: currentMap,
-            animation: google.maps.Animation.DROP,
-            position: pos,
-            icon:  {
-                path: google.maps.SymbolPath.CIRCLE,
-                fillColor: '#00F',
-                fillOpacity: 0.6,
-                strokeColor: '#00A',
-                strokeOpacity: 0.9,
-                strokeWeight: 1,
-                scale: 7
-            }
-          });
-          // infoWindow.setPosition(pos);
-          // infoWindow.open(currentMap);
-          currentMap.setCenter(pos);
-          currentMap.setZoom(18);
-        });
-      }
-    };
   }
 
+  componentDidMount() {
+    let currentPos;
+    currentMap = new window.google.maps.Map(document.getElementById("map"), {
+      zoom: 1
+    });
+
+    markConfig = {
+      map: currentMap,
+      animation: google.maps.Animation.DROP
+    };
+
+
+    let options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
+
+    // Get current Location
+    if (navigator.geolocation) {
+      const retriveNearby = this.retriveNearby;
+
+      navigator.geolocation.getCurrentPosition(function (position) {
+        currentPos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+
+        retriveNearby(currentPos);
+        let Marker = new google.maps.Marker({
+          ...markConfig,
+          position: currentPos,
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            fillColor: '#09a',
+            fillOpacity: 1,
+            strokeColor: '#bbb',
+            strokeOpacity: 0.5,
+            strokeWeight: 3,
+            scale: 8
+          }
+        });
+
+        currentMap.setCenter(currentPos);
+        currentMap.setZoom(18);
+
+      }, error, options);
+    } else {
+      alert("Your browser can not retrieve your location.")
+    }
+
+  }
   render() {
-    console.log(this.props);
+
     const map = (
       <div>
         <div
@@ -67,24 +104,18 @@ class Map extends Component {
             margin: 'auto',
             marginTop: '1%',
             marginBottom: '1%',
-            borderRadius: 5
+            borderRadius: 5,
+            backgroundColor: 'black'
           }}
         />
       </div>
     );
 
-    if (!loaded) {
-      return map;
-    }
-    return;
+    return map;
   }
-}
 
-function loadMap(key) {
-  if (!loaded) {
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&callback=initMap`;
-    script.async = true;
-  }
 }
-
+function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+}
 export default Map;
