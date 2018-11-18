@@ -22,7 +22,7 @@ class SideBar extends Component {
     constructor(props) {
         super(props);
         this.state = {open: true, authenticated: false};
-        
+
     }
 
     render() {
@@ -61,7 +61,7 @@ class SideBar extends Component {
                         <img src={signup} className='img-right'/>
                     </Link>
                 </MenuItem>
-            </Drawer>); 
+            </Drawer>);
 
         }
 
