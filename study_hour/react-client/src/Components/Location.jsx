@@ -126,18 +126,6 @@ export default class Location extends Component {
                                         value={this.state.location.quitness}
                                     />
                                 </Typography>
-
-                                <Typography  style={{ verticalAlign: "baseline", color: "grey" }}>
-                                    Quitness
-                                    <input
-                                        style={{ position: "relative", top: 7, marginLeft: 10, width: 70, display: "inline" }}
-                                        type="range"
-                                        step="1"
-                                        min="1"
-                                        max="4"
-                                        value={this.state.location.quitness}
-                                    />
-                                </Typography>
                             </Grid>
                             <Grid item sm>
                                 <CardContent>
