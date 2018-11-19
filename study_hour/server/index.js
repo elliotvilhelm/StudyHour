@@ -184,6 +184,26 @@ app.post('/api/Signup', function (req, res, next) {
 });
 
 
+
+
+const upload = require('./aws');
+const singleUpload = upload.single('image')
+app.post('/api/image-upload', function(req, res) {
+    // if (req.file === undefined)
+    //     return;
+    console.log("upoloadd")
+    singleUpload(req, res, function(err, some) {
+        if (err) {
+            console.log(err)
+            return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
+        }
+        return res.json({'imageUrl': req.file.location});
+    });
+});
+
+
+
 app.get('/*', (req, res) => {
     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
 });
+

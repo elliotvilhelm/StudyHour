@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom';
 import { URLProvider } from 'react-url';
 import '../styles/style.css'
 import NavBar from './HeaderComponent/NavBar'
 import {Paper} from '@material-ui/core'
 import Map from './Map'
-import github from '../images/github.png'
 import { connect } from "react-redux";
 import FileUpload from './FileUpload';
 
@@ -15,10 +13,7 @@ class HomePage extends Component {
     }
 
     render() {
-
-
         return (
-
             <div>
                 <NavBar/>
                 <Paper className='wallpaper'>
@@ -26,8 +21,6 @@ class HomePage extends Component {
                 </Paper>
                 <FileUpload/>
             </div>
-
-
         )
     }
 }

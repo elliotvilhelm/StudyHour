@@ -30,7 +30,17 @@ class FileUpload extends React.Component {
                 'content-type': 'multipart/form-data'
             }
         }
-        // return  post(url, formData,config)
+        axios({
+            method: 'post',
+            url: `/api/image-upload`,
+            config: { headers: {'Content-Type': 'multipart/form-data' }}
+        }).then(response => {
+            console.log("response upload", response);
+
+        })
+            .catch(function (response) {
+                console.log("Error",response);
+            });
     }
 
     render() {
