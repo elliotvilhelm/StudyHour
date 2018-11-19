@@ -10,6 +10,8 @@ import Typography from "@material-ui/core/Typography/Typography";
 import Grid from "@material-ui/core/Grid/Grid";
 import Modal from "@material-ui/core/Modal/Modal";
 import StarRatingComponent from "react-star-rating-component";
+import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox/Checkbox";
 
 function getModalStyle() {
     const top = 50;
@@ -43,11 +45,15 @@ class AddCommentModal extends Component {
         this.state = {
             text: '',
             rating: 0,
+            outlet: false,
+            internet: false,
             open: false,
         };
         this.handleOpen = this.handleOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleChangeText = this.handleChangeText.bind(this);
+        this.handleChangeOutlet = this.handleChangeOutlet.bind(this);
+        this.handleChangeInternet = this.handleChangeInternet.bind(this);
         this.onStarClick = this.onStarClick.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -60,9 +66,12 @@ class AddCommentModal extends Component {
     handleChangeText(event) {
         this.setState({text: event.target.value});
     };
-    // onStarClick(nextValue, prevValue, name) {
-    //     this.setState({rating: nextValue});
-    // }
+    handleChangeInternet(event) {
+        this.setState({internet: event.target.checked});
+    };
+    handleChangeOutlet(event) {
+        this.setState({outlet: event.target.checked});
+    };
     onStarClick(event) {
         this.setState({rating: event.target.value});
     }
@@ -86,6 +95,26 @@ class AddCommentModal extends Component {
                                 starCount={5}
                                 editing={true}
                                 onStarClick={this.onStarClick.bind(this)}
+                            />
+                        </Grid>
+                        <Grid item xs="12" className={classes.item}>
+                            <FormControlLabel
+                                style={{paddingLeft: "5%"}}
+                                className={classes.textField}
+                                control={
+                                    <Checkbox checked={this.state.outlet} style={{color: "white"}} onChange={this.handleChangeOutlet}/>
+                                }
+                                label="outlet"
+                        />
+                        </Grid>
+                        <Grid item xs="12" className={classes.item}>
+                            <FormControlLabel
+                                style={{paddingLeft: "5%"}}
+                                className={classes.textField}
+                                control={
+                                    <Checkbox checked={this.state.internet} style={{color: "white"}} onChange={this.handleChangeInternet} />
+                                }
+                                label="internet"
                             />
                         </Grid>
                         <Grid item xs="12" className={classes.item}>

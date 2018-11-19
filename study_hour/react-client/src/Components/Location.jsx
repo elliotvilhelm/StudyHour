@@ -14,6 +14,7 @@ import geisel from '../images/geisel.jpg';
 import axios from "axios/index";
 import CommentTable from "./CommentTable";
 import NavBar from './HeaderComponent/NavBar';
+import AddCommentModal from "./AddCommentModal";
 
 
 const content = {
@@ -155,6 +156,9 @@ export default class Location extends Component {
                             </Grid>
                         </Paper>
                     </Grid>
+                </div>
+                <div className="comments-modal">
+                    <AddCommentModal/>
                 </div>
                 <div className="comments-table-div">
                     <CommentTable location_id={this.props.match.params.id}/>

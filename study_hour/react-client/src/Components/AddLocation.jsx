@@ -50,7 +50,7 @@ class AddLocation extends Component {
         this.state = {
             name: '',
             address: '',
-             // outlet: false,
+            outlet: false,
             internet: false,
             // noise_level: '',
             // open_time: '',
@@ -69,7 +69,6 @@ class AddLocation extends Component {
         this.setState({address: event.target.value});
     };
     handleChangeInternet(event) {
-
         this.setState({internet: event.target.checked});
     };
     handleChangeOutlet(event) {
