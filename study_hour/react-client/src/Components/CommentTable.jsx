@@ -5,6 +5,7 @@ import Comment from './Comment'
 import axios from "axios";
 import history from "../history";
 import * as auth_actions from "../actions/auth";
+import Typography from "@material-ui/core/Typography/Typography";
 
 
 
@@ -57,7 +58,9 @@ class CommentTable extends Component {
             <div className="comments-table-div">
                 <table>
                     <tr>
-                        <h2>Comments</h2>
+                        <Typography variant="display3">
+                        Comments
+                        </Typography>
                     </tr>
                     {this.state.table}
                 </table>

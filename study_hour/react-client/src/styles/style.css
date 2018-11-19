@@ -1,6 +1,6 @@
 
 a {
-    text-decoration: none;    
+    text-decoration: none;
 }
 
 a:visited, a:hover {
@@ -11,17 +11,30 @@ a:visited, a:hover {
 .wallpaper {
     background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), url("../images/background-study.jpg") !important;
     background-size: cover !important;
-    position: fixed;
+    /*position: fixed;*/
     width: 100%;
-    height: 100%;
+    /*height: 100%;*/
     border-radius: 0;
 }
 .paper {
-
-    
     overflow-y: auto;
     border-radius: 0;
-    
+}
+
+.comments-table-div {
+    width: 90%;
+    margin: 0 auto;
+}
+
+table {
+    width: 100%;
+}
+
+.location-div {
+    padding-top: 20px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
 }
 .location-header-tr{
     margin: 0 auto;

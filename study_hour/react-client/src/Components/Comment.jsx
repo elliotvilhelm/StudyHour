@@ -9,7 +9,7 @@ const commentStyle = {
     padding: 5,
     margin: 5,
     width: '100%',
-    backgroundColor: "#032B43",
+    backgroundColor: "#484e63",
     color: "white"
 };
 class Comment extends Component {
@@ -34,7 +34,7 @@ class Comment extends Component {
                         value={this.props.rating}
                     />
                 </Grid>
-            </Paper>
+        </Paper>
         )
     }
 }
