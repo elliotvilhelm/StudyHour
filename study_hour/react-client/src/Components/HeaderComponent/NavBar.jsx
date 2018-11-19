@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import * as auth_actions from "../../actions/auth";
 
 import '../../styles/style.css';
+import Typography from "@material-ui/core/Typography/Typography";
 
 const DrawerWidth = 250;
 const list = (
@@ -50,20 +51,14 @@ class NavBar extends Component {
               <MenuIcon />
             </IconButton>
             <img src={studyhour} style={{ marginRight: "70%" }} width={100} />
-
             <Button color="inherit">
               <Link to={"Home"}>
-                Home
-            </Link>
-            </Button>
-            <Button color="inherit">
-              <Link to={"About"}>
-                About
+                  <Typography variant="h5">Home</Typography>
             </Link>
             </Button>
             <Button color="inherit" onClick={() => this.props.dispatch(auth_actions.unauthenticate())}>
               <Link to={"Login"} >
-                Logout
+                  <Typography variant="h5">Logout</Typography>
             </Link>
             </Button>
 
