@@ -17,6 +17,7 @@ import NavBar from "./HeaderComponent/NavBar";
 import Map from "./Map";
 import Grid from "@material-ui/core/Grid/Grid";
 import * as addlocation_actions from "../actions/addlocation_action";
+import FileUpload from './FileUpload'
 
 
 const styles = theme => ({
@@ -100,7 +101,6 @@ class AddLocation extends Component {
                                         placeholder="Location Name"
                                         onChange={this.handleChangeName}
                                         autoComplete="name"
-                                        //value={location.name}
                                     />
                                 </Grid>
                                 <Grid item xs="12" className={classes.item}>
@@ -112,7 +112,6 @@ class AddLocation extends Component {
                                         placeholder="Address"
                                         autoComplete="address"
                                         onChange={this.handleChangeAddress}
-                                        // value={location.address}
                                     />
                                 </Grid>
                                 <Grid item xs="12" className={classes.item}>
@@ -133,37 +132,6 @@ class AddLocation extends Component {
                                         label="internet"
                                     />
                                 </Grid>
-
-                                                {/*<Grid item xs="12" className={classes.item}>*/}
-                                    {/*<FormControlLabel*/}
-                                        {/*className={classes.textField}*/}
-                                        {/*control={*/}
-                                            {/*<Checkbox checked={internet} onChange={this.handleChangeCheckbox('internet')} />*/}
-                                        {/*}*/}
-                                        {/*label="internet"*/}
-                                    {/*/>*/}
-                                {/**/}
-                                {/*</Grid>*/}
-                                {/*<Grid item xs="12" className={classes.item}>*/}
-                                    {/*<FormControlLabel*/}
-                                        {/*className={classes.textField}*/}
-                                        {/*control={*/}
-                                            {/*<Checkbox checked={internet} onChange={this.handleChangeCheckbox('internet')} />*/}
-                                        {/*}*/}
-                                        {/*label="internet"*/}
-                                    {/*/>*/}
-                                {/**/}
-                                {/*</Grid>*/}
-                                {/*<Grid item xs="12" className={classes.item}>*/}
-                                    {/*<FormControlLabel*/}
-                                        {/*className={classes.textField}*/}
-                                        {/*control={*/}
-                                            {/*<Checkbox checked={internet} onChange={this.handleChangeCheckbox('internet')} />*/}
-                                        {/*}*/}
-                                        {/*label="internet"*/}
-                                    {/*/>*/}
-                                {/**/}
-                                {/*</Grid>*/}
                                 <Grid item xs="12" style={{textAlign: "center", marginTop: 10}} className={classes.item}>
                                     <Button id="submit-button"
                                             variant="contained"
@@ -172,6 +140,7 @@ class AddLocation extends Component {
                                         Submit
                                     </Button>
                                 </Grid>
+                                <FileUpload/>
                             </Grid>
 
                         </div>
