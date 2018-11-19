@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get('/api/locate/:lat/:lng', function(req, res){
     // retrieve longtitude, latitude
-    
+
     const lng = parseFloat(req.params.lng);
     const lat = parseFloat(req.params.lat);
 
@@ -36,7 +36,7 @@ app.get('/api/locate/:lat/:lng', function(req, res){
     }
     const range_lng = 0.1;
     const range_lat = 0.1;
-    
+
     let max_lng = lng + range_lng;
     let min_lng = lng - range_lng;
 
@@ -45,7 +45,7 @@ app.get('/api/locate/:lat/:lng', function(req, res){
 
     const queryStr = `select * from locations where lng < ${max_lng} and lng > ${min_lng} and lat < ${max_lat} and lat > ${min_lat}`;
     console.log('Retriving nearby locations:');
-    
+
     console.log(`latitude: ${lat}`)
     console.log(`longtitude: ${lng}`)
 
@@ -59,7 +59,7 @@ app.get('/api/locate/:lat/:lng', function(req, res){
             }
             res.send(result.rows);
         }
-    
+
     );
 
 
@@ -84,6 +84,34 @@ app.post('/api/Location/Comments', function (req, res, next) {
         }
         res.send({dbresponse: result.rows})
     });
+});
+
+app.post('/api/AddCommentModal', function (req, res, next) {
+    pgClient.query('SELECT c.id, u.user_name, c.location_id, c.rating, c.text FROM comments c, users u WHERE c.location_id= $1 and c.user_id=u.id', [req.body.location], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        res.send({dbresponse: result.rows})
+    });
+});
+
+app.post('/api/AddLocation', function (req, res, next) {
+    // pgClient.query('SELECT * FROM locations l where l.name = $1 and l.address = $2',[req.body.name, req.body.address], function (err, result) {
+    //     if (err) {
+    //         return next(err)
+    //     }
+    //     if(result.rows.length !== 0) {
+    //         res.send({success: false});
+    //         return;
+    //     }
+    pgClient.query('INSERT INTO locations(name, address, outlet, internet) VALUES ($1, $2, $3, $4) RETURNING id',[req.body.name, req.body.address, req.body.outlet, req.body.internet],function(err, result) {
+        if (err) {
+            return next(err)
+        }
+        console.log(result.rows[0]);
+        res.send({success: true, location_id: result.rows[0].id});
+    });
+    // });
 });
 
 app.post('/api/Locations', function (req, res, next) {
@@ -147,9 +175,9 @@ app.post('/api/Signup', function (req, res, next) {
             return;
         }
         pgClient.query('INSERT INTO users(user_name, password) VALUES ($1, $2)',[req.body.user_name, req.body.password],function(err, result) {
-           if (err) {
-               return next(err)
-           }
+            if (err) {
+                return next(err)
+            }
         });
         res.send({success: true});
     });

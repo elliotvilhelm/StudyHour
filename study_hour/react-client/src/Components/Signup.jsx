@@ -16,12 +16,8 @@ import { bindActionCreators } from 'redux'
 const styles = theme => ({
     textField: {
         marginLeft: '40%',
-        // marginRight: theme.spacing.unit,
-        width: 200,
-        background: 'blue'
-    },
-    textField: {
         width: "100%",
+        background: 'blue',
         margin: 'auto',
         textAlign: 'center'
     },
