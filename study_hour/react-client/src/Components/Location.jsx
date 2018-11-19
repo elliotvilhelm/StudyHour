@@ -28,6 +28,7 @@ let location = {
     openHour: {
     }
 };
+
 export default class Location extends Component {
     constructor(props) {
         super(props);
@@ -117,7 +118,6 @@ export default class Location extends Component {
                                 value={this.state.location.quitness}
                             />
                         </Typography>
-
                     </Grid>
                 </Grid>
 
@@ -135,6 +135,7 @@ export default class Location extends Component {
                         </ul>
                     </CardContent>
                 </Grid>
+
                 <CommentTable location_id={this.props.match.params.id}/>
             </Paper>
         );

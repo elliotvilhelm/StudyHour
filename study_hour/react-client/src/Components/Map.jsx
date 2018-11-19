@@ -23,7 +23,7 @@ class Map extends Component {
   
   retriveNearby(currentLoc) {
     let targetURL = `/api/locate/${currentLoc.lat}/${currentLoc.lng}`;
-
+    console.log(targetURL);
     axios({
       method: 'get',
       url: targetURL,
@@ -43,6 +43,7 @@ class Map extends Component {
   componentDidMount() {
     let currentPos;
     currentMap = new window.google.maps.Map(document.getElementById("map"), {
+       center: {lat: -34.397, lng: 150.644},
       zoom: 1
     });
 
@@ -54,7 +55,7 @@ class Map extends Component {
 
     let options = {
       enableHighAccuracy: true,
-      timeout: 5000,
+      timeout: 1000000,
       maximumAge: 0
     };
 

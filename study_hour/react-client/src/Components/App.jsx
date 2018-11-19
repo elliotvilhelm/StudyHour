@@ -4,7 +4,8 @@ import HomePage from './HomePage';
 import About from './About';
 import Login from './Login';
 import Signup from './Signup';
-import AddLocation from './AddLocation'
+import AddLocation from './AddLocation';
+import AddCommentModal from './AddCommentModal';
 import '../styles/style.css'
 
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
@@ -61,6 +62,7 @@ class App extends Component {
                         <Route path="/Location/:id" component={Location}/>
                         <Route path="/Location" component={Location}/>
                         <Route path="/AddLocation" component={AddLocation}/>
+                        <Route path="/AddCommentModal" component={AddCommentModal}/>
                     </Switch>
                 </Router>
             </MuiThemeProvider>

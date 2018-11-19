@@ -6,7 +6,6 @@ import login from '../images/login.svg'
 import logout from '../images/logout.svg'
 import signup from '../images/signup.svg'
 import '../styles/style.css'
-import Img from 'react-image';
 import {Drawer} from '@material-ui/core';
 import {MenuItem} from '@material-ui/core';
 import { Link } from 'react-router-dom'
