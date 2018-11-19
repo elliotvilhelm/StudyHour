@@ -127,39 +127,18 @@ export default class Location extends Component {
                                     />
                                 </Typography>
 
-                        <Typography  style={{ verticalAlign: "baseline", color: "grey" }}>
-                            Quitness
-                            <input
-                                style={{ position: "relative", top: 7, marginLeft: 10, width: 70, display: "inline" }}
-                                type="range"
-                                step="1"
-                                min="1"
-                                max="4"
-                                value={this.state.location.quitness}
-                            />
-                        </Typography>
-                    </Grid>
-                </Grid>
-
-                <Grid container>
-                    <CardContent>
-                        <Typography variant="title" style={{ color: "grey" }}>
-                            Open Hours:
-                        </Typography>
-                        <ul style={{ margin: "none", textAlign: "left", listStyleType: "none" }}>
-                            <li>Mon:</li>
-                            <li>Tue:</li>
-                            <li>Wed:</li>
-                            <li>Thu:</li>
-                            <li>Fri:</li>
-                        </ul>
-                    </CardContent>
-                </Grid>
-
-                <CommentTable location_id={this.props.match.params.id}/>
+                                <Typography  style={{ verticalAlign: "baseline", color: "grey" }}>
+                                    Quitness
+                                    <input
+                                        style={{ position: "relative", top: 7, marginLeft: 10, width: 70, display: "inline" }}
+                                        type="range"
+                                        step="1"
+                                        min="1"
+                                        max="4"
+                                        value={this.state.location.quitness}
+                                    />
+                                </Typography>
                             </Grid>
-                            {/*</Grid>*/}
-
                             <Grid item sm>
                                 <CardContent>
                                     <Typography variant="title" style={{ color: "grey" }}>
@@ -175,7 +154,6 @@ export default class Location extends Component {
                                 </CardContent>
                             </Grid>
                         </Paper>
-
                     </Grid>
                 </div>
                 <div className="comments-table-div">
