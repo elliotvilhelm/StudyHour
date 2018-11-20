@@ -4,10 +4,12 @@ import HomePage from './HomePage';
 import About from './About';
 import Login from './Login';
 import Signup from './Signup';
+import AddLocation from './AddLocation';
+import AddCommentModal from './AddCommentModal';
 import '../styles/style.css'
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
+
+import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
+
 import history from '../history';
 import RequireAuth from './RequireAuth';
 import NoAuth from './NoAuth';
@@ -16,7 +18,24 @@ import Review from './Review';
 
 import Location from './Location';
 
-
+import book from '../images/book.svg'
+const dark_theme = createMuiTheme({
+    palette: {
+        primary: {
+            light: '#757ce8',
+            main: '#273258',
+            dark: '#002884',
+            contrastText: '#fff',
+          },
+          secondary: {
+            light: '#ff7961',
+            main: '#f44336',
+            dark: '#ba000d',
+            contrastText: '#000',
+          },
+        type: 'dark',
+    },
+  });
 
 class App extends Component {
     constructor(props) {
@@ -26,9 +45,10 @@ class App extends Component {
     }
     render() {
         return (
-            <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+            <MuiThemeProvider theme={dark_theme}>
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
                 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+                <link rel="icon" href={book} type="image/svg" sizes="16x16" />
                 <Router history={history}>
                     <Switch>
                         <Route exact path="/" component={NoAuth(Login)}/>
@@ -40,6 +60,9 @@ class App extends Component {
                         <Route path="/Locations" component={LocationTable}/>
                         <Route path="/Signup" component={NoAuth(Signup)}/>
                         <Route path="/Location/:id" component={Location}/>
+                        <Route path="/Location" component={Location}/>
+                        <Route path="/AddLocation" component={AddLocation}/>
+                        <Route path="/AddCommentModal" component={AddCommentModal}/>
                     </Switch>
                 </Router>
             </MuiThemeProvider>

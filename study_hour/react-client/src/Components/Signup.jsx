@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import Paper from 'material-ui/Paper';
-import SideBar from "./SideBar";
+import {Paper} from '@material-ui/core';
+import NavBar from "./HeaderComponent/NavBar";
 import '../styles/style.css'
 import { withStyles } from '@material-ui/core/styles';
-import TextField from 'material-ui/TextField';
-import Button from "@material-ui/core/Button/Button";
+import {TextField, Typography, Grid} from '@material-ui/core';
+import Button from "@material-ui/core/Button";
 import axios from "axios/index";
 import * as signup_actions from "../actions/signup_action";
 import { connect } from  "react-redux";
@@ -14,22 +14,20 @@ import { bindActionCreators } from 'redux'
 
 
 const styles = theme => ({
-    container: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
     textField: {
         marginLeft: '40%',
-        // marginRight: theme.spacing.unit,
-        width: 200,
-        background: 'blue'
+        width: "100%",
+        background: 'blue',
+        margin: 'auto',
+        textAlign: 'center'
     },
-    dense: {
-        marginTop: 19,
-    },
-    menu: {
+    button: {
         width: 200,
     },
+    item: {
+        paddingLeft: '25%',
+        paddingRight: '25%'
+    }
 });
 
 class Signup extends Component {
@@ -37,9 +35,7 @@ class Signup extends Component {
         super(props);
         this.state = {
             username:'',
-            password:'',
-            // question:'',
-            // answer:'',
+            password:''
         };
         this.handleChangeUserName = this.handleChangeUserName.bind(this);
         this.handleChangePassword = this.handleChangePassword.bind(this);
@@ -69,62 +65,50 @@ class Signup extends Component {
         return (
             <div>
 
-                <SideBar/>
-                <Paper className='paper'>
-                    <div className='banner-div'>
-                        <h1>Welcome to StudyHour</h1>
-                    </div>
-                    <div className='signup-div'>
-                        <h2>Sign up</h2>
-                        <form className = 'form'>
+                <NavBar/>
+                <Paper className='wallpaper'>
+                    <Paper style={{padding: "2%", width:"50%", margin:"auto", paddingLeft: "5%", paddingRight: "5%", marginTop: "5%"}}>
+                        <Typography variant="headline" style={{marginBottom: "5%"}}>Sign Up To StudyHour</Typography>
+
+                        <form  autoComplete="off">
+                        <Grid container>
+                        <Grid item xs="12" className={classes.item}>
                             <TextField
                                 id="standard-username-input"
+                                
                                 label="Username"
                                 type="text"
                                 className={classes.textField}
                                 placeholder="User Name"
                                 onChange={this.handleChangeUserName}
-                                autoComplete="username"
+                                
+                                required
                             />
+                            </Grid>
+                            <Grid item xs="12" className={classes.item}>
                             <TextField
                                 id="standard-password-input"
                                 label="Password"
+                                
                                 className={classes.textField}
                                 type="password"
-                                placeholder="Password"
-                                autoComplete="current-password"
+                                placeholder="Password"                                
                                 onChange={this.handleChangePassword}
+                                autocomplete='off'
+                                required
                             />
-                            {/*<br/>*/}
-                            {/*<h4>Give me your Security Question</h4>*/}
-                            {/*<TextField*/}
-                                {/*id="standard-question-input"*/}
-                                {/*label="Password"*/}
-                                {/*className={classes.textField}*/}
-                                {/*type="password"*/}
-                                {/*placeholder="Security question"*/}
-                                {/*autoComplete="current-password"*/}
-                                {/*onChange={this.handleChangeQuestion}*/}
-                            {/*/>*/}
-                            {/*<h4>Give me the answer to your Security Question</h4>*/}
-                            {/*<TextField*/}
-                                {/*id="standard-password-input"*/}
-                                {/*label="Password"*/}
-                                {/*className={classes.textField}*/}
-                                {/*type="password"*/}
-                                {/*placeholder="Answer to your question"*/}
-                                {/*autoComplete="current-password"*/}
-                                {/*onChange={this.handleChangeAnswer}*/}
-                            {/*/>*/}
-                            {/*<br />*/}
+                            </Grid>
+                            <Grid item xs="12" style={{textAlign: "center", marginTop: 10}} className={classes.item}>
                             <Button id="submit-button"
                                     variant="contained"
                                     className={classes.button}
                                     onClick={this.handleSubmit}>
                                 Submit
                             </Button>
+                            </Grid>
+                        </Grid>
                         </form>
-                    </div>
+                    </Paper>
                 </Paper>
             </div>
         )

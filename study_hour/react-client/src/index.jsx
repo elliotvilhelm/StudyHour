@@ -14,6 +14,7 @@ document.title = '🔥 StudyHour 🔥';  // YEEEEEEEEEET
 const store = createStore(root_reducer, applyMiddleware(thunk));
 const user = localStorage.getItem('user');
 
+
 if(user) store.dispatch({type: AUTHENTICATED});
 
 ReactDOM.render(<Provider store={store}>

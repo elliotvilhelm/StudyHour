@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Paper from 'material-ui/Paper';
+import {Paper} from '@material-ui/core';
 import SideBar from "./SideBar";
 import '../styles/style.css'
 import Comment from './Comment'

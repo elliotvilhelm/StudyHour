@@ -6,9 +6,8 @@ import login from '../images/login.svg'
 import logout from '../images/logout.svg'
 import signup from '../images/signup.svg'
 import '../styles/style.css'
-import Img from 'react-image';
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
+import {Drawer} from '@material-ui/core';
+import {MenuItem} from '@material-ui/core';
 import { Link } from 'react-router-dom'
 import { connect } from  "react-redux";
 import * as auth_actions from "../actions/auth";
@@ -18,16 +17,14 @@ const style = {
     margin: '40px 32px 16px 0',
 };
 
+
 class SideBar extends Component {
     constructor(props) {
         super(props);
         this.state = {open: true, authenticated: false};
-        this.toggleDrawer = this.toggleDrawer.bind(this);
+
     }
 
-    toggleDrawer(op)  {
-        // this.setState({ open: op });
-    }
     render() {
         let sideBar;
         if (this.props.authenticated) {

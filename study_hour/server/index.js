@@ -24,32 +24,46 @@ pgClient.connect().then();
 app.use(bodyParser.json());
 app.use(express.static(`${__dirname}/../react-client/dist`));
 app.use(express.urlencoded({ extended: true }));
-// app.get('/Home', (req, res) => {
-//     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
-// });
-// app.get('/About', (req, res) => {
-//     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
-// });
-// app.get('/Login', (req, res) => {
-//     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
-// });
-// app.get('/Review', (req, res) => {
-//     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
-// });
-//
-// app.get('/Signup', (req, res) => {
-//       res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
-// });
 
-// app.get('/Locations', (req, res) => {
-//     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
-// });
-//
-// app.get('/Location/:id', (req, res) => {
-//     res.send({fuck: 'you'});
-//     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
-// });
+app.get('/api/locate/:lat/:lng', function(req, res){
+    // retrieve longtitude, latitude
 
+    const lng = parseFloat(req.params.lng);
+    const lat = parseFloat(req.params.lat);
+
+    if(lng == NaN || lat == NaN) {
+        return;
+    }
+    const range_lng = 0.1;
+    const range_lat = 0.1;
+
+    let max_lng = lng + range_lng;
+    let min_lng = lng - range_lng;
+
+    let max_lat = lat + range_lat;
+    let min_lat = lat - range_lat;
+
+    const queryStr = `select * from locations where lng < ${max_lng} and lng > ${min_lng} and lat < ${max_lat} and lat > ${min_lat}`;
+    console.log('Retriving nearby locations:');
+
+    console.log(`latitude: ${lat}`)
+    console.log(`longtitude: ${lng}`)
+
+    pgClient.query(queryStr,
+        function(err, result) {
+            if (err) {
+                console.log("Query failed at retriving longtitude and latitude");
+                console.log("Error detail:")
+                console.log(err);
+                return;
+            }
+            res.send(result.rows);
+        }
+
+    );
+
+
+});
 app.get('/api/Location/:id', function (req, res, next) {
     console.log("routing???");
     // res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
@@ -70,6 +84,34 @@ app.post('/api/Location/Comments', function (req, res, next) {
         }
         res.send({dbresponse: result.rows})
     });
+});
+
+app.post('/api/AddCommentModal', function (req, res, next) {
+    pgClient.query('SELECT c.id, u.user_name, c.location_id, c.rating, c.text FROM comments c, users u WHERE c.location_id= $1 and c.user_id=u.id', [req.body.location], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        res.send({dbresponse: result.rows})
+    });
+});
+
+app.post('/api/AddLocation', function (req, res, next) {
+    // pgClient.query('SELECT * FROM locations l where l.name = $1 and l.address = $2',[req.body.name, req.body.address], function (err, result) {
+    //     if (err) {
+    //         return next(err)
+    //     }
+    //     if(result.rows.length !== 0) {
+    //         res.send({success: false});
+    //         return;
+    //     }
+    pgClient.query('INSERT INTO locations(name, address, outlet, internet) VALUES ($1, $2, $3, $4) RETURNING id',[req.body.name, req.body.address, req.body.outlet, req.body.internet],function(err, result) {
+        if (err) {
+            return next(err)
+        }
+        console.log(result.rows[0]);
+        res.send({success: true, location_id: result.rows[0].id});
+    });
+    // });
 });
 
 app.post('/api/Locations', function (req, res, next) {
@@ -133,15 +175,35 @@ app.post('/api/Signup', function (req, res, next) {
             return;
         }
         pgClient.query('INSERT INTO users(user_name, password) VALUES ($1, $2)',[req.body.user_name, req.body.password],function(err, result) {
-           if (err) {
-               return next(err)
-           }
+            if (err) {
+                return next(err)
+            }
         });
         res.send({success: true});
     });
 });
 
 
+
+
+const upload = require('./aws');
+const singleUpload = upload.single('image')
+app.post('/api/image-upload', function(req, res) {
+    // if (req.file === undefined)
+    //     return;
+    console.log("upoloadd")
+    singleUpload(req, res, function(err, some) {
+        if (err) {
+            console.log(err)
+            return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
+        }
+        return res.json({'imageUrl': req.file.location});
+    });
+});
+
+
+
 app.get('/*', (req, res) => {
     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
 });
+
