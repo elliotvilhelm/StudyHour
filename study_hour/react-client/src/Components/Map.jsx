@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios/index";
+import * as auth_actions from "../actions/auth";
 
 let currentMap;
 let markConfig;
@@ -118,5 +119,11 @@ class Map extends Component {
 }
 function error(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
+}
+
+function mapStateToProps(state) {
+  return {
+      location: state
+  }
 }
 export default Map;
