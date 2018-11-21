@@ -5,7 +5,6 @@ const path = require('path');
 const app = express();
 const pg = require('pg');
 const jwt = require('jsonwebtoken');
-const multer = require('multer');
 db = 'studyhour';
 
 const pgClient = new pg.Client({
@@ -25,8 +24,7 @@ pgClient.connect().then();
 app.use(express.static(`${__dirname}/../react-client/dist`));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(multer().array());  // form-data
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/api/locate/:lat/:lng', function(req, res){
     // retrieve longtitude, latitude
@@ -189,16 +187,21 @@ app.post('/api/Signup', function (req, res, next) {
 
 
 
-// const upload = require('./aws');
+const upload = require('./aws');
 // var upload = multer({ dest: 'uploads/' })
-var upload = multer()
-
+// var upload = multer()
+/** Permissible loading a single file,
+ the value of the attribute "name" in the form of "recfile". **/
+// var upload = multer({ dest: 'upload/'});
+// var type = upload.single("recfile");
 
 // const singleUpload = upload.single('image')
-app.post('/api/image-upload', upload.none(), function(req, res) {
+app.post('/api/image-upload', upload.single("file"), function(req, res) {
     // if (req.file === undefined)
     //     return;
-    console.log("Server req body", req.body);
+    console.log("server req", req);
+    console.log("Server req file", req.file);
+    // console.log(type)
     res.send({done: "done"})
     // console.log("file", req.file);
     // // console.log("Server req data", req.data);

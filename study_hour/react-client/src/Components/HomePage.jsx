@@ -6,6 +6,7 @@ import {Paper} from '@material-ui/core'
 import Map from './Map'
 import { connect } from "react-redux";
 import FileUpload from './FileUpload';
+import BackgroundMusic from './Youtube';
 
 class HomePage extends Component {
     constructor(props) {
@@ -25,7 +26,6 @@ class HomePage extends Component {
     }
 }
 
-// export default HomePage;
 function mapStateToProps(state) {
     return {
         authenticated: state.auth.authenticated
