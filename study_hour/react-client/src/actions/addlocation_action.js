@@ -2,7 +2,7 @@ import axios from "axios";
 import history from "../history";
 
 
-export function addlocation(name, address, outlet, internet) {
+export function addlocation(name, address, outlet, internet, open_time, close_time,noise_level) {
     return (dispatch) => {
         axios({
             method: 'post',
@@ -11,7 +11,10 @@ export function addlocation(name, address, outlet, internet) {
                 name: name,
                 address: address,
                 outlet: outlet,
-                internet: internet
+                internet: internet,
+                open_time: open_time,
+                close_time: close_time,
+                noise_level: noise_level
             },
             config: {headers: {'Content-Type': 'multipart/form-data'}}
         })

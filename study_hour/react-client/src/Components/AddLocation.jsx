@@ -1,23 +1,19 @@
 import React, {Component} from 'react';
 import {Paper} from '@material-ui/core/';
-import SideBar from "./SideBar";
 import {navBar} from './HeaderComponent/NavBar.jsx'
 import '../styles/style.css'
 import {withStyles} from '@material-ui/core/styles';
 import {TextField} from '@material-ui/core/';
 import Button from "@material-ui/core/Button/Button";
-import axios from "axios/index";
 import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabel";
-import FormGroup from "@material-ui/core/FormGroup/FormGroup";
 import Checkbox from "@material-ui/core/Checkbox/Checkbox";
 import {withRouter} from "react-router";
 import connect from "react-redux/es/connect/connect";
 import Typography from "@material-ui/core/Typography/Typography";
 import NavBar from "./HeaderComponent/NavBar";
-import Map from "./Map";
 import Grid from "@material-ui/core/Grid/Grid";
 import * as addlocation_actions from "../actions/addlocation_action";
-
+import FileUpload from "./FileUpload";
 
 const styles = theme => ({
     container: {
@@ -52,15 +48,18 @@ class AddLocation extends Component {
             address: '',
             outlet: false,
             internet: false,
-            // noise_level: '',
-            // open_time: '',
-            // close_time: ''
+            noise_level: 0,
+            open_time: '',
+            close_time: ''
         };
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangeAddress = this.handleChangeAddress.bind(this);
         this.handleChangeOutlet = this.handleChangeOutlet.bind(this);
         this.handleChangeInternet = this.handleChangeInternet.bind(this);
+        this.handleChangeOpenTime = this.handleChangeOpenTime.bind(this);
+        this.handleChangeCloseTime = this.handleChangeCloseTime.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChangeNoiseLevel = this.handleChangeNoiseLevel.bind(this);
     }
     handleChangeName(event) {
         this.setState({name: event.target.value});
@@ -74,14 +73,23 @@ class AddLocation extends Component {
     handleChangeOutlet(event) {
         this.setState({outlet: event.target.checked});
     };
+    handleChangeOpenTime(event) {
+        this.setState({open_time: event.target.value});
+    };
+    handleChangeCloseTime(event) {
+        this.setState({close_time: event.target.value});
+    };
+    handleChangeNoiseLevel(event) {
+        this.setState({noise_level: event.target.value});
+    }
 
-    handleSubmit(event) {
-        this.props.dispatch(addlocation_actions.addlocation(this.state.name, this.state.address, this.state.outlet, this.state.internet));
+    handleSubmit() {
+        this.props.dispatch(addlocation_actions.addlocation(this.state.name, this.state.address, this.state.outlet, this.state.internet, this.state.open_time, this.state.open_time, this.state.noise_level));
     }
 
     render() {
         const {classes} = this.props;
-        const {location, outlet, internet} = this.state;
+        const {outlet, internet} = this.state;
         return (
             <div>
                 <NavBar/>
@@ -93,13 +101,12 @@ class AddLocation extends Component {
                                 <Grid item xs="12" className={classes.item}>
                                     <TextField
                                         id="standard-name-input"
-                                        label="name"
+                                        label="Name"
                                         type="text"
                                         className={classes.textField}
                                         placeholder="Location Name"
                                         onChange={this.handleChangeName}
                                         autoComplete="name"
-                                        //value={location.name}
                                     />
                                 </Grid>
                                 <Grid item xs="12" className={classes.item}>
@@ -111,7 +118,6 @@ class AddLocation extends Component {
                                         placeholder="Address"
                                         autoComplete="address"
                                         onChange={this.handleChangeAddress}
-                                        // value={location.address}
                                     />
                                 </Grid>
                                 <Grid item xs="12" className={classes.item}>
@@ -132,37 +138,52 @@ class AddLocation extends Component {
                                         label="internet"
                                     />
                                 </Grid>
-
-                                                {/*<Grid item xs="12" className={classes.item}>*/}
-                                    {/*<FormControlLabel*/}
-                                        {/*className={classes.textField}*/}
-                                        {/*control={*/}
-                                            {/*<Checkbox checked={internet} onChange={this.handleChangeCheckbox('internet')} />*/}
-                                        {/*}*/}
-                                        {/*label="internet"*/}
-                                    {/*/>*/}
-                                {/**/}
-                                {/*</Grid>*/}
-                                {/*<Grid item xs="12" className={classes.item}>*/}
-                                    {/*<FormControlLabel*/}
-                                        {/*className={classes.textField}*/}
-                                        {/*control={*/}
-                                            {/*<Checkbox checked={internet} onChange={this.handleChangeCheckbox('internet')} />*/}
-                                        {/*}*/}
-                                        {/*label="internet"*/}
-                                    {/*/>*/}
-                                {/**/}
-                                {/*</Grid>*/}
-                                {/*<Grid item xs="12" className={classes.item}>*/}
-                                    {/*<FormControlLabel*/}
-                                        {/*className={classes.textField}*/}
-                                        {/*control={*/}
-                                            {/*<Checkbox checked={internet} onChange={this.handleChangeCheckbox('internet')} />*/}
-                                        {/*}*/}
-                                        {/*label="internet"*/}
-                                    {/*/>*/}
-                                {/**/}
-                                {/*</Grid>*/}
+                                <Grid item xs="12" className={classes.item}>
+                                    <TextField
+                                        id="time"
+                                        label="Open Time"
+                                        type="time"
+                                        defaultValue="00:00"
+                                        className={classes.textField}
+                                        onChange={this.handleChangeOpenTime}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        inputProps={{
+                                            step: 300, // 5 min
+                                        }}
+                                    />
+                                </Grid>
+                                <Grid item xs="12" className={classes.item}>
+                                    <TextField
+                                        id="time"
+                                        label="Close Time"
+                                        type="time"
+                                        defaultValue="00:00"
+                                        className={classes.textField}
+                                        onChange={this.handleChangeCloseTime}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        inputProps={{
+                                            step: 300, // 5 min
+                                        }}
+                                    />
+                                </Grid>
+                                <Grid item xs="12" className={classes.item}>
+                                    <Typography variant='subheading' style={{color: "white"}}>Noise Level</Typography>
+                                    <input
+                                        style={{margin: "auto"}}
+                                        type="range"
+                                        step="1"
+                                        min="0"
+                                        max="10"
+                                        onChange={this.handleChangeNoiseLevel}
+                                    />
+                                </Grid>
+                                <Grid item xs="12" className={classes.item}>
+                                    <FileUpload/>
+                                </Grid>
                                 <Grid item xs="12" style={{textAlign: "center", marginTop: 10}} className={classes.item}>
                                     <Button id="submit-button"
                                             variant="contained"
@@ -172,7 +193,6 @@ class AddLocation extends Component {
                                     </Button>
                                 </Grid>
                             </Grid>
-
                         </div>
                     </Paper>
                 </Paper>
@@ -180,7 +200,6 @@ class AddLocation extends Component {
         )
     }
 }
-
 function mapStateToProps(state) {
     return {
         authenticated: state.auth.authenticated

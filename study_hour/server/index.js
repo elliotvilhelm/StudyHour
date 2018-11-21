@@ -104,7 +104,7 @@ app.post('/api/AddLocation', function (req, res, next) {
     //         res.send({success: false});
     //         return;
     //     }
-    pgClient.query('INSERT INTO locations(name, address, outlet, internet) VALUES ($1, $2, $3, $4) RETURNING id',[req.body.name, req.body.address, req.body.outlet, req.body.internet],function(err, result) {
+    pgClient.query('INSERT INTO locations(name, address, outlet, internet, open_time, close_time, noise_level) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id',[req.body.name, req.body.address, req.body.outlet, req.body.internet, req.body.open_time, req.body.close_time, req.body.noise_level],function(err, result) {
         if (err) {
             return next(err)
         }

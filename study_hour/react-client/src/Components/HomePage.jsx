@@ -7,6 +7,7 @@ import {Paper} from '@material-ui/core'
 import Map from './Map'
 import github from '../images/github.png'
 import { connect } from "react-redux";
+import FileUpload from './FileUpload';
 
 class HomePage extends Component {
     constructor(props) {
@@ -23,6 +24,7 @@ class HomePage extends Component {
                 <Paper className='wallpaper'>
                 <Map width='500' height='500' />
                 </Paper>
+                <FileUpload/>
             </div>
 
 

@@ -15,6 +15,7 @@ import axios from "axios/index";
 import CommentTable from "./CommentTable";
 import NavBar from './HeaderComponent/NavBar';
 import AddCommentModal from "./AddCommentModal";
+import Button from "@material-ui/core/Button/Button";
 
 
 const content = {
@@ -93,6 +94,13 @@ export default class Location extends Component {
                                         src={geisel}
                                         alt="Icon"
                                     />
+                                    <br/>
+                                    <Button id="submit-button"
+                                            variant="contained"
+                                            className={this.props.button}
+                                            onClick={this.handleSubmit}>
+                                        ♡ Like ♡
+                                    </Button>
                                 </Card>
                             </Grid>
                             <Grid item sm style={{float: 'left'}}>
@@ -115,18 +123,6 @@ export default class Location extends Component {
                                     />
                                 </Typography>
 
-
-                                <Typography  style={{ verticalAlign: "baseline", color: "grey" }}>
-                                    Quitness
-                                    <input
-                                        style={{ position: "relative", top: 7, marginLeft: 10, width: 70, display: "inline" }}
-                                        type="range"
-                                        step="1"
-                                        min="1"
-                                        max="4"
-                                        value={this.state.location.quitness}
-                                    />
-                                </Typography>
 
                                 <Typography  style={{ verticalAlign: "baseline", color: "grey" }}>
                                     Quitness

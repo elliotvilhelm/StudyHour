@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { URLProvider } from 'react-url';
 import '../styles/style.css'
 import StarRatingComponent from "react-star-rating-component";
-import { Avatar, Paper, Typography, Grid } from '@material-ui/core'
+import { Avatar, Paper, Typography, Grid, Button } from '@material-ui/core'
 
 
 const commentStyle = {
@@ -27,12 +27,18 @@ class Comment extends Component {
                     <Grid item lg={true}>
                         <Typography color="inherit">{this.props.text}</Typography>
                     </Grid>
+                    <Grid item sm style={{textAlign: 'right'}}>
                     <StarRatingComponent
                         name="rate star"
                         editing={false}
                         starCount={5}
                         value={this.props.rating}
                     />
+                    </Grid>
+                    <Grid item sm style={{textAlign: 'right'}}>
+                        <Button>Edit</Button>
+                        <Button>Delete</Button>
+                    </Grid>
                 </Grid>
         </Paper>
         )
