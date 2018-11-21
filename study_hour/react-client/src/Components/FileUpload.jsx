@@ -45,9 +45,11 @@ class FileUpload extends React.Component {
     render() {
         return (
             <Grid style={{margin:0}} onSubmit={this.onFormSubmit}>
+                <form onSubmit={this.onFormSubmit} encType="multipart/form-data">
                 <Typography variant='subheading' style={{color: "white"}}>Upload Image</Typography>
-                <input type="file" onChange={this.onChange} />
+                <input type="file" name="recfile" onChange={this.onChange} />
                     <button type="submit">Upload</button>
+                </form>
             </Grid>
         )
     }

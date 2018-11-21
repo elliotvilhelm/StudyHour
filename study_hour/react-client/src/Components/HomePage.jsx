@@ -7,6 +7,7 @@ import Map from './Map'
 import { connect } from "react-redux";
 import FileUpload from './FileUpload';
 import BackgroundMusic from './Youtube';
+import Typography from "@material-ui/core/Typography";
 
 class HomePage extends Component {
     constructor(props) {
@@ -15,13 +16,10 @@ class HomePage extends Component {
 
     render() {
         return (
-            <div>
-                <NavBar/>
                 <Paper className='wallpaper'>
-                <Map width='500' height='500' />
+                    <NavBar/>
+                <Map width='800' height='800' />
                 </Paper>
-                <FileUpload/>
-            </div>
         )
     }
 }

@@ -54,12 +54,12 @@ class NavBar extends Component {
                             <img src={studyhour} style={{ marginRight: "70%" }} width={100} />
                             <BackgroundMusic/>
                             <Button color="inherit">
-                                <Link to={"Home"}>
+                                <Link to={"/Home"}>
                                     <Typography variant="h6">Home</Typography>
                                 </Link>
                             </Button>
                             <Button color="inherit" onClick={() => this.props.dispatch(auth_actions.unauthenticate())}>
-                                <Link to={"Login"} >
+                                <Link to={"/Login"} >
                                     <Typography variant="h6">Logout</Typography>
                                 </Link>
                             </Button>
@@ -86,13 +86,13 @@ class NavBar extends Component {
 
 
                             <Button color="inherit">
-                                <Link to={"Login"}>
+                                <Link to={"/Login"}>
                                     <img src={login} width={20} />
                                 </Link>
                             </Button>
 
                             <Button>
-                                <Link to={"Signup"}>
+                                <Link to={"/Signup"}>
                                     <img src={signup} width={20} />
                                 </Link>
                             </Button>

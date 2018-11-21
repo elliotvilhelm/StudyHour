@@ -1,13 +1,16 @@
 import React from 'react';
 import YouTube from 'react-youtube';
-import IconButton from '@material-ui/core/IconButton';
-import Icon from '@material-ui/core/Icon';
-import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 import Button from '@material-ui/core/Button';
 import PlayArrow from '@material-ui/icons/PlayArrow';
 import Stop from '@material-ui/icons/Stop';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import { withStyles } from '@material-ui/core/styles';
 
-
+const styles = {
+    root: {
+        flexGrow: 1,
+    },
+};
 
 
 
@@ -37,33 +40,37 @@ class BackgroundMusic extends React.Component {
             playerVars: { // https://developers.google.com/youtube/player_parameters
                 autoplay: 1
             },
-            // host: 'http://www.youtube.com',
         };
 
-        if (!this.state.playing)
+        if (!this.state.playing) {
             var button = <PlayArrow/>;
-        else
+            var animation = <div></div>;
+        }
+        else {
             var button = <Stop/>;
+            var animation = (
+                <div className="loading-div">
+                    <LinearProgress variant="query"/>
+                </div>
+            );
+        }
 
         return (
             <div>
-            <YouTube
-                ref={this.myRef}
-                videoId="hHW1oY26kxQ"
-                opts={opts}
-                onReady={this._onReady}
-            />
+                <YouTube
+                    ref={this.myRef}
+                    videoId="hHW1oY26kxQ"
+                    opts={opts}
+                    onReady={this._onReady}
+                />
                 <Button variant="fab" color="primary" aria-label="Add" onClick={this.handleClick}>
                     {button}
                 </Button>
+                <br/>
+                {animation}
             </div>
         );
     }
-
-    _onReady(event) {
-        // access to player in all event handlers via event.target
-        // event.target.pauseVideo();
-    }
 }
 
-export default BackgroundMusic;
+export default withStyles(styles)(BackgroundMusic);

@@ -10,11 +10,12 @@ a:visited, a:hover {
 }
 .wallpaper {
     background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), url("../images/background-study.jpg") !important;
-    background-size: cover !important;
-    /*position: fixed;*/
-    width: 100%;
+    /*width: 100%;*/
     /*height: 100%;*/
-    border-radius: 0;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 .paper {
     overflow-y: auto;
@@ -43,4 +44,12 @@ table {
 .addLocation-checkbox{
     margin: 0 auto;
     text-align: center;
+}
+
+.loading-div {
+    padding-top: 2px;
+}
+
+.player-padding {
+    padding: 10px;
 }

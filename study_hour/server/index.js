@@ -215,6 +215,16 @@ app.post('/api/image-upload', upload.single("file"), function(req, res) {
     // });
 });
 
+app.get('/api/images', (req, res) => {
+    var item = req.body;
+    var params = {Bucket: req.params.bucketName, Key: ' '}; // keyname can be a filename
+    s3.getObject(params, function (err, data) {
+        if (err) {
+            return res.send({"error": err});
+        }
+        res.send({data});
+    });
+});
 
 
 app.get('/*', (req, res) => {
