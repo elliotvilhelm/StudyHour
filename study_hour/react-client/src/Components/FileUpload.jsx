@@ -13,34 +13,29 @@ class FileUpload extends React.Component {
         this.fileUpload = this.fileUpload.bind(this)
     }
     onFormSubmit(e){
-        e.preventDefault() // Stop form submit
+        e.preventDefault();  // Stop form submit
         this.fileUpload(this.state.file).then((response)=>{
-            console.log(response.data);
+            console.log(response);
         })
     }
     onChange(e) {
-        this.setState({file:e.target.files[0]})
+        this.setState({file: e.target.files[0]})
     }
     fileUpload(file){
-        const url = 'http://example.com/file-upload';
         const formData = new FormData();
-        formData.append('file',file)
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        }
-        axios({
+        formData.append('file', file);
+        return axios({
             method: 'post',
             url: `/api/image-upload`,
-            config: { headers: {'Content-Type': 'multipart/form-data' }}
+            // body: {elliot: "yeet"},
+            body: formData,
+            // config: { headers: {'Content-Type': 'multipart/form-data' }},
         }).then(response => {
             console.log("response upload", response);
 
-        })
-            .catch(function (response) {
-                console.log("Error",response);
-            });
+        }).catch(function (response) {
+            console.log("Error",response);
+        });
     }
 
     render() {

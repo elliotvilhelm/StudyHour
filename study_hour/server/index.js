@@ -5,6 +5,7 @@ const path = require('path');
 const app = express();
 const pg = require('pg');
 const jwt = require('jsonwebtoken');
+const multer = require('multer');
 db = 'studyhour';
 
 const pgClient = new pg.Client({
@@ -21,9 +22,11 @@ pgClient.connect().then();
     });
 }
 
-app.use(bodyParser.json());
 app.use(express.static(`${__dirname}/../react-client/dist`));
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(multer().array());  // form-data
+// app.use(express.urlencoded({ extended: true }));
 
 app.get('/api/locate/:lat/:lng', function(req, res){
     // retrieve longtitude, latitude
@@ -186,19 +189,27 @@ app.post('/api/Signup', function (req, res, next) {
 
 
 
-const upload = require('./aws');
-const singleUpload = upload.single('image')
-app.post('/api/image-upload', function(req, res) {
+// const upload = require('./aws');
+// var upload = multer({ dest: 'uploads/' })
+var upload = multer()
+
+
+// const singleUpload = upload.single('image')
+app.post('/api/image-upload', upload.none(), function(req, res) {
     // if (req.file === undefined)
     //     return;
-    console.log("upoloadd")
-    singleUpload(req, res, function(err, some) {
-        if (err) {
-            console.log(err)
-            return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
-        }
-        return res.json({'imageUrl': req.file.location});
-    });
+    console.log("Server req body", req.body);
+    res.send({done: "done"})
+    // console.log("file", req.file);
+    // // console.log("Server req data", req.data);
+    // res.send({success: "yeet"})
+    // singleUpload(req, res, function(err, some) {
+    //     if (err) {
+    //         console.log(err)
+    //         return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
+    //     }
+    //     return res.json({'imageUrl': req.file.location});
+    // });
 });
 
 
