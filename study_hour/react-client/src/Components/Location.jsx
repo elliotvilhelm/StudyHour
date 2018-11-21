@@ -12,6 +12,8 @@ import geisel from '../images/geisel.jpg';
 import axios from "axios/index";
 import CommentTable from "./CommentTable";
 import NavBar from './HeaderComponent/NavBar';
+import AddCommentModal from "./AddCommentModal";
+import Button from "@material-ui/core/Button/Button";
 
 
 const content = {
@@ -90,6 +92,13 @@ export default class Location extends Component {
                                         src={geisel}
                                         alt="Icon"
                                     />
+                                    <br/>
+                                    <Button id="submit-button"
+                                            variant="contained"
+                                            className={this.props.button}
+                                            onClick={this.handleSubmit}>
+                                        ♡ Like ♡
+                                    </Button>
                                 </Card>
                             </Grid>
                             <Grid item sm style={{float: 'left'}}>
@@ -141,6 +150,9 @@ export default class Location extends Component {
                             </Grid>
                         </Paper>
                     </Grid>
+                </div>
+                <div className="comments-modal">
+                    <AddCommentModal/>
                 </div>
                 <div className="comments-table-div">
                     <CommentTable location_id={this.props.match.params.id}/>
