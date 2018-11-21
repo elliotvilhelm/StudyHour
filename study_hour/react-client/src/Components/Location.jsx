@@ -8,8 +8,6 @@ import {
     Checkbox,
     Typography,
 } from "@material-ui/core";
-
-import uno from "../images/postgres.png";
 import geisel from '../images/geisel.jpg';
 import axios from "axios/index";
 import CommentTable from "./CommentTable";

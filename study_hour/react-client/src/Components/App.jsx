@@ -19,6 +19,8 @@ import Review from './Review';
 import Location from './Location';
 
 import book from '../images/book.svg'
+import ResetPassword from "./ResetPassword";
+import ProfilePage from "./ProfilePage";
 const dark_theme = createMuiTheme({
     palette: {
         primary: {
@@ -53,6 +55,8 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/" component={NoAuth(Login)}/>
                         <Route exact path="/Home" component={RequireAuth(HomePage)} />
+                        <Route exact path="/Home/ResetPassword" component={RequireAuth(ResetPassword)} />
+                        <Route exact path="/Home/ProfilePage" component={RequireAuth(ProfilePage)} />
                         <Route path="/About" component={RequireAuth(About)}/>
                         <Route path="/Login" component={NoAuth(Login)}/>
                         <Route path="/Review" component={Review}/>

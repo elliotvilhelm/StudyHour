@@ -13,7 +13,8 @@ import Typography from "@material-ui/core/Typography/Typography";
 import NavBar from "./HeaderComponent/NavBar";
 import Grid from "@material-ui/core/Grid/Grid";
 import * as addlocation_actions from "../actions/addlocation_action";
-import FileUpload from "./FileUpload";
+import FileUpload from './FileUpload'
+
 
 const styles = theme => ({
     container: {
@@ -192,6 +193,7 @@ class AddLocation extends Component {
                                         Submit
                                     </Button>
                                 </Grid>
+                                <FileUpload/>
                             </Grid>
                         </div>
                     </Paper>
