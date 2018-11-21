@@ -72,7 +72,7 @@ export default class Location extends Component {
         // return( <h1>{this.props.match.params.id}</h1>)
         console.log("state:", this.state);
         return (
-            <Paper className='wallpaper'>
+            <Paper className='wallpaper-books'>
                 <NavBar/>
                 <div className="location-div">
                     <Grid

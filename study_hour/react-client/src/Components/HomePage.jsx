@@ -8,18 +8,49 @@ import { connect } from "react-redux";
 import FileUpload from './FileUpload';
 import BackgroundMusic from './Youtube';
 import Typography from "@material-ui/core/Typography";
+import axios from "axios";
+import ImageLoader from 'react-image-file';
+
 
 class HomePage extends Component {
     constructor(props) {
         super(props);
+        this.state = {url: ""}
+    }
+    componentDidMount (){
+        var self = this;
+        axios({
+            method: 'get',
+            url: `/api/images`,
+            config: { headers: {'Content-Type': 'multipart/form-data' }}
+        }).then(response => {
+            self.setState({url: response.data.url})
+
+
+        }).catch(function (response) {
+                console.log("Error",response);
+            });
+
     }
 
     render() {
+        if (this.state.url !== "") {
+            var imgl = <img src={this.state.url} />;
+        }
+        else
+            var imgl = <div></div>;
         return (
+            <div className="main-div">
                 <Paper className='wallpaper'>
                     <NavBar/>
-                <Map width='800' height='800' />
+                    <Map width='500' height='500' />
+                    <div>
+                        <h1>image</h1>
+                    {imgl}
+                        <h1>image</h1>
+                    </div>
                 </Paper>
+            </div>
         )
     }
 }

@@ -24,5 +24,24 @@ const upload = multer({
     })
 });
 
-module.exports = upload;
+const getImage = function(params, res) {
+    // s3.getObject(params, function (err, data) {
+    //     if (err) {
+    //         return res.send({"error": err});
+    //     }
+    //     // res.send(data);
+    //     res.writeHead(200, {'Content-Type': 'image/jpeg'});
+    //     res.write(data.Body, 'binary');
+    //     res.end(null, 'binary');
+    // });
+    s3.getSignedUrl('getObject', params, function (err, url) {
+        console.log('Your generated pre-signed URL is', url);
+        res.send({url: url})
+    });
+};
+
+module.exports =  {
+    upload,
+    getImage
+};
 
