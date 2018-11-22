@@ -115,7 +115,7 @@ app.post('/api/AddLocation', function (req, res, next) {
 });
 
 app.post('/api/Locations', function (req, res, next) {
-    pgClient.query('SELECT * FROM locations', function (err, result) {
+    pgClient.query('SELECT t.id, t.name, t.address, t.outlet, t.internet, t.noise_level, t.open_time, t.close_time, p.s3code FROM locations t, location_images p where t.id = p.location_id', function (err, result) {
         if (err) {
             return next(err)
         }
@@ -184,8 +184,6 @@ app.post('/api/Signup', function (req, res, next) {
 });
 
 
-
-
 const aws_tools = require('./aws');
 
 // var upload = multer({ dest: 'uploads/' })
@@ -233,6 +231,26 @@ app.get('/api/images', (req, res) => {
 //     res.write(data.Body, 'binary');
 //     res.end(null, 'binary');
 // });
+
+
+app.post('/api/addprofileimage/user', function (req, res, next) {
+    pgClient.query('INSERT INTO profile_images(user_id,s3code) VALUES($1,$2)';[req.body.user_id, req.body.s3code], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        res.send({success: true})
+    });
+});
+
+
+app.post('/api/addlocationimage/user', function (req, res, next) {
+    pgClient.query('INSERT INTO profile_images(location_id,s3code) VALUES($1,$2)';[req.body.location_id, req.body.s3code], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        res.send({success: true})
+    });
+});
 
 
 app.get('/*', (req, res) => {
