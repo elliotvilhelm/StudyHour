@@ -6,7 +6,7 @@ import axios from "axios";
 import history from "../history";
 import * as auth_actions from "../actions/auth";
 import LocationThumbnail from './LocationThumbnail'
-
+import NavBar from './HeaderComponent/NavBar';
 
 class LocationTable extends Component {
     constructor(props) {
@@ -40,21 +40,22 @@ class LocationTable extends Component {
             .catch(function (response) {
                 console.log("Error",response);
             });
-
-
     }
 
     render() {
         return (
-            <div className="locations-table-div">
-                <table>
-                    <tr className="location-header-tr">
-                        Locations
-                    </tr>
-                    {this.state.table}
-                </table>
+            <div className="locations-table-div wallpaper-locationTable">
+                <NavBar />
+                <div className="container">
+                    <table>
+                        <tr className="location-header-tr">
+                            <h1 className="center blue-text">Locations</h1>
+                        </tr>
+                        {this.state.table}
+                    </table>
+                </div>
             </div>
         )
     }
 }
-export default LocationTable;
+export default LocationTable
