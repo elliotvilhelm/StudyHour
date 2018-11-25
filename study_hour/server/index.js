@@ -234,7 +234,7 @@ app.get('/api/images', (req, res) => {
 
 
 app.post('/api/addprofileimage/user', function (req, res, next) {
-    pgClient.query('INSERT INTO profile_images(user_id,s3code) VALUES($1,$2)';[req.body.user_id, req.body.s3code], function (err, result) {
+    pgClient.query('INSERT INTO profile_images(user_id,s3code) VALUES($1, $2)',[req.body.user_id, req.body.s3code], function (err, result) {
         if (err) {
             return next(err)
         }
@@ -244,7 +244,7 @@ app.post('/api/addprofileimage/user', function (req, res, next) {
 
 
 app.post('/api/addlocationimage/user', function (req, res, next) {
-    pgClient.query('INSERT INTO profile_images(location_id,s3code) VALUES($1,$2)';[req.body.location_id, req.body.s3code], function (err, result) {
+    pgClient.query('INSERT INTO profile_images(location_id,s3code) VALUES($1, $2)',[req.body.location_id, req.body.s3code], function (err, result) {
         if (err) {
             return next(err)
         }
