@@ -7,9 +7,10 @@ import { Avatar, Paper, Typography, Grid, Button } from '@material-ui/core'
 
 const commentStyle = {
     padding: 5,
-    margin: 5,
+    margin: 1,
     width: '100%',
-    backgroundColor: "#484e63",
+    // backgroundColor: "#484e63",
+    backgroundColor: "#283255",
     color: "white"
 };
 class Comment extends Component {
@@ -20,22 +21,23 @@ class Comment extends Component {
     render() {
         return (
             <Paper style={commentStyle}>
-                <Grid container spacing={16}>
+                <Grid container spacing={24}>
                     <Grid item>
                         <Avatar style={{ backgroundColor: "grey" }}>{this.props.user_name}</Avatar>
                     </Grid>
-                    <Grid item lg={true}>
-                        <Typography color="inherit">{this.props.text}</Typography>
+                    <Grid item>
+                        <Typography variant="subheading">{this.props.user_name}</Typography>
                     </Grid>
-                    <Grid item sm style={{textAlign: 'right'}}>
+                    <Grid item>
+                    <Typography color="inherit">{this.props.text}</Typography>
+                    </Grid>
+                    <Grid item lg style={{textAlign: 'right'}}>
                     <StarRatingComponent
                         name="rate star"
                         editing={false}
                         starCount={5}
                         value={this.props.rating}
                     />
-                    </Grid>
-                    <Grid item sm style={{textAlign: 'right'}}>
                         <Button>Edit</Button>
                         <Button>Delete</Button>
                     </Grid>
