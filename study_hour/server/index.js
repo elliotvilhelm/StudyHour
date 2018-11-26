@@ -180,11 +180,9 @@ app.post('/api/Signup', function (req, res, next) {
                 return next(err)
             }
         });
-        res.send({success: true});
+        res.send({dbresponse: result.rows})
     });
 });
-
-
 
 
 const aws_tools = require('./aws');
@@ -235,6 +233,41 @@ app.get('/api/images', (req, res) => {
 //     res.end(null, 'binary');
 // });
 
+
+app.post('/api/addprofileimage/user', function (req, res, next) {
+    pgClient.query('INSERT INTO profile_images(user_id,s3code) VALUES($1, $2)',[req.body.user_id, req.body.s3code], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        res.send({success: true})
+    });
+});
+
+
+app.post('/api/addlocationimage/user', function (req, res, next) {
+    pgClient.query('INSERT INTO location_images(location_id, user_id, s3code) VALUES($1,$2,$3)',[req.body.location_id, req.body.user_id ,req.body.s3code], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        res.send({success: true})
+    });
+});
+
+
+
+
+app.get('/api/images/location', function (req, res, next) {
+    pgClient.query('SELECT s3code FROM location_images u where u.location_id = $1',[req.body.location_id], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        if(result.rows.length == 0) {
+            res.send({success: false});
+            return;
+        }
+        res.send({dbresponse: result.rows})
+    });
+});
 
 app.get('/*', (req, res) => {
     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
