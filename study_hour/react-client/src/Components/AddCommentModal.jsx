@@ -13,6 +13,7 @@ import StarRatingComponent from "react-star-rating-component";
 import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox/Checkbox";
 import FileUpload from "./FileUpload";
+import * as addcomment_actions from "../actions/addcomment_action";
 
 function getModalStyle() {
     const top = 50;
@@ -49,6 +50,7 @@ class AddCommentModal extends Component {
             outlet: false,
             internet: false,
             open: false,
+            // image: ''
         };
         this.handleOpen = this.handleOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
@@ -77,7 +79,7 @@ class AddCommentModal extends Component {
         this.setState({rating: event.target.value});
     }
     handleSubmit(event) {
-        // this.props.dispatch(addlocation_actions.addlocation(this.state.name, this.state.address, this.state.outlet, this.state.internet));
+        this.props.dispatch(addcomment_actions.addcomment(this.state.text, this.state.rating, this.state.outlet, this.state.internet));
     }
 
     render() {

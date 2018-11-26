@@ -37,7 +37,7 @@ export default class Location extends Component {
         this.state = {location: {}}
     }
     componentDidMount() {
-        console.log("going in")
+        console.log("going in");
         let id = this.props.match.params.id;
         let self = this;
         axios({

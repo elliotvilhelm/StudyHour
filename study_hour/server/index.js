@@ -54,7 +54,7 @@ app.get('/api/locate/:lat/:lng', function(req, res){
         function(err, result) {
             if (err) {
                 console.log("Query failed at retriving longtitude and latitude");
-                console.log("Error detail:")
+                console.log("Error detail:");
                 console.log(err);
                 return;
             }
@@ -88,11 +88,12 @@ app.post('/api/Location/Comments', function (req, res, next) {
 });
 
 app.post('/api/AddCommentModal', function (req, res, next) {
-    pgClient.query('SELECT c.id, u.user_name, c.location_id, c.rating, c.text FROM comments c, users u WHERE c.location_id= $1 and c.user_id=u.id', [req.body.location], function (err, result) {
+    pgClient.query('INSERT INTO comments(text, rating, outlet, internet) VALUES ($1, $2, $3, $4) RETURNING id',[req.body.text, req.body.rating, req.body.outlet, req.body.internet],function(err, result) {
         if (err) {
             return next(err)
         }
-        res.send({dbresponse: result.rows})
+        res.send({dbresponse: result.rows});
+        console.log("hello~ can you hear me");
     });
 });
 
