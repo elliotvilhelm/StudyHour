@@ -6,26 +6,65 @@ import {Paper} from '@material-ui/core'
 import Map from './Map'
 import { connect } from "react-redux";
 import FileUpload from './FileUpload';
+import BackgroundMusic from './Youtube';
+import Typography from "@material-ui/core/Typography";
+import axios from "axios";
+import ImageLoader from 'react-image-file';
+import TextField from "@material-ui/core/TextField";
+
+
 
 class HomePage extends Component {
     constructor(props) {
         super(props);
+        this.state = {url: ""}
+    }
+    componentDidMount (){
+        var self = this;
+        axios({
+            method: 'get',
+            url: `/api/images`,
+            config: { headers: {'Content-Type': 'multipart/form-data' }}
+        }).then(response => {
+            self.setState({url: response.data.url})
+
+
+        }).catch(function (response) {
+            console.log("Error",response);
+        });
     }
 
     render() {
+        if (this.state.url !== "") {
+            // var imgl = <img src={this.state.url} />;
+            var imgl = <div></div>;
+        }
+        else
+            var imgl = <div></div>;
         return (
-            <div>
+            <Paper className='wallpaper'>
                 <NavBar/>
-                <Paper className='wallpaper'>
-                <Map width='500' height='500' />
-                </Paper>
-                <FileUpload/>
-            </div>
+                    <div>
+                    <div className='div-search'>
+                        <form noValidate autoComplete="off">
+                            <TextField
+                                id="standard-name"
+                                placeholder="Search Study Locations"
+                                style={{width: '40%', margin: 'auto'}}
+                                value={this.state.name}
+                                margin="normal"
+                            />
+                        </form>
+                    </div>
+                    <div className="div-map">
+                        <Map width='600' height='600' />
+                    </div>
+                </div>
+            </Paper>
         )
     }
 }
 
-// export default HomePage;
 function mapStateToProps(state) {
     return {
         authenticated: state.auth.authenticated

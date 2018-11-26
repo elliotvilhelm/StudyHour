@@ -5,7 +5,6 @@ const path = require('path');
 const app = express();
 const pg = require('pg');
 const jwt = require('jsonwebtoken');
-db = 'studyhour';
 
 const pgClient = new pg.Client({
     user: 'postgres',
@@ -21,8 +20,9 @@ pgClient.connect().then();
     });
 }
 
-app.use(bodyParser.json());
 app.use(express.static(`${__dirname}/../react-client/dist`));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/api/locate/:lat/:lng', function(req, res){
@@ -104,7 +104,7 @@ app.post('/api/AddLocation', function (req, res, next) {
     //         res.send({success: false});
     //         return;
     //     }
-    pgClient.query('INSERT INTO locations(name, address, outlet, internet) VALUES ($1, $2, $3, $4) RETURNING id',[req.body.name, req.body.address, req.body.outlet, req.body.internet],function(err, result) {
+    pgClient.query('INSERT INTO locations(name, address, outlet, internet, open_time, close_time, noise_level) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id',[req.body.name, req.body.address, req.body.outlet, req.body.internet, req.body.open_time, req.body.close_time, req.body.noise_level],function(err, result) {
         if (err) {
             return next(err)
         }
@@ -179,29 +179,94 @@ app.post('/api/Signup', function (req, res, next) {
                 return next(err)
             }
         });
-        res.send({success: true});
+        res.send({dbresponse: result.rows})
     });
 });
 
 
+const aws_tools = require('./aws');
 
+// var upload = multer({ dest: 'uploads/' })
+// var upload = multer()
+/** Permissible loading a single file,
+ the value of the attribute "name" in the form of "recfile". **/
+// var upload = multer({ dest: 'upload/'});
+// var type = upload.single("recfile");
 
-const upload = require('./aws');
-const singleUpload = upload.single('image')
-app.post('/api/image-upload', function(req, res) {
+// const singleUpload = upload.single('image')
+app.post('/api/image-upload', aws_tools.upload.single("file"), function(req, res) {
     // if (req.file === undefined)
     //     return;
-    console.log("upoloadd")
-    singleUpload(req, res, function(err, some) {
+    console.log("server req", req);
+    console.log("Server req file", req.file);
+    // console.log(type)
+    res.send({done: "done"})
+    // console.log("file", req.file);
+    // // console.log("Server req data", req.data);
+    // res.send({success: "yeet"})
+    // singleUpload(req, res, function(err, some) {
+    //     if (err) {
+    //         console.log(err)
+    //         return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
+    //     }
+    //     return res.json({'imageUrl': req.file.location});
+    // });
+});
+
+app.get('/api/images', (req, res) => {
+    var item = req.body;
+    // var params = {Bucket: req.params.bucketName, Key: '1542798549579'}; // keyname can be a filename
+    var params = {Bucket: 'studyhour', Key: '1542798549579'}; // keyname can be a filename
+    console.log("hey")
+    var data = aws_tools.getImage;
+    return data(params, res);
+
+    // res.send(data)
+    // res.send({hey:"hey"})
+
+});
+// var params = { Bucket: config.bucket, Key: req.params.imageId };
+// s3.getObject(params, function(err, data) {
+//     res.writeHead(200, {'Content-Type': 'image/jpeg'});
+//     res.write(data.Body, 'binary');
+//     res.end(null, 'binary');
+// });
+
+
+app.post('/api/addprofileimage/user', function (req, res, next) {
+    pgClient.query('INSERT INTO profile_images(user_id,s3code) VALUES($1, $2)',[req.body.user_id, req.body.s3code], function (err, result) {
         if (err) {
-            console.log(err)
-            return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
+            return next(err)
         }
-        return res.json({'imageUrl': req.file.location});
+        res.send({success: true})
     });
 });
 
 
+app.post('/api/addlocationimage/user', function (req, res, next) {
+    pgClient.query('INSERT INTO location_images(location_id, user_id, s3code) VALUES($1,$2,$3)',[req.body.location_id, req.body.user_id ,req.body.s3code], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        res.send({success: true})
+    });
+});
+
+
+
+
+app.get('/api/images/location', function (req, res, next) {
+    pgClient.query('SELECT s3code FROM location_images u where u.location_id = $1',[req.body.location_id], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        if(result.rows.length == 0) {
+            res.send({success: false});
+            return;
+        }
+        res.send({dbresponse: result.rows})
+    });
+});
 
 app.get('/*', (req, res) => {
     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
