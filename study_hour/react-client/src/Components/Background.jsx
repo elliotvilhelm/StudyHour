@@ -10,7 +10,7 @@ const style = {
 class Background extends Component {
     render() {
         return (
-            <img src={background} className='background' />
+            {/*<img src={background} className='background' />*/}
         )
     }
 }

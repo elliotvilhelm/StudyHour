@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios';
 import Typography from "@material-ui/core/Typography/Typography";
 import Grid from "@material-ui/core/Grid/Grid";
+import { Button } from "@material-ui/core"
 
 class FileUpload extends React.Component {
 
@@ -39,15 +40,21 @@ class FileUpload extends React.Component {
         }).catch(function (response) {
             console.log("Error",response);
         });
-        // return axios.post('/api/image-upload', formData, )
     }
 
     render() {
         return (
             <Grid style={{margin:0}} onSubmit={this.onFormSubmit}>
-                <Typography variant='subheading' style={{color: "white"}}>Upload Image</Typography>
-                <input type="file" onChange={this.onChange} />
-                    <button type="submit">Upload</button>
+                <form onSubmit={this.onFormSubmit} encType="multipart/form-data">
+                <Typography variant='subheading' style={{color: "white"}}>Select File</Typography>
+                    <input hidden id="raised-button-file" accept="image/*" type="file" name="recfile" onChange={this.onChange} />
+                    <label htmlFor="raised-button-file">
+                        <Button component="span">
+                            Select Files
+                        </Button>
+                    </label>
+                    <Button type="submit">Upload</Button>
+                </form>
             </Grid>
         )
     }

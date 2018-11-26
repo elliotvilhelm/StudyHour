@@ -5,7 +5,6 @@ const path = require('path');
 const app = express();
 const pg = require('pg');
 const jwt = require('jsonwebtoken');
-db = 'studyhour';
 
 const pgClient = new pg.Client({
     user: 'postgres',
@@ -188,7 +187,8 @@ app.post('/api/Signup', function (req, res, next) {
 
 
 
-const upload = require('./aws');
+const aws_tools = require('./aws');
+
 // var upload = multer({ dest: 'uploads/' })
 // var upload = multer()
 /** Permissible loading a single file,
@@ -197,7 +197,7 @@ const upload = require('./aws');
 // var type = upload.single("recfile");
 
 // const singleUpload = upload.single('image')
-app.post('/api/image-upload', upload.single("file"), function(req, res) {
+app.post('/api/image-upload', aws_tools.upload.single("file"), function(req, res) {
     // if (req.file === undefined)
     //     return;
     console.log("server req", req);
@@ -216,6 +216,24 @@ app.post('/api/image-upload', upload.single("file"), function(req, res) {
     // });
 });
 
+app.get('/api/images', (req, res) => {
+    var item = req.body;
+    // var params = {Bucket: req.params.bucketName, Key: '1542798549579'}; // keyname can be a filename
+    var params = {Bucket: 'studyhour', Key: '1542798549579'}; // keyname can be a filename
+    console.log("hey")
+    var data = aws_tools.getImage;
+    return data(params, res);
+
+    // res.send(data)
+    // res.send({hey:"hey"})
+
+});
+// var params = { Bucket: config.bucket, Key: req.params.imageId };
+// s3.getObject(params, function(err, data) {
+//     res.writeHead(200, {'Content-Type': 'image/jpeg'});
+//     res.write(data.Body, 'binary');
+//     res.end(null, 'binary');
+// });
 
 
 app.get('/*', (req, res) => {

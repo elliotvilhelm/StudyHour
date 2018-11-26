@@ -85,8 +85,8 @@ class AddCommentModal extends Component {
     render() {
         const {classes} = this.props;
         return (
-            <Paper style={{padding: "2%", width:"50%", margin:"auto", paddingLeft: "5%", paddingRight: "5%", marginTop: "5%"}}>
-                <Button onClick={this.handleOpen}>Write a Review</Button>
+            <Paper style={{width:"100%", margin:"auto", padding: "10px"}}>
+                <Button onClick={this.handleOpen}>Add Comment</Button>
                 <Modal style={{backgroundColor: "white"}} open={this.state.open} onClose={this.handleClose}>
                     <div style={getModalStyle()} className={this.props.paper}>
                         <Typography variant="display1" id="modal-title">

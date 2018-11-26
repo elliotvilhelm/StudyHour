@@ -193,7 +193,6 @@ class AddLocation extends Component {
                                         Submit
                                     </Button>
                                 </Grid>
-                                <FileUpload/>
                             </Grid>
                         </div>
                     </Paper>

@@ -72,8 +72,9 @@ export default class Location extends Component {
         // return( <h1>{this.props.match.params.id}</h1>)
         console.log("state:", this.state);
         return (
-            <Paper className='wallpaper'>
+            <Paper className='wallpaper-books'>
                 <NavBar/>
+                <Paper style={{paddingTop: '30px', paddingBottom: '100px', width: '70%', background: 'rgba(0,0,0,0.5)', margin: 'auto'}}>
                 <div className="location-div">
                     <Grid
                         container
@@ -82,47 +83,55 @@ export default class Location extends Component {
                         alignItems="center"
                         justify="center"
                     >
-                        <Paper style={{left: 50, width: '50%', padding: 5, backgroundColor: "#EFEFEF"}}>
-                            <Typography variant="display4" style={{color: "black"}}>{this.state.location.name}</Typography>
+                        <Grid container
+                              spacing={24}
+                              direction="column"
+                              alignItems="center"
+                              justify="center"
+
+                        >
+                            <Typography variant="display4" style={{fontWeight: 500}}>{this.state.location.name}</Typography>
                             <Grid item sm>
-                                <Card>
-                                    <img
-                                        style={{width: "auto", height: 300 }}
-                                        title="geisel"
-                                        src={geisel}
-                                        alt="Icon"
-                                    />
-                                    <br/>
-                                    <Button id="submit-button"
-                                            variant="contained"
-                                            className={this.props.button}
-                                            onClick={this.handleSubmit}>
-                                        ♡ Like ♡
-                                    </Button>
-                                </Card>
+                                {/*<Card>*/}
+                                <img
+                                    style={{width: "auto", height: "auto"}}
+                                    title="geisel"
+                                    src={geisel}
+                                    alt="Icon"
+                                />
+                                <br/>
+                                <Button id="submit-button"
+                                        variant="contained"
+                                        className={this.props.button}
+                                        onClick={this.handleSubmit}>
+                                    ♡ Like ♡
+                                </Button>
+                                {/*</Card>*/}
                             </Grid>
+                        </Grid>
+                        <Paper style={{width: '50%', padding: '20px'}}>
                             <Grid item sm style={{float: 'left'}}>
-                                <Typography style={{ color: "grey" }}>
+                                <Typography style={{ color: "white" }}>
                                     Outlet
                                     <Checkbox
                                         value="checkedG"
                                         disabled
                                         checked={!!this.state.location.outlet}
-                                        style={{ color: this.state.location.outlet? "green" : "grey" }}
+                                        style={{ color: this.state.location.outlet? "#00BFFF" : "white" }}
                                     />
                                 </Typography>
-                                <Typography  style={{ color: "grey" }}>
+                                <Typography  style={{ color: "white" }}>
                                     Wifi
                                     <Checkbox
                                         value="checkedG"
                                         disabled
                                         checked={this.state.location.wifi}
-                                        style={{ color: location.wifi? "green" : "grey" }}
+                                        style={{ color: location.wifi? "#00BFFF" : "white" }}
                                     />
                                 </Typography>
 
 
-                                <Typography  style={{ verticalAlign: "baseline", color: "grey" }}>
+                                <Typography  style={{ verticalAlign: "baseline", color: "white" }}>
                                     Quitness
                                     <input
                                         style={{ position: "relative", top: 7, marginLeft: 10, width: 70, display: "inline" }}
@@ -135,28 +144,32 @@ export default class Location extends Component {
                                 </Typography>
                             </Grid>
                             <Grid item sm>
-                                <CardContent>
-                                    <Typography variant="title" style={{ color: "grey" }}>
-                                        Open Hours:
-                                    </Typography>
-                                    <ul style={{ margin: "none", listStyleType: "none" }}>
-                                        <li>Monday: 8:00 am - 5:30 pm</li>
-                                        <li>Tuesday: 8:00 am - 5:30 pm</li>
-                                        <li>Wednesday: 8:00 am - 5:30 pm</li>
-                                        <li>Thursday: 8:00 am - 5:30 pm</li>
-                                        <li>Friday: 8:00 am - 5:30 pm</li>
-                                    </ul>
+                                <CardContent style={{padding: '10px'}}>
+                                    <table className="table-open">
+                                        <th>
+                                            <Typography variant="title" style={{ color: "white" }}>
+                                                Open Hours:
+                                            </Typography>
+                                        </th>
+                                        <tr><Typography variant="caption" style={{ color: "white" }}>Monday: 8:00 am - 5:30 pm</Typography></tr>
+                                        <tr><Typography variant="caption" style={{ color: "white" }}>Tuesday: 8:00 am - 5:30 pm</Typography></tr>
+                                        <tr><Typography variant="caption" style={{ color: "white" }}>Thursday: 8:00 am - 5:30 pm</Typography></tr>
+                                        <tr><Typography variant="caption" style={{ color: "white" }}>Friday: 8:00 am - 5:30 pm</Typography></tr>
+                                    </table>
                                 </CardContent>
                             </Grid>
                         </Paper>
+                        <Grid container
+                              spacing={24}
+                              direction="column"
+                              alignItems="center"
+                              justify="center"
+                        >
+                            <CommentTable location_id={this.props.match.params.id}/>
+                        </Grid>
                     </Grid>
                 </div>
-                <div className="comments-modal">
-                    <AddCommentModal/>
-                </div>
-                <div className="comments-table-div">
-                    <CommentTable location_id={this.props.match.params.id}/>
-                </div>
+                </Paper>
             </Paper>
         );
     }

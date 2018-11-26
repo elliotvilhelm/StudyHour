@@ -24,5 +24,15 @@ const upload = multer({
     })
 });
 
-module.exports = upload;
+const getImage = function(params, res) {
+    s3.getSignedUrl('getObject', params, function (err, url) {
+        console.log('Your generated pre-signed URL is', url);
+        res.send({url: url})
+    });
+};
+
+module.exports =  {
+    upload,
+    getImage
+};
 

@@ -34,6 +34,7 @@
     "pg": "^7.4.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-image-file": "^0.3.0",
     "react-img": "^1.0.3",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
