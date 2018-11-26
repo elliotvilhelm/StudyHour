@@ -115,7 +115,7 @@ app.post('/api/AddLocation', function (req, res, next) {
 });
 
 app.post('/api/Locations', function (req, res, next) {
-    pgClient.query('SELECT t.id, t.name, t.address, t.outlet, t.internet, t.noise_level, t.open_time, t.close_time, p.s3code FROM locations t, location_images p where t.id = p.location_id', function (err, result) {
+    pgClient.query('SELECT * FROM locations', function (err, result) {
         if (err) {
             return next(err)
         }
