@@ -120,7 +120,7 @@ class Map extends Component {
     `;
     
     legend.appendChild(div);
-    currentMap.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+    currentMap.controls[google.maps.ControlPosition.RIGHT_TOP].push(legend);
   }
 
   retriveSearch() {
@@ -134,7 +134,7 @@ class Map extends Component {
       console.log(searchedMarks);
       setTimeout(function() {
         currentMap.panTo(newCenter);
-      }, 5000);
+      }, 3000);
 
     }
   }
@@ -219,8 +219,8 @@ class Map extends Component {
           class="map-content"
           style={{
             padding: 5,
-            margin: 2,
-            fontSize: 12,
+            margin: 5,
+            fontSize: 15,
             borderRadius: 5,
             backgroundColor: '#e9ffff',
             border: '1px dash black'
