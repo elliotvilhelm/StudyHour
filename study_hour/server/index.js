@@ -253,7 +253,7 @@ app.post('/api/addlocationimage/user', function (req, res, next) {
 });
 
 app.post('/api/addFavorite', function (req, res, next) {
-    console.log("location: "+req.body.user_id+" user: "+req.body.location_id);
+    console.log("location: "+req.body.location_id+" user: "+req.body.user_id);
     pgClient.query('INSERT INTO favorites(location_id, user_id) VALUES($1,$2)',[req.body.location_id, req.body.user_id ], function (err, result) {
         if (err) {
             return next(err)
