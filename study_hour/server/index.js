@@ -158,10 +158,10 @@ app.post('/api/Login', function (req, res, next) {
         const config = {
             secret: "supersecret"
         };
-        const token = jwt.sign({ id: result.rows[0].user_id }, config.secret, {
+        const token = jwt.sign({ id: result.rows[0].id }, config.secret, {
             expiresIn: 86400 // expires in 24 hours
         });
-        res.send({auth: true, token: token})
+        res.send({auth: true, token: token, user_id:result.rows[0].id})
     });
 });
 
@@ -252,7 +252,15 @@ app.post('/api/addlocationimage/user', function (req, res, next) {
     });
 });
 
-
+app.post('/api/addFavorite', function (req, res, next) {
+    console.log("location: "+req.body.user_id+" user: "+req.body.location_id);
+    pgClient.query('INSERT INTO favorites(location_id, user_id) VALUES($1,$2)',[req.body.location_id, req.body.user_id ], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        res.send({success: true})
+    });
+});
 
 
 app.get('/api/images/location', function (req, res, next) {
