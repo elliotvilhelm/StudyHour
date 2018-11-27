@@ -10,6 +10,7 @@ import BackgroundMusic from './Youtube';
 import Typography from "@material-ui/core/Typography";
 import axios from "axios";
 import ImageLoader from 'react-image-file';
+import TextField from "@material-ui/core/TextField";
 
 
 
@@ -29,29 +30,37 @@ class HomePage extends Component {
 
 
         }).catch(function (response) {
-                console.log("Error",response);
-            });
-
+            console.log("Error",response);
+        });
     }
 
     render() {
         if (this.state.url !== "") {
-            var imgl = <img src={this.state.url} />;
+            // var imgl = <img src={this.state.url} />;
+            var imgl = <div></div>;
         }
         else
             var imgl = <div></div>;
         return (
-            <div className="main-div">
-                <Paper className='wallpaper'>
-                    <NavBar/>
-                    <Map width='500' height='500' />
+            <Paper className='wallpaper'>
+                <NavBar/>
                     <div>
-                        <h1>image</h1>
-                    {imgl}
-                        <h1>image</h1>
+                    <div className='div-search'>
+                        <form noValidate autoComplete="off">
+                            <TextField
+                                id="standard-name"
+                                placeholder="Search Study Locations"
+                                style={{width: '40%', margin: 'auto'}}
+                                value={this.state.name}
+                                margin="normal"
+                            />
+                        </form>
                     </div>
-                </Paper>
-            </div>
+                    <div className="div-map">
+                        <Map width='600' height='600' />
+                    </div>
+                </div>
+            </Paper>
         )
     }
 }
