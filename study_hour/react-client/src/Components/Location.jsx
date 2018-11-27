@@ -50,6 +50,7 @@ export default class Location extends Component {
     constructor(props) {
         super(props);
         this.state = {location: {}}
+        this.handleSubmit=this.handleSubmit.bind(this);
     }
     componentDidMount() {
         console.log("going in")
@@ -80,7 +81,22 @@ export default class Location extends Component {
                 console.log("Error",response);
             });
     }
-
+    favoriteOnClick(){
+        axios({
+            method: 'post',
+            url: '/api/addFavorite',
+            data:{location_id: this.state.location.id ,user_id: localStorage.getItem('user_id')},
+            config: { headers: {'Content-Type': 'multipart/form-data' }}
+        }).then(response =>{
+            console.log('success add favorites');
+        })
+            .catch(function (response) {
+                console.log("Error",response);
+            });
+    }
+    handleSubmit(event){
+       this.favoriteOnClick();
+    }
 
     render() {
 
