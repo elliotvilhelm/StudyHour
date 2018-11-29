@@ -259,7 +259,6 @@ app.post('/api/addlocationimage/user', function (req, res, next) {
 });
 
 app.post('/api/addFavorite', function (req, res, next) {
-    console.log("location: "+req.body.location_id+" user: "+req.body.user_id);
     pgClient.query('INSERT INTO favorites(location_id, user_id) VALUES($1,$2)',[req.body.location_id, req.body.user_id ], function (err, result) {
         if (err) {
             return next(err)
@@ -268,6 +267,26 @@ app.post('/api/addFavorite', function (req, res, next) {
     });
 });
 
+
+app.post('/api/deleteFavorite', function (req, res, next) {
+    pgClient.query('DELETE FROM favorites where location_id=$1 and user_id=$2',[req.body.location_id, req.body.user_id ], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        res.send({success: true})
+    });
+});
+
+
+
+app.post('/api/location_liked', function (req, res, next) {
+    pgClient.query('SELECT count(*) as count from favorites where location_id=$1 and user_id=$2 ',[req.body.location_id, req.body.user_id ], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        res.send({dbresponse: result.rows})
+    });
+});
 
 app.get('/api/images/location', function (req, res, next) {
     pgClient.query('SELECT s3code FROM location_images u where u.location_id = $1',[req.body.location_id], function (err, result) {
