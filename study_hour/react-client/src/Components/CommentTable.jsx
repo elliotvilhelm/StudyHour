@@ -64,7 +64,7 @@ class CommentTable extends Component {
                         </Typography>
                     </th>
                     <th style={{float: 'right'}}>
-                        <AddCommentModal/>
+                        <AddCommentModal location_id={this.props.location_id}/>
                     </th>
                     {this.state.table}
                 </table>

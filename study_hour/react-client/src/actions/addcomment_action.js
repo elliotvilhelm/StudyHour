@@ -2,7 +2,7 @@ import axios from "axios";
 import history from "../history";
 
 
-export function addcomment(text, rating, outlet, internet) {
+export function addcomment(text, rating, outlet, internet, user_id, location_id) {
     return (dispatch) => {
         axios({
             method: 'post',
@@ -11,14 +11,15 @@ export function addcomment(text, rating, outlet, internet) {
                 text: text,
                 rating: rating,
                 outlet: outlet,
-                internet: internet
+                internet: internet,
+                user_id: user_id,
+                location_id: location_id,
             },
             config: {headers: {'Content-Type': 'multipart/form-data'}}
         })
             .then(function (response) {
-                console.log(response.data);
                 if (response.data.success === false) return; // dispatch alert that name is taken
-                history.push('/Location/' + response.data.location_id);
+                history.push('/Location/' + location_id);
             })
             .catch(function (response) {
                 console.log("Error on location db response", response);
