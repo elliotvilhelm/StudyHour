@@ -22,8 +22,6 @@ function getModalStyle() {
     return {
         top: `${top}%`,
         left: `${left}%`,
-        // top: `${top}%`,
-        // bottom: '50%',
         width: '50%',
         margin: 'auto',
         position: 'absolute',
@@ -35,7 +33,6 @@ const styles = theme => ({
         position: 'absolute',
         width: theme.spacing.unit * 50,
         backgroundColor: theme.palette.background.paper,
-        // backgroundColor: 0xFFFFFF,
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
     },
@@ -50,7 +47,6 @@ class AddCommentModal extends Component {
             outlet: false,
             internet: false,
             open: false,
-            // image: ''
         };
         this.handleOpen = this.handleOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);

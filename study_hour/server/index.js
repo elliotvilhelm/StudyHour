@@ -94,14 +94,6 @@ app.post('/api/AddCommentModal', function (req, res, next) {
 });
 
 app.post('/api/AddLocation', function (req, res, next) {
-    // pgClient.query('SELECT * FROM locations l where l.name = $1 and l.address = $2',[req.body.name, req.body.address], function (err, result) {
-    //     if (err) {
-    //         return next(err)
-    //     }
-    //     if(result.rows.length !== 0) {
-    //         res.send({success: false});
-    //         return;
-    //     }
     pgClient.query('INSERT INTO locations(name, address, outlet, internet, open_time, close_time, noise_level) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id',[req.body.name, req.body.address, req.body.outlet, req.body.internet, req.body.open_time, req.body.close_time, req.body.noise_level],function(err, result) {
         if (err) {
             return next(err)
@@ -109,7 +101,6 @@ app.post('/api/AddLocation', function (req, res, next) {
         console.log(result.rows[0]);
         res.send({success: true, location_id: result.rows[0].id});
     });
-    // });
 });
 
 app.post('/api/Locations', function (req, res, next) {
