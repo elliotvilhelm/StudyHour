@@ -85,7 +85,7 @@ app.post('/api/Location/Comments', function (req, res, next) {
 });
 
 app.post('/api/AddCommentModal', function (req, res, next) {
-    pgClient.query('INSERT INTO comments(text, rating, outlet, internet) VALUES ($1, $2, $3, $4) RETURNING id',[req.body.text, req.body.rating, req.body.outlet, req.body.internet],function(err, result) {
+    pgClient.query('INSERT INTO comments(text, rating, outlet, internet, user_id, location_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id',[req.body.text, req.body.rating, req.body.outlet, req.body.internet, req.body.user_id, req.body.location_id],function(err, result) {
         if (err) {
             return next(err)
         }
