@@ -17,14 +17,8 @@
   "author": "Elliot V Pourmand",
   "license": "ISC",
   "dependencies": {
-<<<<<<< HEAD
-    "@google/maps": "^0.5.5",
-    "@kyso/react-jupyter": "^0.6.0",
-    "@material-ui/core": "^3.3.0",
-=======
     "@material-ui/core": "^3.4.0",
     "@material-ui/icons": "^3.0.1",
->>>>>>> 047fe479ef56c63301b38cdb067c8d61d312a24d
     "aws-amplify": "^1.1.7",
     "aws-sdk": "^2.358.0",
     "axios": "^0.18.0",
