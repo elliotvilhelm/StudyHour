@@ -3,6 +3,7 @@ import { URLProvider } from 'react-url';
 import '../styles/style.css'
 import StarRatingComponent from "react-star-rating-component";
 import { Avatar, Paper, Typography, Grid, Button } from '@material-ui/core'
+import default_profile from '../images/profile_pic.png';
 
 
 const commentStyle = {
@@ -23,26 +24,28 @@ class Comment extends Component {
             <Paper style={commentStyle}>
                 <Grid container spacing={24}>
                     <Grid item>
-                        <Avatar style={{ backgroundColor: "grey" }}>{this.props.user_name}</Avatar>
+                        <Avatar style={{ backgroundColor: "grey" }}>
+                            <img className="img-avatar" src={default_profile}/>
+                        </Avatar>
                     </Grid>
                     <Grid item>
                         <Typography variant="subheading">{this.props.user_name}</Typography>
                     </Grid>
                     <Grid item>
-                    <Typography color="inherit">{this.props.text}</Typography>
+                        <Typography color="inherit">{this.props.text}</Typography>
                     </Grid>
                     <Grid item lg style={{textAlign: 'right'}}>
-                    <StarRatingComponent
-                        name="rate star"
-                        editing={false}
-                        starCount={5}
-                        value={this.props.rating}
-                    />
+                        <StarRatingComponent
+                            name="rate star"
+                            editing={false}
+                            starCount={5}
+                            value={this.props.rating}
+                        />
                         <Button>Edit</Button>
                         <Button>Delete</Button>
                     </Grid>
                 </Grid>
-        </Paper>
+            </Paper>
         )
     }
 }
