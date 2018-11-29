@@ -72,6 +72,9 @@ class AddCommentModal extends Component {
         this.setState({outlet: event.target.checked});
     };
     onStarClick(event) {
+        if (event.target.value === undefined) {
+            event.target.value = "";
+        }
         this.setState({rating: event.target.value});
     }
     handleSubmit(event) {
@@ -115,9 +118,6 @@ class AddCommentModal extends Component {
                                 }
                                 label="internet"
                             />
-                        </Grid>
-                        <Grid item xs="12" className={classes.item}>
-                            <FileUpload/>
                         </Grid>
                         <Grid item xs="12" className={classes.item}>
                             <TextField
