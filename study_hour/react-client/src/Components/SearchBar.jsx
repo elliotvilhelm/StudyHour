@@ -8,12 +8,13 @@ import Paper from '@material-ui/core/Paper';
 import { URLProvider } from 'react-url';
 import '../styles/style.css'
 import axios from "axios";
-import history from "../history";
 import TextField from "@material-ui/core/TextField/TextField";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import { withStyles } from '@material-ui/core/styles';
+import * as SearchBar_action from "../actions/SearchBar_action";
+import { connect } from  "react-redux";
 
-const suggestions = [];
+let suggestionList = [];
 
 function renderInputComponent(inputProps) {
     const { classes, inputRef = () => {}, ref, ...other } = inputProps;
@@ -36,11 +37,11 @@ function renderInputComponent(inputProps) {
 }
 
 function renderSuggestion(suggestion, { query, isHighlighted }) {
-    const matches = match(suggestion.label, query);
-    const parts = parse(suggestion.label, matches);
+    const matches = match(suggestion.name, query);
+    const parts = parse(suggestion.name, matches);
 
     return (
-        <MenuItem selected={isHighlighted} component="div">
+        <MenuItem selected={isHighlighted} component="div" onClick={this.handleClick} >
             <div>
                 {parts.map((part, index) => {
                     return part.highlight ? (
@@ -65,9 +66,9 @@ function getSuggestions(value) {
 
     return inputLength === 0
         ? []
-        : suggestions.filter(suggestion => {
+        : suggestionList.filter(suggestion => {
             const keep =
-                count < 5 && suggestion.label.slice(0, inputLength).toLowerCase() === inputValue;
+                count < 5 && suggestion.name.slice(0, inputLength).toLowerCase() === inputValue;
 
             if (keep) {
                 count += 1;
@@ -78,7 +79,7 @@ function getSuggestions(value) {
 }
 
 function getSuggestionValue(suggestion) {
-    return suggestion.label;
+    return suggestion.name;
 }
 
 const styles = theme => ({
@@ -112,7 +113,11 @@ class SearchBar extends Component {
         this.state = {
             single: '',
             suggestions: [],
-        }
+        };
+        this.handleSuggestionsFetchRequested = this.handleSuggestionsFetchRequested.bind(this);
+        this.handleSuggestionsClearRequested = this.handleSuggestionsClearRequested.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
     componentDidMount (){
         axios({
@@ -122,26 +127,38 @@ class SearchBar extends Component {
 
         }).then(response => {
             console.log("response", response.data.dbresponse);
-            // suggestions[] = response.data.dbresponse;
             this.setState({suggestions: response.data.dbresponse});
+            suggestionList = this.state.suggestions;
 
+            console.log(suggestionList);
         })
             .catch(function (response) {
                 console.log("Error",response);
             });
     }
 
-    handleSuggestionsFetchRequested = ({ value }) => {
-        this.setState({suggestions: getSuggestions(value),});
+    handleSuggestionsFetchRequested ({ value }) {
+        this.setState({suggestions: getSuggestions(value)});
     };
 
-    handleSuggestionsClearRequested = () => {
-        this.setState({suggestions: [],});
+    handleSuggestionsClearRequested () {
+        this.setState({suggestions: []});
     };
 
-    handleChange = name => (event, { newValue }) => {
-        this.setState({[name]: newValue,});
+    handleChange (event) {
+        if (event.target.value === undefined) {
+            event.target.value = "";
+        }
+        this.setState({...this.state, single: event.target.value});
     };
+
+    handleClick (event) {
+        // console.log(this.state.suggestions.filter(suggestion => suggestion.name == event.target.innerText)[0]);
+        this.props.dispatch(SearchBar_action.search(this.state.suggestions.filter(suggestion =>
+            suggestion.name.toLowerCase() + "\n" === (event.target.innerText).toLowerCase())[0])
+        );
+    };
+
 
     render() {
         const { classes } = this.props;
@@ -152,7 +169,7 @@ class SearchBar extends Component {
             onSuggestionsFetchRequested: this.handleSuggestionsFetchRequested,
             onSuggestionsClearRequested: this.handleSuggestionsClearRequested,
             getSuggestionValue,
-            renderSuggestion,
+            renderSuggestion: renderSuggestion.bind(this),
         };
 
         return (
@@ -163,7 +180,7 @@ class SearchBar extends Component {
                         classes,
                     placeholder: 'Search a Location',
                     value: this.state.single,
-                    onChange: this.handleChange('single'),
+                    onChange: this.handleChange,
                     }}
                     theme={{
                     container: classes.container,
@@ -186,4 +203,9 @@ SearchBar.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SearchBar);
+// function mapStateToProps(state) {
+//     return {
+//         single: this.state.single
+//     }
+// }
+export default connect()(withStyles(styles)(SearchBar));

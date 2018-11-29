@@ -124,6 +124,23 @@ app.post('/api/Locations', function (req, res, next) {
     });
 });
 
+app.get('/api/SearchBar', function (req, res, next) {
+    pgClient.query('SELECT id, name FROM locations', function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        res.send({dbresponse: result.rows})
+    });
+});
+
+app.get('/api/SearchedResult', function (req, res, next) {
+    pgClient.query('SELECT id FROM locations where name= $1', [req.body.location], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        res.send({dbresponse: result.rows})
+    });
+});
 // Get all comments from a given user
 // not that high priority
 app.post('/api/User/Comments', function (req, res, next) {
