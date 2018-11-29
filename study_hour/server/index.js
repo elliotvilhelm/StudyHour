@@ -52,8 +52,6 @@ app.get('/api/locate/:lat/:lng', function(req, res){
     pgClient.query(queryStr,
         function(err, result) {
             if (err) {
-                console.log("Query failed at retriving longtitude and latitude");
-                console.log("Error detail:");
                 console.log(err);
                 return;
             }
@@ -92,7 +90,6 @@ app.post('/api/AddCommentModal', function (req, res, next) {
             return next(err)
         }
         res.send({dbresponse: result.rows});
-        console.log("hello~ can you hear me");
     });
 });
 

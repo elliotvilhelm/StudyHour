@@ -203,9 +203,4 @@ SearchBar.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-// function mapStateToProps(state) {
-//     return {
-//         single: this.state.single
-//     }
-// }
 export default connect()(withStyles(styles)(SearchBar));
