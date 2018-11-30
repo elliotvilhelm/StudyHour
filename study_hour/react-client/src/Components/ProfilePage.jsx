@@ -14,13 +14,14 @@ import history from '../history';
 import { bindActionCreators } from 'redux'
 
 
+
 const styles = theme => ({
-    textField: {
-        marginLeft: '40%',
-        // marginRight: theme.spacing.unit,
-        width: 200,
-        background: 'blue'
-    },
+    // textField: {
+    //     marginLeft: '40%',
+    //     // marginRight: theme.spacing.unit,
+    //     width: 200,
+    //     background: 'blue'
+    // },
     textField: {
         width: "100%",
         margin: 'auto',
@@ -39,14 +40,19 @@ class ProfilePage extends Component {
     constructor(props){
         super(props);
 
-        this.state = {locations: [], table: []}
+        this.state = {locations: [], table: [],word: "A"}
         this.handleChangeUserName = this.handleChangeUserName.bind(this);
         this.handleChangePassword = this.handleChangePassword.bind(this);
         this.handleChangeQuestion = this.handleChangeQuestion.bind(this);
         this.handleChangeAnswer = this.handleChangeAnswer.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.changeword = this.changeword.bind(this);
 
     }
+
+    changeword(){
+        this.setState({ word:"B" });
+    };
 
     componentDidMount (){
         this.createTable();
@@ -98,8 +104,8 @@ class ProfilePage extends Component {
     render () {
         const { classes } = this.props;
         return (
-            <div>
 
+            <div>
                 <NavBar/>
                 <Paper className='wallpaper'>
                     <Paper style={{padding: "2%", width:"50%", margin:"auto", paddingLeft: "5%", paddingRight: "5%", marginTop: "5%"}}>
@@ -116,7 +122,7 @@ class ProfilePage extends Component {
                                 <Grid item xs="12" className={classes.item}>
                                     <Typography variant={"h6"} style={{}}>Favorite Locations: </Typography>
                                 </Grid>
-
+                                <Button onClick={this.changeword}>{this.state.word}</Button>
                                 <Grid item xs="12" style={{textAlign: "center", marginTop: 10}} className={classes.item}>
                                     <Button id="submit-button"
                                             variant="contained"
@@ -143,3 +149,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(withStyles(styles)(withRouter(ProfilePage)));
+
+// export default connect(mapStateToProps)(withStyles(styles)(withRouter(ProfilePage)));

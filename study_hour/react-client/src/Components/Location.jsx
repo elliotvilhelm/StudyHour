@@ -31,28 +31,16 @@ var images = [
     />,
 ];
 
-const content = {
-    comments: [{ name: "Ana", rating: 2, text: "Noisy place" }, { name: "Bob", rating: 3, text: "It's ok" }]
-};
 
-let location = {
-    name: "Giesel",
-    address: "123 Xiaofan Road",
-    outlet: true,
-    wifi: true,
-    quitness: 3,
-    like: false,
-    //level: 1-4
-    openHour: {
-    }
-};
 
 export default class Location extends Component {
     constructor(props) {
         super(props);
-        this.state = {location: {}, location_liked: false}
-        this.handleSubmit=this.handleSubmit.bind(this);
+
+        this.state = {location: {like:false},}
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
+
     componentDidMount() {
         console.log("going in");
         let id = this.props.match.params.id;
@@ -73,7 +61,8 @@ export default class Location extends Component {
                         close_time: response.close_time,
                         open_time: response.open_time,
                         noise_level: response.noise_level,
-                        id: response.id
+                        id: response.id,
+                        like: response.like
                     }
 
             })
@@ -103,6 +92,20 @@ export default class Location extends Component {
 
     }
     favoriteOnClick(){
+        axios({
+            method: 'post',
+            url: '/api/addFavorite',
+            data:{location_id: this.state.location.id ,user_id: localStorage.getItem('user_id')},
+            config: { headers: {'Content-Type': 'multipart/form-data' }}
+        }).then(response =>{
+            console.log('success add favorites');
+        })
+            .catch(function (response) {
+                console.log("Error",response);
+            });
+    }
+    handleSubmit(event){
+       this.favoriteOnClick();
         if(!this.state.location_liked) {
             axios({
                 method: 'post',
@@ -153,6 +156,46 @@ export default class Location extends Component {
                             alignItems="center"
                             justify="center"
                         >
+                            <Typography variant="display4" style={{fontWeight: 500}}>{this.state.location.name}</Typography>
+                            <Grid item sm>
+                                {/*<Card>*/}
+                                <img
+                                    style={{width: "auto", height: "auto"}}
+                                    title="geisel"
+                                    src={geisel}
+                                    alt="Icon"
+                                />
+                                <br/>
+                                <Button id="submit-button"
+                                        variant="contained"
+                                        className={this.props.button}
+                                        onClick={this.handleSubmit}>
+
+                                    {this.state.location_liked ? '❤️ Like ❤️️' : '🖤 Like 🖤'}
+                                </Button>
+                                {/*</Card>*/}
+                            </Grid>
+                        </Grid>
+                        <Paper style={{width: '50%', padding: '20px'}}>
+                            <Grid item sm style={{float: 'left'}}>
+                                <Typography style={{ color: "white" }}>
+                                    Outlet
+                                    <Checkbox
+                                        value="checkedG"
+                                        disabled
+                                        checked= {true}
+                                        style={{ color: this.state.location.outlet? "#00BFFF" : "white" }}
+                                    />
+                                </Typography>
+                                <Typography  style={{ color: "white" }}>
+                                    Wifi
+                                    <Checkbox
+                                        value="checkedG"
+                                        disabled
+                                        checked={this,state.location.wifi}
+                                        style={{ color: location.wifi? "black" : "white" }}
+                                    />
+                                </Typography>
                             <Grid container
                                   spacing={24}
                                   direction="column"
@@ -232,83 +275,6 @@ export default class Location extends Component {
                             >
                                 <CommentTable location_id={this.props.match.params.id}/>
                             </Grid>
-
-                            <Typography variant="display4" style={{fontWeight: 500}}>{this.state.location.name}</Typography>
-                            <Grid item sm>
-                                {/*<Card>*/}
-                                <img
-                                    style={{width: "auto", height: "auto"}}
-                                    title="geisel"
-                                    src={geisel}
-                                    alt="Icon"
-                                />
-                                <br/>
-                                <Button id="submit-button"
-                                        variant="contained"
-                                        className={this.props.button}
-                                        onClick={this.handleSubmit}>
-                                    {this.state.location_liked ? '❤️ Like ❤️️' : '🖤 Like 🖤'}
-                                </Button>
-                                {/*</Card>*/}
-                            </Grid>
-                        </Grid>
-                        <Paper style={{width: '50%', padding: '20px'}}>
-                            <Grid item sm style={{float: 'left'}}>
-                                <Typography style={{ color: "white" }}>
-                                    Outlet
-                                    <Checkbox
-                                        value="checkedG"
-                                        disabled
-                                        checked={!!this.state.location.outlet}
-                                        style={{ color: this.state.location.outlet? "#00BFFF" : "white" }}
-                                    />
-                                </Typography>
-                                <Typography  style={{ color: "white" }}>
-                                    Wifi
-                                    <Checkbox
-                                        value="checkedG"
-                                        disabled
-                                        checked={this.state.location.wifi}
-                                        style={{ color: location.wifi? "#00BFFF" : "white" }}
-                                    />
-                                </Typography>
-
-
-                                <Typography  style={{ verticalAlign: "baseline", color: "white" }}>
-                                    Quitness
-                                    <input
-                                        style={{ position: "relative", top: 7, marginLeft: 10, width: 70, display: "inline" }}
-                                        type="range"
-                                        step="1"
-                                        min="1"
-                                        max="4"
-                                        value={this.state.location.quitness}
-                                    />
-                                </Typography>
-                            </Grid>
-                            <Grid item sm>
-                                <CardContent style={{padding: '10px'}}>
-                                    <table className="table-open">
-                                        <th>
-                                            <Typography variant="title" style={{ color: "white" }}>
-                                                Open Hours:
-                                            </Typography>
-                                        </th>
-                                        <tr><Typography variant="caption" style={{ color: "white" }}>Monday: 8:00 am - 5:30 pm</Typography></tr>
-                                        <tr><Typography variant="caption" style={{ color: "white" }}>Tuesday: 8:00 am - 5:30 pm</Typography></tr>
-                                        <tr><Typography variant="caption" style={{ color: "white" }}>Thursday: 8:00 am - 5:30 pm</Typography></tr>
-                                        <tr><Typography variant="caption" style={{ color: "white" }}>Friday: 8:00 am - 5:30 pm</Typography></tr>
-                                    </table>
-                                </CardContent>
-                            </Grid>
-                        </Paper>
-                        <Grid container
-                              spacing={24}
-                              direction="column"
-                              alignItems="center"
-                              justify="center"
-                        >
-                            <CommentTable location_id={this.props.match.params.id}/>
                         </Grid>
                     </div>
                 </Paper>
