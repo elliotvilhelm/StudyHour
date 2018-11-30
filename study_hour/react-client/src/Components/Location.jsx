@@ -15,6 +15,7 @@ import NavBar from './HeaderComponent/NavBar';
 import AddCommentModal from "./AddCommentModal";
 import Button from "@material-ui/core/Button/Button";
 import SimpleSlider from './Slider';
+import blue from '@material-ui/core/colors/blue';
 
 var images = [
     <img
@@ -35,17 +36,6 @@ const content = {
     comments: [{ name: "Ana", rating: 2, text: "Noisy place" }, { name: "Bob", rating: 3, text: "It's ok" }]
 };
 
-let location = {
-    name: "Giesel",
-    address: "123 Xiaofan Road",
-    outlet: true,
-    wifi: true,
-    quitness: 3,
-    like: false,
-    //level: 1-4
-    openHour: {
-    }
-};
 
 export default class Location extends Component {
     constructor(props) {
@@ -151,87 +141,8 @@ export default class Location extends Component {
                             spacing={24}
                             direction="row"
                             alignItems="center"
-                            justify="center"
+                            justify="space-around"
                         >
-                            <Grid container
-                                  spacing={24}
-                                  direction="column"
-                                  alignItems="center"
-                                  justify="center"
-
-                            >
-                                <Typography variant="display4" style={{fontWeight: 500}}>{this.state.location.name}</Typography>
-                                <Grid item sm>
-                                    {/*<Card>*/}
-                                    <SimpleSlider images={images}/>
-                                    <br/>
-                                    <Button id="submit-button"
-                                            variant="contained"
-                                            className={this.props.button}
-                                            onClick={this.handleSubmit}>
-                                        ♡ Like ♡
-                                    </Button>
-                                    {/*</Card>*/}
-                                </Grid>
-                            </Grid>
-                            <Paper style={{width: '50%', padding: '20px'}}>
-                                <Grid item sm style={{float: 'left'}}>
-                                    <Typography style={{ color: "white" }}>
-                                        Outlet
-                                        <Checkbox
-                                            value="checkedG"
-                                            disabled
-                                            checked={!!this.state.location.outlet}
-                                            style={{ color: this.state.location.outlet? "#00BFFF" : "white" }}
-                                        />
-                                    </Typography>
-                                    <Typography  style={{ color: "white" }}>
-                                        Wifi
-                                        <Checkbox
-                                            value="checkedG"
-                                            disabled
-                                            checked={this.state.location.wifi}
-                                            style={{ color: location.wifi? "#00BFFF" : "white" }}
-                                        />
-                                    </Typography>
-
-
-                                    <Typography  style={{ verticalAlign: "baseline", color: "white" }}>
-                                        Quitness
-                                        <input
-                                            style={{ position: "relative", top: 7, marginLeft: 10, width: 70, display: "inline" }}
-                                            type="range"
-                                            step="1"
-                                            min="1"
-                                            max="4"
-                                            value={this.state.location.quitness}
-                                        />
-                                    </Typography>
-                                </Grid>
-                                <Grid item sm>
-                                    <CardContent style={{padding: '10px'}}>
-                                        <table className="table-open">
-                                            <th>
-                                                <Typography variant="title" style={{ color: "white" }}>
-                                                    Open Hours:
-                                                </Typography>
-                                            </th>
-                                            <tr><Typography variant="caption" style={{ color: "white" }}>Monday: 8:00 am - 5:30 pm</Typography></tr>
-                                            <tr><Typography variant="caption" style={{ color: "white" }}>Tuesday: 8:00 am - 5:30 pm</Typography></tr>
-                                            <tr><Typography variant="caption" style={{ color: "white" }}>Thursday: 8:00 am - 5:30 pm</Typography></tr>
-                                            <tr><Typography variant="caption" style={{ color: "white" }}>Friday: 8:00 am - 5:30 pm</Typography></tr>
-                                        </table>
-                                    </CardContent>
-                                </Grid>
-                            </Paper>
-                            <Grid container
-                                  spacing={24}
-                                  direction="column"
-                                  alignItems="center"
-                                  justify="center"
-                            >
-                                <CommentTable location_id={this.props.match.params.id}/>
-                            </Grid>
 
                             <Typography variant="display4" style={{fontWeight: 500}}>{this.state.location.name}</Typography>
                             <Grid item sm>
@@ -252,7 +163,7 @@ export default class Location extends Component {
                                 {/*</Card>*/}
                             </Grid>
                         </Grid>
-                        <Paper style={{width: '50%', padding: '20px'}}>
+                        <Paper style={{width: '97%', padding: '20px', height: '200px'}}>
                             <Grid item sm style={{float: 'left'}}>
                                 <Typography style={{ color: "white" }}>
                                     Outlet
@@ -269,21 +180,21 @@ export default class Location extends Component {
                                         value="checkedG"
                                         disabled
                                         checked={this.state.location.wifi}
-                                        style={{ color: location.wifi? "#00BFFF" : "white" }}
+                                        style={{ color: this.state.location.wifi? "#00BFFF" : "white" }}
                                     />
                                 </Typography>
 
 
-                                <Typography  style={{ verticalAlign: "baseline", color: "white" }}>
-                                    Quitness
-                                    <input
-                                        style={{ position: "relative", top: 7, marginLeft: 10, width: 70, display: "inline" }}
-                                        type="range"
-                                        step="1"
-                                        min="1"
-                                        max="4"
-                                        value={this.state.location.quitness}
-                                    />
+                                <Typography  style={{ verticalAlign: "baseline", paddingTop: '10px', color: 'pink'}}>
+                                    Quietness Level:  {this.state.location.noise_level}  (out of 4)
+                                    {/*<input*/}
+                                        {/*style={{ position: "relative", top: 7, marginLeft: 10, width: 70, display: "inline" }}*/}
+                                        {/*type="range"*/}
+                                        {/*step="1"*/}
+                                        {/*min="1"*/}
+                                        {/*max="4"*/}
+                                        {/*value={this.state.location.noise_level}*/}
+                                    {/*/>*/}
                                 </Typography>
                             </Grid>
                             <Grid item sm>
