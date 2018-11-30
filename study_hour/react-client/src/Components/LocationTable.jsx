@@ -7,7 +7,7 @@ import history from "../history";
 import * as auth_actions from "../actions/auth";
 import LocationThumbnail from './LocationThumbnail'
 import NavBar from './HeaderComponent/NavBar';
-import {ButtonBase} from '@material-ui/core';
+import {ButtonBase, Typography} from '@material-ui/core';
 import giesel from '../images/geisel.jpg';
 import {Link} from 'react-router-dom';
 
@@ -56,7 +56,6 @@ class LocationTable extends Component {
             <div className="wallpaper-locationTable">
                 <NavBar />
                 <div className="container">
-                    <h1 className="center blue-text">Locations</h1>
                     <div className="cards">
                         <div className="row">
                             <div className="col s12 m12">
@@ -69,4 +68,5 @@ class LocationTable extends Component {
         )
     }
 }
-export default LocationTable
+
+export default LocationTable;
