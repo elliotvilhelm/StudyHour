@@ -12,7 +12,7 @@ import Modal from "@material-ui/core/Modal/Modal";
 import StarRatingComponent from "react-star-rating-component";
 import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox/Checkbox";
-import FileUpload from "./FileUpload";
+import * as addcomment_actions from "../actions/addcomment_action";
 
 function getModalStyle() {
     const top = 50;
@@ -21,8 +21,6 @@ function getModalStyle() {
     return {
         top: `${top}%`,
         left: `${left}%`,
-        // top: `${top}%`,
-        // bottom: '50%',
         width: '50%',
         margin: 'auto',
         position: 'absolute',
@@ -34,7 +32,6 @@ const styles = theme => ({
         position: 'absolute',
         width: theme.spacing.unit * 50,
         backgroundColor: theme.palette.background.paper,
-        // backgroundColor: 0xFFFFFF,
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
     },
@@ -73,11 +70,15 @@ class AddCommentModal extends Component {
     handleChangeOutlet(event) {
         this.setState({outlet: event.target.checked});
     };
-    onStarClick(event) {
-        this.setState({rating: event.target.value});
+    onStarClick(nextValue, name) {
+        console.log(nextValue);
+        this.setState({rating: nextValue});
     }
     handleSubmit(event) {
-        // this.props.dispatch(addlocation_actions.addlocation(this.state.name, this.state.address, this.state.outlet, this.state.internet));
+        console.log("Cool!!!");
+        console.log(this.props.location_id);
+        this.props.dispatch(addcomment_actions.addcomment(this.state.text, this.state.rating, this.state.outlet, this.state.internet, localStorage.getItem('user_id'), this.props.location_id));
+        this.handleClose();
     }
 
     render() {
@@ -117,9 +118,6 @@ class AddCommentModal extends Component {
                                 }
                                 label="internet"
                             />
-                        </Grid>
-                        <Grid item xs="12" className={classes.item}>
-                            <FileUpload/>
                         </Grid>
                         <Grid item xs="12" className={classes.item}>
                             <TextField
