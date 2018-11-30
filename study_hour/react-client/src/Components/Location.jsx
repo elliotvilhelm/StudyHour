@@ -31,50 +31,18 @@ var images = [
     />,
 ];
 
-const content = {
-    comments: [{ name: "Ana", rating: 2, text: "Noisy place" }, { name: "Bob", rating: 3, text: "It's ok" }]
-};
-//local test location page
-let location = {
-    name: "Giesel",
-    address: "123 Xiaofan Road",
-    outlet: false,
-    wifi: true,
-    quitness: 3,
-    like: false,
-    //level: 1-4
-    openHour: {
-    }
-};
+
 
 export default class Location extends Component {
     constructor(props) {
         super(props);
-<<<<<<< HEAD
+
         this.state = {location: {like:false},}
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleSubmit(){
-        this.setState({location:{like: !this.state.location.like}});
-        // axios({
-        //     method: 'post',
-        //     url: `/`,
-        //     data:,
-        //     config: { headers: { }},
-        // }).then(response => {
-        //     console.log("database got handleSubmit for like button", response);
-        //
-        // }).catch(function (response) {
-        //     console.log("Error",response);
-        // });
-=======
-        this.state = {location: {}}
-        this.handleSubmit=this.handleSubmit.bind(this);
->>>>>>> a03712f1ff8d048507db227a1e51f43b5a44cbc4
-    }
     componentDidMount() {
-        console.log("going in")
+        console.log("going in");
         let id = this.props.match.params.id;
         let self = this;
         axios({
@@ -96,12 +64,32 @@ export default class Location extends Component {
                         id: response.id,
                         like: response.like
                     }
-            })
 
+            })
+            axios({
+                method: 'post',
+                url: `/api/location_liked`,
+                data: {location_id: self.state.location.id, user_id: localStorage.getItem('user_id')},
+                config: { headers: {'Content-Type': 'multipart/form-data' }}
+            }).then(response => {
+                response = response.data.dbresponse[0];
+                console.log("is it favorited?",response);
+                console.log(self.state.location.id ,localStorage.getItem('user_id'));
+                if(response.count!=0) {
+                    console.log("not zero!!")
+                    self.setState({location_liked: true});
+                }
+            })
+                .catch(function (response) {
+                    console.log("Error",response);
+                });
         })
             .catch(function (response) {
                 console.log("Error",response);
             });
+
+
+
     }
     favoriteOnClick(){
         axios({
@@ -118,6 +106,38 @@ export default class Location extends Component {
     }
     handleSubmit(event){
        this.favoriteOnClick();
+        if(!this.state.location_liked) {
+            axios({
+                method: 'post',
+                url: '/api/addFavorite',
+                data: {location_id: this.state.location.id, user_id: localStorage.getItem('user_id')},
+                config: {headers: {'Content-Type': 'multipart/form-data'}}
+            }).then(response => {
+                console.log('success add favorites');
+                this.setState({location_liked: !this.state.location_liked});
+            })
+                .catch(function (response) {
+                    console.log("Error", response);
+                });
+        }
+        else{
+            axios({
+                method: 'post',
+                url: '/api/deleteFavorite',
+                data: {location_id: this.state.location.id, user_id: localStorage.getItem('user_id')},
+                config: {headers: {'Content-Type': 'multipart/form-data'}}
+            }).then(response => {
+                console.log('success deleted favorites');
+                this.setState({location_liked: !this.state.location_liked});
+            })
+                .catch(function (response) {
+                    console.log("Error", response);
+                });
+        }
+
+    }
+    handleSubmit(event){
+        this.favoriteOnClick();
     }
 
     render() {
@@ -136,7 +156,6 @@ export default class Location extends Component {
                             alignItems="center"
                             justify="center"
                         >
-<<<<<<< HEAD
                             <Typography variant="display4" style={{fontWeight: 500}}>{this.state.location.name}</Typography>
                             <Grid item sm>
                                 {/*<Card>*/}
@@ -151,7 +170,8 @@ export default class Location extends Component {
                                         variant="contained"
                                         className={this.props.button}
                                         onClick={this.handleSubmit}>
-                                    { this.state.location.like? '♥ Like ♥' : '♡ Like ♡'}
+
+                                    {this.state.location_liked ? '❤️ Like ❤️️' : '🖤 Like 🖤'}
                                 </Button>
                                 {/*</Card>*/}
                             </Grid>
@@ -176,7 +196,6 @@ export default class Location extends Component {
                                         style={{ color: location.wifi? "black" : "white" }}
                                     />
                                 </Typography>
-=======
                             <Grid container
                                   spacing={24}
                                   direction="column"
@@ -218,7 +237,6 @@ export default class Location extends Component {
                                             style={{ color: location.wifi? "#00BFFF" : "white" }}
                                         />
                                     </Typography>
->>>>>>> a03712f1ff8d048507db227a1e51f43b5a44cbc4
 
 
                                     <Typography  style={{ verticalAlign: "baseline", color: "white" }}>

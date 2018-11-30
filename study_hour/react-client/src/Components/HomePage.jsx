@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import axios from "axios";
 import ImageLoader from 'react-image-file';
 import TextField from "@material-ui/core/TextField";
+import SearchBar from './SearchBar';
 
 
 
@@ -45,17 +46,7 @@ class HomePage extends Component {
             <Paper className='wallpaper'>
                 <NavBar/>
                     <div>
-                    <div className='div-search'>
-                        <form noValidate autoComplete="off">
-                            <TextField
-                                id="standard-name"
-                                placeholder="Search Study Locations"
-                                style={{width: '40%', margin: 'auto'}}
-                                value={this.state.name}
-                                margin="normal"
-                            />
-                        </form>
-                    </div>
+                    <SearchBar/>
                     <div className="div-map">
                         <Map width='600' height='600' />
                     </div>

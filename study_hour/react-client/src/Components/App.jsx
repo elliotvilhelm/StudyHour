@@ -66,7 +66,6 @@ class App extends Component {
                         <Route path="/Location/:id" component={Location}/>
                         <Route path="/Location" component={Location}/>
                         <Route path="/AddLocation" component={AddLocation}/>
-                        <Route path="/AddCommentModal" component={AddCommentModal}/>
                     </Switch>
                 </Router>
             </MuiThemeProvider>
