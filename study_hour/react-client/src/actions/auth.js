@@ -5,8 +5,6 @@ export const AUTHENTICATED = 'authenticated_user';
 export const UNAUTHENTICATED = 'unauthenticated_user';
 export const AUTHENTICATION_ERROR = 'authentication_error';
 
-
-
 export function authenticate(username, password){
   return (dispatch) =>{
     axios({
@@ -19,7 +17,12 @@ export function authenticate(username, password){
       config: {headers: {'Content-Type': 'multipart/form-data'}}
     
     }).then((response) => {
-      if(!response.data.auth) return;
+      /* Validating the response */
+      if(!response.data.auth){
+        localStorage.setItem('user', response.data.token);
+        history.push('/Home');
+        dispatch({type: AUTHENTICATION_ERROR});  
+      } 
       localStorage.setItem('user', response.data.token);
       history.push('/Home');
       dispatch({type: AUTHENTICATED});
