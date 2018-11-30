@@ -41,8 +41,8 @@ class Comment extends Component {
                             starCount={5}
                             value={this.props.rating}
                         />
-                        <Button>Edit</Button>
-                        <Button>Delete</Button>
+                        {/*<Button>Edit</Button>*/}
+                        {/*<Button>Delete</Button>*/}
                     </Grid>
                 </Grid>
             </Paper>
