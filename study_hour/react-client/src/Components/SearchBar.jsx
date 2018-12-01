@@ -13,6 +13,8 @@ import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import { withStyles } from '@material-ui/core/styles';
 import * as SearchBar_action from "../actions/SearchBar_action";
 import { connect } from  "react-redux";
+import Button from "@material-ui/core/Button/Button";
+import * as signup_actions from "../actions/signup_action";
 
 let suggestionList = [];
 
@@ -118,6 +120,7 @@ class SearchBar extends Component {
         this.handleSuggestionsClearRequested = this.handleSuggestionsClearRequested.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
     }
     componentDidMount (){
         axios({
@@ -159,6 +162,9 @@ class SearchBar extends Component {
         );
     };
 
+    handleSearch () {
+        this.props.dispatch(SearchBar_action.listResult(this.state.single));
+    };
 
     render() {
         const { classes } = this.props;
@@ -194,6 +200,12 @@ class SearchBar extends Component {
                     </Paper>
                     )}
                 />
+                <Button id="submit-button"
+                        variant="contained"
+                        className={classes.button}
+                        onClick={this.handleSearch}>
+                    HIT IT!
+                </Button>
             </div>
         )
     }

@@ -1,13 +1,8 @@
 import React, {Component} from 'react';
 import { URLProvider } from 'react-url';
 import '../styles/style.css'
-import Comment from './Comment'
 import axios from "axios";
-import history from "../history";
-import * as auth_actions from "../actions/auth";
-import LocationThumbnail from './LocationThumbnail'
 import NavBar from './HeaderComponent/NavBar';
-import {ButtonBase, Typography} from '@material-ui/core';
 import giesel from '../images/geisel.jpg';
 import {Link} from 'react-router-dom';
 
@@ -20,16 +15,13 @@ class LocationTable extends Component {
         this.createTable();
     }
     createTable() {
-     axios({
+        axios({
             method: 'post',
             url: '/api/Locations',
             config: { headers: {'Content-Type': 'multipart/form-data' }}
         }).then(response => {
-
-            console.log("response", response.data.dbresponse);
-            this.setState({locations: response.data.dbresponse});
-
-            let table = []
+            this.setState({locations: this.props.location.state.list});
+            let table = [];
             table = this.state.locations.map(location =>
                 <div className="card">
                     <Link to={'/Location/'+location.id}>
@@ -42,7 +34,7 @@ class LocationTable extends Component {
                         </div>
                     </Link>
                 </div>
-            )
+            );
             this.setState({table: table});
 
         })
