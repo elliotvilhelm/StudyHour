@@ -47,6 +47,7 @@ let location = {
     }
 };
 
+
 export default class Location extends Component {
     constructor(props) {
         super(props);
@@ -75,7 +76,6 @@ export default class Location extends Component {
                         noise_level: response.noise_level,
                         id: response.id
                     }
-
             })
             axios({
                 method: 'post',
@@ -98,8 +98,6 @@ export default class Location extends Component {
             .catch(function (response) {
                 console.log("Error",response);
             });
-
-
 
     }
     favoriteOnClick(){
@@ -138,9 +136,7 @@ export default class Location extends Component {
     }
 
     render() {
-
         // return( <h1>{this.props.match.params.id}</h1>)
-        console.log("state:", this.state);
         return (
             <Paper className='wallpaper-books'>
                 <NavBar/>

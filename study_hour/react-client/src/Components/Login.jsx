@@ -11,11 +11,6 @@ import { withRouter } from 'react-router-dom';
 
 const styles = theme => ({
     textField: {
-        marginLeft: '40%',
-        width: 200,
-        background: 'blue'
-    },
-    textField: {
         width: "100%",
         margin: 'auto',
         textAlign: 'center'
@@ -58,14 +53,10 @@ class Login extends Component {
         return (
             
             <Fragment>
-                <NavBar/>
                 <Paper className='wallpaper'>
-                    
-
+                    <NavBar/>
                     <Paper style={{padding: "2%", width:"50%", margin:"auto", paddingLeft: "5%", paddingRight: "5%", marginTop: "5%"}}>
                         <Typography variant="headline" style={{marginBottom: "5%"}}>Login To StudyHour</Typography>
-                        
-
                         <Grid container>
                         <Grid item xs="12" className={classes.item}>
                         <TextField

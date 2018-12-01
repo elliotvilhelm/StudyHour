@@ -13,7 +13,6 @@ import TextField from "@material-ui/core/TextField";
 import SearchBar from './SearchBar';
 
 
-
 class HomePage extends Component {
     constructor(props) {
         super(props);
@@ -27,7 +26,6 @@ class HomePage extends Component {
             config: { headers: {'Content-Type': 'multipart/form-data' }}
         }).then(response => {
             self.setState({url: response.data.url})
-
 
         }).catch(function (response) {
             console.log("Error",response);
