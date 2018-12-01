@@ -73,6 +73,20 @@ app.get('/api/Location/:id', function (req, res, next) {
     });
 });
 
+app.get('/api/Profile/:id', function (req, res, next) {
+    console.log("profilepage routing???");
+    // res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
+    pgClient.query('SELECT * from users l WHERE l.id=$1', [req.params.id], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        res.send({dbresponse: result.rows})
+    });
+});
+
+
+
+
 // Get all the comments for a location
 // Returned comment should have all comment data including user_id
 app.post('/api/Location/Comments', function (req, res, next) {

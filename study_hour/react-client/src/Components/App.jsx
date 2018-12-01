@@ -64,6 +64,7 @@ class App extends Component {
                         <Route path="/Locations" component={LocationTable}/>
                         <Route path="/Signup" component={NoAuth(Signup)}/>
                         <Route path="/Location/:id" component={Location}/>
+                        <Route path="/Profile/:id" component={ProfilePage}/>
                         <Route path="/Location" component={Location}/>
                         <Route path="/AddLocation" component={AddLocation}/>
                     </Switch>
