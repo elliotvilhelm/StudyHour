@@ -15,9 +15,7 @@ import { bindActionCreators } from 'redux'
 
 const styles = theme => ({
     textField: {
-        marginLeft: '40%',
         width: "100%",
-        background: 'blue',
         margin: 'auto',
         textAlign: 'center'
     },
@@ -64,9 +62,8 @@ class Signup extends Component {
         const { classes } = this.props;
         return (
             <div>
-
-                <NavBar/>
                 <Paper className='wallpaper'>
+                    <NavBar/>
                     <Paper style={{padding: "2%", width:"50%", margin:"auto", paddingLeft: "5%", paddingRight: "5%", marginTop: "5%"}}>
                         <Typography variant="headline" style={{marginBottom: "5%"}}>Sign Up To StudyHour</Typography>
 
