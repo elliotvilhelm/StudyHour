@@ -163,7 +163,6 @@ class SearchBar extends Component {
     };
 
     handleSearch () {
-        console.log(this.state.single);
         this.props.dispatch(SearchBar_action.listResult(this.state.single));
     };
 

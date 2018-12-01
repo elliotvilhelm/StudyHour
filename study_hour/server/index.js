@@ -121,13 +121,11 @@ app.get('/api/SearchBar', function (req, res, next) {
     });
 });
 
-// GET THE RIGHT LIST!!!!!!!!!!!!!!!!!!!!
-app.get('/api/ListResult', function (req, res, next) {
-    pgClient.query("SELECT * FROM locations", function (err, result) {
+app.post('/api/ListResult', function (req, res, next) {
+    pgClient.query("SELECT * FROM locations WHERE name ILIKE $1",[`%${req.body.place}%`] , function (err, result) {
         if (err) {
             return next(err)
         }
-        console.log({dbresponse: result.rows});
         res.send({dbrexsponse: result.rows})
     });
 });

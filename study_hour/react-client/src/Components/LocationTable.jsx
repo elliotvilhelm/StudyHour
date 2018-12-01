@@ -1,20 +1,10 @@
 import React, {Component} from 'react';
 import { URLProvider } from 'react-url';
 import '../styles/style.css'
-import Comment from './Comment'
 import axios from "axios";
-import history from "../history";
-import * as auth_actions from "../actions/auth";
-import LocationThumbnail from './LocationThumbnail'
 import NavBar from './HeaderComponent/NavBar';
-<<<<<<< HEAD
-import Typography from "@material-ui/core/Typography/Typography";
-import Paper from "@material-ui/core/Paper/Paper";
-=======
-import {ButtonBase, Typography} from '@material-ui/core';
 import giesel from '../images/geisel.jpg';
 import {Link} from 'react-router-dom';
->>>>>>> f33cf509a1e8bc737b2b72e9b0fa83770d4637fa
 
 class LocationTable extends Component {
     constructor(props) {
@@ -30,9 +20,8 @@ class LocationTable extends Component {
             url: '/api/Locations',
             config: { headers: {'Content-Type': 'multipart/form-data' }}
         }).then(response => {
-            this.setState({locations: response.data.dbresponse});
-
-            let table = []
+            this.setState({locations: this.props.location.state.list});
+            let table = [];
             table = this.state.locations.map(location =>
                 <div className="card">
                     <Link to={'/Location/'+location.id}>
@@ -45,7 +34,7 @@ class LocationTable extends Component {
                         </div>
                     </Link>
                 </div>
-            )
+            );
             this.setState({table: table});
 
         })

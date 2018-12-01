@@ -5,7 +5,6 @@ import NavBar from './HeaderComponent/NavBar'
 import {Paper} from '@material-ui/core'
 import Map from './Map'
 import { connect } from "react-redux";
-import FileUpload from './FileUpload';
 import BackgroundMusic from './Youtube';
 import Typography from "@material-ui/core/Typography";
 import axios from "axios";

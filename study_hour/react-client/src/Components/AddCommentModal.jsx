@@ -75,8 +75,6 @@ class AddCommentModal extends Component {
         this.setState({rating: nextValue});
     }
     handleSubmit(event) {
-        console.log("Cool!!!");
-        console.log(this.props.location_id);
         this.props.dispatch(addcomment_actions.addcomment(this.state.text, this.state.rating, this.state.outlet, this.state.internet, localStorage.getItem('user_id'), this.props.location_id));
         this.handleClose();
     }

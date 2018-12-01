@@ -12,16 +12,17 @@ export function search(location) {
 export function listResult(place) {
     return (dispatch) => {
         axios({
-            method: 'get',
+            method: 'post',
             url: '/api/ListResult',
             data: {place: place},
             config: {headers: {'Content-Type': 'multipart/form-data'}}
         })
             .then(function (response) {
                 if (response.data.success === false) return; // dispatch alert that name is taken
-                console.log("HERE?");
-                console.log(response.data);
-                // history.push('/Location/' + location_id);
+                history.push({
+                    pathname: '/Locations',
+                    state: { list: response.data.dbrexsponse }
+                })
             })
             .catch(function (response) {
                 console.log("Error on location db response", response);
