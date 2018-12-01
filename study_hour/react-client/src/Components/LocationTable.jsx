@@ -6,7 +6,9 @@ import axios from "axios";
 import history from "../history";
 import * as auth_actions from "../actions/auth";
 import LocationThumbnail from './LocationThumbnail'
-
+import NavBar from './HeaderComponent/NavBar';
+import Typography from "@material-ui/core/Typography/Typography";
+import Paper from "@material-ui/core/Paper/Paper";
 
 class LocationTable extends Component {
     constructor(props) {
@@ -18,15 +20,12 @@ class LocationTable extends Component {
         this.createTable();
     }
     createTable() {
-     axios({
+        axios({
             method: 'post',
             url: '/api/Locations',
             config: { headers: {'Content-Type': 'multipart/form-data' }}
         }).then(response => {
-
-
-               console.log("response", response.data.dbresponse);
-             this.setState({locations: response.data.dbresponse});
+            this.setState({locations: response.data.dbresponse});
 
             let table = []
             table = this.state.locations.map(location =>
@@ -40,20 +39,21 @@ class LocationTable extends Component {
             .catch(function (response) {
                 console.log("Error",response);
             });
-
-
     }
 
     render() {
         return (
-            <div className="locations-table-div">
-                <table>
-                    <tr className="location-header-tr">
-                        Locations
-                    </tr>
-                    {this.state.table}
-                </table>
-            </div>
+            <Paper className='wallpaper-books'>
+                <NavBar />
+                <Paper style={{paddingTop: '30px', paddingBottom: '100px', width: '70%', background: 'rgba(0,0,0,0.5)', margin: 'auto'}}>
+                    <table>
+                        <tr className="location-header-tr">
+                            <Typography variant='display1'>Locations</Typography>
+                        </tr>
+                        {this.state.table}
+                    </table>
+                </Paper>
+            </Paper>
         )
     }
 }

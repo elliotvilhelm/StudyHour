@@ -45,8 +45,9 @@ class HomePage extends Component {
         return (
             <Paper className='wallpaper'>
                 <NavBar/>
-                    <div>
+                <div>
                     <SearchBar/>
+
                     <div className="div-map">
                         <Map width='600' height='600' />
                     </div>
