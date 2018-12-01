@@ -163,12 +163,7 @@ export default class Location extends Component {
                                 <Typography variant="display4" style={{fontWeight: 500}}>{this.state.location.name}</Typography>
                                 <Grid item sm>
                                     {/*<Card>*/}
-                                    <img
-                                        style={{width: "auto", height: "auto"}}
-                                        title="geisel"
-                                        src={geisel}
-                                        alt="Icon"
-                                    />
+                                    <SimpleSlider images={images}/>
                                     <br/>
                                     <Button id="submit-button"
                                             variant="contained"
