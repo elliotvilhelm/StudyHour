@@ -7,14 +7,19 @@ import history from "../history";
 import * as auth_actions from "../actions/auth";
 import LocationThumbnail from './LocationThumbnail'
 import NavBar from './HeaderComponent/NavBar';
+<<<<<<< HEAD
 import Typography from "@material-ui/core/Typography/Typography";
 import Paper from "@material-ui/core/Paper/Paper";
+=======
+import {ButtonBase, Typography} from '@material-ui/core';
+import giesel from '../images/geisel.jpg';
+import {Link} from 'react-router-dom';
+>>>>>>> f33cf509a1e8bc737b2b72e9b0fa83770d4637fa
 
 class LocationTable extends Component {
     constructor(props) {
         super(props);
         this.state = {locations: [], table: []}
-
     }
     componentDidMount (){
         this.createTable();
@@ -29,9 +34,17 @@ class LocationTable extends Component {
 
             let table = []
             table = this.state.locations.map(location =>
-                <tr>
-                    <LocationThumbnail name={location.name} address={location.address}/>
-                </tr>
+                <div className="card">
+                    <Link to={'/Location/'+location.id}>
+                        <div className="card-image">
+                            <img src={giesel}/>
+                        </div>
+                        <span className="card-title">{location.name}</span>
+                        <div className="card-content">
+                            {location.address}
+                        </div>
+                    </Link>
+                </div>
             )
             this.setState({table: table});
 
@@ -43,18 +56,20 @@ class LocationTable extends Component {
 
     render() {
         return (
-            <Paper className='wallpaper-books'>
+            <div className="wallpaper-locationTable">
                 <NavBar />
-                <Paper style={{paddingTop: '30px', paddingBottom: '100px', width: '70%', background: 'rgba(0,0,0,0.5)', margin: 'auto'}}>
-                    <table>
-                        <tr className="location-header-tr">
-                            <Typography variant='display1'>Locations</Typography>
-                        </tr>
-                        {this.state.table}
-                    </table>
-                </Paper>
-            </Paper>
+                <div className="container">
+                    <div className="cards">
+                        <div className="row">
+                            <div className="col s12 m12">
+                                {this.state.table}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         )
     }
 }
+
 export default LocationTable;
