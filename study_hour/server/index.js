@@ -130,6 +130,24 @@ app.post('/api/ListResult', function (req, res, next) {
     });
 });
 
+app.post('/api/GetQuestion', function (req, res, next) {
+    pgClient.query('SELECT id, security_q, security_a FROM users where user_name=$1', [req.body.user_name], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        res.send({dbresponse: result.rows})
+    });
+});
+
+app.post('/api/savePassword', function (req, res, next) {
+    pgClient.query('UPDATE users SET password = $2 WHERE id = $1', [req.body.id, req.body.password], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        res.send({dbresponse: result.rows})
+    });
+});
+
 // Get all comments from a given user
 // not that high priority
 app.post('/api/User/Comments', function (req, res, next) {

@@ -1,26 +1,23 @@
 import React, { Component } from 'react';
 import { Router, Route, Switch} from 'react-router-dom';
 import HomePage from './HomePage';
-import About from './About';
 import Login from './Login';
 import Signup from './Signup';
 import AddLocation from './AddLocation';
-import AddCommentModal from './AddCommentModal';
+import LocationTable from './LocationTable';
+import Location from './Location';
+import ValidateUser from './ValidateUser';
+import SecurityCheck from './SecurityCheck';
+import ResetPassword from "./ResetPassword";
 import '../styles/style.css'
-
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
-
 import history from '../history';
 import RequireAuth from './RequireAuth';
 import NoAuth from './NoAuth';
-import LocationTable from './LocationTable';
-import Review from './Review';
-
-import Location from './Location';
-
 import book from '../images/book.svg'
-import ResetPassword from "./ResetPassword";
 import ProfilePage from "./ProfilePage";
+
+
 const dark_theme = createMuiTheme({
     palette: {
         primary: {
@@ -55,17 +52,15 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/" component={NoAuth(Login)}/>
                         <Route exact path="/Home" component={RequireAuth(HomePage)} />
-                        <Route exact path="/Home/ResetPassword" component={RequireAuth(ResetPassword)} />
                         <Route exact path="/Home/ProfilePage" component={RequireAuth(ProfilePage)} />
-                        <Route path="/About" component={RequireAuth(About)}/>
                         <Route path="/Login" component={NoAuth(Login)}/>
-                        <Route path="/Review" component={Review}/>
-                        {/*<Route path="/Location" component={Review}/>*/}
-                        <Route path="/Locations" component={LocationTable}/>
+                        <Route path="/Locations" component={RequireAuth(LocationTable)}/>
                         <Route path="/Signup" component={NoAuth(Signup)}/>
-                        <Route path="/Location/:id" component={Location}/>
-                        <Route path="/Location" component={Location}/>
-                        <Route path="/AddLocation" component={AddLocation}/>
+                        <Route path="/Location/:id" component={RequireAuth(Location)}/>
+                        <Route path="/AddLocation" component={RequireAuth(AddLocation)}/>
+                        <Route path="/ValidateUser" component={NoAuth(ValidateUser)}/>
+                        <Route path="/SecurityCheck" component={NoAuth(SecurityCheck)}/>
+                        <Route path="/ResetPassword" component={NoAuth(ResetPassword)} />
                     </Switch>
                 </Router>
             </MuiThemeProvider>
