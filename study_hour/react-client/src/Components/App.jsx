@@ -60,13 +60,10 @@ class App extends Component {
                         <Route exact path="/Home/ProfilePage" component={RequireAuth(ProfilePage)} />
                         <Route path="/About" component={RequireAuth(About)}/>
                         <Route path="/Login" component={NoAuth(Login)}/>
-                        <Route path="/Review" component={Review}/>
-                        {/*<Route path="/Location" component={Review}/>*/}
-                        <Route path="/Locations" component={LocationTable}/>
+                        <Route path="/Locations" component={RequireAuth(LocationTable)}/>
                         <Route path="/Signup" component={NoAuth(Signup)}/>
-                        <Route path="/Location/:id" component={Location}/>
-                        <Route path="/Location" component={Location}/>
-                        <Route path="/AddLocation" component={AddLocation}/>
+                        <Route path="/Location/:id" component={RequireAuth(Location)}/>
+                        <Route path="/AddLocation" component={RequireAuth(AddLocation)}/>
                         <Route path="/ValidateUser" component={NoAuth(ValidateUser)}/>
                         <Route path="/SecurityCheck" component={NoAuth(SecurityCheck)}/>
                         <Route path="/ResetPassword" component={NoAuth(ResetPassword)} />
