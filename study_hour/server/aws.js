@@ -26,9 +26,6 @@ const upload = multer({
 
 const getImage = function(params, res) {
     s3.getSignedUrl('getObject', params, function (err, url) {
-        console.log('Your generated pre-signed URL is', url);
-        console.log("err: ", err);
-        console.log("params.key", params.Key, typeof params.Key);
         res.send({url: url})
     });
 };

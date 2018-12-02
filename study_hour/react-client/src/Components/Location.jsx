@@ -137,7 +137,6 @@ export default class Location extends Component {
 
     render() {
 
-        // return( <h1>{this.props.match.params.id}</h1>)
         return (
             <Paper className='wallpaper-books'>
                 <NavBar/>

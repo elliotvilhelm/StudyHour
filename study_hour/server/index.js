@@ -26,8 +26,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/api/locate/:lat/:lng', function(req, res){
-    // retrieve longtitude, latitude
-
     const lng = parseFloat(req.params.lng);
     const lat = parseFloat(req.params.lat);
 
@@ -74,8 +72,6 @@ app.get('/api/Location/:id', function (req, res, next) {
 });
 
 app.get('/api/Profile/:id', function (req, res, next) {
-    console.log("profilepage routing???");
-    // res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
     pgClient.query('SELECT * from users l WHERE l.id=$1', [req.params.id], function (err, result) {
         if (err) {
             return next(err)
@@ -207,15 +203,6 @@ app.post('/api/Signup', function (req, res, next) {
 
 
 const aws_tools = require('./aws');
-
-// var upload = multer({ dest: 'uploads/' })
-// var upload = multer()
-/** Permissible loading a single file,
- the value of the attribute "name" in the form of "recfile". **/
-// var upload = multer({ dest: 'upload/'});
-// var type = upload.single("recfile");
-
-// const singleUpload = upload.single('image')
 app.post('/api/image-upload', aws_tools.upload.single("file"), function(req, res) {
     if (req.file === undefined) {
         console.log("file undefined");
@@ -226,21 +213,10 @@ app.post('/api/image-upload', aws_tools.upload.single("file"), function(req, res
 
 app.post('/api/images', (req, res) => {
     var item = req.body;
-    // var params = {Bucket: req.params.bucketName, Key: '1542798549579'}; // keyname can be a filename
     var params = {Bucket: 'studyhour', Key: req.body.code}; // keyname can be a filename
     var data = aws_tools.getImage;
     return data(params, res);
-
-    // res.send(data)
-    // res.send({hey:"hey"})
-
 });
-// var params = { Bucket: config.bucket, Key: req.params.imageId };
-// s3.getObject(params, function(err, data) {
-//     res.writeHead(200, {'Content-Type': 'image/jpeg'});
-//     res.write(data.Body, 'binary');
-//     res.end(null, 'binary');
-// });
 
 
 app.post('/api/addprofileimage/user', function (req, res, next) {
