@@ -217,19 +217,18 @@ const aws_tools = require('./aws');
 
 // const singleUpload = upload.single('image')
 app.post('/api/image-upload', aws_tools.upload.single("file"), function(req, res) {
-    if (req.file === undefined)
-        console.log("file undevned");
-    console.log("THE S3 CODE IS SENDING ", req.file, "UNDER NAME s3_code");
+    if (req.file === undefined) {
+        console.log("file undefined");
+        return;
+    }
     res.send({s3_code: req.file.key});
 });
 
 app.post('/api/images', (req, res) => {
     var item = req.body;
     // var params = {Bucket: req.params.bucketName, Key: '1542798549579'}; // keyname can be a filename
-    console.log("looking for code ", req.body.code);
     var params = {Bucket: 'studyhour', Key: req.body.code}; // keyname can be a filename
     var data = aws_tools.getImage;
-    console.log("hey images", data);
     return data(params, res);
 
     // res.send(data)

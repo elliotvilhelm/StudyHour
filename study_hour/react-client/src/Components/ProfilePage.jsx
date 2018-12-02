@@ -36,7 +36,6 @@ class ProfilePage extends Component {
             url: `/api/Profile/${id}`,
             config: { headers: {'Content-Type': 'multipart/form-data' }}
         }).then(response => {
-            console.log("response user/n", response.data.dbresponse);
             response = response.data.dbresponse[0];
             self.setState({
                 user:

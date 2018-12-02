@@ -25,7 +25,6 @@ export default class Location extends Component {
         this.handleSubmit=this.handleSubmit.bind(this);
     }
     componentDidMount() {
-        console.log("going in")
         let id = this.props.match.params.id;
         let self = this;
         axios({
@@ -139,7 +138,6 @@ export default class Location extends Component {
     render() {
 
         // return( <h1>{this.props.match.params.id}</h1>)
-        console.log("state:", this.state);
         return (
             <Paper className='wallpaper-books'>
                 <NavBar/>

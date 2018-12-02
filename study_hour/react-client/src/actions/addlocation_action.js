@@ -21,7 +21,6 @@ export function addlocation(name, address, outlet, internet, open_time, close_ti
             config: {headers: {'Content-Type': 'multipart/form-data'}}
         })
             .then(function (response) {
-                console.log("addlocation response", response.data);
                 if (response.data.success === false) return; // dispatch alert that name is taken
                 upload_ref.current.fileUpload(response.data.location_id);
             })
