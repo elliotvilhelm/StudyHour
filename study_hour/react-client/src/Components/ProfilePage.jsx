@@ -25,7 +25,6 @@ class ProfilePage extends Component {
             data: {id: localStorage.getItem('user_id')},
             config: { headers: {'Content-Type': 'application/json' }}
         }).then(response => {
-            console.log("profile page response: ",response.data.dbresponse[0]);
             this.setState({
                 fullname: response.data.dbresponse[0].fullname,
                 city: response.data.dbresponse[0].city,
@@ -40,22 +39,15 @@ class ProfilePage extends Component {
             data: {id: localStorage.getItem('user_id')},
             config: { headers: {'Content-Type': 'application/json' }}
         }).then(response => {
-            console.log("profile page response: ",response.data.dbresponse[0]);
             this.setState({
                 numComments: response.data.dbresponse[0].numcomment
             });
-            console.log("count", this.state.count);
         }).catch(function (response) {
             console.log("Error",response);
         });
     }
 
     render() {
-        if (this.state.url !== "") {
-            var imgl = <div></div>;
-        }
-        else
-            var imgl = <div></div>;
         return (
             <div>
                 <Paper className='wallpaper'>
