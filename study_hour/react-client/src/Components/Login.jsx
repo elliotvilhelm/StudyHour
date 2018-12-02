@@ -67,7 +67,7 @@ class Login extends Component {
                             <Grid item xs="12" className={classes.item}>
                                 <TextField
                                     id="standard-email"
-                                    label="Email"
+                                    label="User Name"
                                     placeholder="User Name"
                                     onChange={this.handleChangeUserName}
                                     autoComplete='off'
@@ -75,7 +75,7 @@ class Login extends Component {
                                     className={classes.textField}
                                     value={this.state.username}
                                     required
-                                    style={{padding: "10px"}}
+                                    style={{paddingBottom: "10px"}}
                                 />
                             </Grid>
                             <Grid item xs="12" className={classes.item}>
@@ -89,7 +89,7 @@ class Login extends Component {
                                     className={classes.textField}
                                     value={this.state.password}
                                     required
-                                    style={{padding: "10px"}}
+                                    style={{paddingBottom: "10px"}}
                                 />
                             </Grid>
                             <Grid item xs="12" style={{textAlign: "center", marginTop: 10}} className={classes.item}>

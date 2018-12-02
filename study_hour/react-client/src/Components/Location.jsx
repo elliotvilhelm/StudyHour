@@ -182,15 +182,16 @@ export default class Location extends Component {
                                     </Typography>
 
 
-                                    <Typography  style={{ verticalAlign: "baseline", color: "white" }}>
-                                        Quitness
+                                    <Typography  style={{ color: "white" }}>
+                                        Noise Level
                                         <input
                                             style={{ position: "relative", top: 7, marginLeft: 10, width: 70, display: "inline" }}
                                             type="range"
                                             step="1"
                                             min="1"
                                             max="4"
-                                            value={this.state.location.quitness}
+                                            contentEditable={false}
+                                            value={this.state.location.noise_level}
                                         />
                                     </Typography>
                                 </Grid>
@@ -202,10 +203,13 @@ export default class Location extends Component {
                                                     Open Hours:
                                                 </Typography>
                                             </th>
-                                            <tr><Typography variant="caption" style={{ color: "white" }}>Monday: 8:00 am - 5:30 pm</Typography></tr>
-                                            <tr><Typography variant="caption" style={{ color: "white" }}>Tuesday: 8:00 am - 5:30 pm</Typography></tr>
-                                            <tr><Typography variant="caption" style={{ color: "white" }}>Thursday: 8:00 am - 5:30 pm</Typography></tr>
-                                            <tr><Typography variant="caption" style={{ color: "white" }}>Friday: 8:00 am - 5:30 pm</Typography></tr>
+                                            <tr><Typography variant="caption" style={{ color: "white" }}>Monday:    8:00 am - 5:30 pm</Typography></tr>
+                                            <tr><Typography variant="caption" style={{ color: "white" }}>Tuesday:   8:00 am - 5:30 pm</Typography></tr>
+                                            <tr><Typography variant="caption" style={{ color: "white" }}>Wednesday: 8:00 am - 5:30 pm</Typography></tr>
+                                            <tr><Typography variant="caption" style={{ color: "white" }}>Thursday:  8:00 am - 5:30 pm</Typography></tr>
+                                            <tr><Typography variant="caption" style={{ color: "white" }}>Friday:    8:00 am - 5:30 pm</Typography></tr>
+                                            <tr><Typography variant="caption" style={{ color: "white" }}>Saturday:  8:00 am - 5:30 pm</Typography></tr>
+                                            <tr><Typography variant="caption" style={{ color: "white" }}>Sunday:    8:00 am - 5:30 pm</Typography></tr>
                                         </table>
                                     </CardContent>
                                 </Grid>
