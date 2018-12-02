@@ -22,6 +22,7 @@ export function authenticate(username, password) {
             .then(function (response) {
                 if (!response.data.auth) return;
                 localStorage.setItem('user', response.data.token);
+                localStorage.setItem('user_id', response.data.user_id);
                 history.push('/Home');
                 dispatch({type: AUTHENTICATED});
             })
