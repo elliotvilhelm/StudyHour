@@ -74,10 +74,10 @@ class ResetPassword extends Component {
                                 <Grid item xs="12" className={classes.item}>
                                     <TextField
                                         id="standard-password-input"
-                                        label="Password"
+                                        label="New Password"
                                         className={classes.textField}
                                         type="password"
-                                        placeholder="Password"
+                                        placeholder="New Password"
                                         onChange={this.handleChangeNewPassword}
                                         autocomplete='off'
                                         required
@@ -90,7 +90,7 @@ class ResetPassword extends Component {
                                         label="Confirm password"
                                         className={classes.textField}
                                         type="password"
-                                        placeholder="Password"
+                                        placeholder="Confirm Password"
                                         onChange={this.handleChangeConfirmPassword}
                                         autocomplete='off'
                                         required
