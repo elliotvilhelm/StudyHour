@@ -237,15 +237,14 @@ ALTER TABLE ONLY public.comments
     ADD CONSTRAINT comments_users_id_fk FOREIGN KEY (user_id) REFERENCES public.users(id);
 
 
-delete from location;
-delete from comments;
-delete from users;
+delete from public.locations;
+delete from public.comments;
+delete from public.users;
 
-alter sequence users_id_seq restart with 1;
-alter sequence comments_id_seq restart with 1;
-alter sequence locations_id_seq restart with 1;
+alter sequence public.users_id_seq restart with 1;
+alter sequence public.comments_id_seq restart with 1;
+alter sequence public.locations_id_seq restart with 1;
 
 --
 -- PostgreSQL database dump complete
 --
-

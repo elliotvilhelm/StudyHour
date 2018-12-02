@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Paper} from '@material-ui/core/';
+import {navBar} from './HeaderComponent/NavBar.jsx'
 import '../styles/style.css'
 import {withStyles} from '@material-ui/core/styles';
 import {TextField} from '@material-ui/core/';
