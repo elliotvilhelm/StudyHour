@@ -32,7 +32,6 @@ export default class Location extends Component {
             url: `/api/Location/${id}`,
             config: { headers: {'Content-Type': 'multipart/form-data' }}
         }).then(response => {
-            console.log("response location/n", response.data.dbresponse);
             response = response.data.dbresponse[0];
             self.setState({location:
                     {
@@ -53,10 +52,7 @@ export default class Location extends Component {
                 config: { headers: {'Content-Type': 'multipart/form-data' }}
             }).then(response => {
                 response = response.data.dbresponse[0];
-                console.log("is it favorited?",response);
-                console.log(self.state.location.id ,localStorage.getItem('user_id'));
                 if(response.count!=0) {
-                    console.log("not zero!!")
                     self.setState({location_liked: true});
                 }
             })
@@ -84,9 +80,7 @@ export default class Location extends Component {
                             self.setState({images: images})
                         });
                     })
-                ).then(response => {
-                    console.log("all promise done");
-                })
+                )
 
             }).catch(function (response) {
                 console.log("Error",response);
@@ -108,7 +102,6 @@ export default class Location extends Component {
                 data: {location_id: this.state.location.id, user_id: localStorage.getItem('user_id')},
                 config: {headers: {'Content-Type': 'multipart/form-data'}}
             }).then(response => {
-                console.log('success add favorites');
                 this.setState({location_liked: !this.state.location_liked});
             })
                 .catch(function (response) {
@@ -122,7 +115,6 @@ export default class Location extends Component {
                 data: {location_id: this.state.location.id, user_id: localStorage.getItem('user_id')},
                 config: {headers: {'Content-Type': 'multipart/form-data'}}
             }).then(response => {
-                console.log('success deleted favorites');
                 this.setState({location_liked: !this.state.location_liked});
             })
                 .catch(function (response) {

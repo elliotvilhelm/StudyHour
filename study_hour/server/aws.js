@@ -4,8 +4,8 @@ const aws = require('aws-sdk');
 const { access_key_id, secret_access_key_id } = require('../secrets/aws_s3');
 
 aws.config.update({
-        secretAccessKey: secret_access_key_id,
-        accessKeyId: access_key_id,
+    secretAccessKey: secret_access_key_id,
+    accessKeyId: access_key_id,
     region: 'us-west-1' // region of your bucket
 });
 
@@ -14,7 +14,6 @@ const upload = multer({
     storage: multerS3({
         s3: s3,
         bucket: 'studyhour',
-        // acl: 'public-read',
         metadata: function (req, file, cb) {
             cb(null, {fieldName: file.fieldname});
         },

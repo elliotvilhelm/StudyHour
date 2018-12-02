@@ -57,7 +57,6 @@ class ProfilePage extends Component {
 
     render() {
         if (this.state.url !== "") {
-            // var imgl = <img src={this.state.url} />;
             var imgl = <div></div>;
         }
         else
