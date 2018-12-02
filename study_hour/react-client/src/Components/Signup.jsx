@@ -63,16 +63,12 @@ class Signup extends Component {
     };
     handleConfirmPassword(event) {
         const password = this.state.password;
-        console.log("typed password: ",password);
         const confirm = event.target.value;
-        console.log("confirm password: ",confirm);
         if (password !== confirm && password !== '' && confirm !== '') {
-            // event.target.setCustomValidity("Passwords don't match");
             this.setState({confirm: false});
         }
         else {
             this.setState({confirm: true});
-            // event.target.setCustomValidity('');
         }
     };
     handleChangeCity(event) {
