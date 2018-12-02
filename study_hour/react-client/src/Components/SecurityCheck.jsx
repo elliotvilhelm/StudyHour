@@ -51,7 +51,6 @@ class SecurityCheck extends Component {
 
     handleSubmit() {
         if (this.state.security_a === this.state.userInput) {
-            console.log("id in security check file: ",this.state.id);
             this.props.dispatch(resetPassword_actions.validateUser(this.state.id, this.state.security_a, this.state.userInput));
         }
         else {

@@ -37,7 +37,6 @@ class ResetPassword extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentDidMount (){
-        console.log("id in reset password file: ",this.props.location.state.id);
         this.setState({id: this.props.location.state.id});
     }
 

@@ -20,7 +20,6 @@ export function getQuestion(username) {
         })
             .then(function (response) {
                 if (response.data.success === false) return; // dispatch alert that name is taken
-                console.log("returned data:",response.data.dbresponse[0]);
                 history.push({
                     pathname: '/SecurityCheck',
                     state: {id: response.data.dbresponse[0].id,
