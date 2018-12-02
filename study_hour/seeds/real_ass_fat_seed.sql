@@ -1,4 +1,4 @@
-delete from location;
+delete from locations;
 delete from comments;
 delete from users;
 
