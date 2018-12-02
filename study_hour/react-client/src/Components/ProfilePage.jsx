@@ -3,56 +3,51 @@ import { URLProvider } from 'react-url';
 import '../styles/style.css'
 import NavBar from './HeaderComponent/NavBar'
 import {Paper} from '@material-ui/core'
-import Map from './Map'
 import { connect } from "react-redux";
-import FileUpload from './FileUpload';
-import BackgroundMusic from './Youtube';
 import Typography from "@material-ui/core/Typography";
 import axios from "axios";
-import ImageLoader from 'react-image-file';
-import TextField from "@material-ui/core/TextField";
-import SearchBar from './SearchBar';
 
-let user = {
-    user_id: "1",
-    city: "San Diego",
-    user_name: "Roger Cheng",
-    comment_count: "10",
-    user_password: "fml",
-
-}
 
 class ProfilePage extends Component {
     constructor(props) {
         super(props);
-        this.state = {user: {}}
-
+        this.state = {
+            fullname: '',
+            city: '',
+            bio: '',
+            numComments: '',
+        }
     }
     componentDidMount (){
-        let id = this.props.match.params.id;
-        let self = this;
         axios({
-            method: 'get',
-            url: `/api/Profile/${id}`,
-            config: { headers: {'Content-Type': 'multipart/form-data' }}
+            method: 'post',
+            url: `/api/Profile`,
+            data: {id: localStorage.getItem('user_id')},
+            config: { headers: {'Content-Type': 'application/json' }}
         }).then(response => {
-            response = response.data.dbresponse[0];
-            self.setState({
-                user:
-                    {
-                        user_id: response.user_id,
-                        user_name: response.user_name,
-                        user_password: response.password,
-                        city: "San Diego",
-                        comment_count: "5",
-                        photos_count: "3"
-                    }
-
+            console.log("profile page response: ",response.data.dbresponse[0]);
+            this.setState({
+                fullname: response.data.dbresponse[0].fullname,
+                city: response.data.dbresponse[0].city,
+                bio: response.data.dbresponse[0].bio
             });
         }).catch(function (response) {
             console.log("Error",response);
         });
-
+        axios({
+            method: 'post',
+            url: `/api/commentCounts`,
+            data: {id: localStorage.getItem('user_id')},
+            config: { headers: {'Content-Type': 'application/json' }}
+        }).then(response => {
+            console.log("profile page response: ",response.data.dbresponse[0]);
+            this.setState({
+                numComments: response.data.dbresponse[0].numcomment
+            });
+            console.log("count", this.state.count);
+        }).catch(function (response) {
+            console.log("Error",response);
+        });
     }
 
     render() {
@@ -62,25 +57,17 @@ class ProfilePage extends Component {
         else
             var imgl = <div></div>;
         return (
-            <Paper className='wallpaper'>
-                <NavBar/>
-                <div>
-                    {this.state.user.user_name}
-                </div>
-                <div>
-                    {this.state.user.user_password}
-                </div>
-                <div>
-                    {this.state.user.city}
-                </div>
-                <div>
-                    {this.state.user.comment_count}
-                </div>
-                <div>
-                    {this.state.user.photos_count}
-                </div>
-
-            </Paper>
+            <div>
+                <Paper className='wallpaper'>
+                    <NavBar/>
+                    <Paper style={{padding: "2%", width:"50%", margin:"auto", paddingLeft: "5%", paddingRight: "5%", marginTop: "5%"}}>
+                        <Typography variant="headline" style={{padding: "5%"}}>{this.state.fullname}</Typography>
+                        <Typography variant="headline" style={{padding: "5%"}}>{this.state.city}</Typography>
+                        <Typography variant="headline" style={{padding: "5%"}}>{this.state.bio}</Typography>
+                        <Typography variant="headline" style={{padding: "5%"}}>{this.state.numComments}</Typography>
+                    </Paper>
+                </Paper>
+            </div>
         )
     }
 }

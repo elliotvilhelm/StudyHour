@@ -129,11 +129,8 @@ class SearchBar extends Component {
             config: { headers: {'Content-Type': 'multipart/form-data' }}
 
         }).then(response => {
-            console.log("response", response.data.dbresponse);
             this.setState({suggestions: response.data.dbresponse});
             suggestionList = this.state.suggestions;
-
-            console.log(suggestionList);
         })
             .catch(function (response) {
                 console.log("Error",response);
@@ -156,7 +153,6 @@ class SearchBar extends Component {
     };
 
     handleClick (event) {
-        // console.log(this.state.suggestions.filter(suggestion => suggestion.name == event.target.innerText)[0]);
         this.props.dispatch(SearchBar_action.search(this.state.suggestions.filter(suggestion =>
             suggestion.name.toLowerCase() + "\n" === (event.target.innerText).toLowerCase())[0])
         );

@@ -61,7 +61,7 @@ class NavBar extends Component {
                                 </Link>
                             </Button>
                              <Button color="inherit">
-                                <Link to={"/Home"}>
+                                <Link to={`/Home/ProfilePage/${localStorage.getItem('user_id')}`}>
                                     <img src={profile} width={20} />
                                 </Link>
                             </Button>
