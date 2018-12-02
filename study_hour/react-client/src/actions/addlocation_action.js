@@ -24,7 +24,6 @@ export function addlocation(name, address, outlet, internet, open_time, close_ti
                 console.log("addlocation response", response.data);
                 if (response.data.success === false) return; // dispatch alert that name is taken
                 upload_ref.current.fileUpload(response.data.location_id);
-
             })
             .catch(function (response) {
                 console.log("Error on location db response", response);

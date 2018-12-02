@@ -14,48 +14,18 @@ import CommentTable from "./CommentTable";
 import NavBar from './HeaderComponent/NavBar';
 import AddCommentModal from "./AddCommentModal";
 import Button from "@material-ui/core/Button/Button";
-import SimpleSlider from './Slider';
+import SimpleSlider from "./Slider";
 
-var images = [
-    <img
-        className="img-slider"
-        title="geisel"
-        src={geisel}
-        alt="Icon"
-    />,
-    <img
-        className="img-slider"
-        title="geisel"
-        src={geisel}
-        alt="Icon"
-    />,
-];
-
-const content = {
-    comments: [{ name: "Ana", rating: 2, text: "Noisy place" }, { name: "Bob", rating: 3, text: "It's ok" }]
-};
-
-let location = {
-    name: "Giesel",
-    address: "123 Xiaofan Road",
-    outlet: true,
-    wifi: true,
-    quitness: 3,
-    like: false,
-    //level: 1-4
-    openHour: {
-    }
-};
 
 
 export default class Location extends Component {
     constructor(props) {
         super(props);
-        this.state = {location: {}, location_liked: false}
+        this.state = {location: {}, location_liked: false, images: []};
         this.handleSubmit=this.handleSubmit.bind(this);
     }
     componentDidMount() {
-        console.log("going in");
+        console.log("going in")
         let id = this.props.match.params.id;
         let self = this;
         axios({
@@ -76,7 +46,7 @@ export default class Location extends Component {
                         noise_level: response.noise_level,
                         id: response.id
                     }
-            })
+            });
             axios({
                 method: 'post',
                 url: `/api/location_liked`,
@@ -94,10 +64,41 @@ export default class Location extends Component {
                 .catch(function (response) {
                     console.log("Error",response);
                 });
+
+            axios({
+                method: 'post',
+                url: '/api/images/location',
+                data: {location_id: self.state.location.id},
+                config: { headers: {'Content-Type': 'multipart/form-data' }}
+            }).then(response => {
+                let s3_codes = response.data.dbresponse;
+                let images = [];
+                Promise.all(
+                    s3_codes.map(code => {
+                        axios({
+                            method: 'post',
+                            url: '/api/images',
+                            data: {code: code.s3code},
+                            config: {headers: {'Content-Type': 'multipart/form-data'}}
+                        }).then(response => {
+                            images.push(<img className="img-big" src={response.data.url}/>);
+                            self.setState({images: images})
+                        });
+                    })
+                ).then(response => {
+                    console.log("all promise done");
+                })
+
+            }).catch(function (response) {
+                console.log("Error",response);
+            });
         })
             .catch(function (response) {
                 console.log("Error",response);
             });
+
+
+
 
     }
     favoriteOnClick(){
@@ -136,7 +137,9 @@ export default class Location extends Component {
     }
 
     render() {
+
         // return( <h1>{this.props.match.params.id}</h1>)
+        console.log("state:", this.state);
         return (
             <Paper className='wallpaper-books'>
                 <NavBar/>
@@ -158,8 +161,7 @@ export default class Location extends Component {
                             >
                                 <Typography variant="display4" style={{fontWeight: 500}}>{this.state.location.name}</Typography>
                                 <Grid item sm>
-                                    {/*<Card>*/}
-                                    <SimpleSlider images={images}/>
+                                    <SimpleSlider images={this.state.images}/>
                                     <br/>
                                     <Button id="submit-button"
                                             variant="contained"
@@ -167,7 +169,6 @@ export default class Location extends Component {
                                             onClick={this.handleSubmit}>
                                         {this.state.location_liked ? '❤️ Like ❤️️' : '🖤 Like 🖤'}
                                     </Button>
-                                    {/*</Card>*/}
                                 </Grid>
                             </Grid>
                             <Paper style={{width: '50%', padding: '20px'}}>
