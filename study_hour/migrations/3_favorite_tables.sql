@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS favorites; 
 create table favorites
 (
   id          serial not null

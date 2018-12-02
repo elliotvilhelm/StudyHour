@@ -1,16 +1,9 @@
-delete from locations;
-delete from comments;
-delete from users;
-
-alter sequence users_id_seq restart with 1;
-alter sequence comments_id_seq restart with 1;
-alter sequence locations_id_seq restart with 1;
 insert into locations(name, address, outlet, internet, noise_level, open_time, close_time) values ('Geisel 8th floor','9500 Gilman dr, San Diego','true','true','1', '7:30am', '12:00am');
 insert into locations(name, address, outlet, internet, noise_level, open_time, close_time) values ('Geisel 7th floor','9500 Gilman dr, San Diego','true','true','1', '7:30am', '12:00am');
 insert into locations(name, address, outlet, internet, noise_level, open_time, close_time) values ('Geisel 6th floor','9500 Gilman dr, San Diego','true','true','3', '7:30am', '12:00am');
 insert into locations(name, address, outlet, internet, noise_level, open_time, close_time) values ('Geisel 2nd floor','9500 Gilman dr, San Diego','true','true','8', '12:00am', '11:59pm');
 insert into locations(name, address, outlet, internet, noise_level, open_time, close_time) values ('Geisel 1st floor','9500 Gilman dr, San Diego','true','true','8', '7:30am', '12:00am');
-insert into locations(name, address, outlet, internet, noise_level, open_time, close_time) values ('Starbucks','4150 Regents Park Row, La Jolla','true','tree','5', '5:00am', '8:00pm');
+insert into locations(name, address, outlet, internet, noise_level, open_time, close_time) values ('Starbucks','4150 Regents Park Row, La Jolla','true','true','5', '5:00am', '8:00pm');
 insert into locations(name, address, outlet, internet, noise_level, open_time, close_time) values ('Home sweet home','8950 Costa Verde Blvd #3208, San Diego','true','true', '2', '10:00am', '3:00am');
 insert into locations(name, address, outlet, internet, noise_level, open_time, close_time) values ('under the bridge ','8950 Costa Verde Blvd #38, San Diego','true','true', '2', '10:00am', '3:00am');
 insert into locations(name, address, outlet, internet, noise_level, open_time, close_time) values ('Starbucks','8750 Genesee Ave #244, San Diego','true','true', '7', '4:30am', '11:00pm');
@@ -18,7 +11,7 @@ insert into locations(name, address, outlet, internet, noise_level, open_time, c
 insert into locations(name, address, outlet, internet, noise_level, open_time, close_time) values ('Biomedical Library','9500 Gilman dr, San Diego','true','true', '3', '8:00am', '6:00pm');
 insert into locations(name, address, outlet, internet, noise_level, open_time, close_time) values ('The Forum Coffee House','4340 Genesee Ave, Ste 110, San Diego','true','true', '5', '6:00am', '7:00pm');
 insert into locations(name, address, outlet, internet, noise_level, open_time, close_time) values ('Moniker General- Coffee','2860 Sims Rd, San Diego','false','true', '5', '7:00am', '7:00pm');
-insert into locations(name, address, outlet, internet, noise_level, open_time, close_time) values ('Copa Vida','11055 Roselle St Ste 105, San Diego','fasle','true','4', '7:00am', '7:00pm');
+insert into locations(name, address, outlet, internet, noise_level, open_time, close_time) values ('Copa Vida','11055 Roselle St Ste 105, San Diego','false','true','4', '7:00am', '7:00pm');
 insert into locations(name, address, outlet, internet, noise_level, open_time, close_time) values ('Gotcha Tea','5375 Kearny Villa Rd, ste 113, San Diego','false','true','1', '11:00am', '11:00pm');
 insert into locations(name, address, outlet, internet, noise_level, open_time, close_time) values ('Living Room Coffeehouse','5900 El Cajon Blvd, San Diego','false','false','5', '8:30am', '1:00pm');
 insert into locations(name, address, outlet, internet, noise_level, open_time, close_time) values ('Duet Coffee','6526 El Cajon Blvd, San Diego','false','true','5', '7:00am', '5:00pm');

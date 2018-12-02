@@ -26,8 +26,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/api/locate/:lat/:lng', function(req, res){
-    // retrieve longtitude, latitude
-
     const lng = parseFloat(req.params.lng);
     const lat = parseFloat(req.params.lat);
 
@@ -63,8 +61,6 @@ app.get('/api/locate/:lat/:lng', function(req, res){
 
 });
 app.get('/api/Location/:id', function (req, res, next) {
-    console.log("routing???");
-    // res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
     pgClient.query('SELECT * from locations l WHERE l.id=$1', [req.params.id], function (err, result) {
         if (err) {
             return next(err)
@@ -72,6 +68,18 @@ app.get('/api/Location/:id', function (req, res, next) {
         res.send({dbresponse: result.rows})
     });
 });
+
+app.get('/api/Profile/:id', function (req, res, next) {
+    pgClient.query('SELECT * from users l WHERE l.id=$1', [req.params.id], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        res.send({dbresponse: result.rows})
+    });
+});
+
+
+
 
 // Get all the comments for a location
 // Returned comment should have all comment data including user_id
@@ -211,52 +219,20 @@ app.post('/api/Signup', function (req, res, next) {
 
 
 const aws_tools = require('./aws');
-
-// var upload = multer({ dest: 'uploads/' })
-// var upload = multer()
-/** Permissible loading a single file,
- the value of the attribute "name" in the form of "recfile". **/
-// var upload = multer({ dest: 'upload/'});
-// var type = upload.single("recfile");
-
-// const singleUpload = upload.single('image')
 app.post('/api/image-upload', aws_tools.upload.single("file"), function(req, res) {
-    // if (req.file === undefined)
-    //     return;
-    console.log("server req", req);
-    console.log("Server req file", req.file);
-    // console.log(type)
-    res.send({done: "done"})
-    // console.log("file", req.file);
-    // // console.log("Server req data", req.data);
-    // res.send({success: "yeet"})
-    // singleUpload(req, res, function(err, some) {
-    //     if (err) {
-    //         console.log(err)
-    //         return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
-    //     }
-    //     return res.json({'imageUrl': req.file.location});
-    // });
+    if (req.file === undefined) {
+        console.log("file undefined");
+        return;
+    }
+    res.send({s3_code: req.file.key});
 });
 
-app.get('/api/images', (req, res) => {
+app.post('/api/images', (req, res) => {
     var item = req.body;
-    // var params = {Bucket: req.params.bucketName, Key: '1542798549579'}; // keyname can be a filename
-    var params = {Bucket: 'studyhour', Key: '1542798549579'}; // keyname can be a filename
-    console.log("hey")
+    var params = {Bucket: 'studyhour', Key: req.body.code}; // keyname can be a filename
     var data = aws_tools.getImage;
     return data(params, res);
-
-    // res.send(data)
-    // res.send({hey:"hey"})
-
 });
-// var params = { Bucket: config.bucket, Key: req.params.imageId };
-// s3.getObject(params, function(err, data) {
-//     res.writeHead(200, {'Content-Type': 'image/jpeg'});
-//     res.write(data.Body, 'binary');
-//     res.end(null, 'binary');
-// });
 
 
 app.post('/api/addprofileimage/user', function (req, res, next) {
@@ -277,6 +253,20 @@ app.post('/api/addlocationimage/user', function (req, res, next) {
         res.send({success: true})
     });
 });
+
+app.post('/api/images/location', function (req, res, next) {
+    pgClient.query('SELECT s3code FROM location_images u where u.location_id = $1',[req.body.location_id], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        if(result.rows.length == 0) {
+            res.send({success: false});
+            return;
+        }
+        res.send({dbresponse: result.rows})
+    });
+});
+
 
 app.post('/api/addFavorite', function (req, res, next) {
     pgClient.query('INSERT INTO favorites(location_id, user_id) VALUES($1,$2)',[req.body.location_id, req.body.user_id ], function (err, result) {
@@ -308,18 +298,7 @@ app.post('/api/location_liked', function (req, res, next) {
     });
 });
 
-app.get('/api/images/location', function (req, res, next) {
-    pgClient.query('SELECT s3code FROM location_images u where u.location_id = $1',[req.body.location_id], function (err, result) {
-        if (err) {
-            return next(err)
-        }
-        if(result.rows.length == 0) {
-            res.send({success: false});
-            return;
-        }
-        res.send({dbresponse: result.rows})
-    });
-});
+
 
 app.get('/*', (req, res) => {
     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
