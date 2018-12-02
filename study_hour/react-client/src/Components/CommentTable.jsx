@@ -35,7 +35,8 @@ class CommentTable extends Component {
 
             let table = this.state.comments.map(comment =>
                 <tr style={{width: '100%'}}>
-                    <Comment user_name={comment.user_name}
+                    <Comment user_id={comment.user_id}
+                             user_name={comment.fullname}
                              rating = {comment.rating}
                              text={comment.text}/>
                 </tr>
