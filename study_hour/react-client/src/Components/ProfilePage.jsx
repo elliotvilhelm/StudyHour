@@ -22,7 +22,7 @@ class ProfilePage extends Component {
         axios({
             method: 'post',
             url: `/api/Profile`,
-            data: {id: localStorage.getItem('user_id')},
+            data: {id: this.props.match.params.id},
             config: { headers: {'Content-Type': 'application/json' }}
         }).then(response => {
             this.setState({
@@ -36,7 +36,7 @@ class ProfilePage extends Component {
         axios({
             method: 'post',
             url: `/api/commentCounts`,
-            data: {id: localStorage.getItem('user_id')},
+            data: {id: this.props.match.params.id},
             config: { headers: {'Content-Type': 'application/json' }}
         }).then(response => {
             this.setState({
