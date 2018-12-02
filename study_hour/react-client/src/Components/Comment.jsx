@@ -27,7 +27,7 @@ class Comment extends Component {
                 <Grid container spacing={24}>
                     <Grid item>
                         <Link to={`/Home/ProfilePage/${this.props.user_id}`}>
-                            <Avatar style={{ backgroundColor: "grey" }}>
+                            <Avatar style={{ backgroundColor: "grey", borderRadius: 0 }}>
                                 <img className="img-avatar" src={default_profile}/>
                             </Avatar>
                         </Link>
