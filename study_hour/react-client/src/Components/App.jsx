@@ -5,6 +5,9 @@ import About from './About';
 import Login from './Login';
 import Signup from './Signup';
 import AddLocation from './AddLocation';
+import ValidateUser from './ValidateUser';
+import SecurityCheck from './SecurityCheck';
+import ResetPassword from "./ResetPassword";
 import AddCommentModal from './AddCommentModal';
 import '../styles/style.css'
 
@@ -19,7 +22,6 @@ import Review from './Review';
 import Location from './Location';
 
 import book from '../images/book.svg'
-import ResetPassword from "./ResetPassword";
 import ProfilePage from "./ProfilePage";
 const dark_theme = createMuiTheme({
     palette: {
@@ -55,7 +57,6 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/" component={NoAuth(Login)}/>
                         <Route exact path="/Home" component={RequireAuth(HomePage)} />
-                        <Route exact path="/Home/ResetPassword" component={RequireAuth(ResetPassword)} />
                         <Route exact path="/Home/ProfilePage" component={RequireAuth(ProfilePage)} />
                         <Route path="/About" component={RequireAuth(About)}/>
                         <Route path="/Login" component={NoAuth(Login)}/>
@@ -66,6 +67,9 @@ class App extends Component {
                         <Route path="/Location/:id" component={Location}/>
                         <Route path="/Location" component={Location}/>
                         <Route path="/AddLocation" component={AddLocation}/>
+                        <Route path="/ValidateUser" component={ValidateUser}/>
+                        <Route path="/SecurityCheck" component={SecurityCheck}/>
+                        <Route path="/ResetPassword" component={ResetPassword} />
                     </Switch>
                 </Router>
             </MuiThemeProvider>
