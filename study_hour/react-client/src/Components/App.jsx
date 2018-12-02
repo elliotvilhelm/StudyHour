@@ -52,7 +52,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/" component={NoAuth(Login)}/>
                         <Route exact path="/Home" component={RequireAuth(HomePage)} />
-                        <Route exact path="/Home/ProfilePage" component={RequireAuth(ProfilePage)} />
+                        <Route exact path="/Home/ProfilePage/:id" component={RequireAuth(ProfilePage)} />
                         <Route path="/Login" component={NoAuth(Login)}/>
                         <Route path="/Locations" component={RequireAuth(LocationTable)}/>
                         <Route path="/Signup" component={NoAuth(Signup)}/>

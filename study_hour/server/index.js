@@ -69,15 +69,22 @@ app.get('/api/Location/:id', function (req, res, next) {
     });
 });
 
-app.get('/api/Profile/:id', function (req, res, next) {
-    pgClient.query('SELECT * from users l WHERE l.id=$1', [req.params.id], function (err, result) {
+app.post('/api/Profile', function (req, res, next) {
+    pgClient.query('SELECT * FROM users WHERE id=$1', [req.body.id], function (err, result) {
         if (err) {
             return next(err)
         }
         res.send({dbresponse: result.rows})
     });
 });
-
+app.post('/api/commentCounts', function (req, res, next) {
+    pgClient.query('SELECT count(*) AS numcomment FROM comments WHERE user_id=$1', [req.body.id], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        res.send({dbresponse: result.rows})
+    });
+});
 
 
 
