@@ -67,9 +67,9 @@ class App extends Component {
                         <Route path="/Location/:id" component={Location}/>
                         <Route path="/Location" component={Location}/>
                         <Route path="/AddLocation" component={AddLocation}/>
-                        <Route path="/ValidateUser" component={ValidateUser}/>
-                        <Route path="/SecurityCheck" component={SecurityCheck}/>
-                        <Route path="/ResetPassword" component={ResetPassword} />
+                        <Route path="/ValidateUser" component={NoAuth(ValidateUser)}/>
+                        <Route path="/SecurityCheck" component={NoAuth(SecurityCheck)}/>
+                        <Route path="/ResetPassword" component={NoAuth(ResetPassword)} />
                     </Switch>
                 </Router>
             </MuiThemeProvider>

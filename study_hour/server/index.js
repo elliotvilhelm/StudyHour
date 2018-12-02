@@ -147,14 +147,7 @@ app.post('/api/savePassword', function (req, res, next) {
         res.send({dbresponse: result.rows})
     });
 });
-// app.get('/api/ValidateUser', function (req, res, next) {
-//     pgClient.query('SELECT user_name, security_q FROM users', function (err, result) {
-//         if (err) {
-//             return next(err)
-//         }
-//         res.send({dbresponse: result.rows})
-//     });
-// });
+
 // Get all comments from a given user
 // not that high priority
 app.post('/api/User/Comments', function (req, res, next) {
