@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import {TextField, Grid, Typography} from '@material-ui/core';
 import {Button} from "@material-ui/core";
 import * as auth_actions from "../actions/auth";
+import * as resetPassword_actions from "../actions/resetPassword_action";
 import { connect } from  "react-redux";
 import { withRouter } from 'react-router-dom';
 
@@ -44,7 +45,11 @@ class Login extends Component {
         this.setState({password: event.target.value});
     }
 
-    handleSubmit(event) {
+    handleForgotPassword() {
+        this.props.dispatch(resetPassword_actions.resetPassword());
+    }
+
+    handleSubmit() {
         this.props.dispatch(auth_actions.authenticate(this.state.username, this.state.password));
     }
 
@@ -85,6 +90,14 @@ class Login extends Component {
                                     required
                                     style={{padding: "10px"}}
                                 />
+                            </Grid>
+                            <Grid item xs="12" style={{textAlign: "center", marginTop: 10}} className={classes.item}>
+                                <Button className={classes.button}
+                                        onClick={this.handleForgotPassword}
+                                        color="white"
+                                >
+                                    Forgot password?
+                                </Button>
                             </Grid>
                             <Grid item xs="12" style={{textAlign: "center", marginTop: 10}} className={classes.item}>
                                 <Button variant="contained"
