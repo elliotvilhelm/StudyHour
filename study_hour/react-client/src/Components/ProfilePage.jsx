@@ -53,10 +53,10 @@ class ProfilePage extends Component {
                 <Paper className='wallpaper'>
                     <NavBar/>
                     <Paper style={{padding: "2%", width:"50%", margin:"auto", paddingLeft: "5%", paddingRight: "5%", marginTop: "5%"}}>
-                        <Typography variant="headline" style={{padding: "5%"}}>{this.state.fullname}</Typography>
-                        <Typography variant="headline" style={{padding: "5%"}}>{this.state.city}</Typography>
-                        <Typography variant="headline" style={{padding: "5%"}}>{this.state.bio}</Typography>
-                        <Typography variant="headline" style={{padding: "5%"}}>{this.state.numComments}</Typography>
+                        <Typography variant="headline" style={{padding: "5%"}}>Name: {this.state.fullname}</Typography>
+                        <Typography variant="headline" style={{padding: "5%"}}>City: {this.state.city}</Typography>
+                        <Typography variant="headline" style={{padding: "5%"}}>About Me: {this.state.bio}</Typography>
+                        <Typography variant="headline" style={{padding: "5%"}}>Karma: {Math.round(Math.PI * (parseInt(this.state.numComments) + 1) * 100)/100}</Typography>
                     </Paper>
                 </Paper>
             </div>

@@ -15,6 +15,7 @@ import * as SearchBar_action from "../actions/SearchBar_action";
 import { connect } from  "react-redux";
 import Button from "@material-ui/core/Button/Button";
 import * as signup_actions from "../actions/signup_action";
+import SearchIcon from '@material-ui/icons/Search'
 
 let suggestionList = [];
 
@@ -176,32 +177,38 @@ class SearchBar extends Component {
 
         return (
             <div className={classes.root}>
-                <Autosuggest
-                    {...autosuggestProps}
-                    inputProps={{
-                        classes,
-                    placeholder: 'Search a Location',
-                    value: this.state.single,
-                    onChange: this.handleChange,
-                    }}
-                    theme={{
-                    container: classes.container,
-                    suggestionsContainerOpen: classes.suggestionsContainerOpen,
-                    suggestionsList: classes.suggestionsList,
-                    suggestion: classes.suggestion,
-                    }}
-                    renderSuggestionsContainer={options => (
-                    <Paper {...options.containerProps} square>
-                        {options.children}
-                    </Paper>
-                    )}
-                />
-                <Button id="submit-button"
-                        variant="contained"
-                        className={classes.button}
-                        onClick={this.handleSearch}>
-                    HIT IT!
-                </Button>
+                <div className='div-bar'>
+                    <div className='div-search-bar'>
+                        <Autosuggest
+                            {...autosuggestProps}
+                            inputProps={{
+                                classes,
+                                placeholder: 'Search a Location',
+                                value: this.state.single,
+                                onChange: this.handleChange,
+                            }}
+                            theme={{
+                                container: classes.container,
+                                suggestionsContainerOpen: classes.suggestionsContainerOpen,
+                                suggestionsList: classes.suggestionsList,
+                                suggestion: classes.suggestion,
+                            }}
+                            renderSuggestionsContainer={options => (
+                                <Paper {...options.containerProps} square>
+                                    {options.children}
+                                </Paper>
+                            )}
+                        />
+                    </div>
+                    <div className='div-search-button'>
+                        <Button id="submit-button"
+                                className={classes.button}
+                                onClick={this.handleSearch}>
+                            <SearchIcon/>
+
+                        </Button>
+                    </div>
+                </div>
             </div>
         )
     }

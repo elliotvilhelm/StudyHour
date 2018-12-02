@@ -305,6 +305,15 @@ app.post('/api/location_liked', function (req, res, next) {
     });
 });
 
+app.post('/api/upload/profile_image', function (req, res, next) {
+    pgClient.query('INSERT INTO profile_images(user_id, s3code) VALUES($1,$2,$3)',[req.body.user_id ,req.body.s3code], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        console.log("res '/api/upload/profile_image' ", result);
+        res.send({success: true})
+    });
+});
 
 
 app.get('/*', (req, res) => {

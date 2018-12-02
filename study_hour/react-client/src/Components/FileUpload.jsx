@@ -48,6 +48,32 @@ class FileUpload extends React.Component {
 
 
     }
+    fileUploadProfile(user_id) {
+        let file = this.state.file;
+        let key;
+        const formData = new FormData();
+        formData.append('file', file);
+        axios({
+            method: 'post',
+            url: '/api/image-upload',
+            data: formData,
+            config: { headers: {'content-type': 'multipart/form-data' }},
+        }).then(response => {
+            key = response.data.s3_code;
+
+            axios({
+                method: 'post',
+                url: `/api/upload/profile_image`,
+                data: {user_id: localStorage.getItem('user_id'), s3code: key},
+                config: { headers: {'Content-Type': 'multipart/form-data' }}
+            }).then(response => {
+            });
+
+
+        }).catch(function (response) {
+            console.log("Error",response);
+        });
+    }
 
 
     render() {
