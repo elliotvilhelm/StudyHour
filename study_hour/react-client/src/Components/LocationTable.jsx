@@ -46,6 +46,7 @@ class LocationTable extends Component {
     render() {
         return (
             <div className="wallpaper-locationTable">
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css "/>
                 <NavBar />
                 <div className="container">
                     <div className="cards">

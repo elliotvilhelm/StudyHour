@@ -195,7 +195,8 @@ app.post('/api/Signup', function (req, res, next) {
             res.send({success: false});
             return;
         }
-        pgClient.query('INSERT INTO users(user_name, password) VALUES ($1, $2)',[req.body.user_name, req.body.password],function(err, result) {
+        pgClient.query('INSERT INTO users(fullname, user_name, password, city, security_q, security_a, bio) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+            [req.body.fullname, req.body.user_name, req.body.password, req.body.city, req.body.security_q, req.body.security_a, req.body.bio],function(err, result) {
             if (err) {
                 return next(err)
             }
