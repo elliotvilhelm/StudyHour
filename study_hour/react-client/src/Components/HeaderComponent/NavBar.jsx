@@ -54,7 +54,7 @@ class NavBar extends Component {
                                 <MenuIcon />
                             </IconButton>
                             <img src={studyhour} style={{ marginRight: "70%" }} width={100} />
-                            <BackgroundMusic/>
+                            
                             <Button color="inherit">
                                 <Link to={"/Home"}>
                                     <img src={home} width={20} />
@@ -88,7 +88,7 @@ class NavBar extends Component {
                                 <MenuIcon />
                             </IconButton>
                             <img src={studyhour} style={{ marginRight: "75%" }} width={100} />
-
+                            <BackgroundMusic/>
 
                             <Button color="inherit">
                                 <Link to={"/Login"}>
