@@ -6,7 +6,7 @@ import { Avatar, Paper, Typography, Grid, Button } from '@material-ui/core'
 import default_profile from '../../images/profile_pic.png';
 import home from "../../images/home.svg";
 import {Link} from "react-router-dom";
-import {deletecomment} from "../actions/deletecomment_action";
+import {deletecomment} from "../../actions/deletecomment_action";
 import { connect } from  "react-redux";
 
 
