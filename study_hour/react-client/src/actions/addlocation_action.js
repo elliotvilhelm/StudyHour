@@ -29,3 +29,9 @@ export function addlocation(name, address, outlet, internet, open_time, close_ti
             });
     }
 }
+
+export function linkButton() {
+    return (dispatch) => {
+        history.push('/addLocation');
+    }
+}
