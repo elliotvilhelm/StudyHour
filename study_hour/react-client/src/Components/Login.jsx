@@ -77,11 +77,11 @@ class Login extends Component {
     }
 
     formValidation(){
-        const globalState = getState()
-        const error = {}
-        if(globalState.type.localeCompare('authentication_error'){
+        // const globalState = getState()
+        // const error = {}
+        // if(globalState.type.localeCompare('authentication_error'){
             
-        } 
+        // } 
         
     }
 
