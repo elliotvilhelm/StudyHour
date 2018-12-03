@@ -272,6 +272,7 @@ app.post('/api/image-upload', aws_tools.upload.single("file"), function(req, res
 
 app.post('/api/images', (req, res) => {
     var item = req.body;
+    console.log("req.body.code", req.body.code);
     var params = {Bucket: 'studyhour', Key: req.body.code}; // keyname can be a filename
     var data = aws_tools.getImage;
     return data(params, res);

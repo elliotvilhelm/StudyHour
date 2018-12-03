@@ -146,7 +146,7 @@ table {
 .div-slider {
     text-align: center;
     margin: 0 auto;
-    width: 400px;
+    width: 80%;
     height: auto;
 
 }
@@ -266,6 +266,7 @@ table {
 }
 
 .location-image-div {
+    width: 100%;
     margin: 0 auto;
     text-align: center;
 }
@@ -286,8 +287,8 @@ table {
 }
 
 .img-big {
-    height: 1000px;
-    width: 1000px;
+    height: 600px;
+    width: 800px;
 }
 .table-open {
     float: right;
@@ -345,7 +346,7 @@ table {
 }
 .locationImage-card {
     /*width: 30%;*/
-    width: 200px;
+    width: 80%;
     height: 30%;
     display: inline-block;
     float: left;
