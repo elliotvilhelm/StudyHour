@@ -93,7 +93,14 @@ app.post('/api/Profile/favorites', function (req, res, next) {
         res.send({dbresponse: result.rows})
     });
 });
-
+app.post('/api/Profile/submitProfile', function (req, res, next) {
+    pgClient.query('UPDATE users SET fullname=$2, password=$3, city=$4, bio=$5 WHERE id=$1', [req.body.id, req.body.fullname, req.body.password, req.body.city, req.body.bio], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        res.send({dbresponse: result.rows})
+    });
+});
 
 
 // Get all the comments for a location
