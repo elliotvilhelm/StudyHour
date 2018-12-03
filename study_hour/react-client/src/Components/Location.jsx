@@ -14,48 +14,17 @@ import CommentTable from "./CommentTable";
 import NavBar from './HeaderComponent/NavBar';
 import AddCommentModal from "./AddCommentModal";
 import Button from "@material-ui/core/Button/Button";
-import SimpleSlider from './Slider';
+import SimpleSlider from "./Slider";
 
-var images = [
-    <img
-        className="img-slider"
-        title="geisel"
-        src={geisel}
-        alt="Icon"
-    />,
-    <img
-        className="img-slider"
-        title="geisel"
-        src={geisel}
-        alt="Icon"
-    />,
-];
-
-const content = {
-    comments: [{ name: "Ana", rating: 2, text: "Noisy place" }, { name: "Bob", rating: 3, text: "It's ok" }]
-};
-
-let location = {
-    name: "Giesel",
-    address: "123 Xiaofan Road",
-    outlet: true,
-    wifi: true,
-    quitness: 3,
-    like: false,
-    //level: 1-4
-    openHour: {
-    }
-};
 
 
 export default class Location extends Component {
     constructor(props) {
         super(props);
-        this.state = {location: {}, location_liked: false}
+        this.state = {location: {}, location_liked: false, images: []};
         this.handleSubmit=this.handleSubmit.bind(this);
     }
     componentDidMount() {
-        console.log("going in");
         let id = this.props.match.params.id;
         let self = this;
         axios({
@@ -63,7 +32,6 @@ export default class Location extends Component {
             url: `/api/Location/${id}`,
             config: { headers: {'Content-Type': 'multipart/form-data' }}
         }).then(response => {
-            console.log("response location/n", response.data.dbresponse);
             response = response.data.dbresponse[0];
             self.setState({location:
                     {
@@ -76,7 +44,7 @@ export default class Location extends Component {
                         noise_level: response.noise_level,
                         id: response.id
                     }
-            })
+            });
             axios({
                 method: 'post',
                 url: `/api/location_liked`,
@@ -84,20 +52,46 @@ export default class Location extends Component {
                 config: { headers: {'Content-Type': 'multipart/form-data' }}
             }).then(response => {
                 response = response.data.dbresponse[0];
-                console.log("is it favorited?",response);
-                console.log(self.state.location.id ,localStorage.getItem('user_id'));
                 if(response.count!=0) {
-                    console.log("not zero!!")
                     self.setState({location_liked: true});
                 }
             })
                 .catch(function (response) {
                     console.log("Error",response);
                 });
+
+            axios({
+                method: 'post',
+                url: '/api/images/location',
+                data: {location_id: self.state.location.id},
+                config: { headers: {'Content-Type': 'multipart/form-data' }}
+            }).then(response => {
+                let s3_codes = response.data.dbresponse;
+                let images = [];
+                Promise.all(
+                    s3_codes.map(code => {
+                        axios({
+                            method: 'post',
+                            url: '/api/images',
+                            data: {code: code.s3code},
+                            config: {headers: {'Content-Type': 'multipart/form-data'}}
+                        }).then(response => {
+                            images.push(<img className="img-big" src={response.data.url}/>);
+                            self.setState({images: images})
+                        });
+                    })
+                )
+
+            }).catch(function (response) {
+                console.log("Error",response);
+            });
         })
             .catch(function (response) {
                 console.log("Error",response);
             });
+
+
+
 
     }
     favoriteOnClick(){
@@ -108,7 +102,6 @@ export default class Location extends Component {
                 data: {location_id: this.state.location.id, user_id: localStorage.getItem('user_id')},
                 config: {headers: {'Content-Type': 'multipart/form-data'}}
             }).then(response => {
-                console.log('success add favorites');
                 this.setState({location_liked: !this.state.location_liked});
             })
                 .catch(function (response) {
@@ -122,7 +115,6 @@ export default class Location extends Component {
                 data: {location_id: this.state.location.id, user_id: localStorage.getItem('user_id')},
                 config: {headers: {'Content-Type': 'multipart/form-data'}}
             }).then(response => {
-                console.log('success deleted favorites');
                 this.setState({location_liked: !this.state.location_liked});
             })
                 .catch(function (response) {
@@ -136,7 +128,7 @@ export default class Location extends Component {
     }
 
     render() {
-        // return( <h1>{this.props.match.params.id}</h1>)
+
         return (
             <Paper className='wallpaper-books'>
                 <NavBar/>
@@ -158,8 +150,7 @@ export default class Location extends Component {
                             >
                                 <Typography variant="display4" style={{fontWeight: 500}}>{this.state.location.name}</Typography>
                                 <Grid item sm>
-                                    {/*<Card>*/}
-                                    <SimpleSlider images={images}/>
+                                    <SimpleSlider images={this.state.images}/>
                                     <br/>
                                     <Button id="submit-button"
                                             variant="contained"
@@ -167,7 +158,6 @@ export default class Location extends Component {
                                             onClick={this.handleSubmit}>
                                         {this.state.location_liked ? '❤️ Like ❤️️' : '🖤 Like 🖤'}
                                     </Button>
-                                    {/*</Card>*/}
                                 </Grid>
                             </Grid>
                             <Paper style={{width: '50%', padding: '20px'}}>
@@ -192,15 +182,16 @@ export default class Location extends Component {
                                     </Typography>
 
 
-                                    <Typography  style={{ verticalAlign: "baseline", color: "white" }}>
-                                        Quitness
+                                    <Typography  style={{ color: "white" }}>
+                                        Noise Level
                                         <input
                                             style={{ position: "relative", top: 7, marginLeft: 10, width: 70, display: "inline" }}
                                             type="range"
                                             step="1"
                                             min="1"
-                                            max="4"
-                                            value={this.state.location.quitness}
+                                            max="5"
+                                            contentEditable={false}
+                                            value={this.state.location.noise_level}
                                         />
                                     </Typography>
                                 </Grid>
@@ -212,10 +203,13 @@ export default class Location extends Component {
                                                     Open Hours:
                                                 </Typography>
                                             </th>
-                                            <tr><Typography variant="caption" style={{ color: "white" }}>Monday: 8:00 am - 5:30 pm</Typography></tr>
-                                            <tr><Typography variant="caption" style={{ color: "white" }}>Tuesday: 8:00 am - 5:30 pm</Typography></tr>
-                                            <tr><Typography variant="caption" style={{ color: "white" }}>Thursday: 8:00 am - 5:30 pm</Typography></tr>
-                                            <tr><Typography variant="caption" style={{ color: "white" }}>Friday: 8:00 am - 5:30 pm</Typography></tr>
+                                            <tr><Typography variant="caption" style={{ color: "white" }}>Monday:    8:00 am - 5:30 pm</Typography></tr>
+                                            <tr><Typography variant="caption" style={{ color: "white" }}>Tuesday:   8:00 am - 5:30 pm</Typography></tr>
+                                            <tr><Typography variant="caption" style={{ color: "white" }}>Wednesday: 8:00 am - 5:30 pm</Typography></tr>
+                                            <tr><Typography variant="caption" style={{ color: "white" }}>Thursday:  8:00 am - 5:30 pm</Typography></tr>
+                                            <tr><Typography variant="caption" style={{ color: "white" }}>Friday:    8:00 am - 5:30 pm</Typography></tr>
+                                            <tr><Typography variant="caption" style={{ color: "white" }}>Saturday:  8:00 am - 5:30 pm</Typography></tr>
+                                            <tr><Typography variant="caption" style={{ color: "white" }}>Sunday:    8:00 am - 5:30 pm</Typography></tr>
                                         </table>
                                     </CardContent>
                                 </Grid>

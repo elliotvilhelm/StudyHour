@@ -4,7 +4,6 @@ import axios from "axios";
 
 export function search(location) {
     return (dispatch) => {
-        console.log(location.id);
         history.push('/Location/' + location.id);
     }
 }
@@ -21,7 +20,10 @@ export function listResult(place) {
                 if (response.data.success === false) return; // dispatch alert that name is taken
                 history.push({
                     pathname: '/Locations',
-                    state: { list: response.data.dbrexsponse }
+                    state: {
+                        list: response.data.dbrexsponse,
+                        favorite: false
+                    }
                 })
             })
             .catch(function (response) {

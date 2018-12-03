@@ -7,6 +7,7 @@ import {TextField, Grid, Typography} from '@material-ui/core';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import {Button} from "@material-ui/core";
 import * as auth_actions from "../actions/auth";
+import * as resetPassword_actions from "../actions/resetPassword_action";
 import { connect } from  "react-redux";
 import { withRouter } from 'react-router-dom';
 
@@ -35,6 +36,7 @@ class Login extends Component {
         };
         this.handleChangeUserName = this.handleChangeUserName.bind(this);
         this.handleChangePassword = this.handleChangePassword.bind(this);
+        this.handleForgotPassword = this.handleForgotPassword.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -46,7 +48,11 @@ class Login extends Component {
         this.setState({password: event.target.value});
     }
 
-    handleSubmit(event) {
+    handleForgotPassword() {
+        this.props.dispatch(resetPassword_actions.resetPassword());
+    }
+
+    handleSubmit() {
         this.props.dispatch(auth_actions.authenticate(this.state.username, this.state.password));
         
     }
@@ -85,7 +91,7 @@ class Login extends Component {
                             <Grid item xs="12" className={classes.item}>
                                 <TextField
                                     id="standard-email"
-                                    label="Email"
+                                    label="User Name"
                                     placeholder="User Name"
                                     onChange={this.handleChangeUserName}
                                     autoComplete='off'
@@ -93,7 +99,7 @@ class Login extends Component {
                                     className={classes.textField}
                                     value={this.state.username}
                                     required
-                                    style={{padding: "10px"}}
+                                    style={{paddingBottom: "10px"}}
                                 />
                                 {submitted && !username && <FormHelperText id="component-helper-text">Some important helper text</FormHelperText>}
                             </Grid>
@@ -108,9 +114,17 @@ class Login extends Component {
                                     className={classes.textField}
                                     value={this.state.password}
                                     required
-                                    style={{padding: "10px"}}
+                                    style={{paddingBottom: "10px"}}
                                 />
                                 {submitted && !password && <FormHelperText id="component-helper-text">Some important helper text</FormHelperText>}
+                            </Grid>
+                            <Grid item xs="12" style={{textAlign: "center", marginTop: 10}} className={classes.item}>
+                                <Button className={classes.button}
+                                        onClick={this.handleForgotPassword}
+                                        color="white"
+                                >
+                                    Forgot password?
+                                </Button>
                             </Grid>
                             <Grid item xs="12" style={{textAlign: "center", marginTop: 10}} className={classes.item}>
                                 <Button variant="contained"

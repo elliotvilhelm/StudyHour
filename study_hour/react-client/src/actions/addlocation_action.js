@@ -2,7 +2,9 @@ import axios from "axios";
 import history from "../history";
 
 
-export function addlocation(name, address, outlet, internet, open_time, close_time,noise_level) {
+export function addlocation(name, address, outlet, internet, open_time, close_time,noise_level, upload_ref) {
+    open_time = "1999-01-08 04:05:06";
+    close_time = "1999-01-08 04:05:06";
     return (dispatch) => {
         axios({
             method: 'post',
@@ -19,12 +21,17 @@ export function addlocation(name, address, outlet, internet, open_time, close_ti
             config: {headers: {'Content-Type': 'multipart/form-data'}}
         })
             .then(function (response) {
-                console.log(response.data);
                 if (response.data.success === false) return; // dispatch alert that name is taken
-                history.push('/Location/' + response.data.location_id);
+                upload_ref.current.fileUpload(response.data.location_id);
             })
             .catch(function (response) {
                 console.log("Error on location db response", response);
             });
+    }
+}
+
+export function linkButton() {
+    return (dispatch) => {
+        history.push('/addLocation');
     }
 }

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Paper} from '@material-ui/core/';
+import {navBar} from './HeaderComponent/NavBar.jsx'
 import '../styles/style.css'
 import {withStyles} from '@material-ui/core/styles';
 import {TextField} from '@material-ui/core/';
@@ -60,6 +61,7 @@ class AddLocation extends Component {
         this.handleChangeCloseTime = this.handleChangeCloseTime.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChangeNoiseLevel = this.handleChangeNoiseLevel.bind(this);
+        this.upload_ref = React.createRef();
     }
     handleChangeName(event) {
         this.setState({name: event.target.value});
@@ -84,7 +86,7 @@ class AddLocation extends Component {
     }
 
     handleSubmit() {
-        this.props.dispatch(addlocation_actions.addlocation(this.state.name, this.state.address, this.state.outlet, this.state.internet, this.state.open_time, this.state.open_time, this.state.noise_level));
+        this.props.dispatch(addlocation_actions.addlocation(this.state.name, this.state.address, this.state.outlet, this.state.internet, this.state.open_time, this.state.open_time, this.state.noise_level, this.upload_ref));
     }
 
     render() {
@@ -92,8 +94,8 @@ class AddLocation extends Component {
         const {outlet, internet} = this.state;
         return (
             <div>
-                <NavBar/>
                 <Paper className='wallpaper'>
+                    <NavBar/>
                     <Paper style={{padding: "2%", width:"50%", margin:"auto", paddingLeft: "5%", paddingRight: "5%", marginTop: "5%"}}>
                         <div className='addLocation-div'>
                             <Typography variant='display1'>Add Location</Typography>
@@ -182,7 +184,7 @@ class AddLocation extends Component {
                                     />
                                 </Grid>
                                 <Grid item xs="12" className={classes.item}>
-                                    <FileUpload/>
+                                    <FileUpload ref={this.upload_ref}/>
                                 </Grid>
                                 <Grid item xs="12" style={{textAlign: "center", marginTop: 10}} className={classes.item}>
                                     <Button id="submit-button"

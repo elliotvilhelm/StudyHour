@@ -5,12 +5,10 @@ import '../styles/style.css'
 import { withStyles } from '@material-ui/core/styles';
 import {TextField, Typography, Grid} from '@material-ui/core';
 import Button from "@material-ui/core/Button";
-import axios from "axios/index";
-import * as signup_actions from "../actions/signup_action";
 import { connect } from  "react-redux";
 import { withRouter} from 'react-router-dom';
-import history from '../history';
-import { bindActionCreators } from 'redux'
+import axios from "axios";
+import * as profilePage_actions from "../actions/profilePage_action";
 
 
 const styles = theme => ({
@@ -28,35 +26,43 @@ const styles = theme => ({
     }
 });
 
-
-class Signup extends Component {
+class EditProfilePage extends Component {
     constructor(props){
         super(props);
         this.state = {
             fullname:'',
-            username:'',
             password:'',
             confirm: true,
             city:'',
-            question:'',
-            answer:'', bio:'',
+            bio:''
         };
         this.handleChangeFullname = this.handleChangeFullname.bind(this);
-        this.handleChangeUserName = this.handleChangeUserName.bind(this);
         this.handleChangePassword = this.handleChangePassword.bind(this);
         this.handleConfirmPassword = this.handleConfirmPassword.bind(this);
         this.handleChangeCity = this.handleChangeCity.bind(this);
-        this.handleChangeQuestion = this.handleChangeQuestion.bind(this);
-        this.handleChangeAnswer = this.handleChangeAnswer.bind(this);
         this.handleChangeBio = this.handleChangeBio.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    componentDidMount () {
+        axios({
+            method: 'post',
+            url: `/api/Profile`,
+            data: {id: localStorage.getItem('user_id')},
+            config: {headers: {'Content-Type': 'application/json'}}
+        }).then(response => {
+            this.setState({
+                fullname: response.data.dbresponse[0].fullname,
+                password: response.data.dbresponse[0].password,
+                city: response.data.dbresponse[0].city,
+                bio: response.data.dbresponse[0].bio
+            });
+        }).catch(function (response) {
+            console.log("Error", response);
+        });
     }
 
     handleChangeFullname(event) {
         this.setState({fullname: event.target.value});
-    };
-    handleChangeUserName(event) {
-        this.setState({username: event.target.value});
     };
     handleChangePassword(event) {
         this.setState({password: event.target.value});
@@ -74,25 +80,16 @@ class Signup extends Component {
     handleChangeCity(event) {
         this.setState({city: event.target.value});
     };
-    handleChangeQuestion(event) {
-        this.setState({question: event.target.value});
-    };
-    handleChangeAnswer(event) {
-        this.setState({answer: event.target.value});
-    };
     handleChangeBio(event) {
         this.setState({bio: event.target.value});
     };
     handleSubmit() {
-        if (this.state.confirm === true) {
-            this.props.dispatch(signup_actions.signup(this.state.fullname,
-                this.state.username,
+            this.props.dispatch(profilePage_actions.submitProfile(
+                localStorage.getItem('user_id'),
+                this.state.fullname,
                 this.state.password,
                 this.state.city,
-                this.state.question,
-                this.state.answer,
                 this.state.bio));
-        }
     }
 
     render () {
@@ -102,8 +99,7 @@ class Signup extends Component {
                 <Paper className='wallpaper'>
                     <NavBar/>
                     <Paper style={{padding: "2%", width:"50%", margin:"auto", paddingLeft: "5%", paddingRight: "5%", marginTop: "5%"}}>
-                        <Typography variant="headline" style={{marginBottom: "5%"}}>Sign Up To StudyHour</Typography>
-
+                        <Typography variant="headline" style={{marginBottom: "5%"}}>Edit Profile Page</Typography>
                         <form  autoComplete="off">
                             <Grid container>
                                 <Grid item xs="12" className={classes.item}>
@@ -114,18 +110,6 @@ class Signup extends Component {
                                         className={classes.textField}
                                         placeholder="Full Name"
                                         onChange={this.handleChangeFullname}
-                                        required
-                                        style={{padding: "10px"}}
-                                    />
-                                </Grid>
-                                <Grid item xs="12" className={classes.item}>
-                                    <TextField
-                                        id="standard-username-input"
-                                        label="Username"
-                                        type="test"
-                                        className={classes.textField}
-                                        placeholder="User Name"
-                                        onChange={this.handleChangeUserName}
                                         required
                                         style={{padding: "10px"}}
                                     />
@@ -172,32 +156,6 @@ class Signup extends Component {
                                 </Grid>
                                 <Grid item xs="12" className={classes.item}>
                                     <TextField
-                                        id="standard-question-input"
-                                        label="Create your security question"
-                                        className={classes.textField}
-                                        type="test"
-                                        placeholder="Security Question"
-                                        onChange={this.handleChangeQuestion}
-                                        autocomplete='off'
-                                        required
-                                        style={{padding: "10px"}}
-                                    />
-                                </Grid>
-                                <Grid item xs="12" className={classes.item}>
-                                    <TextField
-                                        id="standard-answer-input"
-                                        label="Answer to your security question"
-                                        className={classes.textField}
-                                        type="test"
-                                        placeholder="Security Answer"
-                                        onChange={this.handleChangeAnswer}
-                                        autocomplete='off'
-                                        required
-                                        style={{padding: "10px"}}
-                                    />
-                                </Grid>
-                                <Grid item xs="12" className={classes.item}>
-                                    <TextField
                                         id="standard-bio-input"
                                         label="Describe yourself"
                                         className={classes.textField}
@@ -233,4 +191,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(withRouter(Signup)));
+export default connect(mapStateToProps)(withStyles(styles)(withRouter(EditProfilePage)));

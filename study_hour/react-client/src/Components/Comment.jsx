@@ -4,6 +4,8 @@ import '../styles/style.css'
 import StarRatingComponent from "react-star-rating-component";
 import { Avatar, Paper, Typography, Grid, Button } from '@material-ui/core'
 import default_profile from '../images/profile_pic.png';
+import home from "../images/home.svg";
+import {Link} from "react-router-dom";
 
 
 const commentStyle = {
@@ -24,9 +26,11 @@ class Comment extends Component {
             <Paper style={commentStyle}>
                 <Grid container spacing={24}>
                     <Grid item>
-                        <Avatar style={{ backgroundColor: "grey" }}>
-                            <img className="img-avatar" src={default_profile}/>
-                        </Avatar>
+                        <Link to={`/Home/ProfilePage/${this.props.user_id}`}>
+                            <Avatar style={{ backgroundColor: "grey", borderRadius: 0 }}>
+                                <img className="img-avatar" src={default_profile}/>
+                            </Avatar>
+                        </Link>
                     </Grid>
                     <Grid item>
                         <Typography variant="subheading">{this.props.user_name}</Typography>

@@ -1,145 +1,125 @@
 import React, {Component} from 'react';
-import {Paper} from '@material-ui/core';
-import NavBar from "./HeaderComponent/NavBar";
+import { URLProvider } from 'react-url';
 import '../styles/style.css'
-import { withStyles } from '@material-ui/core/styles';
-import {TextField, Typography, Grid} from '@material-ui/core';
-import Button from "@material-ui/core/Button";
-import axios from "axios/index";
-import * as signup_actions from "../actions/signup_action";
-import { connect } from  "react-redux";
-import { withRouter} from 'react-router-dom';
-import LocationThumbnail from './LocationThumbnail'
-import history from '../history';
-import { bindActionCreators } from 'redux'
+import NavBar from './HeaderComponent/NavBar'
+import {Button, Paper} from '@material-ui/core'
+import { connect } from "react-redux";
+import Typography from "@material-ui/core/Typography";
+import axios from "axios";
+import * as profile_action from "../actions/profilePage_action";
 
-
-const styles = theme => ({
-    textField: {
-        marginLeft: '40%',
-        // marginRight: theme.spacing.unit,
-        width: 200,
-        background: 'blue'
-    },
-    textField: {
-        width: "100%",
-        margin: 'auto',
-        textAlign: 'center'
-    },
-    button: {
-        width: 200,
-    },
-    item: {
-        paddingLeft: '25%',
-        paddingRight: '25%'
-    }
-});
 
 class ProfilePage extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-
-        this.state = {locations: [], table: []}
-        this.handleChangeUserName = this.handleChangeUserName.bind(this);
-        this.handleChangePassword = this.handleChangePassword.bind(this);
-        this.handleChangeQuestion = this.handleChangeQuestion.bind(this);
-        this.handleChangeAnswer = this.handleChangeAnswer.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-
+        this.state = {
+            fullname: '',
+            city: '',
+            bio: '',
+            numComments: '',
+            favorites: []
+        };
+        this.handleFavorite = this.handleFavorite.bind(this);
+        this.handleEditProfile = this.handleEditProfile.bind(this);
     }
-
     componentDidMount (){
-        this.createTable();
-    }
-
-    createTable() {
-     axios({
+        axios({
             method: 'post',
-            url: '/api/Locations',
-            config: { headers: {'Content-Type': 'multipart/form-data' }}
+            url: `/api/Profile`,
+            data: {id: this.props.match.params.id},
+            config: { headers: {'Content-Type': 'application/json' }}
         }).then(response => {
-
-
-               console.log("response", response.data.dbresponse);
-             this.setState({locations: response.data.dbresponse});
-
-            let table = []
-            table = this.state.locations.map(location =>
-                <tr>
-                    <LocationThumbnail name={location.name} address={location.address}/>
-                </tr>
-            )
-            this.setState({table: table});
-
-        })
-            .catch(function (response) {
-                console.log("Error",response);
+            this.setState({
+                fullname: response.data.dbresponse[0].fullname,
+                city: response.data.dbresponse[0].city,
+                bio: response.data.dbresponse[0].bio
             });
-
-
+        }).catch(function (response) {
+            console.log("Error",response);
+        });
+        axios({
+            method: 'post',
+            url: `/api/Profile/commentCounts`,
+            data: {id: this.props.match.params.id},
+            config: { headers: {'Content-Type': 'application/json' }}
+        }).then(response => {
+            this.setState({
+                numComments: response.data.dbresponse[0].numcomment
+            });
+        }).catch(function (response) {
+            console.log("Error",response);
+        });
     }
 
-    handleChangeUserName(event) {
-        this.setState({username: event.target.value});
-    };
-    handleChangePassword(event) {
-        this.setState({password: event.target.value});
-    };
-    handleChangeQuestion(event) {
-        this.setState({question: event.target.value});
-    };
-    handleChangeAnswer(event) {
-        this.setState({answer: event.target.value});
-    };
-    handleSubmit(event) {
-        this.props.dispatch(signup_actions.signup(this.state.username, this.state.password));
+    handleFavorite() {
+        this.props.dispatch(profile_action.listFavorite(this.props.match.params.id));
     }
 
-    render () {
-        const { classes } = this.props;
-        return (
-            <div>
+    handleEditProfile() {
+        this.props.dispatch(profile_action.editProfile());
+    }
 
-                <NavBar/>
-                <Paper className='wallpaper'>
-                    <Paper style={{padding: "2%", width:"50%", margin:"auto", paddingLeft: "5%", paddingRight: "5%", marginTop: "5%"}}>
-                        <Typography variant="headline" style={{marginBottom: "5%"}}>ELLIOT POURMAND</Typography>
-                        <img class="profilename" src="https://raw.githubusercontent.com/Infernus101/ProfileUI/0690f5e61a9f7af02c30342d4d6414a630de47fc/icon.png" />
-                        <form  autoComplete="off">
-                            <Grid container>
-                                <Grid item xs="12" className={classes.item}>
-                                    <Typography variant={"h6"} style={{}}>Comments Made: 110</Typography>
-                                </Grid>
-                                <Grid item xs="12" className={classes.item}>
-                                    <Typography variant={"h6"} style={{}}>City: San Diego</Typography>
-                                </Grid>
-                                <Grid item xs="12" className={classes.item}>
-                                    <Typography variant={"h6"} style={{}}>Favorite Locations: </Typography>
-                                </Grid>
-
-                                <Grid item xs="12" style={{textAlign: "center", marginTop: 10}} className={classes.item}>
-                                    <Button id="submit-button"
-                                            variant="contained"
-                                            className={classes.button}
-                                            onClick={this.handleSubmit}>
-                                       Edit
-                                    </Button>
-                                </Grid>
-                            </Grid>
-                        </form>
-                        <Grid>
-                        {this.state.table}
-                        </Grid>
+    render() {
+        let pageWithEdit;
+        if (this.props.match.params.id === localStorage.getItem('user_id')) {
+            pageWithEdit = (
+                <div>
+                    <Paper className='wallpaper'>
+                        <NavBar/>
+                        <Paper style={{padding: "2%", width:"50%", margin:"auto", paddingLeft: "5%", paddingRight: "5%", marginTop: "5%"}}>
+                            <Typography variant="headline" style={{padding: "5%"}}>Name: {this.state.fullname}</Typography>
+                            <Typography variant="headline" style={{padding: "5%"}}>City: {this.state.city}</Typography>
+                            <Typography variant="headline" style={{padding: "5%"}}>About Me: {this.state.bio}</Typography>
+                            <Typography variant="headline" style={{padding: "5%"}}>Karma: {Math.round(Math.PI * (parseInt(this.state.numComments) + 1) * 100)/100}</Typography>
+                            <div className="favorite button">
+                                <Button variant="contained"
+                                    // className={classes.button}
+                                        onClick={this.handleFavorite}
+                                        color="white">
+                                    Favorite Locations
+                                </Button>
+                            </div>
+                            <div className="edit button">
+                                <Button onClick={this.handleEditProfile}
+                                        color="white">
+                                    Edit Profile
+                                </Button>
+                            </div>
+                        </Paper>
                     </Paper>
-                </Paper>
-            </div>
-        )
+                </div>
+            );
+        }
+        else {
+            pageWithEdit = (
+                <div>
+                    <Paper className='wallpaper'>
+                        <NavBar/>
+                        <Paper style={{padding: "2%", width:"50%", margin:"auto", paddingLeft: "5%", paddingRight: "5%", marginTop: "5%"}}>
+                            <Typography variant="headline" style={{padding: "5%"}}>Name: {this.state.fullname}</Typography>
+                            <Typography variant="headline" style={{padding: "5%"}}>City: {this.state.city}</Typography>
+                            <Typography variant="headline" style={{padding: "5%"}}>About Me: {this.state.bio}</Typography>
+                            <Typography variant="headline" style={{padding: "5%"}}>Karma: {Math.round(Math.PI * (parseInt(this.state.numComments) + 1) * 100)/100}</Typography>
+                            <div className="favorite button">
+                                <Button variant="contained"
+                                        onClick={this.handleFavorite}
+                                        color="white">
+                                    Favorite Locations
+                                </Button>
+                            </div>
+                        </Paper>
+                    </Paper>
+                </div>
+            );
+        }
+        return pageWithEdit;
     }
 }
+
 function mapStateToProps(state) {
     return {
         authenticated: state.auth.authenticated
-    }
+    };
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(withRouter(ProfilePage)));
+export default connect(mapStateToProps)(ProfilePage);

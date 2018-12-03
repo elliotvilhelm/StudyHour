@@ -4,6 +4,7 @@ import studyhour from '../../images/studyhour.png';
 import signup from '../../images/signup.svg';
 import home from '../../images/home.svg';
 import logout from '../../images/logout.svg';
+import profile from '../../images/profile.svg';
 import { IconButton, AppBar, Toolbar, Button, Drawer, List, ListItemText, ListItem } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from 'react-router-dom'
@@ -53,10 +54,15 @@ class NavBar extends Component {
                                 <MenuIcon />
                             </IconButton>
                             <img src={studyhour} style={{ marginRight: "70%" }} width={100} />
-                            <BackgroundMusic/>
+                            
                             <Button color="inherit">
                                 <Link to={"/Home"}>
                                     <img src={home} width={20} />
+                                </Link>
+                            </Button>
+                             <Button color="inherit">
+                                <Link to={`/Home/ProfilePage/${localStorage.getItem('user_id')}`}>
+                                    <img src={profile} width={20} />
                                 </Link>
                             </Button>
                             <Button color="inherit" onClick={() => this.props.dispatch(auth_actions.unauthenticate())}>
@@ -68,8 +74,6 @@ class NavBar extends Component {
                         </Toolbar>
                     </AppBar>
                     <Drawer width={DrawerWidth} open={this.state.comeout} onClose={this.toggleDrawer(false)}>
-
-
                         {list}
                     </Drawer>
                 </Fragment>
@@ -84,7 +88,7 @@ class NavBar extends Component {
                                 <MenuIcon />
                             </IconButton>
                             <img src={studyhour} style={{ marginRight: "75%" }} width={100} />
-
+                            <BackgroundMusic/>
 
                             <Button color="inherit">
                                 <Link to={"/Login"}>
