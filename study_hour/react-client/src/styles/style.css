@@ -349,3 +349,8 @@ table {
     float: right;
 }
 
+.display-avg-rating {
+    padding-top: 5%;
+    padding-bottom: 5%;
+    display: inline-block;
+}
