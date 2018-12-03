@@ -77,8 +77,16 @@ app.post('/api/Profile', function (req, res, next) {
         res.send({dbresponse: result.rows})
     });
 });
-app.post('/api/commentCounts', function (req, res, next) {
+app.post('/api/Profile/commentCounts', function (req, res, next) {
     pgClient.query('SELECT count(*) AS numcomment FROM comments WHERE user_id=$1', [req.body.id], function (err, result) {
+        if (err) {
+            return next(err)
+        }
+        res.send({dbresponse: result.rows})
+    });
+});
+app.post('/api/Profile/favorites', function (req, res, next) {
+    pgClient.query('SELECT * FROM favorites f, locations l WHERE f.user_id=$1 AND f.location_id=l.id', [req.body.id], function (err, result) {
         if (err) {
             return next(err)
         }
