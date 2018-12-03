@@ -6,7 +6,7 @@ import {Button, Paper} from '@material-ui/core'
 import { connect } from "react-redux";
 import Typography from "@material-ui/core/Typography";
 import axios from "axios";
-import * as favorites_action from "../actions/favorites_action";
+import * as profile_action from "../actions/profilePage_action";
 
 
 class ProfilePage extends Component {
@@ -18,8 +18,9 @@ class ProfilePage extends Component {
             bio: '',
             numComments: '',
             favorites: []
-        }
+        };
         this.handleFavorite = this.handleFavorite.bind(this);
+        this.handleEditProfile = this.handleEditProfile.bind(this);
     }
     componentDidMount (){
         axios({
@@ -51,31 +52,67 @@ class ProfilePage extends Component {
     }
 
     handleFavorite() {
-        this.props.dispatch(favorites_action.linkButton(this.props.match.params.id));
+        this.props.dispatch(profile_action.listFavorite(this.props.match.params.id));
+    }
+
+    handleEditProfile() {
+        this.props.dispatch(profile_action.editProfile());
     }
 
     render() {
-        return (
-            <div>
-                <Paper className='wallpaper'>
-                    <NavBar/>
-                    <Paper style={{padding: "2%", width:"50%", margin:"auto", paddingLeft: "5%", paddingRight: "5%", marginTop: "5%"}}>
-                        <Typography variant="headline" style={{padding: "5%"}}>Name: {this.state.fullname}</Typography>
-                        <Typography variant="headline" style={{padding: "5%"}}>City: {this.state.city}</Typography>
-                        <Typography variant="headline" style={{padding: "5%"}}>About Me: {this.state.bio}</Typography>
-                        <Typography variant="headline" style={{padding: "5%"}}>Karma: {Math.round(Math.PI * (parseInt(this.state.numComments) + 1) * 100)/100}</Typography>
-                        <div>
-                            <Button variant="contained"
+        let pageWithEdit;
+        if (this.props.match.params.id === localStorage.getItem('user_id')) {
+            pageWithEdit = (
+                <div>
+                    <Paper className='wallpaper'>
+                        <NavBar/>
+                        <Paper style={{padding: "2%", width:"50%", margin:"auto", paddingLeft: "5%", paddingRight: "5%", marginTop: "5%"}}>
+                            <Typography variant="headline" style={{padding: "5%"}}>Name: {this.state.fullname}</Typography>
+                            <Typography variant="headline" style={{padding: "5%"}}>City: {this.state.city}</Typography>
+                            <Typography variant="headline" style={{padding: "5%"}}>About Me: {this.state.bio}</Typography>
+                            <Typography variant="headline" style={{padding: "5%"}}>Karma: {Math.round(Math.PI * (parseInt(this.state.numComments) + 1) * 100)/100}</Typography>
+                            <div className="favorite button">
+                                <Button variant="contained"
                                     // className={classes.button}
-                                    onClick={this.handleFavorite}
-                                    color="white">
-                                Favorite Locations
-                            </Button>
-                        </div>
+                                        onClick={this.handleFavorite}
+                                        color="white">
+                                    Favorite Locations
+                                </Button>
+                            </div>
+                            <div className="edit button">
+                                <Button onClick={this.handleEditProfile}
+                                        color="white">
+                                    Edit Profile
+                                </Button>
+                            </div>
+                        </Paper>
                     </Paper>
-                </Paper>
-            </div>
-        )
+                </div>
+            );
+        }
+        else {
+            pageWithEdit = (
+                <div>
+                    <Paper className='wallpaper'>
+                        <NavBar/>
+                        <Paper style={{padding: "2%", width:"50%", margin:"auto", paddingLeft: "5%", paddingRight: "5%", marginTop: "5%"}}>
+                            <Typography variant="headline" style={{padding: "5%"}}>Name: {this.state.fullname}</Typography>
+                            <Typography variant="headline" style={{padding: "5%"}}>City: {this.state.city}</Typography>
+                            <Typography variant="headline" style={{padding: "5%"}}>About Me: {this.state.bio}</Typography>
+                            <Typography variant="headline" style={{padding: "5%"}}>Karma: {Math.round(Math.PI * (parseInt(this.state.numComments) + 1) * 100)/100}</Typography>
+                            <div className="favorite button">
+                                <Button variant="contained"
+                                        onClick={this.handleFavorite}
+                                        color="white">
+                                    Favorite Locations
+                                </Button>
+                            </div>
+                        </Paper>
+                    </Paper>
+                </div>
+            );
+        }
+        return pageWithEdit;
     }
 }
 

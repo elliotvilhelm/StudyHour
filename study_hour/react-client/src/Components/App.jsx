@@ -16,6 +16,7 @@ import RequireAuth from './RequireAuth';
 import NoAuth from './NoAuth';
 import book from '../images/book.svg'
 import ProfilePage from "./ProfilePage";
+import EditProfilePage from "./EditProfilePage";
 
 
 const dark_theme = createMuiTheme({
@@ -40,8 +41,7 @@ class App extends Component {
     constructor(props) {
         super(props);
     }
-    componenetDidMount() {
-    }
+
     render() {
         return (
             <MuiThemeProvider theme={dark_theme}>
@@ -53,6 +53,7 @@ class App extends Component {
                         <Route exact path="/" component={NoAuth(Login)}/>
                         <Route exact path="/Home" component={RequireAuth(HomePage)} />
                         <Route path="/Home/ProfilePage/:id" component={RequireAuth(ProfilePage)} />
+                        <Route path="/EditProfile" component={RequireAuth(EditProfilePage)} />
                         <Route path="/Login" component={NoAuth(Login)}/>
                         <Route path="/Locations" component={RequireAuth(LocationTable)}/>
                         <Route path="/Signup" component={NoAuth(Signup)}/>

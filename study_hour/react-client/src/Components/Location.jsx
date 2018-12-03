@@ -189,7 +189,7 @@ export default class Location extends Component {
                                             type="range"
                                             step="1"
                                             min="1"
-                                            max="4"
+                                            max="5"
                                             contentEditable={false}
                                             value={this.state.location.noise_level}
                                         />
