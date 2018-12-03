@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button/Button";
 import * as addlocation_action from "../actions/addlocation_action";
 import Typography from "@material-ui/core/Typography/Typography";
 import Paper from "@material-ui/core/Paper/Paper";
+import LocationAvgRating from "./LocationAvgRating";
 
 class LocationTable extends Component {
     constructor(props) {
@@ -34,11 +35,14 @@ class LocationTable extends Component {
                         <div className="locationImage-card">
                             <img src={geisel} height="500" width="693" vspace="10"/>
                         </div>
-                        <div className="locationInfo-card">
+                    </Link>
+                    <div className="locationInfo-card">
+                        <Link to={'/Location/'+location.id}>
                             <Typography variant="headline" style={{fontSize: 50, fontWeight: 500}}>{location.name}</Typography>
                             <Typography variant="display2" style={{fontSize: 30}}>{location.address}</Typography>
-                        </div>
-                    </Link>
+                        </Link>
+                        <LocationAvgRating location_id={location.id}/>
+                    </div>
                 </div>
             );
             this.setState({table: table});
