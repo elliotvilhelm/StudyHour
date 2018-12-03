@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { URLProvider } from 'react-url';
 import '../styles/style.css'
 import axios from "axios";
-import StarRating from "react-star-rating-component";
+import StarRatings from "react-star-ratings";
 
 
 function calculateAvgRate(ratingList) {
@@ -42,10 +42,12 @@ class LocationAvgRating extends Component {
     render() {
         return (
             <div className="display-avg-rating">
-                <StarRating
+                <StarRatings
                     name="rate1"
-                    starCount={5}
-                    value={this.state.avgRate}
+                    starRatedColor="gold"
+                    starEmptyColor="black"
+                    starDimension={'50px'}
+                    rating={this.state.avgRate}
                     editing={false}
                 />
             </div>
