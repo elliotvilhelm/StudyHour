@@ -73,9 +73,6 @@ class NavBar extends Component {
 
                         </Toolbar>
                     </AppBar>
-                    <Drawer width={DrawerWidth} open={this.state.comeout} onClose={this.toggleDrawer(false)}>
-                        {list}
-                    </Drawer>
                 </Fragment>
 
             );
@@ -104,13 +101,6 @@ class NavBar extends Component {
 
                         </Toolbar>
                     </AppBar>
-
-                    <Drawer width={DrawerWidth} open={this.state.comeout} onClose={this.toggleDrawer(false)}>
-
-
-                        {list}
-                    </Drawer>
-
                 </Fragment>
 
             );

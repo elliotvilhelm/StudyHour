@@ -79,7 +79,7 @@ class ProfilePage extends Component {
                                     Favorite Locations
                                 </Button>
                             </div>
-                            <div className="edit button">
+                            <div className="edit button" style={{padding: "5%"}}>
                                 <Button onClick={this.handleEditProfile}
                                         color="white">
                                     Edit Profile
