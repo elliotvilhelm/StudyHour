@@ -94,8 +94,8 @@ class AddLocation extends Component {
         const {outlet, internet} = this.state;
         return (
             <div>
-                <NavBar/>
                 <Paper className='wallpaper'>
+                    <NavBar/>
                     <Paper style={{padding: "2%", width:"50%", margin:"auto", paddingLeft: "5%", paddingRight: "5%", marginTop: "5%"}}>
                         <div className='addLocation-div'>
                             <Typography variant='display1'>Add Location</Typography>
