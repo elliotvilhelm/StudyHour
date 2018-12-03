@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import { URLProvider } from 'react-url';
 import '../styles/style.css'
 import NavBar from './HeaderComponent/NavBar'
-import {Paper} from '@material-ui/core'
+import {Button, Paper} from '@material-ui/core'
 import { connect } from "react-redux";
 import Typography from "@material-ui/core/Typography";
 import axios from "axios";
+import * as favorites_action from "../actions/favorites_action";
 
 
 class ProfilePage extends Component {
@@ -16,7 +17,9 @@ class ProfilePage extends Component {
             city: '',
             bio: '',
             numComments: '',
+            favorites: []
         }
+        this.handleFavorite = this.handleFavorite.bind(this);
     }
     componentDidMount (){
         axios({
@@ -35,7 +38,7 @@ class ProfilePage extends Component {
         });
         axios({
             method: 'post',
-            url: `/api/commentCounts`,
+            url: `/api/Profile/commentCounts`,
             data: {id: this.props.match.params.id},
             config: { headers: {'Content-Type': 'application/json' }}
         }).then(response => {
@@ -45,6 +48,10 @@ class ProfilePage extends Component {
         }).catch(function (response) {
             console.log("Error",response);
         });
+    }
+
+    handleFavorite() {
+        this.props.dispatch(favorites_action.linkButton(this.props.match.params.id));
     }
 
     render() {
@@ -57,6 +64,14 @@ class ProfilePage extends Component {
                         <Typography variant="headline" style={{padding: "5%"}}>City: {this.state.city}</Typography>
                         <Typography variant="headline" style={{padding: "5%"}}>About Me: {this.state.bio}</Typography>
                         <Typography variant="headline" style={{padding: "5%"}}>Karma: {Math.round(Math.PI * (parseInt(this.state.numComments) + 1) * 100)/100}</Typography>
+                        <div>
+                            <Button variant="contained"
+                                    // className={classes.button}
+                                    onClick={this.handleFavorite}
+                                    color="white">
+                                Favorite Locations
+                            </Button>
+                        </div>
                     </Paper>
                 </Paper>
             </div>

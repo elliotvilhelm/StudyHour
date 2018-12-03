@@ -14,7 +14,11 @@ import LocationAvgRating from "./LocationAvgRating";
 class LocationTable extends Component {
     constructor(props) {
         super(props);
-        this.state = {locations: [], table: []};
+        this.state = {
+            locations: [],
+            table: [],
+            favorite: false,
+        };
         this.handleAddLocation = this.handleAddLocation.bind(this);
     }
 
@@ -28,6 +32,7 @@ class LocationTable extends Component {
             config: { headers: {'Content-Type': 'multipart/form-data' }}
         }).then(response => {
             this.setState({locations: this.props.location.state.list});
+            this.setState({favorite: this.props.location.state.favorite});
             let table = [];
             table = this.state.locations.map(location =>
                 <div className="location-card">
@@ -58,21 +63,43 @@ class LocationTable extends Component {
     }
 
     render() {
-        return (
-            <Paper className='wallpaper-locationTable'>
-                <NavBar />
-                <Paper style={{padding: "2%", width:"80%", margin:"auto", marginTop: "5%"}}>
-                    <div className="addLocation-button">
-                        <Button onClick={this.handleAddLocation} variant="contained" color="white">
-                            Add Location
-                        </Button>
-                    </div>
-                    <div className='div-card-hold'>
-                        {this.state.table}
-                    </div>
+        let locationTable;
+        if (this.state.favorite) {
+            locationTable = (
+                <Paper className='wallpaper-locationTable'>
+                    <NavBar />
+                    <Paper style={{padding: "2%", width:"80%", margin:"auto", marginTop: "5%"}}>
+                        <div className='div-card-hold'>
+                            {this.state.table}
+                        </div>
+                    </Paper>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
                 </Paper>
-            </Paper>
-        )
+            );
+        }
+        else {
+            locationTable = (
+                <Paper className='wallpaper-locationTable'>
+                    <NavBar />
+                    <Paper style={{padding: "2%", width:"80%", margin:"auto", marginTop: "5%"}}>
+                        <div className="addLocation-button">
+                            <Button onClick={this.handleAddLocation} variant="contained" color="white">
+                                Add Location
+                            </Button>
+                        </div>
+                        <div className='div-card-hold'>
+                            {this.state.table}
+                        </div>
+                    </Paper>
+                </Paper>
+            );
+        }
+        return locationTable;
     }
 }
 

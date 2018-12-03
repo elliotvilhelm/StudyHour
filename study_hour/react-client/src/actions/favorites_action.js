@@ -2,18 +2,12 @@ import history from "../history";
 import axios from "axios";
 
 
-export function search(location) {
-    return (dispatch) => {
-        history.push('/Location/' + location.id);
-    }
-}
-
-export function listResult(place) {
+export function linkButton(id) {
     return (dispatch) => {
         axios({
             method: 'post',
-            url: '/api/ListResult',
-            data: {place: place},
+            url: '/api/Profile/favorites',
+            data: {id: id},
             config: {headers: {'Content-Type': 'multipart/form-data'}}
         })
             .then(function (response) {
@@ -21,8 +15,8 @@ export function listResult(place) {
                 history.push({
                     pathname: '/Locations',
                     state: {
-                        list: response.data.dbrexsponse,
-                        favorite: false
+                        list: response.data.dbresponse,
+                        favorite: true
                     }
                 })
             })
