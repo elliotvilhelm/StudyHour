@@ -6,6 +6,8 @@ import { Avatar, Paper, Typography, Grid, Button } from '@material-ui/core'
 import default_profile from '../../images/profile_pic.png';
 import home from "../../images/home.svg";
 import {Link} from "react-router-dom";
+import {deletecomment} from "../actions/deletecomment_action";
+import { connect } from  "react-redux";
 
 
 const commentStyle = {
@@ -19,38 +21,90 @@ const commentStyle = {
 class Comment extends Component {
     constructor(props) {
         super(props);
+        this.handleDelete=this.handleDelete.bind(this);
+        this.handleEdit=this.handleEdit.bind(this);
+    }
+
+    handleEdit(event){
+         //this.EditOnclick();
+    }
+
+    handleDelete(event){
+        this.props.dispatch(deletecomment(this.props.comment_id));
+        this.props.on_delete();
     }
 
     render() {
-        return (
-            <Paper style={commentStyle}>
-                <Grid container spacing={24}>
-                    <Grid item>
-                        <Link to={`/Home/ProfilePage/${this.props.user_id}`}>
-                            <Avatar style={{ backgroundColor: "grey", borderRadius: 0 }}>
-                                <img className="img-avatar" src={default_profile}/>
-                            </Avatar>
-                        </Link>
+        console.log("user_id: ",this.props.user_id);
+        if(this.props.user_id.toString() === localStorage.getItem('user_id')) {
+            return (
+                <Paper style={commentStyle}>
+                    <Grid container spacing={24}>
+                        <Grid item>
+                            <Link to={`/Home/ProfilePage/${this.props.user_id}`}>
+                                <Avatar style={{backgroundColor: "grey", borderRadius: 0}}>
+                                    <img className="img-avatar" src={default_profile}/>
+                                </Avatar>
+                            </Link>
+                        </Grid>
+                        <Grid item>
+                            <Typography variant="subheading">{this.props.user_name}</Typography>
+                        </Grid>
+                        <Grid item>
+                            <Typography color="inherit">{this.props.text}</Typography>
+                        </Grid>
+                        <Grid item lg style={{textAlign: 'right'}}>
+                            <Button onClick={this.handleEdit}>Edit</Button>
+                            <Button onClick={this.handleDelete}>Delete</Button>
+                            <StarRatingComponent
+                                name="rate star"
+                                editing={false}
+                                starCount={5}
+                                value={this.props.rating}
+                            />
+                        </Grid>
                     </Grid>
-                    <Grid item>
-                        <Typography variant="subheading">{this.props.user_name}</Typography>
+                </Paper>
+            )
+        }
+        else{
+       return (
+                <Paper style={commentStyle}>
+                    <Grid container spacing={24}>
+                        <Grid item>
+                            <Link to={`/Home/ProfilePage/${this.props.user_id}`}>
+                                <Avatar style={{backgroundColor: "grey", borderRadius: 0}}>
+                                    <img className="img-avatar" src={default_profile}/>
+                                </Avatar>
+                            </Link>
+                        </Grid>
+                        <Grid item>
+                            <Typography variant="subheading">{this.props.user_name}</Typography>
+                        </Grid>
+                        <Grid item>
+                            <Typography color="inherit">{this.props.text}</Typography>
+                        </Grid>
+                        <Grid item lg style={{textAlign: 'right'}}>
+                            <StarRatingComponent
+                                name="rate star"
+                                editing={false}
+                                starCount={5}
+                                value={this.props.rating}
+                            />
+                        </Grid>
                     </Grid>
-                    <Grid item>
-                        <Typography color="inherit">{this.props.text}</Typography>
-                    </Grid>
-                    <Grid item lg style={{textAlign: 'right'}}>
-                        <StarRatingComponent
-                            name="rate star"
-                            editing={false}
-                            starCount={5}
-                            value={this.props.rating}
-                        />
-                        <Button>Edit</Button>
-                        <Button>Delete</Button>
-                    </Grid>
-                </Grid>
-            </Paper>
-        )
+                </Paper>
+            )
+
+
+
+        }
     }
 }
-export default Comment;
+function mapStateToProps(state) {
+    return {
+        authenticated: state
+    }
+}
+
+export default connect(mapStateToProps)(Comment);

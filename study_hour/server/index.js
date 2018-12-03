@@ -29,7 +29,7 @@ app.get('/api/locate/:lat/:lng', function(req, res){
     const lng = parseFloat(req.params.lng);
     const lat = parseFloat(req.params.lat);
 
-    if(lng == NaN || lat == NaN) {
+    if(lng === NaN || lat === NaN) {
         return;
     }
     const range_lng = 0.1;
@@ -132,12 +132,24 @@ app.post('/api/AddCommentModal', function (req, res, next) {
     });
 });
 
+
+app.post('/api/delete_comment', function (req, res, next) {
+    pgClient.query('delete from comments where id = $1',[req.body.comment_id],function(err, result) {
+        if (err) {
+            return next(err)
+        }
+        res.send({dbresponse: result.rows});
+    });
+});
+
+
+
+
 app.post('/api/AddLocation', function (req, res, next) {
     pgClient.query('INSERT INTO locations(name, address, outlet, internet, open_time, close_time, noise_level) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id',[req.body.name, req.body.address, req.body.outlet, req.body.internet, req.body.open_time, req.body.close_time, req.body.noise_level],function(err, result) {
         if (err) {
             return next(err)
         }
-        console.log(result.rows[0]);
         res.send({success: true, location_id: result.rows[0].id});
     });
 });
@@ -334,10 +346,10 @@ app.post('/api/upload/profile_image', function (req, res, next) {
         if (err) {
             return next(err)
         }
-        console.log("res '/api/upload/profile_image' ", result);
         res.send({success: true})
     });
 });
+
 
 
 app.get('/*', (req, res) => {

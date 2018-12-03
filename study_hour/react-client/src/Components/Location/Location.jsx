@@ -55,7 +55,7 @@ export default class Location extends Component {
                 config: { headers: {'Content-Type': 'multipart/form-data' }}
             }).then(response => {
                 response = response.data.dbresponse[0];
-                if(response.count!=0) {
+                if(response.count !== 0) {
                     self.setState({location_liked: true});
                 }
             })
@@ -135,7 +135,6 @@ export default class Location extends Component {
     }
 
     render() {
-
         return (
             <Paper className='wallpaper-books'>
                 <NavBar/>
