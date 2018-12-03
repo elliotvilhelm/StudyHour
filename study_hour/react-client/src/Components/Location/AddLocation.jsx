@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Paper} from '@material-ui/core/';
-import {navBar} from './HeaderComponent/NavBar.jsx'
-import '../styles/style.css'
+import {navBar} from '../HeaderComponent/NavBar.jsx'
+import '../../styles/style.css'
 import {withStyles} from '@material-ui/core/styles';
 import {TextField} from '@material-ui/core/';
 import Button from "@material-ui/core/Button/Button";
@@ -10,10 +10,10 @@ import Checkbox from "@material-ui/core/Checkbox/Checkbox";
 import {withRouter} from "react-router";
 import connect from "react-redux/es/connect/connect";
 import Typography from "@material-ui/core/Typography/Typography";
-import NavBar from "./HeaderComponent/NavBar";
+import NavBar from "./../HeaderComponent/NavBar";
 import Grid from "@material-ui/core/Grid/Grid";
-import * as addlocation_actions from "../actions/addlocation_action";
-import FileUpload from './FileUpload'
+import * as addlocation_actions from "../../actions/addlocation_action";
+import FileUpload from './../FileUpload'
 
 
 const styles = theme => ({

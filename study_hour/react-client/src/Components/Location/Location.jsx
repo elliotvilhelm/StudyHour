@@ -8,13 +8,14 @@ import {
     Checkbox,
     Typography,
 } from "@material-ui/core";
-import geisel from '../images/geisel.jpg';
+import geisel from '../../images/geisel.jpg';
 import axios from "axios/index";
-import CommentTable from "./CommentTable";
-import NavBar from './HeaderComponent/NavBar';
-import AddCommentModal from "./AddCommentModal";
+import CommentTable from "./../Comments/CommentTable";
+import NavBar from './../HeaderComponent/NavBar';
+import AddCommentModal from '../Comments/AddCommentModal';
 import Button from "@material-ui/core/Button/Button";
-import SimpleSlider from "./Slider";
+import SimpleSlider from "./../Slider";
+import FileUpload from "./../FileUpload";
 
 
 
@@ -23,6 +24,8 @@ export default class Location extends Component {
         super(props);
         this.state = {location: {}, location_liked: false, images: []};
         this.handleSubmit=this.handleSubmit.bind(this);
+        this.imageUpload = this.imageUpload.bind(this);
+        this.upload_ref = React.createRef();
     }
     componentDidMount() {
         let id = this.props.match.params.id;
@@ -127,6 +130,10 @@ export default class Location extends Component {
         this.favoriteOnClick();
     }
 
+    imageUpload() {
+        this.upload_ref.current.fileUpload(this.props.match.params.id)
+    }
+
     render() {
 
         return (
@@ -150,14 +157,24 @@ export default class Location extends Component {
                             >
                                 <Typography variant="display4" style={{fontWeight: 500}}>{this.state.location.name}</Typography>
                                 <Grid item sm>
-                                    <SimpleSlider images={this.state.images}/>
-                                    <br/>
-                                    <Button id="submit-button"
-                                            variant="contained"
-                                            className={this.props.button}
-                                            onClick={this.handleSubmit}>
+                                    <div className="div-slider">
+                                        <SimpleSlider images={this.state.images}/>
+                                    </div>
+                                    <div style={{height: '8px'}}></div>
+                                    <Button
+                                        className={this.props.button}
+                                        onClick={this.handleSubmit}>
                                         {this.state.location_liked ? '❤️ Like ❤️️' : '🖤 Like 🖤'}
                                     </Button>
+                                    <FileUpload ref={this.upload_ref}/>
+                                    <div style={{height: '8px'}}></div>
+                                    <Paper>
+                                        <Button id="submit-button"
+                                                onClick={this.imageUpload}>
+                                            Upload Location Image
+                                        </Button>
+                                    </Paper>
+                                    <div style={{height: '8px'}}></div>
                                 </Grid>
                             </Grid>
                             <Paper style={{width: '50%', padding: '20px'}}>
@@ -220,6 +237,8 @@ export default class Location extends Component {
                                   alignItems="center"
                                   justify="center"
                             >
+                                <div style={{height: '8px'}}></div>
+                                <div style={{height: '8px'}}></div>
                                 <CommentTable location_id={this.props.match.params.id}/>
                             </Grid>
                         </Grid>

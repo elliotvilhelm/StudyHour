@@ -143,6 +143,10 @@ table {
 .map-content h1 {
     font-size: 1.5rem;
 }
+.div-slider {
+    width: 90%;
+    background-color: pink;
+}
 a {
     text-decoration: none;
 }

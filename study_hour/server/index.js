@@ -142,7 +142,7 @@ app.post('/api/AddLocation', function (req, res, next) {
     });
 });
 
-app.post('/api/Locations', function (req, res, next) {
+app.post('/api/Location', function (req, res, next) {
     pgClient.query('SELECT * FROM locations', function (err, result) {
         if (err) {
             return next(err)

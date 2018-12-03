@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
 import { Router, Route, Switch} from 'react-router-dom';
 import HomePage from './HomePage';
-import Login from './Login';
-import Signup from './Signup';
-import AddLocation from './AddLocation';
-import LocationTable from './LocationTable';
-import Location from './Location';
-import ValidateUser from './ValidateUser';
-import SecurityCheck from './SecurityCheck';
-import ResetPassword from "./ResetPassword";
+import Login from './User/Login';
+import Signup from './User/Signup';
+import AddLocation from './Location/AddLocation';
+import LocationTable from './Location/LocationTable';
+import Location from './Location/Location';
+import ValidateUser from './User/ValidateUser';
+import SecurityCheck from './User/SecurityCheck';
+import ResetPassword from "./User/ResetPassword";
 import '../styles/style.css'
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
 import history from '../history';
 import RequireAuth from './RequireAuth';
 import NoAuth from './NoAuth';
 import book from '../images/book.svg'
-import ProfilePage from "./ProfilePage";
-import EditProfilePage from "./EditProfilePage";
+import ProfilePage from "./User/ProfilePage";
+import EditProfilePage from "./User/EditProfilePage";
 
 
 const dark_theme = createMuiTheme({

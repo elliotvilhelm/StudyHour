@@ -1,11 +1,11 @@
 import React, {Component, Fragment} from 'react';
 import {Paper} from '@material-ui/core';
-import NavBar from "./HeaderComponent/NavBar";
-import '../styles/style.css'
+import NavBar from "../HeaderComponent/NavBar";
+import '../../styles/style.css'
 import { withStyles } from '@material-ui/core/styles';
 import {TextField, Grid, Typography} from '@material-ui/core';
 import {Button} from "@material-ui/core";
-import * as resetPassword_actions from "../actions/resetPassword_action";
+import * as resetPassword_actions from "../../actions/resetPassword_action";
 import { connect } from  "react-redux";
 import { withRouter } from 'react-router-dom';
 

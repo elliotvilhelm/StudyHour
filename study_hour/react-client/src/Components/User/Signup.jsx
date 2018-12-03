@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
 import {Paper} from '@material-ui/core';
-import NavBar from "./HeaderComponent/NavBar";
-import '../styles/style.css'
+import NavBar from "../HeaderComponent/NavBar";
+import '../../styles/style.css'
 import { withStyles } from '@material-ui/core/styles';
 import {TextField, Typography, Grid} from '@material-ui/core';
 import Button from "@material-ui/core/Button";
 import axios from "axios/index";
-import * as signup_actions from "../actions/signup_action";
+import * as signup_actions from "../../actions/signup_action";
 import { connect } from  "react-redux";
 import { withRouter} from 'react-router-dom';
-import history from '../history';
+import history from '../../history';
 import { bindActionCreators } from 'redux'
 
 

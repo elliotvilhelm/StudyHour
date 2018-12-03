@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import { URLProvider } from 'react-url';
-import '../styles/style.css'
+import '../../styles/style.css'
 import Comment from './Comment'
 import axios from "axios";
-import history from "../history";
+import history from "../../history";
 import Typography from "@material-ui/core/Typography/Typography";
 import AddCommentModal from "./AddCommentModal";
 

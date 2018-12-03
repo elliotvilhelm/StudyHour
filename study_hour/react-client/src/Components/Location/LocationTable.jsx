@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import { URLProvider } from 'react-url';
-import '../styles/style.css'
+import '../../styles/style.css'
 import axios from "axios";
-import NavBar from './HeaderComponent/NavBar';
-import geisel from '../images/geisel.jpg';
+import NavBar from './../HeaderComponent/NavBar';
+import geisel from '../../images/geisel.jpg';
 import {Link} from 'react-router-dom';
 import Button from "@material-ui/core/Button/Button";
-import * as addlocation_action from "../actions/addlocation_action";
+import * as addlocation_action from "../../actions/addlocation_action";
 import Typography from "@material-ui/core/Typography/Typography";
 import Paper from "@material-ui/core/Paper/Paper";
 import LocationAvgRating from "./LocationAvgRating";
@@ -28,7 +28,7 @@ class LocationTable extends Component {
     createTable() {
         axios({
             method: 'post',
-            url: '/api/Locations',
+            url: '/api/Location',
             config: { headers: {'Content-Type': 'multipart/form-data' }}
         }).then(response => {
             this.setState({locations: this.props.location.state.list});

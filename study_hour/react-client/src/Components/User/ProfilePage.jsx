@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import { URLProvider } from 'react-url';
-import '../styles/style.css'
-import NavBar from './HeaderComponent/NavBar'
+import '../../styles/style.css'
+import NavBar from './../HeaderComponent/NavBar'
 import {Button, Paper} from '@material-ui/core'
 import { connect } from "react-redux";
 import Typography from "@material-ui/core/Typography";
 import axios from "axios";
-import * as profile_action from "../actions/profilePage_action";
+import * as profile_action from "../../actions/profilePage_action";
 
 
 class ProfilePage extends Component {

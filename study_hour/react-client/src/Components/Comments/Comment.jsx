@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import { URLProvider } from 'react-url';
-import '../styles/style.css'
+import '../../styles/style.css'
 import StarRatingComponent from "react-star-rating-component";
 import { Avatar, Paper, Typography, Grid, Button } from '@material-ui/core'
-import default_profile from '../images/profile_pic.png';
-import home from "../images/home.svg";
+import default_profile from '../../images/profile_pic.png';
+import home from "../../images/home.svg";
 import {Link} from "react-router-dom";
 
 
