@@ -4,10 +4,8 @@ import '../styles/style.css'
 import Comment from './Comment'
 import axios from "axios";
 import history from "../history";
-import * as auth_actions from "../actions/auth";
 import Typography from "@material-ui/core/Typography/Typography";
 import AddCommentModal from "./AddCommentModal";
-
 
 
 class CommentTable extends Component {
@@ -48,14 +46,11 @@ class CommentTable extends Component {
             .catch(function (response) {
                 console.log("Error",response);
             });
-
-
-
-
     }
 
     render() {
         return (
+
             <div className="comments-table-div">
                 <table className="table-comments">
                     <th style={{float: 'left'}}>
@@ -64,7 +59,7 @@ class CommentTable extends Component {
                         </Typography>
                     </th>
                     <th style={{float: 'right'}}>
-                        <AddCommentModal/>
+                        <AddCommentModal location_id={this.props.location_id}/>
                     </th>
                     {this.state.table}
                 </table>

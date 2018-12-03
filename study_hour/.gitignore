@@ -6,5 +6,6 @@ build/
 bundle.js
 # Dependency directories
 node_modules/
+secrets/
 
 .DS_Store
