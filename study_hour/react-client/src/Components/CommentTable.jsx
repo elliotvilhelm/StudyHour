@@ -4,10 +4,8 @@ import '../styles/style.css'
 import Comment from './Comment'
 import axios from "axios";
 import history from "../history";
-import * as auth_actions from "../actions/auth";
 import Typography from "@material-ui/core/Typography/Typography";
 import AddCommentModal from "./AddCommentModal";
-
 
 
 class CommentTable extends Component {
@@ -37,7 +35,8 @@ class CommentTable extends Component {
 
             let table = this.state.comments.map(comment =>
                 <tr style={{width: '100%'}}>
-                    <Comment user_name={comment.user_name}
+                    <Comment user_id={comment.user_id}
+                             user_name={comment.fullname}
                              rating = {comment.rating}
                              text={comment.text}/>
                 </tr>
@@ -48,14 +47,11 @@ class CommentTable extends Component {
             .catch(function (response) {
                 console.log("Error",response);
             });
-
-
-
-
     }
 
     render() {
         return (
+
             <div className="comments-table-div">
                 <table className="table-comments">
                     <th style={{float: 'left'}}>
@@ -64,7 +60,7 @@ class CommentTable extends Component {
                         </Typography>
                     </th>
                     <th style={{float: 'right'}}>
-                        <AddCommentModal/>
+                        <AddCommentModal createTable={this.createTable} location_id={this.props.location_id}/>
                     </th>
                     {this.state.table}
                 </table>

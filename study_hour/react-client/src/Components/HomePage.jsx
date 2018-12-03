@@ -5,13 +5,13 @@ import NavBar from './HeaderComponent/NavBar'
 import {Paper} from '@material-ui/core'
 import Map from './Map'
 import { connect } from "react-redux";
-import FileUpload from './FileUpload';
 import BackgroundMusic from './Youtube';
 import Typography from "@material-ui/core/Typography";
 import axios from "axios";
 import ImageLoader from 'react-image-file';
 import TextField from "@material-ui/core/TextField";
-
+import SearchBar from './SearchBar';
+import Card from "@material-ui/core/Card/Card";
 
 
 class HomePage extends Component {
@@ -28,7 +28,6 @@ class HomePage extends Component {
         }).then(response => {
             self.setState({url: response.data.url})
 
-
         }).catch(function (response) {
             console.log("Error",response);
         });
@@ -44,20 +43,14 @@ class HomePage extends Component {
         return (
             <Paper className='wallpaper'>
                 <NavBar/>
-                    <div>
+                <Typography variant="headline" style={{fontSize: 72, fontWeight: 500}}>Study Hour</Typography>
+                <Typography variant="display2" style={{fontSize: 30}}>Find your next Study Location</Typography>
+                <div className='div-home'>
                     <div className='div-search'>
-                        <form noValidate autoComplete="off">
-                            <TextField
-                                id="standard-name"
-                                placeholder="Search Study Locations"
-                                style={{width: '40%', margin: 'auto'}}
-                                value={this.state.name}
-                                margin="normal"
-                            />
-                        </form>
+                        <SearchBar/>
                     </div>
                     <div className="div-map">
-                        <Map width='600' height='600' />
+                        <Map width='500' height='500' />
                     </div>
                 </div>
             </Paper>

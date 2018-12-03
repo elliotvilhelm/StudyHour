@@ -6,15 +6,11 @@ import { withStyles } from '@material-ui/core/styles';
 import {TextField, Grid, Typography} from '@material-ui/core';
 import {Button} from "@material-ui/core";
 import * as auth_actions from "../actions/auth";
+import * as resetPassword_actions from "../actions/resetPassword_action";
 import { connect } from  "react-redux";
 import { withRouter } from 'react-router-dom';
 
 const styles = theme => ({
-    textField: {
-        marginLeft: '40%',
-        width: 200,
-        background: 'blue'
-    },
     textField: {
         width: "100%",
         margin: 'auto',
@@ -38,9 +34,10 @@ class Login extends Component {
         };
         this.handleChangeUserName = this.handleChangeUserName.bind(this);
         this.handleChangePassword = this.handleChangePassword.bind(this);
+        this.handleForgotPassword = this.handleForgotPassword.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    
+
     handleChangeUserName(event) {
         this.setState({username: event.target.value});
     }
@@ -48,66 +45,72 @@ class Login extends Component {
     handleChangePassword(event) {
         this.setState({password: event.target.value});
     }
-    
-    handleSubmit(event) {
+
+    handleForgotPassword() {
+        this.props.dispatch(resetPassword_actions.resetPassword());
+    }
+
+    handleSubmit() {
         this.props.dispatch(auth_actions.authenticate(this.state.username, this.state.password));
     }
 
     render () {
         const { classes } = this.props;
         return (
-            
-            <Fragment>
-                <NavBar/>
-                <Paper className='wallpaper'>
-                    
 
+            <Fragment>
+                <Paper className='wallpaper'>
+                    <NavBar/>
                     <Paper style={{padding: "2%", width:"50%", margin:"auto", paddingLeft: "5%", paddingRight: "5%", marginTop: "5%"}}>
                         <Typography variant="headline" style={{marginBottom: "5%"}}>Login To StudyHour</Typography>
-                        
-
                         <Grid container>
-                        <Grid item xs="12" className={classes.item}>
-                        <TextField
-                            id="standard-email"
-                            label="Email"
-                            type="text"
-                            placeholder="User Name"
-                            onChange={this.handleChangeUserName}
-                            autoComplete='off'
-                            className={classes.textField}
-                            value={this.state.username}
-                            required
-                        />
+                            <Grid item xs="12" className={classes.item}>
+                                <TextField
+                                    id="standard-email"
+                                    label="User Name"
+                                    placeholder="User Name"
+                                    onChange={this.handleChangeUserName}
+                                    autoComplete='off'
+                                    type="test"
+                                    className={classes.textField}
+                                    value={this.state.username}
+                                    required
+                                    style={{paddingBottom: "10px"}}
+                                />
+                            </Grid>
+                            <Grid item xs="12" className={classes.item}>
+                                <TextField
+                                    id="standard-password-input"
+                                    label="Password"
+                                    placeholder="Password"
+                                    autoComplete='off'
+                                    type="password"
+                                    onChange={this.handleChangePassword}
+                                    className={classes.textField}
+                                    value={this.state.password}
+                                    required
+                                    style={{paddingBottom: "10px"}}
+                                />
+                            </Grid>
+                            <Grid item xs="12" style={{textAlign: "center", marginTop: 10}} className={classes.item}>
+                                <Button className={classes.button}
+                                        onClick={this.handleForgotPassword}
+                                        color="white"
+                                >
+                                    Forgot password?
+                                </Button>
+                            </Grid>
+                            <Grid item xs="12" style={{textAlign: "center", marginTop: 10}} className={classes.item}>
+                                <Button variant="contained"
+                                        className={classes.button}
+                                        onClick={this.handleSubmit}
+                                        color="primary"
+                                >
+                                    Submit
+                                </Button>
+                            </Grid>
                         </Grid>
-                        <Grid item xs="12" className={classes.item}>
-                        <TextField
-                            id="standard-password-input"
-                            label="Password"
-                            type="password"
-                            placeholder="Password"
-                            autoComplete='off'
-                            onChange={this.handleChangePassword}
-                            className={classes.textField}
-                            value={this.state.password}
-                            required
-                        />
-                        </Grid>
-                        <Grid item xs="12" style={{textAlign: "center", marginTop: 10}} className={classes.item}>
-                        <Button variant="contained"
-                                className={classes.button}
-                                onClick={this.handleSubmit}
-                                color="primary"    
-                                        >
-                            Submit
-                        </Button>
-                        </Grid>
-                        </Grid>
-
                     </Paper>
-
-                    
-                    
                 </Paper>
             </Fragment>
         )
