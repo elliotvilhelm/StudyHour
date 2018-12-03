@@ -144,8 +144,11 @@ table {
     font-size: 1.5rem;
 }
 .div-slider {
-    width: 90%;
-    background-color: pink;
+    text-align: center;
+    margin: 0 auto;
+    width: 400px;
+    height: auto;
+
 }
 a {
     text-decoration: none;
@@ -341,8 +344,9 @@ table {
     padding-right: 2%
 }
 .locationImage-card {
-    width: 60%;
-    height: 80%;
+    /*width: 30%;*/
+    width: 200px;
+    height: 30%;
     display: inline-block;
     float: left;
 }
@@ -356,5 +360,6 @@ table {
 .display-avg-rating {
     padding-top: 5%;
     padding-bottom: 5%;
-    display: inline-block;
+    width: 20%;
+    display: inline;
 }

@@ -19,7 +19,7 @@ export function listResult(place) {
             .then(function (response) {
                 if (response.data.success === false) return; // dispatch alert that name is taken
                 history.push({
-                    pathname: '/Location',
+                    pathname: '/Locations',
                     state: {
                         list: response.data.dbrexsponse,
                         favorite: false

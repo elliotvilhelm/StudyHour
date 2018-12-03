@@ -166,9 +166,10 @@ export default class Location extends Component {
                                         onClick={this.handleSubmit}>
                                         {this.state.location_liked ? '❤️ Like ❤️️' : '🖤 Like 🖤'}
                                     </Button>
+                                    <div style={{height: '8px'}}></div>
                                     <FileUpload ref={this.upload_ref}/>
                                     <div style={{height: '8px'}}></div>
-                                    <Paper>
+                                    <Paper style={{width: '40%', display: 'inline-block'}}>
                                         <Button id="submit-button"
                                                 onClick={this.imageUpload}>
                                             Upload Location Image

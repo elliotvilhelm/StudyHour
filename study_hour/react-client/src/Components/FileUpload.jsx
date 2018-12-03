@@ -97,14 +97,14 @@ class FileUpload extends React.Component {
                 <form encType="multipart/form-data">
                     <input hidden id="raised-button-file" accept="image/*" type="file" name="recfile" onChange={this.onChange} multiple/>
                     <label htmlFor="raised-button-file">
-                        <Paper>
-                        <Button component="span">
-                            Select Images to Upload
-                        </Button>
+                        <Paper style={{width: '40%', display: 'inline-block'}}>
+                            <Button component="span">
+                                Select Images to Upload
+                            </Button>
                         </Paper>
                     </label>
                     <Typography variant='subheading' style={{color: "white"}}>
-                    {file_names}
+                        {file_names}
                     </Typography>
                 </form>
             </Grid>

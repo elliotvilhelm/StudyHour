@@ -13,6 +13,8 @@ function calculateAvgRate(ratingList) {
         stars += Number(ratingList[rate].rating);
         counts++;
     }
+    if (counts == 0)
+        return 0;
     return stars/counts;
 }
 
@@ -48,6 +50,7 @@ class LocationAvgRating extends Component {
                     starEmptyColor="black"
                     starDimension={'50px'}
                     rating={this.state.avgRate}
+                    // rating={4}
                     editing={false}
                 />
             </div>

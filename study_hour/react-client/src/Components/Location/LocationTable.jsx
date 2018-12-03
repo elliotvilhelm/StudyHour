@@ -38,7 +38,7 @@ class LocationTable extends Component {
                 <div className="location-card">
                     <Link to={'/Location/'+location.id}>
                         <div className="locationImage-card">
-                            <img src={geisel} height="500" width="693" vspace="10"/>
+                            <img src={geisel} width="500" vspace="10"/>
                         </div>
                     </Link>
                     <div className="locationInfo-card">
