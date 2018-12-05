@@ -1,9 +1,9 @@
-dropdb studyhour;
-createdb studyhour;
-psql -d studyhour -f 1_comments_locations_users_tables.sql;
-psql -d studyhour -f 2_profile_location_image_tables.sql;
-psql -d studyhour -f 3_favorite_tables.sql;
-psql -d studyhour -f 4_add_long_lat_to_locationtable.sql;
-psql -d studyhour -f 5_add_booleans_to_comment.sql
-psql -d studyhour -f 6_add_columns_to_users.sql
-psql -d studyhour -f ../seeds/good_seed.sql;
+dropdb studyhour -U postgres;
+createdb studyhour -U postgres;
+psql -U postgres -d studyhour -f 1_comments_locations_users_tables.sql;
+psql -U postgres -d studyhour -f 2_profile_location_image_tables.sql;
+psql -U postgres -d studyhour -f 3_favorite_tables.sql;
+psql -U postgres -d studyhour -f 4_add_long_lat_to_locationtable.sql;
+psql -U postgres -d studyhour -f 5_add_booleans_to_comment.sql
+psql -U postgres -d studyhour -f 6_add_columns_to_users.sql
+psql -U postgres -d studyhour -f ../seeds/good_seed.sql;
