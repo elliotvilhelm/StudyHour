@@ -25,3 +25,17 @@ cd StudyHour
 ./StudyHour.sh
 ```
 Live at **localhost:8080**.
+
+## 🍌🍌🍌🍌Team B🍌n🍌n🍌! 🍌🍌🍌🍌🍌
+| Names                  |
+|------------------------|
+| Mher Arabian                   |
+| Yoo Jin Chung (Rachel) |
+| Cheng Cheng (Roger)    |
+| William Vuong          |
+| Elliot Pourmand        |
+| Xiaofan Lin (Sam)      |
+| Zixuan Zhang           |
+| Adam Kabbara           |
+| Jishan Khandoker       |
+| Kenil Vora             |
