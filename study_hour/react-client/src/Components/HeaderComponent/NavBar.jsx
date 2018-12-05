@@ -50,13 +50,14 @@ class NavBar extends Component {
                 <Fragment>
                     <AppBar position="static">
                         <Toolbar>
-                            <img src={studyhour} style={{ marginRight: "70%" }} width={100} />
-                            <BackgroundMusic/>
-                            <Link to={"/Home"}>
-                                <Button color="inherit">
+                           <BackgroundMusic/>
+                            <a href={'./Home'} style={{marginRight: "70%"}}><img src={studyhour}  width={100} /></a>
+                            <Button color="inherit">
+                                <Link to={"/"}>
                                     <img src={home} width={20} />
-                                </Button>
-                            </Link>
+                                </Link>
+                            </Button>
+                         
                             <Link to={`/Home/ProfilePage/${localStorage.getItem('user_id')}`}>
                                 <Button color="inherit">
                                     <img src={profile} width={20} />

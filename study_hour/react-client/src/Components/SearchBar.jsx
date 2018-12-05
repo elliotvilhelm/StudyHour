@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import deburr from 'lodash/deburr';
 import Autosuggest from 'react-autosuggest';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
-import Paper from '@material-ui/core/Paper';
+import {Grid, Paper} from '@material-ui/core';
 import { URLProvider } from 'react-url';
 import '../styles/style.css'
 import axios from "axios";
@@ -23,6 +23,7 @@ function renderInputComponent(inputProps) {
     const { classes, inputRef = () => {}, ref, ...other } = inputProps;
 
     return (
+
         <TextField
             fullWidth
             InputProps={{
@@ -36,6 +37,7 @@ function renderInputComponent(inputProps) {
             }}
             {...other}
         />
+
     );
 }
 
@@ -176,9 +178,9 @@ class SearchBar extends Component {
         };
 
         return (
-            <div className={classes.root}>
-                <div className='div-bar'>
-                    <div className='div-search-bar'>
+            <div>
+                <Grid container style={{width: '70%', margin: 'auto', marginTop: '7%', marginBottom: '5%'}}>
+                    <Grid item sm={11}>
                         <Autosuggest
                             {...autosuggestProps}
                             inputProps={{
@@ -199,16 +201,17 @@ class SearchBar extends Component {
                                 </Paper>
                             )}
                         />
-                    </div>
-                    <div className='div-search-button'>
+                    </Grid>
+                    <Grid item sm>
+
                         <Button id="submit-button"
                                 className={classes.button}
                                 onClick={this.handleSearch}>
                             <SearchIcon/>
 
                         </Button>
-                    </div>
-                </div>
+                    </Grid>
+                </Grid>
             </div>
         )
     }
