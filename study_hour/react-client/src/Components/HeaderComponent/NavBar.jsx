@@ -6,7 +6,6 @@ import home from '../../images/home.svg';
 import logout from '../../images/logout.svg';
 import profile from '../../images/profile.svg';
 import { IconButton, AppBar, Toolbar, Button, Drawer, List, ListItemText, ListItem } from '@material-ui/core'
-import MenuIcon from '@material-ui/icons/Menu';
 import { Link } from 'react-router-dom'
 import { connect } from "react-redux";
 import * as auth_actions from "../../actions/auth";
@@ -28,7 +27,6 @@ class NavBar extends Component {
             console.log(this.state.comeout);
         };
     }
-
     render() {
         let navBar;
         if (this.props.authenticated) {
@@ -37,7 +35,6 @@ class NavBar extends Component {
                     <AppBar position="static">
                         <Toolbar>
                             <a href={'./Home'} style={{marginRight: "70%"}}><img src={studyhour}  width={100} /></a>
-                            <BackgroundMusic/>
                             <Button color="inherit" size="medium">
                                 <Link to={"/"}>
                                     <img src={home} width={30} height={40}/>
@@ -65,7 +62,7 @@ class NavBar extends Component {
                     <AppBar position="static" >
                         <Toolbar>
                             <img src={studyhour} style={{ marginRight: "75%" }} width={100} />
-                            <BackgroundMusic/>
+                            
                             <Link to={"/Login"}>
                                 <Button color="inherit" size="medium">
                                     <img src={login} width={30} height={40}/>
