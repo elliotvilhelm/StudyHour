@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Paper} from '@material-ui/core/';
-import '../styles/style.css'
+import '../../styles/style.css'
 import {withStyles} from '@material-ui/core/styles';
 import {TextField} from '@material-ui/core/';
 import Button from "@material-ui/core/Button/Button";
@@ -12,7 +12,7 @@ import Modal from "@material-ui/core/Modal/Modal";
 import StarRatingComponent from "react-star-rating-component";
 import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox/Checkbox";
-import * as addcomment_actions from "../actions/addcomment_action";
+import * as addcomment_actions from "../../actions/addcomment_action";
 
 function getModalStyle() {
     const top = 50;

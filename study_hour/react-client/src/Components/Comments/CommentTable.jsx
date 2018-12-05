@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import { URLProvider } from 'react-url';
-import '../styles/style.css'
+import '../../styles/style.css'
 import Comment from './Comment'
 import axios from "axios";
-import history from "../history";
+import history from "../../history";
 import Typography from "@material-ui/core/Typography/Typography";
 import AddCommentModal from "./AddCommentModal";
 
@@ -13,8 +13,7 @@ class CommentTable extends Component {
         super(props);
         //this.state = {comments: [{user: "elliot", text: "hey baby", rating: 2},
         //{user:"john", text: "heyyyyy", rating:2}], table: []}
-        this.state={comments:[]};
-
+        this.state={comments:[], self_comment:false};
         this.createTable = this.createTable.bind(this);
 
     }
@@ -29,19 +28,23 @@ class CommentTable extends Component {
             config: { headers: {'Content-Type': 'multipart/form-data' }}
         }).then(response => {
 
-
-            console.log("response", response.data.dbresponse);
             this.setState({comments: response.data.dbresponse});
-
+            console.log("this is comments", this.state.comments);
             let table = this.state.comments.map(comment =>
                 <tr style={{width: '100%'}}>
-                    <Comment user_id={comment.user_id}
+                    <Comment
+                             user_id={comment.user_id}
                              user_name={comment.fullname}
                              rating = {comment.rating}
-                             text={comment.text}/>
+                             text={comment.text}
+                             comment_id={comment.id}
+                             on_delete={this.createTable}
+                    />
+
                 </tr>
             );
             this.setState({table: table});
+
 
         })
             .catch(function (response) {

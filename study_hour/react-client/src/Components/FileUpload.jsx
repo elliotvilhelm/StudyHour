@@ -4,6 +4,7 @@ import Typography from "@material-ui/core/Typography/Typography";
 import Grid from "@material-ui/core/Grid/Grid";
 import { Button } from "@material-ui/core"
 import history from "../history";
+import Paper from "@material-ui/core/Paper/Paper";
 
 class FileUpload extends React.Component {
 
@@ -18,7 +19,6 @@ class FileUpload extends React.Component {
         this.setState({file: e.target.files[0]})
         this.setState({files: e.target.files});
     }
-
 
     fileUpload(location_id){
         for (let i = 0; i < this.state.files.length; i++) {
@@ -49,9 +49,8 @@ class FileUpload extends React.Component {
                 console.log("Error", response);
             });
         }
-
-
     }
+
     fileUploadProfile(user_id) {
         let file = this.state.file;
         let key;
@@ -98,12 +97,14 @@ class FileUpload extends React.Component {
                 <form encType="multipart/form-data">
                     <input hidden id="raised-button-file" accept="image/*" type="file" name="recfile" onChange={this.onChange} multiple/>
                     <label htmlFor="raised-button-file">
-                        <Button component="span">
-                            Select Images to Upload
-                        </Button>
+                        <Paper style={{width: '40%', display: 'inline-block'}}>
+                            <Button component="span">
+                                Select Images to Upload
+                            </Button>
+                        </Paper>
                     </label>
                     <Typography variant='subheading' style={{color: "white"}}>
-                    {file_names}
+                        {file_names}
                     </Typography>
                 </form>
             </Grid>

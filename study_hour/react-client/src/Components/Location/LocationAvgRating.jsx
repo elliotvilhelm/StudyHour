@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { URLProvider } from 'react-url';
-import '../styles/style.css'
+import '../../styles/style.css'
 import axios from "axios";
 import StarRatings from "react-star-ratings";
 
@@ -13,6 +13,8 @@ function calculateAvgRate(ratingList) {
         stars += Number(ratingList[rate].rating);
         counts++;
     }
+    if (counts == 0)
+        return 0;
     return stars/counts;
 }
 

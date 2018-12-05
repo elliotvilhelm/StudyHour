@@ -143,6 +143,13 @@ table {
 .map-content h1 {
     font-size: 1.5rem;
 }
+.div-slider {
+    text-align: center;
+    margin: 0 auto;
+    width: 80%;
+    height: auto;
+
+}
 a {
     text-decoration: none;
 }
@@ -259,6 +266,7 @@ table {
 }
 
 .location-image-div {
+    width: 100%;
     margin: 0 auto;
     text-align: center;
 }
@@ -279,8 +287,8 @@ table {
 }
 
 .img-big {
-    height: 1000px;
-    width: 1000px;
+    height: 600px;
+    width: 800px;
 }
 .table-open {
     float: right;
@@ -337,8 +345,9 @@ table {
     padding-right: 2%
 }
 .locationImage-card {
-    width: 60%;
-    height: 80%;
+    /*width: 30%;*/
+    width: 80%;
+    height: 30%;
     display: inline-block;
     float: left;
 }
@@ -352,5 +361,6 @@ table {
 .display-avg-rating {
     padding-top: 5%;
     padding-bottom: 5%;
-    display: inline-block;
+    width: 20%;
+    display: inline;
 }

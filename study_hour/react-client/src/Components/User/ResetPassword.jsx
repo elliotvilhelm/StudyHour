@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {Paper} from '@material-ui/core';
-import NavBar from "./HeaderComponent/NavBar";
-import '../styles/style.css'
+import NavBar from "../HeaderComponent/NavBar";
+import '../../styles/style.css'
 import { withStyles } from '@material-ui/core/styles';
 import {TextField, Typography, Grid} from '@material-ui/core';
 import Button from "@material-ui/core/Button";
 import { connect } from  "react-redux";
 import { withRouter} from 'react-router-dom';
-import * as resetPassword_actions from '../actions/resetPassword_action';
+import * as resetPassword_actions from '../../actions/resetPassword_action';
 
 const styles = theme => ({
     textField: {

@@ -3,7 +3,7 @@ import {Link, withRouter} from 'react-router-dom';
 import connect from "react-redux/es/connect/connect";
 import {withStyles} from "@material-ui/core/styles";
 import StarRatingComponent from 'react-star-rating-component';
-import CommentTable from './CommentTable'
+import CommentTable from './Comments/CommentTable'
 import SideBar from "./SideBar";
 import {Paper} from "@material-ui/core";
 

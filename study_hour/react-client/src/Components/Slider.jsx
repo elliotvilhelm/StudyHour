@@ -14,7 +14,7 @@ class SimpleSlider extends React.Component {
             <div className='location-image-div'>{image}</div>
         );
         return (
-            <Slider {...settings}>
+            <Slider {...settings} style={{display: 'inline-block'}}>
                 {images}
             </Slider>
         );
