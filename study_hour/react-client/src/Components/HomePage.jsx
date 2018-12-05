@@ -38,7 +38,6 @@ class HomePage extends Component {
             var imgl = <div></div>;
         return (
             <Paper className='wallpaper'>
-                <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
                 <NavBar/>
                 <div style={{margin: '3%'}}>
                 <Typography variant="headline" style={{fontSize: 72, fontWeight: 500}}>Study Hour</Typography>
