@@ -1,0 +1,13 @@
+.study_hour {
+    padding: 40px 80px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 40px;
+    color: white;
+    font-family: sans-serif;
+    animation: scale 4s linear infinite alternate;
+}
+
+@keyframes scale {
+    to { transform: scale(2) }
+}

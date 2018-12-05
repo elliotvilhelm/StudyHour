@@ -19,6 +19,7 @@
   "dependencies": {
     "@material-ui/core": "^3.4.0",
     "@material-ui/icons": "^3.0.1",
+    "animejs": "^2.2.0",
     "autosuggest-highlight": "^3.1.1",
     "aws-amplify": "^1.1.7",
     "aws-sdk": "^2.358.0",

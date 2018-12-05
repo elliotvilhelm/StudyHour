@@ -5,13 +5,9 @@ import NavBar from './HeaderComponent/NavBar'
 import {Paper} from '@material-ui/core'
 import Map from './Map'
 import { connect } from "react-redux";
-import BackgroundMusic from './Youtube';
 import Typography from "@material-ui/core/Typography";
 import axios from "axios";
-import ImageLoader from 'react-image-file';
-import TextField from "@material-ui/core/TextField";
 import SearchBar from './SearchBar';
-import Card from "@material-ui/core/Card/Card";
 
 
 class HomePage extends Component {
@@ -42,16 +38,14 @@ class HomePage extends Component {
             var imgl = <div></div>;
         return (
             <Paper className='wallpaper'>
+                <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
                 <NavBar/>
+                <div style={{margin: '3%'}}>
                 <Typography variant="headline" style={{fontSize: 72, fontWeight: 500}}>Study Hour</Typography>
-                <Typography variant="display2" style={{fontSize: 30}}>Find your next Study Location</Typography>
+                <Typography variant="display2" style={{fontSize: 30, fontWeight: 200}}>Find your next Study Location</Typography>
+                </div>
                 <div className='div-home'>
-                    <div className='div-search'>
                         <SearchBar/>
-                    </div>
-                    <div className="div-map">
-                        <Map width='500' height='500' />
-                    </div>
                 </div>
             </Paper>
         )

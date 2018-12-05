@@ -203,7 +203,7 @@ class Signup extends Component {
                                         className={classes.textField}
                                         type="test"
                                         placeholder="Enter bio"
-                                        onChange={this.handleChangeCity}
+                                        onChange={this.handleChangeBio}
                                         autocomplete='off'
                                         required
                                         style={{padding: "10px"}}
