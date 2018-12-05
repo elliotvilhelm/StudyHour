@@ -65,7 +65,7 @@ class ProfilePage extends Component {
         axios({
             method: 'get',
             url: '/api/profile_image/',
-            params: {user_id: this.props.match.params.id},
+            params: {user_id:  this.props.match.params.id},
             data: null,
             config: {headers: {'Content-Type': 'application/json'}},
         }).then(response => {

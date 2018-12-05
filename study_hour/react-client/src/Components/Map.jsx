@@ -201,12 +201,13 @@ class Map extends Component {
   render() {
 
     const map = (
-      <div>
+      <div >
         <div
           id="map"
           style={{
-            width: parseInt(this.props.width),
-            height: parseInt(this.props.height),
+            position: 'fixed',
+            width: this.props.width,
+            height: '85vh',
             margin: 'auto',
             marginTop: '1%',
             marginBottom: '1%',
@@ -220,7 +221,7 @@ class Map extends Component {
           style={{
             padding: 5,
             margin: 5,
-            fontSize: 15,
+            fontSize: 10,
             borderRadius: 5,
             backgroundColor: '#e9ffff',
             border: '1px dash black'
