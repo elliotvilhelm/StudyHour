@@ -11,6 +11,7 @@ import Footer from "../FooterComponent/Footer";
 import Grid from "@material-ui/core/Grid/Grid";
 import Avatar from "@material-ui/core/Avatar/Avatar";
 import FileUpload from "../FileUpload";
+import Footer from "../FooterComponent/Footer";
 import profileImage from "../../images/default.jpg"
 
 
@@ -153,6 +154,7 @@ class ProfilePage extends Component {
                                 </Grid>
                             </Grid>
                             {edit_profile}
+
                         </Grid>
                     </Paper>
                     <div style={{height: '300px'}}></div>

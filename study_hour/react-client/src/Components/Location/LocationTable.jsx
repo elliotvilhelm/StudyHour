@@ -11,6 +11,7 @@ import {Paper, Grid} from "@material-ui/core";
 import LocationAvgRating from "./LocationAvgRating";
 import Footer from "../FooterComponent/Footer";
 import Map from '../Map'
+
 function location_card(location) {
     const location_img = <img src={location.image_url} style={{borderRadius: '2%'}} width='500' height='350'/>;
     const no_img = <Typography variant='headline' color='error'>No Image Found</Typography>;
@@ -110,7 +111,7 @@ class LocationTable extends Component {
                             <Button  style={{float: 'left'}} onClick={this.handleAddLocation} variant="contained" color="white">
                                 Add Location
                             </Button>
-                    
+      
                     );
 
         locationTable = (
@@ -132,6 +133,7 @@ class LocationTable extends Component {
                     </div>
                     </Grid>
                     </Grid>
+
                     </Paper>                    
                     <Footer/>
                 </Paper>
