@@ -3,8 +3,7 @@
 http://34.210.224.115:8080
 
 ## Build Status
-[![Build
-Status](https://travis-ci.org/ElliotVilhelm/StudyHour.svg?branch=master)](https://travis-ci.org/ElliotVilhelm/StudyHour)
+[![Build Status](https://travis-ci.org/ElliotVilhelm/StudyHour.svg?branch=master)](https://travis-ci.org/ElliotVilhelm/StudyHour)
 
 ## What is this?
 StudyHour is a web application built to help you find the ideal study location. Our app is tailored to your study needs. Do you find yourself
@@ -27,15 +26,15 @@ cd StudyHour
 Live at **localhost:8080**.
 
 ## 🍌🍌🍌🍌Team B🍌n🍌n🍌! 🍌🍌🍌🍌🍌
-| Names                  |
-|------------------------|
-| Mher Arabian                   |
-| Yoo Jin Chung (Rachel) |
-| Cheng Cheng (Roger)    |
-| William Vuong          |
-| Elliot Pourmand        |
-| Xiaofan Lin (Sam)      |
-| Zixuan Zhang           |
-| Adam Kabbara           |
-| Jishan Khandoker       |
-| Kenil Vora             |
+| Team Member              |          info          |
+|--------------------------|------------------------|
+| # Elliot Pourmand        |                        |
+| # Yoo Jin Chung (Rachel) |                        |
+| # Cheng Cheng (Roger)    |                        |
+| # Xiaofan Lin (Sam)      |                        |
+| # Zixuan Zhang           |                        |
+| # Mher Arabian           |                        |
+| # William Vuong          |                        |
+| # Adam Kabbara           |                        |
+| # Jishan Khandoker       |                        |
+| # Kenil Vora             |                        |
