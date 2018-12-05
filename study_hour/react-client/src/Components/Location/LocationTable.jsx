@@ -9,6 +9,7 @@ import * as addlocation_action from "../../actions/addlocation_action";
 import Typography from "@material-ui/core/Typography/Typography";
 import {Paper, Grid} from "@material-ui/core";
 import LocationAvgRating from "./LocationAvgRating";
+import Footer from "../FooterComponent/Footer";
 import Map from '../Map'
 function location_card(location) {
     const location_img = <img src={location.image_url} style={{borderRadius: '2%'}} width='500' height='350'/>;
@@ -132,6 +133,7 @@ class LocationTable extends Component {
                     </Grid>
                     </Grid>
                     </Paper>                    
+                    <Footer/>
                 </Paper>
             );
         

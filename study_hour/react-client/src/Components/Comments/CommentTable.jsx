@@ -6,6 +6,7 @@ import axios from "axios";
 import history from "../../history";
 import Typography from "@material-ui/core/Typography/Typography";
 import AddCommentModal from "./AddCommentModal";
+import Footer from "../FooterComponent/Footer";
 
 
 class CommentTable extends Component {
@@ -67,6 +68,7 @@ class CommentTable extends Component {
                     </th>
                     {this.state.table}
                 </table>
+                <Footer/>
             </div>
         )
     }

@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import { URLProvider } from 'react-url';
-import '../styles/style.css'
-import NavBar from './HeaderComponent/NavBar'
-import {Paper} from '@material-ui/core'
-import Map from './Map'
+import '../styles/style.css';
+import NavBar from './HeaderComponent/NavBar';
+import {Paper} from '@material-ui/core';
 import { connect } from "react-redux";
 import Typography from "@material-ui/core/Typography";
 import axios from "axios";
 import SearchBar from './SearchBar';
+import Footer from './FooterComponent/Footer';
 
 
 class HomePage extends Component {
@@ -46,6 +46,7 @@ class HomePage extends Component {
                 <div className='div-home'>
                         <SearchBar/>
                 </div>
+            <Footer/>
             </Paper>
         )
     }
