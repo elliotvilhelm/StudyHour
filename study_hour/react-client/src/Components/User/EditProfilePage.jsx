@@ -85,13 +85,14 @@ class EditProfilePage extends Component {
         this.setState({bio: event.target.value});
     };
     handleSubmit() {
-            this.props.dispatch(profilePage_actions.submitProfile(
-                localStorage.getItem('user_id'),
-                this.state.fullname,
-                this.state.password,
-                this.state.city,
-                this.state.bio));
+        this.props.dispatch(profilePage_actions.submitProfile(
+            localStorage.getItem('user_id'),
+            this.state.fullname,
+            this.state.password,
+            this.state.city,
+            this.state.bio));
     }
+
 
     render () {
         const { classes } = this.props;
@@ -177,6 +178,7 @@ class EditProfilePage extends Component {
                                             color="primary">
                                         Submit
                                     </Button>
+
                                 </Grid>
                             </Grid>
                         </form>
