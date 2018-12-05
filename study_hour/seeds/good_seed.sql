@@ -167,3 +167,24 @@ insert into comments(user_id, location_id, rating, text, outlet, internet) value
 insert into comments(user_id, location_id, rating, text, outlet, internet) values ('8','3','2','smelly place, I would not recomment this place','false', 'false');
 insert into comments(user_id, location_id, rating, text, outlet, internet) values ('9','3','4','great coffee, comfy and quite','true', 'true');
 
+insert into location_images (location_id, user_id, s3code) VALUES (5, 6, 'clairemont_coffee_1.jpg');
+insert into location_images (location_id, user_id, s3code) VALUES (5, 2, 'clairemont_coffee_2.jpg');
+insert into location_images (location_id, user_id, s3code) VALUES (6, 5, 'copa_vida_1.jpg');
+insert into location_images (location_id, user_id, s3code) VALUES (6, 2, 'copa_vida_2.jpg');
+insert into location_images (location_id, user_id, s3code) VALUES (6, 7, 'copa_vida_3.jpg');
+insert into location_images (location_id, user_id, s3code) VALUES (7, 1, 'lestats_on_park_1.jpg');
+insert into location_images (location_id, user_id, s3code) VALUES (7, 3, 'lestats_on_park_2.jpg');
+insert into location_images (location_id, user_id, s3code) VALUES (7, 4, 'lestats_on_park_3.jpg');
+insert into location_images (location_id, user_id, s3code) VALUES (2, 8, 'philz_1.png');
+insert into location_images (location_id, user_id, s3code) VALUES (2, 6, 'philz_2.jpg');
+insert into location_images (location_id, user_id, s3code) VALUES (1, 2, 'starbucks_1.jpg');
+insert into location_images (location_id, user_id, s3code) VALUES (1, 5, 'starbucks_2.jpg');
+insert into location_images (location_id, user_id, s3code) VALUES (8, 2, 'the_forum_1.jpg');
+insert into location_images (location_id, user_id, s3code) VALUES (8, 7, 'the_forum_2.jpg');
+insert into location_images (location_id, user_id, s3code) VALUES (8, 1, 'the_forum_3.jpg');
+insert into location_images (location_id, user_id, s3code) VALUES (4, 3, 'this_three_is_livingroomcafe_1.jpg');
+insert into location_images (location_id, user_id, s3code) VALUES (4, 4, 'this_three_is_livingroomcafe_2.jpg');
+insert into location_images (location_id, user_id, s3code) VALUES (4, 10,'this_three_is_livingroomcafe_3.jpg');
+insert into location_images (location_id, user_id, s3code) VALUES (3, 9, 'whole_food_1.jpg');
+insert into location_images (location_id, user_id, s3code) VALUES (3, 8, 'whole_food_2.jpg');
+insert into location_images (location_id, user_id, s3code) VALUES (3, 7, 'whole_food_3.jpg');
