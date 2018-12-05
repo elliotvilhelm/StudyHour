@@ -50,9 +50,6 @@ class Comment extends Component {
                         <Grid item>
                             <Typography variant="subheading">{this.props.user_name}</Typography>
                         </Grid>
-                        <Grid item>
-                            <Typography color="inherit">{this.props.text}</Typography>
-                        </Grid>
                         <Grid item lg style={{textAlign: 'right'}}>
                             <Button onClick={this.handleEdit}>Edit</Button>
                             <Button onClick={this.handleDelete}>Delete</Button>
@@ -62,6 +59,9 @@ class Comment extends Component {
                                 starCount={5}
                                 value={this.props.rating}
                             />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Typography color="inherit" style={{paddingLeft: '5%', textAlign:'left'}}>{this.props.text}</Typography>
                         </Grid>
                     </Grid>
                 </Paper>
@@ -81,9 +81,6 @@ class Comment extends Component {
                         <Grid item>
                             <Typography variant="subheading">{this.props.user_name}</Typography>
                         </Grid>
-                        <Grid item>
-                            <Typography color="inherit">{this.props.text}</Typography>
-                        </Grid>
                         <Grid item lg style={{textAlign: 'right'}}>
                             <StarRatingComponent
                                 name="rate star"
@@ -91,6 +88,9 @@ class Comment extends Component {
                                 starCount={5}
                                 value={this.props.rating}
                             />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Typography color="inherit" style={{paddingLeft: '5%', textAlign: 'left'}}>{this.props.text}</Typography>
                         </Grid>
                     </Grid>
                 </Paper>

@@ -298,6 +298,7 @@ table {
 .img-big {
     height: 600px;
     width: 800px;
+    margin: auto;
 }
 .table-open {
     float: right;

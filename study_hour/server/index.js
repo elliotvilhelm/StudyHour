@@ -252,10 +252,10 @@ app.post('/api/Signup', function (req, res, next) {
         }
         pgClient.query('INSERT INTO users(fullname, user_name, password, city, security_q, security_a, bio) VALUES ($1, $2, $3, $4, $5, $6, $7)',
             [req.body.fullname, req.body.user_name, req.body.password, req.body.city, req.body.security_q, req.body.security_a, req.body.bio],function(err, result) {
-            if (err) {
-                return next(err)
-            }
-        });
+                if (err) {
+                    return next(err)
+                }
+            });
         res.send({dbresponse: result.rows})
     });
 });
@@ -342,16 +342,37 @@ app.post('/api/location_liked', function (req, res, next) {
     });
 });
 
-app.post('/api/upload/profile_image', function (req, res, next) {
-    pgClient.query('INSERT INTO profile_images(user_id, s3code) VALUES($1,$2,$3)', [req.body.user_id ,req.body.s3code], function (err, result) {
-        if (err) {
+
+app.post('/api/profile_image/', function (req, res, next) {
+    pgClient.query('SELECT s3code FROM profile_images where user_id = $1',[req.body.user_id], function (err, result) {
+        if(err){
             return next(err)
         }
-        res.send({success: true})
+        res.send(result.rows)
     });
 });
 
-
+app.post('/api/upload/profile_image', function (req, res, next) {
+    pgClient.query('SELECT * FROM profile_images where user_id = $1',[req.body.user_id], function (err, result) {
+        if(err){
+            return next(err)
+        }
+        if(result.rows.length !== 0) {
+            console.log("deleting");
+            pgClient.query('DELETE FROM profile_images where user_id = $1',[req.body.user_id], function (err, result) {
+                if(err){
+                    return next(err)
+                }
+            });
+        }
+        pgClient.query('INSERT INTO profile_images(user_id, s3code) VALUES($1,$2)',[req.body.user_id ,req.body.s3code], function (err, result) {
+            if(err){
+                return next(err)
+            }
+        });
+        res.send({success: true});
+    });
+});
 
 app.get('/*', (req, res) => {
     res.sendFile(path.resolve(`${__dirname}/../react-client/dist/index.html`));
