@@ -50,32 +50,25 @@ class NavBar extends Component {
                 <Fragment>
                     <AppBar position="static">
                         <Toolbar>
-                            {/*<IconButton  onClick={this.toggleDrawer(true)} style={{ marginRight: "1%" }} color="inherit" aria-label="Menu">*/}
-                                {/*<MenuIcon />*/}
-                            {/*</IconButton>*/}
                             <img src={studyhour} style={{ marginRight: "70%" }} width={100} />
-
-                            <Button color="inherit">
-                                <Link to={"/Home"}>
+                            <BackgroundMusic/>
+                            <Link to={"/Home"}>
+                                <Button color="inherit">
                                     <img src={home} width={20} />
-                                </Link>
-                            </Button>
-                             <Button color="inherit">
-                                <Link to={`/Home/ProfilePage/${localStorage.getItem('user_id')}`}>
+                                </Button>
+                            </Link>
+                            <Link to={`/Home/ProfilePage/${localStorage.getItem('user_id')}`}>
+                                <Button color="inherit">
                                     <img src={profile} width={20} />
-                                </Link>
-                            </Button>
-                            <Button color="inherit" onClick={() => this.props.dispatch(auth_actions.unauthenticate())}>
-                                <Link to={"/Login"} >
+                                </Button>
+                            </Link>
+                            <Link to={"/Login"} >
+                                <Button color="inherit" onClick={() => this.props.dispatch(auth_actions.unauthenticate())}>
                                     <img src={logout} width={20} />
-                                </Link>
-                            </Button>
-
+                                </Button>
+                            </Link>
                         </Toolbar>
                     </AppBar>
-                    <Drawer width={DrawerWidth} open={this.state.comeout} onClose={this.toggleDrawer(false)}>
-                        {list}
-                    </Drawer>
                 </Fragment>
 
             );
@@ -84,37 +77,22 @@ class NavBar extends Component {
                 <Fragment>
                     <AppBar position="static" >
                         <Toolbar>
-                            {/*<IconButton onClick={this.toggleDrawer(true)} style={{ marginRight: "1%" }} color="inherit" aria-label="Menu">*/}
-                                {/*<MenuIcon />*/}
-                            {/*</IconButton>*/}
                             <img src={studyhour} style={{ marginRight: "75%" }} width={100} />
                             <BackgroundMusic/>
-
-                            <Button color="inherit">
-                                <Link to={"/Login"}>
+                            <Link to={"/Login"}>
+                                <Button color="inherit">
                                     <img src={login} width={20} />
-                                </Link>
-                            </Button>
-
-                            <Button>
-                                <Link to={"/Signup"}>
+                                </Button>
+                            </Link>
+                            <Link to={"/Signup"}>
+                                <Button>
                                     <img src={signup} width={20} />
-                                </Link>
-                            </Button>
-
+                                </Button>
+                            </Link>
                         </Toolbar>
                     </AppBar>
-
-                    <Drawer width={DrawerWidth} open={this.state.comeout} onClose={this.toggleDrawer(false)}>
-
-
-                        {list}
-                    </Drawer>
-
                 </Fragment>
-
             );
-
         }
         return navBar;
     }

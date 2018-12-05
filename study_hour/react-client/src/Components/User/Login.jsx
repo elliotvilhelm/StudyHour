@@ -59,7 +59,7 @@ class Login extends Component {
         return (
 
             <Fragment>
-                <Paper className='wallpaper'>
+                <Paper className='wallpaper-books-2'>
                     <NavBar/>
                     <Paper style={{padding: "2%", width:"50%", margin:"auto", paddingLeft: "5%", paddingRight: "5%", marginTop: "5%"}}>
                         <Typography variant="headline" style={{marginBottom: "5%"}}>Login To StudyHour</Typography>
@@ -111,6 +111,7 @@ class Login extends Component {
                             </Grid>
                         </Grid>
                     </Paper>
+                    <div style={{height: '300px'}}/>
                 </Paper>
             </Fragment>
         )
