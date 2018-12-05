@@ -22,9 +22,10 @@ import FileUpload from "./../FileUpload";
 export default class Location extends Component {
     constructor(props) {
         super(props);
-        this.state = {location: {}, location_liked: false, images: []};
+        this.state = {location: {}, location_liked: false, images: [], file_loaded: false};
         this.handleSubmit=this.handleSubmit.bind(this);
         this.imageUpload = this.imageUpload.bind(this);
+        this.fileLoaded = this.fileLoaded.bind(this);
         this.upload_ref = React.createRef();
     }
     componentDidMount() {
@@ -78,11 +79,11 @@ export default class Location extends Component {
                             data: {code: code.s3code},
                             config: {headers: {'Content-Type': 'multipart/form-data'}}
                         }).then(response => {
-                            images.push(<img className="img-big" src={response.data.url}/>);
-                            self.setState({images: images})
+                            this.setState({
+                                images: this.state.images.concat([<img className="img-big" src={response.data.url}/>])
+                            });
                         });
-                    })
-                )
+                    }))
 
             }).catch(function (response) {
                 console.log("Error",response);
@@ -133,7 +134,27 @@ export default class Location extends Component {
         this.upload_ref.current.fileUpload(this.props.match.params.id)
     }
 
+    fileLoaded(file_loaded) {
+        this.setState({file_loaded: file_loaded})
+    }
+
+
     render() {
+        // console.log(this.state.file_loaded);
+        // let upload;
+        // if (this.state.file_loaded) {
+        let upload = (<Paper style={{width: '40%', display: 'inline-block'}}>
+        <Button id="submit-button"
+                onClick={this.imageUpload}>
+            Upload Location Image
+        </Button>
+    </Paper>);
+        // }
+        //
+        // else {
+        //     upload = <div></div>;
+        // }
+
         return (
             <Paper className='wallpaper-books'>
                 <NavBar/>
@@ -165,14 +186,9 @@ export default class Location extends Component {
                                         {this.state.location_liked ? '❤️ Like ❤️️' : '🖤 Like 🖤'}
                                     </Button>
                                     <div style={{height: '8px'}}></div>
-                                    <FileUpload ref={this.upload_ref}/>
+                                    <FileUpload fileLoaded={this.fileLoaded} ref={this.upload_ref}/>
                                     <div style={{height: '8px'}}></div>
-                                    <Paper style={{width: '40%', display: 'inline-block'}}>
-                                        <Button id="submit-button"
-                                                onClick={this.imageUpload}>
-                                            Upload Location Image
-                                        </Button>
-                                    </Paper>
+                                    {upload}
                                     <div style={{height: '8px'}}></div>
                                 </Grid>
                             </Grid>
@@ -209,6 +225,10 @@ export default class Location extends Component {
                                             contentEditable={false}
                                             value={this.state.location.noise_level}
                                         />
+                                    </Typography>
+                                    <br/>
+                                    <Typography  style={{ color: "white" }}>
+                                        Address: {this.state.location.address}
                                     </Typography>
                                 </Grid>
                                 <Grid item sm>
