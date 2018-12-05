@@ -28,13 +28,15 @@ Live at **localhost:8080**.
 ## 🍌🍌🍌🍌Team B🍌n🍌n🍌! 🍌🍌🍌🍌🍌
 | Team Member              |          info          |
 |--------------------------|------------------------|
-| # Elliot Pourmand        |                        |
-| # Yoo Jin Chung (Rachel) |                        |
-| # Cheng Cheng (Roger)    |                        |
-| # Xiaofan Lin (Sam)      |                        |
-| # Zixuan Zhang           |                        |
-| # Mher Arabian           |                        |
-| # William Vuong          |                        |
-| # Adam Kabbara           |                        |
-| # Jishan Khandoker       |                        |
-| # Kenil Vora             |                        |
+|  Elliot Pourmand        | Team nana. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+|  Yoo Jin Chung (Rachel) |                        |
+|  Cheng Cheng (Roger)    |                        |
+|  Xiaofan Lin (Sam)      |                        |
+|  Zixuan Zhang           |                        |
+|  Mher Arabian           |                        |
+|  William Vuong          |                        |
+|  Adam Kabbara           |                        |
+|  Jishan Khandoker       |                        |
+|  Kenil Vora             |                        |
+
+Created at UC San Diego for CSE110 - Software Engineering.
