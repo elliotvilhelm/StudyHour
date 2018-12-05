@@ -63,7 +63,7 @@ class ProfilePage extends Component {
         axios({
             method: 'get',
             url: '/api/profile_image/',
-            params: {user_id: 1},
+            params: {user_id: localStorage.getItem('user_id')},
             data: null,
             config: {headers: {'Content-Type': 'application/json'}},
         }).then(response => {
