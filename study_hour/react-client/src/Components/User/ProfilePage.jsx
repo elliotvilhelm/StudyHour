@@ -9,6 +9,7 @@ import axios from "axios";
 import * as profile_action from "../../actions/profilePage_action";
 import FileUpload from "../FileUpload";
 import Footer from "../FooterComponent/Footer";
+import profileImage from "../../images/default.jpg"
 
 
 class ProfilePage extends Component {
@@ -20,7 +21,7 @@ class ProfilePage extends Component {
             bio: '',
             numComments: '',
             favorites: [],
-            url: ""
+            url: profileImage
         };
         this.handleFavorite = this.handleFavorite.bind(this);
         this.handleEditProfile = this.handleEditProfile.bind(this);
@@ -64,17 +65,20 @@ class ProfilePage extends Component {
         axios({
             method: 'get',
             url: '/api/profile_image/',
-            params: {user_id: 1},
+            params: {user_id: this.props.match.params.id},
             data: null,
             config: {headers: {'Content-Type': 'application/json'}},
         }).then(response => {
             console.log("response for getting profile image", response.data);
+            if (response.data.length === 0)
+                return;
             axios({
                 method: 'post',
                 url: `/api/images`,
                 config: { headers: {'Content-Type': 'multipart/form-data' }},
                 data: {code: response.data[0].s3code}
             }).then(response => {
+                console.log("da url", response.data.url);
                 this.setState({url: response.data.url})
             }).catch(function (response) {
                 console.log("Error",response);
@@ -90,7 +94,7 @@ class ProfilePage extends Component {
         this.props.dispatch(profile_action.editProfile());
     }
     imageUpload() {
-        this.upload_ref.current.fileUploadProfile(localStorage.getItem('user_id')).then(() => {
+        this.upload_ref.current.fileUploadProfile(this.props.match.params.id).then(() => {
                 this.fetchImage();
             }
         );

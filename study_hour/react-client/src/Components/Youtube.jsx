@@ -19,7 +19,7 @@ class BackgroundMusic extends React.Component {
         super(props);
         this.myRef = React.createRef()
         this.handleClick = this.handleClick.bind(this)
-        this.state = {playing: true}
+        this.state = {playing: false}
     }
 
     handleClick() {
@@ -38,7 +38,7 @@ class BackgroundMusic extends React.Component {
             height: '0',
             width: '0',
             playerVars: { // https://developers.google.com/youtube/player_parameters
-                autoplay: 1
+                autoplay: 0
             },
         };
 
