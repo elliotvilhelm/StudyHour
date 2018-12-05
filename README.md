@@ -26,7 +26,7 @@ cd StudyHour
 Live at **localhost:8080**.
 
 ## 🍌🍌🍌🍌Team B🍌n🍌n🍌! 🍌🍌🍌🍌🍌
-| Team Member              |          info          |
+| Team Member              |          Info          |
 |--------------------------|------------------------|
 |  Elliot Pourmand        | Team nana. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
 |  Yoo Jin Chung (Rachel) |                        |
