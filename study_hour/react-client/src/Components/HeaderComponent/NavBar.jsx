@@ -50,25 +50,24 @@ class NavBar extends Component {
                 <Fragment>
                     <AppBar position="static">
                         <Toolbar>
-                            <IconButton  onClick={this.toggleDrawer(true)} style={{ marginRight: "1%" }} color="inherit" aria-label="Menu">
-                                <MenuIcon />
-                            </IconButton>
+                           <BackgroundMusic/>
                             <a href={'./Home'} style={{marginRight: "70%"}}><img src={studyhour}  width={100} /></a>
                             <Button color="inherit">
                                 <Link to={"/"}>
                                     <img src={home} width={20} />
                                 </Link>
                             </Button>
-                            <Button color="inherit">
-                                <Link to={`/Home/ProfilePage/${localStorage.getItem('user_id')}`}>
+                         
+                            <Link to={`/Home/ProfilePage/${localStorage.getItem('user_id')}`}>
+                                <Button color="inherit">
                                     <img src={profile} width={20} />
-                                </Link>
-                            </Button>
-                            <Button color="inherit" onClick={() => this.props.dispatch(auth_actions.unauthenticate())}>
-                                <Link to={"/Login"} >
+                                </Button>
+                            </Link>
+                            <Link to={"/Login"} >
+                                <Button color="inherit" onClick={() => this.props.dispatch(auth_actions.unauthenticate())}>
                                     <img src={logout} width={20} />
-                                </Link>
-                            </Button>
+                                </Button>
+                            </Link>
                         </Toolbar>
                     </AppBar>
                 </Fragment>
@@ -79,30 +78,22 @@ class NavBar extends Component {
                 <Fragment>
                     <AppBar position="static" >
                         <Toolbar>
-                            <IconButton onClick={this.toggleDrawer(true)} style={{ marginRight: "1%" }} color="inherit" aria-label="Menu">
-                                <MenuIcon />
-                            </IconButton>
                             <img src={studyhour} style={{ marginRight: "75%" }} width={100} />
                             <BackgroundMusic/>
-
-                            <Button color="inherit">
-                                <Link to={"/Login"}>
+                            <Link to={"/Login"}>
+                                <Button color="inherit">
                                     <img src={login} width={20} />
-                                </Link>
-                            </Button>
-
-                            <Button>
-                                <Link to={"/Signup"}>
+                                </Button>
+                            </Link>
+                            <Link to={"/Signup"}>
+                                <Button>
                                     <img src={signup} width={20} />
-                                </Link>
-                            </Button>
-
+                                </Button>
+                            </Link>
                         </Toolbar>
                     </AppBar>
                 </Fragment>
-
             );
-
         }
         return navBar;
     }
