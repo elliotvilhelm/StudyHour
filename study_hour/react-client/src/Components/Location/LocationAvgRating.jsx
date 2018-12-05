@@ -48,7 +48,7 @@ class LocationAvgRating extends Component {
                     name="rate1"
                     starRatedColor="gold"
                     starEmptyColor="black"
-                    starDimension={'50px'}
+                    starDimension={'15px'}
                     rating={this.state.avgRate}
                     editing={false}
                 />
