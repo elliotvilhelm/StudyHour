@@ -343,11 +343,13 @@ app.post('/api/location_liked', function (req, res, next) {
 });
 
 
-app.post('/api/profile_image/', function (req, res, next) {
-    pgClient.query('SELECT s3code FROM profile_images where user_id = $1',[req.body.user_id], function (err, result) {
+app.get('/api/profile_image/', function (req, res, next) {
+    console.log("user id", req.query);
+    pgClient.query('SELECT s3code FROM profile_images where user_id = $1',[req.query.user_id], function (err, result) {
         if(err){
             return next(err)
         }
+        console.log("result.rows for /api/profile_image", result.rows);
         res.send(result.rows)
     });
 });

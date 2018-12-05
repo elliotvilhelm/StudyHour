@@ -18,10 +18,12 @@ class ProfilePage extends Component {
             city: '',
             bio: '',
             numComments: '',
-            favorites: []
+            favorites: [],
+            url: ""
         };
         this.handleFavorite = this.handleFavorite.bind(this);
         this.handleEditProfile = this.handleEditProfile.bind(this);
+        this.imageUpload = this.imageUpload.bind(this);
         this.upload_ref = React.createRef();
     }
     componentDidMount (){
@@ -51,6 +53,32 @@ class ProfilePage extends Component {
         }).catch(function (response) {
             console.log("Error",response);
         });
+
+        this.fetchImage();
+
+
+    }
+
+    fetchImage() {
+        axios({
+            method: 'get',
+            url: '/api/profile_image/',
+            params: {user_id: 1},
+            data: null,
+            config: {headers: {'Content-Type': 'application/json'}},
+        }).then(response => {
+            console.log("response for getting profile image", response.data);
+            axios({
+                method: 'post',
+                url: `/api/images`,
+                config: { headers: {'Content-Type': 'multipart/form-data' }},
+                data: {code: response.data[0].s3code}
+            }).then(response => {
+                this.setState({url: response.data.url})
+            }).catch(function (response) {
+                console.log("Error",response);
+            });
+        });
     }
 
     handleFavorite() {
@@ -61,7 +89,10 @@ class ProfilePage extends Component {
         this.props.dispatch(profile_action.editProfile());
     }
     imageUpload() {
-        this.upload_ref.fileUploadProfile(localStorage.getItem('user_id'))
+        this.upload_ref.current.fileUploadProfile(localStorage.getItem('user_id')).then(() => {
+                this.fetchImage();
+            }
+        );
     }
 
     render() {
@@ -69,7 +100,7 @@ class ProfilePage extends Component {
         let upload = (<Paper style={{width: '40%', display: 'inline-block'}}>
             <Button id="submit-button"
                     onClick={this.imageUpload}>
-                Upload Location Image
+                Upload Profile Photo
             </Button>
         </Paper>);
         if (this.props.match.params.id === localStorage.getItem('user_id')) {
@@ -92,6 +123,7 @@ class ProfilePage extends Component {
                     <Paper className='wallpaper-books-2'>
                         <NavBar/>
                         <Paper style={{padding: "2%", width:"50%", margin:"auto", paddingLeft: "5%", paddingRight: "5%", marginTop: "5%"}}>
+                            <img width='400' height='400' src={this.state.url}/>
                             <Typography variant="headline" style={{padding: "5%"}}>Name: {this.state.fullname}</Typography>
                             <Typography variant="headline" style={{padding: "5%"}}>City: {this.state.city}</Typography>
                             <Typography variant="headline" style={{padding: "5%"}}>About Me: {this.state.bio}</Typography>

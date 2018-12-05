@@ -18,12 +18,15 @@ class FileUpload extends React.Component {
         console.log(e.target.files);
         this.setState({file: e.target.files[0]})
         this.setState({files: e.target.files});
-        if (this.state.files.length > 0)
-            this.props.fileLoaded(true);
-        else
-            this.props.fileLoaded(false);
-
-    }
+        if (this.state.files.length > 0) {
+            if (this.props.fileLoaded)
+                this.props.fileLoaded(true);
+        }
+        else {
+            if (this.props.fileLoaded)
+                this.props.fileLoaded(false);
+        }
+        }
 
     fileUpload(location_id){
         for (let i = 0; i < this.state.files.length; i++) {
@@ -61,7 +64,7 @@ class FileUpload extends React.Component {
         let key;
         const formData = new FormData();
         formData.append('file', file);
-        axios({
+        return axios({
             method: 'post',
             url: '/api/image-upload',
             data: formData,
@@ -72,14 +75,9 @@ class FileUpload extends React.Component {
             axios({
                 method: 'post',
                 url: `/api/upload/profile_image`,
-                data: {user_id: localStorage.getItem('user_id'), s3code: key},
+                data: {user_id: user_id, s3code: key},
                 config: { headers: {'Content-Type': 'multipart/form-data' }}
-            }).then(response => {
-            });
-
-
-        }).catch(function (response) {
-            console.log("Error",response);
+            })
         });
     }
 
