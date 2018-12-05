@@ -14,20 +14,6 @@ import '../../styles/style.css';
 import BackgroundMusic from '../Youtube'
 
 
-const DrawerWidth = 250;
-const list = (
-    <List>
-        <ListItem button key="Favourite Locations">
-            <ListItemText primary={"Favorite Places"} />
-        </ListItem>
-        <ListItem button key="Favourite Locations">
-            <ListItemText primary={"Nearby StudyHours"} />
-        </ListItem>
-        <ListItem button>
-            <ListItemText primary={"Map"} />
-        </ListItem>
-    </List>
-)
 class NavBar extends Component {
     constructor(props) {
         super(props);
@@ -50,22 +36,22 @@ class NavBar extends Component {
                 <Fragment>
                     <AppBar position="static">
                         <Toolbar>
-                           <BackgroundMusic/>
                             <a href={'./Home'} style={{marginRight: "70%"}}><img src={studyhour}  width={100} /></a>
-                            <Button color="inherit">
+                            <BackgroundMusic/>
+                            <Button color="inherit" size="medium">
                                 <Link to={"/"}>
-                                    <img src={home} width={20} />
+                                    <img src={home} width={30} height={40}/>
                                 </Link>
                             </Button>
                          
                             <Link to={`/Home/ProfilePage/${localStorage.getItem('user_id')}`}>
-                                <Button color="inherit">
-                                    <img src={profile} width={20} />
+                                <Button color="inherit" size="medium">
+                                    <img src={profile} width={30} height={40}/>
                                 </Button>
                             </Link>
                             <Link to={"/Login"} >
-                                <Button color="inherit" onClick={() => this.props.dispatch(auth_actions.unauthenticate())}>
-                                    <img src={logout} width={20} />
+                                <Button color="inherit" size="medium" onClick={() => this.props.dispatch(auth_actions.unauthenticate())}>
+                                    <img src={logout} width={30} height={40}/>
                                 </Button>
                             </Link>
                         </Toolbar>
@@ -81,13 +67,13 @@ class NavBar extends Component {
                             <img src={studyhour} style={{ marginRight: "75%" }} width={100} />
                             <BackgroundMusic/>
                             <Link to={"/Login"}>
-                                <Button color="inherit">
-                                    <img src={login} width={20} />
+                                <Button color="inherit" size="medium">
+                                    <img src={login} width={30} height={40}/>
                                 </Button>
                             </Link>
                             <Link to={"/Signup"}>
-                                <Button>
-                                    <img src={signup} width={20} />
+                                <Button color="inherit" size="medium">
+                                    <img src={signup} width={30} height={40}/>
                                 </Button>
                             </Link>
                         </Toolbar>
