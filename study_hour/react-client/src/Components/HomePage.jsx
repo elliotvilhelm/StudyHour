@@ -44,7 +44,7 @@ class HomePage extends Component {
             <Paper className='wallpaper'>
                 <NavBar/>
                 <Typography variant="headline" style={{fontSize: 72, fontWeight: 500}}>Study Hour</Typography>
-                <Typography variant="display2" style={{fontSize: 30}}>Find your next Study Location</Typography>
+                <Typography variant="display2" style={{fontSize: 30, fontWeight: 200}}>Find your next Study Location</Typography>
                 <div className='div-home'>
                     <div className='div-search'>
                         <SearchBar/>
