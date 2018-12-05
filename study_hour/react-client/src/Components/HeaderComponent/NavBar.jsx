@@ -53,14 +53,13 @@ class NavBar extends Component {
                             <IconButton  onClick={this.toggleDrawer(true)} style={{ marginRight: "1%" }} color="inherit" aria-label="Menu">
                                 <MenuIcon />
                             </IconButton>
-                            <img src={studyhour} style={{ marginRight: "70%" }} width={100} />
-                            
+                            <a href={'./Home'} style={{marginRight: "70%"}}><img src={studyhour}  width={100} /></a>
                             <Button color="inherit">
-                                <Link to={"/Home"}>
+                                <Link to={"/"}>
                                     <img src={home} width={20} />
                                 </Link>
                             </Button>
-                             <Button color="inherit">
+                            <Button color="inherit">
                                 <Link to={`/Home/ProfilePage/${localStorage.getItem('user_id')}`}>
                                     <img src={profile} width={20} />
                                 </Link>
@@ -70,7 +69,6 @@ class NavBar extends Component {
                                     <img src={logout} width={20} />
                                 </Link>
                             </Button>
-
                         </Toolbar>
                     </AppBar>
                 </Fragment>
