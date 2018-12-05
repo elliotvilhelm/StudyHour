@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import axios from "axios";
 import * as profile_action from "../../actions/profilePage_action";
 import FileUpload from "../FileUpload";
+import Footer from "../FooterComponent/Footer";
 
 
 class ProfilePage extends Component {
@@ -138,6 +139,7 @@ class ProfilePage extends Component {
                             {edit_profile}
                         </Paper>
                         <div style={{height: '100px'}}></div>
+                        <Footer/>
                     </Paper>
                 </div>
             );

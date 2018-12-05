@@ -9,6 +9,7 @@ import { connect } from  "react-redux";
 import { withRouter} from 'react-router-dom';
 import axios from "axios";
 import * as profilePage_actions from "../../actions/profilePage_action";
+import Footer from "../FooterComponent/Footer";
 
 
 const styles = theme => ({
@@ -180,6 +181,7 @@ class EditProfilePage extends Component {
                             </Grid>
                         </form>
                     </Paper>
+                    <Footer/>
                 </Paper>
             </div>
         )

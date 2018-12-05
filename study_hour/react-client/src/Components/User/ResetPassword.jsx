@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import { connect } from  "react-redux";
 import { withRouter} from 'react-router-dom';
 import * as resetPassword_actions from '../../actions/resetPassword_action';
+import Footer from "../FooterComponent/Footer";
 
 const styles = theme => ({
     textField: {
@@ -109,6 +110,7 @@ class ResetPassword extends Component {
                             </Grid>
                         </form>
                     </Paper>
+                    <Footer/>
                 </Paper>
             </div>
         )

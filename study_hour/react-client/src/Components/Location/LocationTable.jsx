@@ -9,6 +9,7 @@ import * as addlocation_action from "../../actions/addlocation_action";
 import Typography from "@material-ui/core/Typography/Typography";
 import Paper from "@material-ui/core/Paper/Paper";
 import LocationAvgRating from "./LocationAvgRating";
+import Footer from "../FooterComponent/Footer";
 
 class LocationTable extends Component {
     constructor(props) {
@@ -157,6 +158,7 @@ class LocationTable extends Component {
                             {this.state.table}
                         </div>
                     </Paper>
+                    <Footer/>
                 </Paper>
             );
         }
