@@ -50,11 +50,11 @@ class NavBar extends Component {
                 <Fragment>
                     <AppBar position="static">
                         <Toolbar>
-                            <IconButton  onClick={this.toggleDrawer(true)} style={{ marginRight: "1%" }} color="inherit" aria-label="Menu">
-                                <MenuIcon />
-                            </IconButton>
+                            {/*<IconButton  onClick={this.toggleDrawer(true)} style={{ marginRight: "1%" }} color="inherit" aria-label="Menu">*/}
+                                {/*<MenuIcon />*/}
+                            {/*</IconButton>*/}
                             <img src={studyhour} style={{ marginRight: "70%" }} width={100} />
-                            
+
                             <Button color="inherit">
                                 <Link to={"/Home"}>
                                     <img src={home} width={20} />
@@ -84,9 +84,9 @@ class NavBar extends Component {
                 <Fragment>
                     <AppBar position="static" >
                         <Toolbar>
-                            <IconButton onClick={this.toggleDrawer(true)} style={{ marginRight: "1%" }} color="inherit" aria-label="Menu">
-                                <MenuIcon />
-                            </IconButton>
+                            {/*<IconButton onClick={this.toggleDrawer(true)} style={{ marginRight: "1%" }} color="inherit" aria-label="Menu">*/}
+                                {/*<MenuIcon />*/}
+                            {/*</IconButton>*/}
                             <img src={studyhour} style={{ marginRight: "75%" }} width={100} />
                             <BackgroundMusic/>
 

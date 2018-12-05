@@ -64,6 +64,7 @@ class LocationTable extends Component {
                             location.image_url = response.data.url;
                             this.setState({
                                 table: this.state.table.concat([
+
                                     <div className="location-card">
                                         <Link to={'/Location/' + location.id}>
                                             <div className="locationImage-card">

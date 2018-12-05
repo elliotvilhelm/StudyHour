@@ -18,6 +18,11 @@ class FileUpload extends React.Component {
         console.log(e.target.files);
         this.setState({file: e.target.files[0]})
         this.setState({files: e.target.files});
+        if (this.state.files.length > 0)
+            this.props.fileLoaded(true);
+        else
+            this.props.fileLoaded(false);
+
     }
 
     fileUpload(location_id){

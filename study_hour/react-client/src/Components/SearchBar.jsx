@@ -155,7 +155,7 @@ class SearchBar extends Component {
 
     handleClick (event) {
         this.props.dispatch(SearchBar_action.search(this.state.suggestions.filter(suggestion =>
-            suggestion.name.toLowerCase() + "\n" === (event.target.innerText).toLowerCase())[0])
+            (suggestion.name.toLowerCase() + "\n" === (event.target.innerText).toLowerCase()) || (suggestion.name.toLowerCase()  === (this.state.single + event.target.innerText).toLowerCase()) || (suggestion.name.toLowerCase() + "\n"  === (this.state.single + event.target.innerText).toLowerCase()))[0])
         );
     };
 
