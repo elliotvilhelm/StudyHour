@@ -133,8 +133,9 @@ class LocationTable extends Component {
                     </div>
                     </Grid>
                     </Grid>
-                    </Paper> 
-                <Footer/>
+
+                    </Paper>                    
+                    <Footer/>
                 </Paper>
             );
         
