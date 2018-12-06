@@ -1,61 +1,42 @@
 import React, {Component} from 'react';
-import { URLProvider } from 'react-url';
+import LocationCard from './LocationCard';
 import '../../styles/style.css'
 import axios from "axios";
 import NavBar from './../HeaderComponent/NavBar';
-import {Link} from 'react-router-dom';
+
 import Button from "@material-ui/core/Button/Button";
 import * as addlocation_action from "../../actions/addlocation_action";
-import Typography from "@material-ui/core/Typography/Typography";
+
 import {Paper, Grid} from "@material-ui/core";
 import LocationAvgRating from "./LocationAvgRating";
 import Footer from "../FooterComponent/Footer";
 import Map from '../Map'
-function location_card(location) {
-    const location_img = <img src={location.image_url} style={{borderRadius: '2%'}} width='500' height='350'/>;
-    const no_img = <Typography variant='headline' color='error'>No Image Found</Typography>;
-    return (
-    <div  className="location-card" style={{marginTop: '2%', backgroundColor: 'rgba(0,0,0,0.7)', width: '100%', borderRadius: 10}} >
-        <Link to={'/Location/' + location.id}>
-            <div className="locationImage-card">
-                {location.image_id !== -1 ? location_img : no_img}
-            </div>
-        </Link>
-        <div className="locationInfo-card">
-            <Link to={'/Location/' + location.id}>
-                <div className="location-name">
-                    <Typography variant="headline"
-                                >{location.name}</Typography>
-                    <Typography variant='caption'
-                                >{location.address}</Typography>
-                </div>
-            </Link>
-            <div>
-                <LocationAvgRating  location_id={location.id}/>
-            </div>
-        </div>
-    </div>
-    );
-}
+
 
 class LocationTable extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            locations: [],
-            table: [],
-            favorite: false,
-        };
+        if(this.props.location.state) {
+            this.state = {
+                locations: this.props.location.state.list,
+                table: [],
+                favorite: this.props.location.state.favorite,
+                centerLocation: null
+            };
+        }
         this.handleAddLocation = this.handleAddLocation.bind(this);
+        this.highLight = this.highLight.bind(this);
     }
 
+    highLight(location) {
+        return (target) => {
+            this.setState({centerLocation: location});
+        }
+    }
     componentDidMount (){
+        
         this.createTable();
-        this.setState({locations: this.props.location.state.list});
-        this.setState({favorite: this.props.location.state.favorite});
-        this.setState({updated_locations: []});
-        this.setState({updated_final_locations: []});
-
+        
     }
 
     createTable() {
@@ -83,14 +64,14 @@ class LocationTable extends Component {
                         location.image_url = response.data.url;
                         this.setState({
                             table: this.state.table.concat([
-                                location_card(location)
+                                <LocationCard location={location} onMouseOver={this.highLight}/>
                             ])
                         });
                     });
                 } else {
                     this.setState({
                         table: this.state.table.concat([
-                            location_card(location)
+                            <LocationCard location={location} onMouseOver={this.highLight}/>
                         ])
                     });
                 }
@@ -103,7 +84,6 @@ class LocationTable extends Component {
     }
 
     render() {
-        console.log('state', this.state);
         let locationTable;
         const add_button = (
                     
@@ -128,7 +108,7 @@ class LocationTable extends Component {
                     <Grid item md={5}>
 
                     <div style={{position: 'sticky', top: '5vh', marginTop: '3%'}} >
-                        <Map width="85%" />
+                        <Map width="85%" searchedLocations={this.state.locations} centerLocation={this.state.centerLocation}/>
                     </div>
                     </Grid>
                     </Grid>
