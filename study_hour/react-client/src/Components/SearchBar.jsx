@@ -178,8 +178,9 @@ class SearchBar extends Component {
         };
 
         return (
-            <div>
-                <Grid container style={{width: '70%', margin: 'auto', marginTop: '7%', marginBottom: '5%'}}>
+            <div className='div-search-bar-2'>
+                <Grid container style={{width: '70%', margin: 'auto', marginTop: '7%',
+                    marginBottom: '5%'}}>
                     <Grid item sm={11}>
                         <Autosuggest
                             {...autosuggestProps}
@@ -202,13 +203,11 @@ class SearchBar extends Component {
                             )}
                         />
                     </Grid>
-                    <Grid item sm>
-
+                    <Grid item sm style={{overflow: 'hidden', display: 'flex'}}>
                         <Button id="submit-button"
                                 className={classes.button}
                                 onClick={this.handleSearch}>
                             <SearchIcon/>
-
                         </Button>
                     </Grid>
                 </Grid>
