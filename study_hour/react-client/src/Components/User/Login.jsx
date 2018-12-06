@@ -9,6 +9,7 @@ import * as auth_actions from "../../actions/auth";
 import * as resetPassword_actions from "../../actions/resetPassword_action";
 import { connect } from  "react-redux";
 import { withRouter } from 'react-router-dom';
+import Footer from "../FooterComponent/Footer";
 
 const styles = theme => ({
     textField: {
@@ -112,6 +113,7 @@ class Login extends Component {
                         </Grid>
                     </Paper>
                     <div style={{height: '300px'}}/>
+                    <Footer/>
                 </Paper>
             </Fragment>
         )

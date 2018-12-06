@@ -9,6 +9,7 @@ import { connect } from  "react-redux";
 import { withRouter} from 'react-router-dom';
 import axios from "axios";
 import * as profilePage_actions from "../../actions/profilePage_action";
+import Footer from "../FooterComponent/Footer";
 
 
 const styles = theme => ({
@@ -84,13 +85,14 @@ class EditProfilePage extends Component {
         this.setState({bio: event.target.value});
     };
     handleSubmit() {
-            this.props.dispatch(profilePage_actions.submitProfile(
-                localStorage.getItem('user_id'),
-                this.state.fullname,
-                this.state.password,
-                this.state.city,
-                this.state.bio));
+        this.props.dispatch(profilePage_actions.submitProfile(
+            localStorage.getItem('user_id'),
+            this.state.fullname,
+            this.state.password,
+            this.state.city,
+            this.state.bio));
     }
+
 
     render () {
         const { classes } = this.props;
@@ -176,10 +178,12 @@ class EditProfilePage extends Component {
                                             color="primary">
                                         Submit
                                     </Button>
+
                                 </Grid>
                             </Grid>
                         </form>
                     </Paper>
+                    <Footer/>
                 </Paper>
             </div>
         )

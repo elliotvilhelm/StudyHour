@@ -5,12 +5,10 @@ import '../../styles/style.css'
 import { withStyles } from '@material-ui/core/styles';
 import {TextField, Typography, Grid} from '@material-ui/core';
 import Button from "@material-ui/core/Button";
-import axios from "axios/index";
 import * as signup_actions from "../../actions/signup_action";
 import { connect } from  "react-redux";
 import { withRouter} from 'react-router-dom';
-import history from '../../history';
-import { bindActionCreators } from 'redux'
+import Footer from "../FooterComponent/Footer";
 
 
 const styles = theme => ({
@@ -222,6 +220,7 @@ class Signup extends Component {
                             </Grid>
                         </form>
                     </Paper>
+                    <Footer/>
                 </Paper>
             </div>
         )

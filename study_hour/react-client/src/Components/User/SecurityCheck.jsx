@@ -8,6 +8,7 @@ import {Button} from "@material-ui/core";
 import * as resetPassword_actions from "../../actions/resetPassword_action";
 import { connect } from  "react-redux";
 import { withRouter } from 'react-router-dom';
+import Footer from "../FooterComponent/Footer";
 
 const styles = theme => ({
     textField: {
@@ -97,6 +98,7 @@ class SecurityCheck extends Component {
                             </Grid>
                         </Grid>
                     </Paper>
+                    <Footer/>
                 </Paper>
             </Fragment>
         )

@@ -8,7 +8,8 @@ import Button from "@material-ui/core/Button/Button";
 import * as addlocation_action from "../../actions/addlocation_action";
 
 import {Paper, Grid} from "@material-ui/core";
-
+import LocationAvgRating from "./LocationAvgRating";
+import Footer from "../FooterComponent/Footer";
 import Map from '../Map'
 
 
@@ -112,6 +113,7 @@ class LocationTable extends Component {
                     </Grid>
                     </Grid>
                     </Paper>                    
+                    <Footer/>
                 </Paper>
             );
         

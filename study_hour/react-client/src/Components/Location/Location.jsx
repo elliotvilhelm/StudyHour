@@ -16,6 +16,7 @@ import AddCommentModal from '../Comments/AddCommentModal';
 import Button from "@material-ui/core/Button/Button";
 import SimpleSlider from "./../Slider";
 import FileUpload from "./../FileUpload";
+import Footer from "../FooterComponent/Footer";
 
 
 
@@ -263,6 +264,7 @@ export default class Location extends Component {
                         </Grid>
                     </div>
                 </Paper>
+                <Footer/>
             </Paper>
         );
     }
