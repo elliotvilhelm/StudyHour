@@ -68,7 +68,6 @@ class CommentTable extends Component {
                     </th>
                     {this.state.table}
                 </table>
-                <Footer/>
             </div>
         )
     }
