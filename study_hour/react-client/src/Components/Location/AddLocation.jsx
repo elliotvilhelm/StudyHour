@@ -14,6 +14,7 @@ import NavBar from "./../HeaderComponent/NavBar";
 import Grid from "@material-ui/core/Grid/Grid";
 import * as addlocation_actions from "../../actions/addlocation_action";
 import FileUpload from './../FileUpload'
+import Footer from "../FooterComponent/Footer";
 
 
 const styles = theme => ({
@@ -197,6 +198,7 @@ class AddLocation extends Component {
                             </Grid>
                         </div>
                     </Paper>
+                    <Footer/>
                 </Paper>
             </div>
         )

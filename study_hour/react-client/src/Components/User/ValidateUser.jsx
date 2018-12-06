@@ -8,6 +8,7 @@ import {Button} from "@material-ui/core";
 import * as resetPassword_actions from "../../actions/resetPassword_action";
 import { connect } from  "react-redux";
 import { withRouter } from 'react-router-dom';
+import Footer from "../FooterComponent/Footer";
 
 const styles = theme => ({
     textField: {
@@ -65,7 +66,7 @@ class ValidateUser extends Component {
                                     style={{padding: "10px"}}
                                 />
                             </Grid>
-                             <Grid item xs="12" style={{textAlign: "center", marginTop: 10}} className={classes.item}>
+                            <Grid item xs="12" style={{textAlign: "center", marginTop: 10}} className={classes.item}>
                                 <Button variant="contained"
                                         className={classes.button}
                                         onClick={this.handleEnter}
@@ -76,6 +77,7 @@ class ValidateUser extends Component {
                             </Grid>
                         </Grid>
                     </Paper>
+                    <Footer/>
                 </Paper>
             </Fragment>
         )
