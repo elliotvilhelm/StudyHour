@@ -273,7 +273,6 @@ export default class Location extends Component {
                                         </CardContent>
                                     </div>
                                 </div>
-
                             </Paper>
                             <Grid container
                                   spacing={24}

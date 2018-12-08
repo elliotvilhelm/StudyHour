@@ -61,8 +61,7 @@ class NavBar extends Component {
                 <Fragment>
                     <AppBar position="static" >
                         <Toolbar>
-                            <img src={studyhour} style={{ marginRight: "75%" }} width={100} />
-                            
+                            <a href={'./Home'} style={{marginRight: "70%"}}><img src={studyhour}  width={100} /></a>
                             <Link to={"/Login"}>
                                 <Button color="inherit" size="medium">
                                     <img src={login} width={30} height={40}/>
