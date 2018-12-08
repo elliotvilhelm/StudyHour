@@ -2,9 +2,8 @@ import React, {Component} from 'react';
 import { URLProvider } from 'react-url';
 import '../../styles/style.css'
 import StarRatingComponent from "react-star-rating-component";
-import { Avatar, Paper, Typography, Grid, Button } from '@material-ui/core'
-import default_profile from '../../images/profile_pic.png';
-import home from "../../images/home.svg";
+import { Avatar, Paper, Typography, Grid, Button } from '@material-ui/core';
+import default_profile from '../../images/default.jpg';
 import {Link} from "react-router-dom";
 import {deletecomment} from "../../actions/deletecomment_action";
 import { connect } from  "react-redux";
@@ -23,7 +22,7 @@ class Comment extends Component {
     constructor(props) {
         super(props);
         this.state={
-            url: ''
+            url: default_profile
         };
         this.handleDelete=this.handleDelete.bind(this);
         this.handleEdit=this.handleEdit.bind(this);
@@ -76,7 +75,7 @@ class Comment extends Component {
                             </Link>
                         </Grid>
                         <Grid item>
-                            <Typography variant="subheading">{this.props.user_name}</Typography>
+                            <Typography variant="display1">{this.props.user_name}</Typography>
                         </Grid>
                         <Grid item lg style={{textAlign: 'right'}}>
                             <Button onClick={this.handleEdit}>Edit</Button>
@@ -89,7 +88,7 @@ class Comment extends Component {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography color="inherit" style={{paddingLeft: '5%', textAlign:'left'}}>{this.props.text}</Typography>
+                            <Typography variant="h6" color="inherit" style={{paddingLeft: '5%', textAlign:'left'}}>{this.props.text}</Typography>
                         </Grid>
                     </Grid>
                 </Paper>
@@ -101,13 +100,13 @@ class Comment extends Component {
                     <Grid container spacing={24}>
                         <Grid item>
                             <Link to={`/Home/ProfilePage/${this.props.user_id}`}>
-                                <Avatar style={{backgroundColor: "grey", borderRadius: 0}}>
-                                    <img className="img-avatar" src={default_profile}/>
-                                </Avatar>
+                                <Grid container justify="center" alignItems="center">
+                                    <Avatar src={this.state.url} style={{margin: 10, width: 60, height:60}}/>
+                                </Grid>
                             </Link>
                         </Grid>
                         <Grid item>
-                            <Typography variant="subheading">{this.props.user_name}</Typography>
+                            <Typography variant="display1">{this.props.user_name}</Typography>
                         </Grid>
                         <Grid item lg style={{textAlign: 'right'}}>
                             <StarRatingComponent
@@ -118,7 +117,7 @@ class Comment extends Component {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography color="inherit" style={{paddingLeft: '5%', textAlign: 'left'}}>{this.props.text}</Typography>
+                            <Typography variant="h6" color="inherit" style={{paddingLeft: '5%', textAlign: 'left'}}>{this.props.text}</Typography>
                         </Grid>
                     </Grid>
                 </Paper>
