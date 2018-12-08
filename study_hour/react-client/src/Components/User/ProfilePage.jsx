@@ -105,7 +105,7 @@ class ProfilePage extends Component {
     render() {
         let edit_profile;
         let upload = (
-            <Paper style={{width: '40%', display: 'inline-block'}}>
+            <Paper style={{width: '100%', textAlign: 'center', display: 'inline-block'}}>
                 <Button id="submit-button"
                         onClick={this.imageUpload}>
                     Upload Profile Photo
@@ -114,11 +114,13 @@ class ProfilePage extends Component {
         if (this.props.match.params.id === localStorage.getItem('user_id')) {
             edit_profile = (
                 <Grid item>
+                    <Paper style={{width: '100%', textAlign: 'center', display: 'inline-block'}}>
                     <Button onClick={this.handleEditProfile}
                             color="white">
                         Edit Profile
                     </Button>
-                    <FileUpload ref={this.upload_ref}/>
+                    </Paper>
+                    <FileUpload multi={false} ref={this.upload_ref}/>
                     {upload}
                 </Grid>)
         }
@@ -130,10 +132,10 @@ class ProfilePage extends Component {
             <div>
                 <Paper className='wallpaper-books-2'>
                     <NavBar/>
-                    <Paper style={{padding: "2%", width:"50%", margin:"auto", paddingLeft: "5%", paddingRight: "5%", marginTop: "5%"}}>
+                    <Paper style={{padding: "2%", width:"70%", margin:"auto", paddingLeft: "5%", paddingRight: "5%", marginTop: "5%"}}>
                         <Grid container spacing={16}>
                             <Avatar style={{backgroundColor: "grey", borderRadius: 0, margin: 10, width: 400, height: 400}}>
-                                <img width='400' height='400' src={this.state.url} />
+                                <img width='95%' height='95%' src={this.state.url} />
                             </Avatar>
                             <Grid item xs={12} sm container>
                                 <Grid item xs container direction="column" spacint={16}>
@@ -144,11 +146,13 @@ class ProfilePage extends Component {
                                         <Typography gutterBottom variant="display2" style={{fontSize: 25, fontWeight: 300}}>Karma: {Math.round(Math.PI * (parseInt(this.state.numComments) + 1) * 100)/100}</Typography>
                                     </Grid>
                                     <Grid item>
-                                        <Button variant="contained"
+                                        <Paper style={{width: '100%', textAlign: 'center', display: 'inline-block'}}>
+                                            <Button
                                                 onClick={this.handleFavorite}
-                                                color="white">
-                                            Favorite Locations
-                                        </Button>
+                                            >
+                                                💕 Favorite Locations 💕
+                                            </Button>
+                                        </Paper>
                                     </Grid>
                                 </Grid>
                             </Grid>

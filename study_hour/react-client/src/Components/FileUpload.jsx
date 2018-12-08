@@ -83,27 +83,29 @@ class FileUpload extends React.Component {
 
 
     render() {
-
         let file_names;
+        let images_button;
         if (this.state.files.length > 0)
             file_names = [<Typography variant='subheading' style={{color: "white"}}>Selected Files</Typography>];
         else
             file_names = [];
         for (let i = 0; i < this.state.files.length; i++) {
             file_names.push(<Typography variant='subheading' style={{color: "white"}}>{this.state.files[i].name}</Typography>)
-
-
         }
 
+        if (this.props.multi) {
+            images_button = (<Button component="span">Select Images to Upload</Button>);
+        }
+        else {
+            images_button = (<Button component="span">Select Image to Upload</Button>);
+        }
         return (
             <Grid style={{margin:0}} >
                 <form encType="multipart/form-data">
                     <input hidden id="raised-button-file" accept="image/*" type="file" name="recfile" onChange={this.onChange} multiple/>
                     <label htmlFor="raised-button-file">
-                        <Paper style={{width: '40%', display: 'inline-block'}}>
-                            <Button component="span">
-                                Select Images to Upload
-                            </Button>
+                        <Paper style={{width: '100%', textAlign: 'center', display: 'inline-block'}}>
+                            {images_button}
                         </Paper>
                     </label>
                     <Typography variant='subheading' style={{color: "white"}}>

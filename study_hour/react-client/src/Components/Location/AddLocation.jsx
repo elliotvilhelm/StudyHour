@@ -185,7 +185,7 @@ class AddLocation extends Component {
                                     />
                                 </Grid>
                                 <Grid item xs="12" className={classes.item}>
-                                    <FileUpload ref={this.upload_ref}/>
+                                    <FileUpload ref={this.upload_ref} multi={true}/>
                                 </Grid>
                                 <Grid item xs="12" style={{textAlign: "center", marginTop: 10}} className={classes.item}>
                                     <Button id="submit-button"

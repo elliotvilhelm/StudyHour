@@ -28,6 +28,7 @@ export default class Location extends Component {
         this.imageUpload = this.imageUpload.bind(this);
         this.fileLoaded = this.fileLoaded.bind(this);
         this.upload_ref = React.createRef();
+        this.fetchImages = this.fetchImages.bind(this);
     }
     componentDidMount() {
         let id = this.props.match.params.id;
@@ -93,10 +94,35 @@ export default class Location extends Component {
             .catch(function (response) {
                 console.log("Error",response);
             });
+    }
 
+    fetchImages() {
+        this.setState({images: []});
+        axios({
+            method: 'post',
+            url: '/api/images/location',
+            data: {location_id: this.state.location.id},
+            config: { headers: {'Content-Type': 'multipart/form-data' }}
+        }).then(response => {
+            let s3_codes = response.data.dbresponse;
+            let images = [];
+            Promise.all(
+                s3_codes.map(code => {
+                    axios({
+                        method: 'post',
+                        url: '/api/images',
+                        data: {code: code.s3code},
+                        config: {headers: {'Content-Type': 'multipart/form-data'}}
+                    }).then(response => {
+                        this.setState({
+                            images: this.state.images.concat([<img className="img-big" src={response.data.url}/>])
+                        });
+                    });
+                }))
 
-
-
+        }).catch(function (response) {
+            console.log("Error",response);
+        });
     }
     favoriteOnClick(){
         if(!this.state.location_liked) {
@@ -132,7 +158,8 @@ export default class Location extends Component {
     }
 
     imageUpload() {
-        this.upload_ref.current.fileUpload(this.props.match.params.id)
+        this.upload_ref.current.fileUpload(this.props.match.params.id);
+        this.fetchImages();
     }
 
     fileLoaded(file_loaded) {
@@ -187,7 +214,7 @@ export default class Location extends Component {
                                         {this.state.location_liked ? '❤️ Like ❤️️' : '🖤 Like 🖤'}
                                     </Button>
                                     <div style={{height: '8px'}}></div>
-                                    <FileUpload fileLoaded={this.fileLoaded} ref={this.upload_ref}/>
+                                    <FileUpload multi={true} fileLoaded={this.fileLoaded} ref={this.upload_ref}/>
                                     <div style={{height: '8px'}}></div>
                                     {upload}
                                     <div style={{height: '8px'}}></div>

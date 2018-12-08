@@ -82,6 +82,9 @@ class Signup extends Component {
         this.setState({bio: event.target.value});
     };
     handleSubmit() {
+        if (this.state.username === '' || this.state.password === '') {
+            return;
+        }
         if (this.state.confirm === true) {
             this.props.dispatch(signup_actions.signup(this.state.fullname,
                 this.state.username,
