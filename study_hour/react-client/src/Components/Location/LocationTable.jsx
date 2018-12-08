@@ -34,9 +34,9 @@ class LocationTable extends Component {
         }
     }
     componentDidMount (){
-        
+
         this.createTable();
-        
+
     }
 
     createTable() {
@@ -86,39 +86,34 @@ class LocationTable extends Component {
     render() {
         let locationTable;
         const add_button = (
-                    
-                            <Button  style={{float: 'left'}} onClick={this.handleAddLocation} variant="contained" color="white">
-                                Add Location
-                            </Button>
-                    
-                    );
+            <Button  style={{float: 'left'}} onClick={this.handleAddLocation} variant="contained" color="white">
+                Add Location
+            </Button>
+
+        );
 
         locationTable = (
-                <Paper className='wallpaper'>
-                    <NavBar />
-                    <Paper style={{padding: "1%", width:"90%", margin:"auto", marginTop: "3%"}}>
+            <Paper className='wallpaper'>
+                <NavBar />
+                <Paper style={{padding: "1%", width:"90%", margin:"auto", marginTop: "3%"}}>
                     {!this.state.favorite ? add_button : ""}
                     <Grid container spacing={20}>
-                    <Grid item md={7}>
-                    
-                    
-                       {this.state.table}
-                    
+                        <Grid item md={7}>
+                            {this.state.table}
+                        </Grid>
+                        <Grid item md={5}>
+                            <div style={{position: 'sticky', top: '5vh', marginTop: '3%'}} >
+                                <Map width="85%" searchedLocations={this.state.locations} centerLocation={this.state.centerLocation}/>
+                            </div>
+                        </Grid>
                     </Grid>
-                    <Grid item md={5}>
-
-                    <div style={{position: 'sticky', top: '5vh', marginTop: '3%'}} >
-                        <Map width="85%" searchedLocations={this.state.locations} centerLocation={this.state.centerLocation}/>
-                    </div>
-                    </Grid>
-                    </Grid>
-                    </Paper>                    
-                    <Footer/>
                 </Paper>
-            );
-        
-        
-         
+                <Footer/>
+            </Paper>
+        );
+
+
+
         return locationTable;
     }
 }
