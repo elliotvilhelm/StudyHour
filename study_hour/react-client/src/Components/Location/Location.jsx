@@ -232,12 +232,12 @@ export default class Location extends Component {
                                         />
                                     </Typography>
                                     <Typography  style={{ color: "white" }}>
-                                        Wifi
+                                        Internet
                                         <Checkbox
                                             value="checkedG"
                                             disabled
-                                            checked={this.state.location.wifi}
-                                            style={{ color: location.wifi? "#00BFFF" : "white" }}
+                                            checked={!!this.state.location.internet}
+                                            style={{ color: this.state.location.internet? "#00BFFF" : "white" }}
                                         />
                                     </Typography>
 

@@ -7,11 +7,11 @@ import { connect } from "react-redux";
 import Typography from "@material-ui/core/Typography";
 import axios from "axios";
 import * as profile_action from "../../actions/profilePage_action";
-import Footer from "../FooterComponent/Footer";
 import Grid from "@material-ui/core/Grid/Grid";
 import Avatar from "@material-ui/core/Avatar/Avatar";
 import FileUpload from "../FileUpload";
 import profileImage from "../../images/default.jpg"
+import Footer from "../FooterComponent/Footer";
 
 
 class ProfilePage extends Component {

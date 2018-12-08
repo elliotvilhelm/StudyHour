@@ -10,6 +10,7 @@ import * as resetPassword_actions from "../../actions/resetPassword_action";
 import { connect } from  "react-redux";
 import { withRouter } from 'react-router-dom';
 import Footer from "../FooterComponent/Footer";
+import { Link } from 'react-router-dom'
 
 const styles = theme => ({
     textField: {
@@ -93,13 +94,24 @@ class Login extends Component {
                                     style={{paddingBottom: "10px"}}
                                 />
                             </Grid>
-                            <Grid item xs="12" style={{textAlign: "center", marginTop: 10}} className={classes.item}>
-                                <Button className={classes.button}
-                                        onClick={this.handleForgotPassword}
-                                        color="white"
-                                >
-                                    Forgot password?
-                                </Button>
+                            <Grid container spacing={12} style={{textAlign: "center"}}>
+                                <Grid item xs={3}/>
+                                <Grid item xs={3} style={{textAlign:"center"}}>
+                                    <Button className={classes.button}
+                                            onClick={this.handleForgotPassword}
+                                            color="white"
+                                    >
+                                        Forgot password?
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={3} style={{textAlign:"center"}}>
+                                    <Link to={"/Signup"}>
+                                        <Button className={classes.button} color="white">
+                                            Create Account
+                                        </Button>
+                                    </Link>
+                                </Grid>
+                                <Grid item xs={3}/>
                             </Grid>
                             <Grid item xs="12" style={{textAlign: "center", marginTop: 10}} className={classes.item}>
                                 <Button variant="contained"
@@ -112,7 +124,7 @@ class Login extends Component {
                             </Grid>
                         </Grid>
                     </Paper>
-                    <div style={{height: '300px'}}/>
+                    <div style={{height: '430px'}}/>
                     <Footer/>
                 </Paper>
             </Fragment>
