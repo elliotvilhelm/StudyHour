@@ -147,7 +147,7 @@ table {
     text-align: center;
     margin: 0 auto;
     width: 80%;
-    height: auto;
+    height: 80%;
 
 }
 a {
@@ -275,9 +275,10 @@ table {
 }
 
 .location-image-div {
-    width: 100%;
+    width: 800px;
     margin: 0 auto;
     text-align: center;
+    background-color: pink;
 }
 .img-slider {
     margin-left: auto;
@@ -296,8 +297,8 @@ table {
 }
 
 .img-big {
-    height: 600px;
-    width: 800px;
+    height: 100%;
+    width: 100%;
     margin: auto;
 }
 .table-open {

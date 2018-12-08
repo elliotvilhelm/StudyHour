@@ -23,6 +23,7 @@ export function addlocation(name, address, outlet, internet, open_time, close_ti
             .then(function (response) {
                 if (response.data.success === false) return; // dispatch alert that name is taken
                 upload_ref.current.fileUpload(response.data.location_id);
+                history.push(`/Location/${response.data.location_id}`);
             })
             .catch(function (response) {
                 console.log("Error on location db response", response);
