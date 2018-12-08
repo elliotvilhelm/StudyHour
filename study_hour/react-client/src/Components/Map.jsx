@@ -4,25 +4,235 @@ import axios from "axios/index";
 let currentMap = null;
 let markConfig;
 
-let mockSearched = [
+let mapStyles = [
   {
-    address: "San diego",
-    close_time: null,
-    id: 5,
-    internet: true,
-    lat: 32.8712,
-    lng: -117.217,
-    name: "Geisel",
-    noise_level: 4,
-    open_time: null,
-    outlet: false
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#ebe3cd"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#523735"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#f5f1e6"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#c9b2a6"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#dcd2be"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#ae9e90"
+      }
+    ]
+  },
+  {
+    "featureType": "landscape.natural",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#dfd2ae"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#dfd2ae"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#93817c"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#a5b076"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#447530"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#f5f1e6"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#fdfcf8"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#f8c967"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#e9bc62"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway.controlled_access",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#e98d58"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway.controlled_access",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#db8555"
+      }
+    ]
+  },
+  {
+    "featureType": "road.local",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#806b63"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.line",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#dfd2ae"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.line",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#8f7d77"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.line",
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#ebe3cd"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.station",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#dfd2ae"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#b9d3c2"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.business",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#92998d"
+      }
+    ]
   }
-]
+];
+
 class Map extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { locations: props.locations, locationsMark: {}, searchedLocations: props.searchedLocations, searchedMarks: {} };
+    this.state = { locations: props.locations, locationsMark: {}, searchedLocations: props.searchedLocations, searchedMarks: {}, centerLocation: props.centerLocation };
     
 
     this.retriveNearby = this.retriveNearby.bind(this);
@@ -30,7 +240,6 @@ class Map extends Component {
     this.markByLocations = this.markByLocations.bind(this);
     this.renderLocationsContent = this.renderLocationsContent.bind(this);
     this.drawLegend = this.drawLegend.bind(this);
-    this.state.searchedLocations = mockSearched;
   }
 
   renderLocationsContent(locations, locationsMark) {
@@ -80,7 +289,12 @@ class Map extends Component {
                 strokeWeight: 3,
                 scale: 5
       },
-        label: loc.name
+        label: {
+          text: loc.name,
+          fontFamily: 'Roboto',
+          color: "#523735",
+          fontSize: "12px",
+        }
      });
     });
     
@@ -120,61 +334,83 @@ class Map extends Component {
     `;
     
     legend.appendChild(div);
-    currentMap.controls[google.maps.ControlPosition.RIGHT_TOP].push(legend);
+    //currentMap.controls[google.maps.ControlPosition.RIGHT_TOP].push(legend);
   }
 
+  clearMarks() {
+    for (let mark in this.state.searchedMarks){
+      mark.setMap(null);
+      console.log('cleeear');
+    }
+  }
+
+  renderMarks() {
+    for (let mark in this.state.searchedMarks){
+      mark.setMap(currentMap);
+      console.log('seeet');
+    }
+  }
   retriveSearch() {
     let searchedLocations = this.state.searchedLocations;
-    if(currentMap && searchedLocations) {
-      let searchedMarks = this.markByLocations(searchedLocations, '#ff0');
-      
-      let newCenter = {lat: searchedLocations[0].lat, lng: searchedLocations[0].lng};
-      console.log(newCenter);
-      this.setState({...this.state, searchedMarks: searchedMarks});
-      console.log(searchedMarks);
-      setTimeout(function() {
-        currentMap.panTo(newCenter);
-      }, 3000);
 
+    if(currentMap && searchedLocations) {
+      this.clearMarks();
+      let searchedMarks = this.markByLocations(searchedLocations, '#ff0');      
+      this.setState({...this.state, searchedMarks: searchedMarks});
+      this.renderMarks();
     }
   }
 
   componentDidUpdate(prevProps) {
     if(prevProps.searchedLocations !== this.props.searchedLocations) {
       this.setState({...this.state, searchedLocations: this.props.searchedLocations})
+      this.retriveSearch();
     }
+
+    if(prevProps.centerLocation !== this.props.centerLocation) {
+      if (this.props.centerLocation) {
+        let centerLocation = this.props.centerLocation;
+        let newCenter = {lat: centerLocation.lat, lng: centerLocation.lng};
+        this.setState({...this.state, centerLocation: centerLocation});
+        setTimeout(function() {
+          currentMap.panTo(newCenter);
+        }, 500);
+      }
+    }
+
   }
   componentDidMount() {
     let currentPos;
     currentMap = new window.google.maps.Map(document.getElementById("map"), {
       center: {lat: -34.397, lng: 150.644},
-      zoom: 1
+      zoom: 1,
+      styles: mapStyles
     });
-    this.drawLegend();
+    //this.drawLegend();
     markConfig = {
       map: currentMap,
       animation: google.maps.Animation.DROP
     };
 
-
+    
     let options = {
       enableHighAccuracy: true,
       timeout: 1000000,
       maximumAge: 0
     };
 
+    this.retriveSearch();
     // Get current Location
     if (navigator.geolocation) {
-      const retriveNearby = this.retriveNearby;
-      const retriveSearch = this.retriveSearch;
+      //const retriveNearby = this.retriveNearby;
       navigator.geolocation.getCurrentPosition(function (position) {
         currentPos = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
 
-        retriveNearby(currentPos);
-        retriveSearch();
+        //retriveNearby(currentPos);
+
         let Marker = new google.maps.Marker({
           ...markConfig,
           position: currentPos,
@@ -207,7 +443,7 @@ class Map extends Component {
           style={{
             position: 'fixed',
             width: this.props.width,
-            height: '85vh',
+            height: '70vh',
             margin: 'auto',
             marginTop: '1%',
             marginBottom: '1%',
@@ -215,19 +451,18 @@ class Map extends Component {
             backgroundColor: 'black'
           }}
         />
+{/*         
         <div 
           id="legend"
           class="map-content"
           style={{
-            padding: 5,
-            margin: 5,
             fontSize: 10,
             borderRadius: 5,
             backgroundColor: '#e9ffff',
             border: '1px dash black'
 
           }}
-          ></div>
+          ></div> */}
       </div>
     );
     
