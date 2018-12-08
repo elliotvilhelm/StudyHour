@@ -8,6 +8,7 @@ import home from "../../images/home.svg";
 import {Link} from "react-router-dom";
 import {deletecomment} from "../../actions/deletecomment_action";
 import { connect } from  "react-redux";
+import axios from "axios";
 
 
 const commentStyle = {
@@ -21,8 +22,35 @@ const commentStyle = {
 class Comment extends Component {
     constructor(props) {
         super(props);
+        this.state={
+            url: ''
+        };
         this.handleDelete=this.handleDelete.bind(this);
         this.handleEdit=this.handleEdit.bind(this);
+    }
+    componentDidMount() {
+        axios({
+            method: 'get',
+            url: '/api/profile_image/',
+            params: {user_id:  this.props.user_id},
+            data: null,
+            config: {headers: {'Content-Type': 'application/json'}},
+        }).then(response => {
+            console.log("response for getting profile image", response.data);
+            if (response.data.length === 0)
+                return;
+            axios({
+                method: 'post',
+                url: `/api/images`,
+                config: { headers: {'Content-Type': 'multipart/form-data' }},
+                data: {code: response.data[0].s3code}
+            }).then(response => {
+                console.log("da url", response.data.url);
+                this.setState({url: response.data.url})
+            }).catch(function (response) {
+                console.log("Error",response);
+            });
+        });
     }
 
     handleEdit(event){
@@ -42,9 +70,9 @@ class Comment extends Component {
                     <Grid container spacing={24}>
                         <Grid item>
                             <Link to={`/Home/ProfilePage/${this.props.user_id}`}>
-                                <Avatar style={{backgroundColor: "grey", borderRadius: 0}}>
-                                    <img className="img-avatar" src={default_profile}/>
-                                </Avatar>
+                                <Grid container justify="center" alignItems="center">
+                                    <Avatar src={this.state.url} style={{margin: 10, width: 60, height:60}}/>
+                                </Grid>
                             </Link>
                         </Grid>
                         <Grid item>
