@@ -97,32 +97,32 @@ export default class Location extends Component {
     }
 
     fetchImages() {
-        this.setState({images: []});
         axios({
             method: 'post',
             url: '/api/images/location',
             data: {location_id: this.state.location.id},
             config: { headers: {'Content-Type': 'multipart/form-data' }}
         }).then(response => {
-            let s3_codes = response.data.dbresponse;
-            let images = [];
-            Promise.all(
-                s3_codes.map(code => {
-                    axios({
-                        method: 'post',
-                        url: '/api/images',
-                        data: {code: code.s3code},
-                        config: {headers: {'Content-Type': 'multipart/form-data'}}
-                    }).then(response => {
-                        this.setState({
-                            images: this.state.images.concat([<img className="img-big" src={response.data.url}/>])
+            this.setState({images: []}, () => {
+                let s3_codes = response.data.dbresponse;
+                Promise.all(
+                    s3_codes.map(code => {
+                        axios({
+                            method: 'post',
+                            url: '/api/images',
+                            data: {code: code.s3code},
+                            config: {headers: {'Content-Type': 'multipart/form-data'}}
+                        }).then(response => {
+                            this.setState({
+                                images: this.state.images.concat([<img className="img-big" src={response.data.url}/>])
+                            });
                         });
-                    });
-                }))
+                    }))
 
+            });
         }).catch(function (response) {
-            console.log("Error",response);
-        });
+                console.log("Error",response);
+            });
     }
     favoriteOnClick(){
         if(!this.state.location_liked) {
@@ -168,20 +168,14 @@ export default class Location extends Component {
 
 
     render() {
-        // console.log(this.state.file_loaded);
-        // let upload;
-        // if (this.state.file_loaded) {
-        let upload = (<Paper style={{width: '40%', display: 'inline-block'}}>
-        <Button id="submit-button"
-                onClick={this.imageUpload}>
-            Upload Location Image
-        </Button>
-    </Paper>);
-        // }
-        //
-        // else {
-        //     upload = <div></div>;
-        // }
+        let upload = (
+            <Paper style={{width: '40%', display: 'inline-block'}}>
+                <Button id="submit-button"
+                        onClick={this.imageUpload}>
+                    Upload Location Image
+                </Button>
+            </Paper>
+        );
 
         return (
             <Paper className='wallpaper-books'>
@@ -220,63 +214,66 @@ export default class Location extends Component {
                                     <div style={{height: '8px'}}></div>
                                 </Grid>
                             </Grid>
-                            <Paper style={{width: '50%', padding: '20px'}}>
-                                <Grid item sm style={{float: 'left'}}>
-                                    <Typography style={{ color: "white" }}>
-                                        Outlet
-                                        <Checkbox
-                                            value="checkedG"
-                                            disabled
-                                            checked={!!this.state.location.outlet}
-                                            style={{ color: this.state.location.outlet? "#00BFFF" : "white" }}
-                                        />
-                                    </Typography>
-                                    <Typography  style={{ color: "white" }}>
-                                        Wifi
-                                        <Checkbox
-                                            value="checkedG"
-                                            disabled
-                                            checked={this.state.location.wifi}
-                                            style={{ color: location.wifi? "#00BFFF" : "white" }}
-                                        />
-                                    </Typography>
+                            <Paper style={{width: '80%', padding: '0px'}}>
+                                <div style={{width: '100%'}}>
+                                    <div style={{display: 'inline-block', float: 'left', width: '40%', textAlign: 'left', padding: '2%'}}>
+                                        <Typography  variant="title" style={{ color: "white" }}>
+                                        Address:
+                                        </Typography>
+                                        <Typography  style={{ color: "white" }}>
+                                            {this.state.location.address}
+                                        </Typography>
+                                        <Typography style={{ color: "white" }}>
+                                            Outlet
+                                            <Checkbox
+                                                value="checkedG"
+                                                disabled
+                                                checked={!!this.state.location.outlet}
+                                                style={{ color: this.state.location.outlet? "#00BFFF" : "white" }}
+                                            />
+                                        </Typography>
+                                        <Typography  style={{ color: "white" }}>
+                                            Wifi
+                                            <Checkbox
+                                                value="checkedG"
+                                                disabled
+                                                checked={this.state.location.wifi}
+                                                style={{ color: location.wifi? "#00BFFF" : "white" }}
+                                            />
+                                        </Typography>
+                                        <Typography  style={{ color: "white" }}>
+                                            Noise Level
+                                            <input
+                                                style={{ position: "relative", top: 7, marginLeft: 10, width: 70, display: "inline" }}
+                                                type="range"
+                                                step="1"
+                                                min="1"
+                                                max="5"
+                                                contentEditable={false}
+                                                value={this.state.location.noise_level}
+                                            />
+                                        </Typography>
+                                    </div>
+                                    <div style={{display: 'inline-block', width: '50%'}}>
+                                        <CardContent style={{padding: '0px'}}>
+                                            <table className="table-open">
+                                                <th>
+                                                    <Typography variant="title" style={{ color: "white", textAlign: 'left' }}>
+                                                        Open Hours:
+                                                    </Typography>
+                                                </th>
+                                                <tr><Typography variant="caption" style={{ color: "white" }}>Monday:    8:00 am - 5:30 pm</Typography></tr>
+                                                <tr><Typography variant="caption" style={{ color: "white" }}>Tuesday:   8:00 am - 5:30 pm</Typography></tr>
+                                                <tr><Typography variant="caption" style={{ color: "white" }}>Wednesday: 8:00 am - 5:30 pm</Typography></tr>
+                                                <tr><Typography variant="caption" style={{ color: "white" }}>Thursday:  8:00 am - 5:30 pm</Typography></tr>
+                                                <tr><Typography variant="caption" style={{ color: "white" }}>Friday:    8:00 am - 5:30 pm</Typography></tr>
+                                                <tr><Typography variant="caption" style={{ color: "white" }}>Saturday:  8:00 am - 5:30 pm</Typography></tr>
+                                                <tr><Typography variant="caption" style={{ color: "white" }}>Sunday:    8:00 am - 5:30 pm</Typography></tr>
+                                            </table>
+                                        </CardContent>
+                                    </div>
+                                </div>
 
-
-                                    <Typography  style={{ color: "white" }}>
-                                        Noise Level
-                                        <input
-                                            style={{ position: "relative", top: 7, marginLeft: 10, width: 70, display: "inline" }}
-                                            type="range"
-                                            step="1"
-                                            min="1"
-                                            max="5"
-                                            contentEditable={false}
-                                            value={this.state.location.noise_level}
-                                        />
-                                    </Typography>
-                                    <br/>
-                                    <Typography  style={{ color: "white" }}>
-                                        Address: {this.state.location.address}
-                                    </Typography>
-                                </Grid>
-                                <Grid item sm>
-                                    <CardContent style={{padding: '10px'}}>
-                                        <table className="table-open">
-                                            <th>
-                                                <Typography variant="title" style={{ color: "white" }}>
-                                                    Open Hours:
-                                                </Typography>
-                                            </th>
-                                            <tr><Typography variant="caption" style={{ color: "white" }}>Monday:    8:00 am - 5:30 pm</Typography></tr>
-                                            <tr><Typography variant="caption" style={{ color: "white" }}>Tuesday:   8:00 am - 5:30 pm</Typography></tr>
-                                            <tr><Typography variant="caption" style={{ color: "white" }}>Wednesday: 8:00 am - 5:30 pm</Typography></tr>
-                                            <tr><Typography variant="caption" style={{ color: "white" }}>Thursday:  8:00 am - 5:30 pm</Typography></tr>
-                                            <tr><Typography variant="caption" style={{ color: "white" }}>Friday:    8:00 am - 5:30 pm</Typography></tr>
-                                            <tr><Typography variant="caption" style={{ color: "white" }}>Saturday:  8:00 am - 5:30 pm</Typography></tr>
-                                            <tr><Typography variant="caption" style={{ color: "white" }}>Sunday:    8:00 am - 5:30 pm</Typography></tr>
-                                        </table>
-                                    </CardContent>
-                                </Grid>
                             </Paper>
                             <Grid container
                                   spacing={24}

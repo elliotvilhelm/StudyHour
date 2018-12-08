@@ -52,6 +52,7 @@ class FileUpload extends React.Component {
                 }).catch(function (response) {
                     console.log("Error", response);
                 });
+                this.setState({ file: null, files: []});
 
             }).catch(function (response) {
                 console.log("Error", response);
@@ -78,6 +79,7 @@ class FileUpload extends React.Component {
                 data: {user_id: user_id, s3code: key},
                 config: { headers: {'Content-Type': 'multipart/form-data' }}
             })
+            this.setState({ file: null, files: []});
         });
     }
 

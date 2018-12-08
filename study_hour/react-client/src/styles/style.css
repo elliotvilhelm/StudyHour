@@ -88,10 +88,9 @@ body, html {
 }
 
 .table-open {
-    float: right;
-    width: 40%;
-    /*background-color: grey;*/
+    width: 100%;
     text-align: left;
+    padding: 15%;
 }
 
 table {
@@ -146,8 +145,9 @@ table {
 .div-slider {
     text-align: center;
     margin: 0 auto;
-    width: 80%;
-    height: 80%;
+    /*width: 80%;*/
+    /*height: 80%;*/
+    /*height: 100px;*/
 
 }
 a {
@@ -245,7 +245,7 @@ table {
 
 .location-div {
     padding-top: 20px;
-    width: 100%;
+    width: 80%;
     margin: 0 auto;
     text-align: center;
 }
@@ -275,15 +275,18 @@ table {
 }
 
 .location-image-div {
-    width: 800px;
+    width: 80%;
     margin: 0 auto;
     text-align: center;
-    background-color: pink;
+    background-color: black;
 }
 .img-slider {
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    /*display: block;*/
+    /*width: 500px;*/
+    max-width: 80%;
+    height: 500px;
 
 }
 .img-avatar {
@@ -297,15 +300,8 @@ table {
 }
 
 .img-big {
-    height: 100%;
-    width: 100%;
+    max-height: 600px;
     margin: auto;
-}
-.table-open {
-    float: right;
-    width: 40%;
-    /*background-color: grey;*/
-    text-align: left;
 }
 
 .div-search {

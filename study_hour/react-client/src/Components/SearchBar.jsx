@@ -124,8 +124,23 @@ class SearchBar extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
+        this.updateList = this.updateList(this);
     }
     componentDidMount (){
+        axios({
+            method: 'get',
+            url: '/api/SearchBar',
+            config: { headers: {'Content-Type': 'multipart/form-data' }}
+
+        }).then(response => {
+            this.setState({suggestions: response.data.dbresponse});
+            suggestionList = this.state.suggestions;
+        })
+            .catch(function (response) {
+                console.log("Error",response);
+            });
+    }
+    updateList () {
         axios({
             method: 'get',
             url: '/api/SearchBar',
