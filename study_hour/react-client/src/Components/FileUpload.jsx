@@ -29,35 +29,33 @@ class FileUpload extends React.Component {
         }
 
     fileUpload(location_id){
-        for (let i = 0; i < this.state.files.length; i++) {
-            let file = this.state.files[i];
+        console.log('uploading files', this.state, location_id);
+        Promise.all(Array.from(this.state.files).map(file => {
             let key;
             const formData = new FormData();
             formData.append('file', file);
-            axios({
+            return axios({
                 method: 'post',
                 url: '/api/image-upload',
                 data: formData,
                 config: {headers: {'content-type': 'multipart/form-data'}},
             }).then(response => {
                 key = response.data.s3_code;
-
                 axios({
                     method: 'post',
                     url: `/api/addlocationimage/user`,
                     data: {location_id: location_id, user_id: localStorage.getItem('user_id'), s3code: key},
                     config: {headers: {'Content-Type': 'multipart/form-data'}}
-                }).then(response => {
-                    history.push('/Location/' + location_id);
                 }).catch(function (response) {
                     console.log("Error", response);
                 });
-                this.setState({ file: null, files: []});
-
             }).catch(function (response) {
                 console.log("Error", response);
             });
-        }
+        })).then(() => {
+            history.push('/Location/' + location_id);
+            this.setState({ file: null, files: []});
+        });
     }
 
     fileUploadProfile(user_id) {

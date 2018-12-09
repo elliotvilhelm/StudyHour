@@ -88,8 +88,8 @@ class AddLocation extends Component {
 
     handleSubmit() {
         this.props.dispatch(addlocation_actions.addlocation(this.state.name, this.state.address, this.state.outlet, this.state.internet, this.state.open_time, this.state.open_time, this.state.noise_level, this.upload_ref));
-
     }
+
 
     render() {
         const {classes} = this.props;

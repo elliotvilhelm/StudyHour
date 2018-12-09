@@ -72,7 +72,7 @@ export default class Location extends Component {
                 config: { headers: {'Content-Type': 'multipart/form-data' }}
             }).then(response => {
                 let s3_codes = response.data.dbresponse;
-                let images = [];
+                if (!s3_codes) return;
                 Promise.all(
                     s3_codes.map(code => {
                         axios({
